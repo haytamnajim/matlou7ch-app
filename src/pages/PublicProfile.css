@@ -1,0 +1,161 @@
+.public-profile-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.public-profile-title {
+  color: #4a56e2;
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profile-header-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #ff7043;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-username {
+  font-size: 20px;
+  margin: 0 0 8px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.profile-location, .profile-member-since {
+  display: flex;
+  align-items: center;
+  color: #666;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.profile-location svg, .profile-member-since svg {
+  margin-right: 5px;
+  min-width: 16px;
+}
+
+.donation-stats {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+  justify-content: center;
+  gap: 20px;
+  max-width: 500px;
+}
+
+.stat-box {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.edit-profile-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4a9af8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.edit-profile-button svg {
+  margin-right: 10px;
+}
+
+.empty-listings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.empty-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.empty-message {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .donation-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .profile-header-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .profile-info {
+    align-items: center;
+  }
+}

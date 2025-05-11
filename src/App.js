@@ -5,6 +5,9 @@ import Footer from './components/Footer';
 import Favoris from './pages/Favoris';
 import Messages from './pages/Messages';
 import Profile from './pages/Profile';
+import MesAnnonces from './pages/MesAnnonces';
+import PublicProfile from './pages/PublicProfile';
+import EditProfile from './pages/EditProfile';
 import './App.css';
 
 // Pages temporaires simples
@@ -29,6 +32,9 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/cgu" element={<CGU />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/mes-annonces" element={<MesAnnonces />} />
+            <Route path="/profil-public" element={<PublicProfile />} />
+            <Route path="/modifier-profil" element={<EditProfile />} />
           </Routes>
         </main>
         <Footer />
