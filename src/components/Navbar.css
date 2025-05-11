@@ -1,0 +1,124 @@
+.navbar {
+  background-color: #f0f6ff;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  width: 100%;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin-bottom: 10px;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Brush Script MT', cursive;
+}
+
+/* La classe .frame a été supprimée car elle n'est plus utilisée */
+
+.search-bar {
+  display: flex;
+  border-radius: 25px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  background-color: white;
+  width: 40%;
+  max-width: 400px;
+}
+
+.search-bar input {
+  padding: 10px 15px;
+  border: none;
+  width: 100%;
+  outline: none;
+}
+
+.search-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.donate-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.icon-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #2c3e50;
+  font-size: 12px;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #f39c12;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 40px;
+  background-color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.menu-item {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Suppression du point rouge sous Accueil */
+.menu-item.active::after {
+  display: none;
+}
+
+

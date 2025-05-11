@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Favoris from './pages/Favoris';
+import Messages from './pages/Messages';
 import './App.css';
+
+// Pages temporaires simples
+const Home = () => <div style={{padding: '20px'}}><h1>Page d'accueil</h1></div>;
+const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
+const NotreADN = () => <div style={{padding: '20px'}}><h1>Notre ADN</h1></div>;
+const FAQ = () => <div style={{padding: '20px'}}><h1>FAQ</h1></div>;
+const CGU = () => <div style={{padding: '20px'}}><h1>Conditions Générales d'Utilisation</h1></div>;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app-container">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/catalogue" element={<Catalogue />} />
+            <Route path="/notre-adn" element={<NotreADN />} />
+            <Route path="/favoris" element={<Favoris />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/cgu" element={<CGU />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
+
+
+
+
+
