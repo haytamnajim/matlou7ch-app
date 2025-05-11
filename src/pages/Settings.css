@@ -78,6 +78,16 @@
   justify-content: center;
 }
 
+.settings-item.danger {
+  border-top: 1px solid #f0f0f0;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.danger-text {
+  color: #d32f2f !important;
+}
+
 @media (max-width: 600px) {
   .settings-container {
     padding: 20px;

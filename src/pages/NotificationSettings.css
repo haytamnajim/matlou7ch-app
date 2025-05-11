@@ -1,0 +1,136 @@
+.notification-settings-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.notification-settings-container {
+  width: 100%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.notification-settings-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.back-button {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.notification-settings-title {
+  color: #4a56e2;
+  font-size: 24px;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  margin-right: 24px; /* Pour compenser l'icône de retour */
+}
+
+.notification-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.notification-category {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.notification-divider {
+  height: 1px;
+  background-color: #eee;
+  margin-bottom: 15px;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-description {
+  flex: 1;
+  font-size: 14px;
+  color: #555;
+  padding-right: 20px;
+}
+
+.notification-toggles {
+  display: flex;
+  gap: 10px;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-button.active {
+  background-color: #4a56e2;
+  color: white;
+}
+
+.toggle-button.push.active {
+  background-color: #4a56e2;
+}
+
+.toggle-button.email.active {
+  background-color: #4a56e2;
+}
+
+@media (max-width: 600px) {
+  .notification-settings-container {
+    padding: 20px;
+  }
+  
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .notification-description {
+    margin-bottom: 15px;
+    padding-right: 0;
+  }
+  
+  .notification-toggles {
+    align-self: flex-end;
+  }
+}

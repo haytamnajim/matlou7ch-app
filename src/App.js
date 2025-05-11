@@ -9,8 +9,11 @@ import MesAnnonces from './pages/MesAnnonces';
 import PublicProfile from './pages/PublicProfile';
 import EditProfile from './pages/EditProfile';
 import Settings from './pages/Settings';
+import NotificationSettings from './pages/NotificationSettings';
 import EmailSettings from './pages/EmailSettings';
+import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
+import DeleteAccount from './pages/DeleteAccount';
 import './App.css';
 
 // Pages temporaires simples
@@ -39,8 +42,11 @@ function App() {
             <Route path="/profil-public" element={<PublicProfile />} />
             <Route path="/modifier-profil" element={<EditProfile />} />
             <Route path="/parametres" element={<Settings />} />
+            <Route path="/parametres/notifications" element={<NotificationSettings />} />
             <Route path="/parametres/email" element={<EmailSettings />} />
+            <Route path="/parametres/mot-de-passe" element={<PasswordSettings />} />
             <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
+            <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
           </Routes>
         </main>
         <Footer />
