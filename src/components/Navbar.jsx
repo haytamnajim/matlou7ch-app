@@ -37,7 +37,7 @@ function Navbar() {
             </svg>
             <span>Messages</span>
           </Link>
-          <div className="user-avatar">H</div>
+          <Link to="/profile" className="user-avatar">H</Link>
         </div>
       </div>
       

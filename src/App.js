@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Favoris from './pages/Favoris';
 import Messages from './pages/Messages';
+import Profile from './pages/Profile';
 import './App.css';
 
 // Pages temporaires simples
@@ -27,6 +28,7 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/cgu" element={<CGU />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
         <Footer />
