@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import MesAnnonces from './pages/MesAnnonces';
 import PublicProfile from './pages/PublicProfile';
 import EditProfile from './pages/EditProfile';
+import Settings from './pages/Settings';
 import './App.css';
 
 // Pages temporaires simples
@@ -35,6 +36,7 @@ function App() {
             <Route path="/mes-annonces" element={<MesAnnonces />} />
             <Route path="/profil-public" element={<PublicProfile />} />
             <Route path="/modifier-profil" element={<EditProfile />} />
+            <Route path="/parametres" element={<Settings />} />
           </Routes>
         </main>
         <Footer />
