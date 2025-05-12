@@ -1,0 +1,212 @@
+.post-ad-container {
+  max-width: 800px;
+  margin: 30px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.post-ad-title {
+  text-align: center;
+  color: #4a56e2;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+}
+
+.dot.active {
+  background-color: #4a56e2;
+}
+
+.post-ad-step {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.form-label svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.form-hint {
+  color: #888;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.form-input, .form-textarea {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.photo-upload-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.photo-upload-box {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.add-icon {
+  font-size: 30px;
+  color: #888;
+}
+
+.photo-number {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #ff6b6b;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.char-count {
+  text-align: right;
+  color: #888;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.next-button {
+  background-color: #7cb9e8;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+.publish-button {
+  background-color: #7cb9e8;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .post-ad-container {
+    padding: 20px;
+    margin: 15px;
+  }
+  
+  .photo-upload-grid {
+    justify-content: center;
+  }
+}
+
+.success-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.confetti-icon {
+  margin-bottom: 20px;
+}
+
+.confetti-icon img {
+  width: 80px;
+  height: 80px;
+}
+
+.success-title {
+  color: #7cb9e8;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.view-ad-button {
+  display: inline-block;
+  background-color: white;
+  color: #7cb9e8;
+  border: 2px solid #7cb9e8;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.view-ad-button:hover {
+  background-color: #7cb9e8;
+  color: white;
+}
+

@@ -15,6 +15,7 @@ import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
 import './App.css';
+import PostAd from './components/PostAd';
 
 // Pages temporaires simples
 const Home = () => <div style={{padding: '20px'}}><h1>Page d'accueil</h1></div>;
@@ -47,6 +48,7 @@ function App() {
             <Route path="/parametres/mot-de-passe" element={<PasswordSettings />} />
             <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
             <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
+            <Route path="/post-ad" element={<PostAd />} />
           </Routes>
         </main>
         <Footer />

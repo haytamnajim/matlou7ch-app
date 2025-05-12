@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './MesAnnonces.css';
 
 function MesAnnonces() {
@@ -35,7 +36,9 @@ function MesAnnonces() {
           <p className="empty-description">
             Faites un geste pour la planète, publiez une annonce sur Matlou7ch
           </p>
-          <button className="publish-button">+ Publier une annonce</button>
+          <Link to="/post-ad">
+            <button className="publish-button">+ Publier une annonce</button>
+          </Link>
         </div>
       </div>
     </div>
@@ -43,4 +46,5 @@ function MesAnnonces() {
 }
 
 export default MesAnnonces;
+
 

@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleDonateClick = () => {
+    navigate('/post-ad');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-content">
@@ -22,7 +28,7 @@ function Navbar() {
         </div>
         
         <div className="nav-actions">
-          <button className="donate-button">+ Donner</button>
+          <Link to="/post-ad" className="donate-button">+ DONNER</Link>
           <Link to="/favoris" className="icon-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#888" width="24px" height="24px">
               <path d="M0 0h24v24H0z" fill="none"/>
