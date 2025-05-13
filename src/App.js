@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Home from './pages/Home';
 import Favoris from './pages/Favoris';
 import Messages from './pages/Messages';
 import Profile from './pages/Profile';
@@ -18,7 +19,6 @@ import './App.css';
 import PostAd from './components/PostAd';
 
 // Pages temporaires simples
-const Home = () => <div style={{padding: '20px'}}><h1>Page d'accueil</h1></div>;
 const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
 const NotreADN = () => <div style={{padding: '20px'}}><h1>Notre ADN</h1></div>;
 const FAQ = () => <div style={{padding: '20px'}}><h1>FAQ</h1></div>;

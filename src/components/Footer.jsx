@@ -2,31 +2,109 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
-function Footer() {
+function Footer({ type }) {
+  // Afficher le footer complet uniquement sur les pages d'accueil et catalogue
+  if (type !== 'home' && type !== 'catalogue') {
+    return null;
+  }
+
   return (
-    <footer className="footer">
-      <div className="footer-links">
-        <Link to="/notre-adn" className="footer-link">Notre ADN</Link>
-        <Link to="/faq" className="footer-link">FAQ</Link>
-        <Link to="/cgu" className="footer-link">CGU</Link>
-      </div>
-      
-      <div className="social-links">
-        <a href="https://facebook.com" className="social-link" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
-          </svg>
-        </a>
-        <a href="https://twitter.com" className="social-link" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
-          </svg>
-        </a>
-        <a href="https://instagram.com" className="social-link" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-          </svg>
-        </a>
+    <footer className="app-footer">
+      <div className="footer-content">
+        <section className="footer-section">
+          <h2 className="footer-title">Toutes les catégories</h2>
+          <div className="footer-grid">
+            <Link to="/catalogue?category=accessoires-mode" className="footer-link">Accessoires de mode</Link>
+            <Link to="/catalogue?category=animaux" className="footer-link">Le monde des animaux</Link>
+            <Link to="/catalogue?category=loisirs-jeux" className="footer-link">Loisirs & Jeux</Link>
+            <Link to="/catalogue?category=nourriture" className="footer-link">Nourriture</Link>
+            
+            <Link to="/catalogue?category=culture" className="footer-link">Culture</Link>
+            <Link to="/catalogue?category=ameublement" className="footer-link">Ameublement</Link>
+            <Link to="/catalogue?category=maison" className="footer-link">Maison</Link>
+            <Link to="/catalogue?category=sport" className="footer-link">Sport</Link>
+            
+            <Link to="/catalogue?category=equipement-bebe" className="footer-link">Équipement bébé</Link>
+            <Link to="/catalogue?category=bricolage" className="footer-link">Bricolage, Jardinage, Outillage</Link>
+            <Link to="/catalogue?category=materiel-professionnel" className="footer-link">Matériel professionnel</Link>
+            <Link to="/catalogue?category=vehicule" className="footer-link">Véhicule</Link>
+            
+            <Link to="/catalogue?category=hygiene-soin" className="footer-link">Hygiène & Soin</Link>
+            <Link to="/catalogue?category=chaussures" className="footer-link">Chaussures</Link>
+            <Link to="/catalogue?category=multimedia" className="footer-link">Multimédia</Link>
+            <Link to="/catalogue?category=vetements" className="footer-link">Vêtements</Link>
+          </div>
+        </section>
+
+        <section className="footer-section">
+          <h2 className="footer-title">Les annonces par ville</h2>
+          <div className="footer-grid">
+            <Link to="/catalogue?location=Rabat" className="footer-link">Rabat</Link>
+            <Link to="/catalogue?location=Agadir" className="footer-link">Agadir</Link>
+            <Link to="/catalogue?location=Sale" className="footer-link">Salé</Link>
+            <Link to="/catalogue?location=Mohammedia" className="footer-link">Mohammedia</Link>
+            
+            <Link to="/catalogue?location=Casablanca" className="footer-link">Casablanca</Link>
+            <Link to="/catalogue?location=Tanger" className="footer-link">Tanger</Link>
+            <Link to="/catalogue?location=Kenitra" className="footer-link">Kenitra</Link>
+            <Link to="/catalogue?location=Safi" className="footer-link">Safi</Link>
+            
+            <Link to="/catalogue?location=Fes" className="footer-link">Fès</Link>
+            <Link to="/catalogue?location=Oujda" className="footer-link">Oujda</Link>
+            <Link to="/catalogue?location=Temara" className="footer-link">Témara</Link>
+            <Link to="/catalogue?location=ElJadida" className="footer-link">El Jadida</Link>
+            
+            <Link to="/catalogue?location=Marrakech" className="footer-link">Marrakech</Link>
+            <Link to="/catalogue?location=Meknes" className="footer-link">Meknès</Link>
+            <Link to="/catalogue?location=Tetouan" className="footer-link">Tétouan</Link>
+            <Link to="/catalogue?location=Nador" className="footer-link">Nador</Link>
+          </div>
+        </section>
+
+        <section className="footer-section">
+          <h2 className="footer-title">Les annonces par département</h2>
+          <div className="footer-grid">
+            <Link to="/catalogue?region=Casablanca-Settat" className="footer-link">Casablanca-Settat</Link>
+            <Link to="/catalogue?region=Tanger-Tetouan-Al-Hoceima" className="footer-link">Tanger-Tétouan-Al Hoceïma</Link>
+            <Link to="/catalogue?region=Draa-Tafilalet" className="footer-link">Drâa-Tafilalet</Link>
+            
+            <Link to="/catalogue?region=Rabat-Sale-Kenitra" className="footer-link">Rabat-Salé-Kénitra</Link>
+            <Link to="/catalogue?region=Oriental" className="footer-link">Oriental</Link>
+            <Link to="/catalogue?region=Guelmim-Oued-Noun" className="footer-link">Guelmim-Oued Noun</Link>
+            
+            <Link to="/catalogue?region=Fes-Meknes" className="footer-link">Fès-Meknès</Link>
+            <Link to="/catalogue?region=Beni-Mellal-Khenifra" className="footer-link">Béni Mellal-Khénifra</Link>
+            <Link to="/catalogue?region=Laayoune-Sakia-El-Hamra" className="footer-link">Laâyoune-Sakia El Hamra</Link>
+            
+            <Link to="/catalogue?region=Marrakech-Safi" className="footer-link">Marrakech-Safi</Link>
+            <Link to="/catalogue?region=Souss-Massa" className="footer-link">Souss-Massa</Link>
+            <Link to="/catalogue?region=Dakhla-Oued-Ed-Dahab" className="footer-link">Dakhla-Oued Ed-Dahab</Link>
+          </div>
+        </section>
+
+        <div className="footer-social">
+          <a href="https://facebook.com" className="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="24" height="24">
+              <path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com" className="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+              <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
+            </svg>
+          </a>
+          <a href="https://instagram.com" className="social-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24">
+              <path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+            </svg>
+          </a>
+        </div>
+
+        <div className="footer-links">
+          <Link to="/notre-adn" className="footer-page-link">Notre ADN</Link>
+          <Link to="/faq" className="footer-page-link">FAQ</Link>
+          <Link to="/cgu" className="footer-page-link">CGU</Link>
+        </div>
       </div>
     </footer>
   );
