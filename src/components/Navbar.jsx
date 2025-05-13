@@ -33,7 +33,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-content">
         <div className="logo-section">
-          <Link to="/" className="logo">Matlouch.org</Link>
+          <Link to="/" className="logo">Matlou7ch.org</Link>
         </div>
         
         <div className="search-bar" onClick={handleSearchClick}>
