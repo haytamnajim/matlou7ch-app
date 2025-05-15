@@ -1,35 +1,43 @@
 .home-page {
-  max-width: 1200px;
+  max-width: 100%;
+  padding: 0;
   margin: 0 auto;
-  padding: 20px;
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+.home-page > *:not(.banner-section) {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
 }
 
 /* BANNIÈRE */
 .banner-section {
   margin-bottom: 40px;
   position: relative;
+  width: 100vw; /* Utilise toute la largeur de la fenêtre */
+  margin-left: calc(-50vw + 50%); /* Centre la section par rapport à la page */
+  box-sizing: border-box;
 }
 
+/* Suppression du pseudo-élément qui affiche "Section 15" */
 .banner-section::before {
-  content: "Section 15";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  z-index: 3;
+  content: none; /* Supprime le contenu */
+  display: none; /* Masque complètement l'élément */
 }
 
 .banner-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 80px 60px;
   overflow: hidden;
-  height: 300px;
+  height: 400px;
   background-color: #a7d1f7 !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .banner-text {
@@ -56,6 +64,7 @@
 .banner-image {
   width: 100%;
   height: auto;
+  max-height: 350px; /* Augmenté pour permettre une image plus grande */
   object-fit: contain;
 }
 
@@ -266,6 +275,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+
+
 
 
 
