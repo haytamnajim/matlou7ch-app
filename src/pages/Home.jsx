@@ -6,8 +6,8 @@ function Home() {
   return (
     <div className="home-page">
       {/* Bannière */}
-      <section className="banner-section">
-        <div className="banner-content" style={{ backgroundColor: '#a7d1f7' }}>
+      <section className="banner-section" id="section-15">
+        <div className="banner-content">
           <div className="banner-text">
             "La première plateforme marocaine où tout se donne gratuitement 100% !"
           </div>

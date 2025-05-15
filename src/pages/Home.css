@@ -7,6 +7,18 @@
 /* BANNIÈRE */
 .banner-section {
   margin-bottom: 40px;
+  position: relative;
+}
+
+.banner-section::before {
+  content: "Section 15";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  z-index: 3;
 }
 
 .banner-content {
@@ -14,28 +26,37 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 12px;
-  padding: 30px;
+  padding: 80px 60px;
   overflow: hidden;
+  height: 300px;
+  background-color: #a7d1f7 !important;
 }
 
 .banner-text {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
+  font-size: 32px;
+  font-weight: normal;
+  color: white;
   max-width: 50%;
   line-height: 1.4;
+  font-family: 'Brush Script MT', cursive;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  transform: rotate(-5deg);
+  z-index: 2;
 }
 
 .banner-image-container {
-  width: 45%;
-  height: 200px;
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
 }
 
 .banner-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* CATÉGORIES */
@@ -245,5 +266,6 @@
     grid-template-columns: 1fr;
   }
 }
+
 
 
