@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Footer from '../components/Footer';
 import './Catalogue.css';
 
 function Catalogue() {
@@ -10,13 +9,13 @@ function Catalogue() {
   const category = searchParams.get('category') || 'Ameublement';
 
   return (
-    <>
-      <div className="search-results-page">
-        {/* Contenu existant de la page catalogue */}
-        {/* ... */}
-      </div>
-      <Footer type="catalogue" />
-    </>
+    <div className="search-results-page">
+      {/* Contenu existant de la page catalogue */}
+      {/* ... */}
+      
+      {/* Supprimez la ligne qui inclut le Footer */}
+      {/* <Footer type="catalogue" /> */}
+    </div>
   );
 }
 

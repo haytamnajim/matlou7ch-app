@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SimpleFooter from './components/SimpleFooter';
 import Home from './pages/Home';
 import Favoris from './pages/Favoris';
 import Messages from './pages/Messages';
@@ -27,33 +28,55 @@ const CGU = () => <div style={{padding: '20px'}}><h1>Conditions Générales d'Ut
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalogue" element={<Catalogue />} />
-            <Route path="/notre-adn" element={<NotreADN />} />
-            <Route path="/favoris" element={<Favoris />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/cgu" element={<CGU />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/mes-annonces" element={<MesAnnonces />} />
-            <Route path="/profil-public" element={<PublicProfile />} />
-            <Route path="/modifier-profil" element={<EditProfile />} />
-            <Route path="/parametres" element={<Settings />} />
-            <Route path="/parametres/notifications" element={<NotificationSettings />} />
-            <Route path="/parametres/email" element={<EmailSettings />} />
-            <Route path="/parametres/mot-de-passe" element={<PasswordSettings />} />
-            <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
-            <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
-            <Route path="/post-ad" element={<PostAd />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
+  );
+}
+
+// Composant pour gérer le footer
+function AppContent() {
+  const location = useLocation();
+  const path = location.pathname;
+  
+  // Afficher le footer complet uniquement sur la page d'accueil
+  const showFullFooter = path === '/';
+  // Afficher le footer de catalogue uniquement sur la page catalogue
+  const showCatalogueFooter = path === '/catalogue';
+  
+  return (
+    <div className="app-container">
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogue" element={<Catalogue />} />
+          <Route path="/notre-adn" element={<NotreADN />} />
+          <Route path="/favoris" element={<Favoris />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/cgu" element={<CGU />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/mes-annonces" element={<MesAnnonces />} />
+          <Route path="/profil-public" element={<PublicProfile />} />
+          <Route path="/modifier-profil" element={<EditProfile />} />
+          <Route path="/parametres" element={<Settings />} />
+          <Route path="/parametres/notifications" element={<NotificationSettings />} />
+          <Route path="/parametres/email" element={<EmailSettings />} />
+          <Route path="/parametres/mot-de-passe" element={<PasswordSettings />} />
+          <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
+          <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
+          <Route path="/post-ad" element={<PostAd />} />
+        </Routes>
+      </main>
+      
+      {showFullFooter ? (
+        <Footer type="home" />
+      ) : showCatalogueFooter ? (
+        <Footer type="catalogue" />
+      ) : (
+        <SimpleFooter />
+      )}
+    </div>
   );
 }
 
