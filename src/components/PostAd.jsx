@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ConfettiIcon from './ConfettiIcon';
 import './PostAd.css';
+import Confetti from './Confetti';
 
 function PostAd() {
   const [step, setStep] = useState(1);
@@ -38,6 +39,7 @@ function PostAd() {
   if (isSubmitted) {
     return (
       <div className="success-container">
+        <Confetti />
         <div className="confetti-icon">
           <ConfettiIcon />
         </div>

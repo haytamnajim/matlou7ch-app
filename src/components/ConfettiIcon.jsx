@@ -16,3 +16,4 @@ function ConfettiIcon() {
 }
 
 export default ConfettiIcon;
+
