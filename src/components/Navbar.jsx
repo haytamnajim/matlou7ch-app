@@ -70,6 +70,7 @@ function Navbar() {
         <Link to="/" className="menu-item">Accueil</Link>
         <Link to="/catalogue" className="menu-item">Catalogue</Link>
         <Link to="/notre-adn" className="menu-item">Notre ADN</Link>
+        <Link to="/contact" className="menu-item">Contact</Link>
       </div>
 
       {showAdvancedSearch && (

@@ -16,6 +16,7 @@ import EmailSettings from './pages/EmailSettings';
 import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
+import Contact from './pages/Contact'; // Importez la page Contact
 import './App.css';
 import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
@@ -33,15 +34,9 @@ function App() {
   );
 }
 
-// Composant pour gérer le footer
 function AppContent() {
   const location = useLocation();
-  const path = location.pathname;
-  
-  // Afficher le footer complet uniquement sur la page d'accueil
-  const showFullFooter = path === '/';
-  // Afficher le footer de catalogue uniquement sur la page catalogue
-  const showCatalogueFooter = path === '/catalogue';
+  const isSimpleFooterPage = ['/catalogue'].includes(location.pathname);
   
   return (
     <div className="app-container">
@@ -66,24 +61,12 @@ function AppContent() {
           <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
           <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
           <Route path="/post-ad" element={<PostAd />} />
+          <Route path="/contact" element={<Contact />} /> {/* Ajoutez la route pour la page Contact */}
         </Routes>
       </main>
-      
-      {showFullFooter ? (
-        <Footer type="home" />
-      ) : showCatalogueFooter ? (
-        <Footer type="catalogue" />
-      ) : (
-        <SimpleFooter />
-      )}
+      {isSimpleFooterPage ? <SimpleFooter /> : <Footer />}
     </div>
   );
 }
 
 export default App;
-
-
-
-
-
-
