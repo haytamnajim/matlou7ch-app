@@ -22,6 +22,7 @@ import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
 import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
+import InformationsLegales from './pages/InformationsLegales';
 
 // Pages temporaires simples
 const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
@@ -53,7 +54,8 @@ function AppContent() {
     '/parametres/utilisateurs-bloques',
     '/parametres/supprimer-compte',
     '/post-ad',
-    '/contact'
+    '/contact',
+    '/informations-legales'
   ];
   
   // Pages qui utilisent le Footer complet
@@ -75,6 +77,7 @@ function AppContent() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/cgu" element={<CGU />} />
+          <Route path="/informations-legales" element={<InformationsLegales />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/mes-annonces" element={<MesAnnonces />} />
           <Route path="/profil-public" element={<PublicProfile />} />
