@@ -40,13 +40,13 @@ function NotreADN() {
           
           <div className="who-we-are-content">
             <p>
-              Créée en 2023 par une équipe de jeunes entrepreneurs marocains, Matlouch.ma est la première plateforme 
+              Créée en 2023 par une équipe de jeunes entrepreneurs marocains, Matlou7ch.ma est la première plateforme 
               gratuite de dons d'objets au Maroc, réunissant près de 10 000 membres. Notre plateforme vise à réduire le gaspillage 
               et à promouvoir l'économie circulaire, une entreprise sociale créée avec la conviction que chaque objet mérite une seconde vie.
             </p>
             
             <p>
-              Dans cette lignée, Matlouch a pour mission de faire du don d'objets une norme.
+              Dans cette lignée, Matlou7ch a pour mission de faire du don d'objets une norme.
             </p>
             
             <p>
@@ -57,7 +57,7 @@ function NotreADN() {
             </p>
             
             <p>
-              Matlouch s'engage tous les jours pour faire de la seconde vie des objets un puissant levier de changement.
+              Matlou7ch s'engage tous les jours pour faire de la seconde vie des objets un puissant levier de changement.
             </p>
           </div>
         </div>
@@ -127,7 +127,7 @@ function NotreADN() {
             </p>
             
             <p>
-              Oui tout n'est pas perdu, car avec Matlouch, nous relevons un défi. Celui de, tous ensemble, inverser la tendance. Résolument et 
+              Oui tout n'est pas perdu, car avec Matlou7ch, nous relevons un défi. Celui de, tous ensemble, inverser la tendance. Résolument et 
               audacieusement. Le défi de mettre un maximum d'utilisateurs sur la plateforme afin de créer un puissant effet de levier et amorcer un changement, 
               profond, durable, impactant. Atteindre des millions de foyers, c'est aussi supprimer potentiellement des milliers de tonnes de déchets, éviter des 
               tonnes d'émissions de CO2 et faire des millions d'économies. Ce défi, c'est l'espoir qui s'ancre dans la réalité. En insufflant une nouvelle 
@@ -185,7 +185,7 @@ function NotreADN() {
 
       <section className="team-section">
         <div className="container">
-          <h2 className="section-title">L'Équipe Derrière Matlouch</h2>
+          <h2 className="section-title">L'Équipe Derrière Matlou7ch</h2>
           <p className="team-intro">
             Nous sommes une équipe passionnée de développeurs, designers et entrepreneurs marocains 
             unis par la conviction que le partage peut changer positivement notre société.

@@ -61,19 +61,19 @@ function FAQ() {
   const faqData = {
     general: [
       {
-        id: 'what-is-matlouch',
-        question: 'Qu\'est-ce que Matlouch ?',
-        answer: 'Matlouch est la première plateforme marocaine de dons d\'objets entre particuliers. Notre mission est de favoriser le réemploi des objets et de créer du lien social tout en luttant contre le gaspillage. Sur Matlouch, tous les objets sont donnés gratuitement, sans contrepartie financière.'
+        id: 'what-is-matlou7ch',
+        question: 'Qu\'est-ce que Matlou7ch ?',
+        answer: 'Matlou7ch est la première plateforme marocaine de dons d\'objets entre particuliers. Notre mission est de favoriser le réemploi des objets et de créer du lien social tout en luttant contre le gaspillage. Sur Matlou7ch, tous les objets sont donnés gratuitement, sans contrepartie financière.'
       },
       {
         id: 'how-it-works',
-        question: 'Comment fonctionne Matlouch ?',
+        question: 'Comment fonctionne Matlou7ch ?',
         answer: 'Le principe est simple : les utilisateurs publient des annonces pour donner des objets dont ils n\'ont plus l\'usage. D\'autres utilisateurs intéressés peuvent les contacter via la messagerie de la plateforme. Une fois d\'accord, ils conviennent d\'un lieu et d\'une heure pour la remise de l\'objet.'
       },
       {
         id: 'is-it-free',
         question: 'Est-ce vraiment gratuit ?',
-        answer: 'Oui, l\'utilisation de Matlouch est entièrement gratuite. Tous les objets proposés sur la plateforme doivent être donnés sans contrepartie financière. Nous ne prélevons aucune commission sur les dons.'
+        answer: 'Oui, l\'utilisation de Matlou7ch est entièrement gratuite. Tous les objets proposés sur la plateforme doivent être donnés sans contrepartie financière. Nous ne prélevons aucune commission sur les dons.'
       }
     ],
     compte: [
@@ -153,7 +153,7 @@ function FAQ() {
       {
         id: 'notifications',
         question: 'Je ne reçois pas les notifications, pourquoi ?',
-        answer: 'Vérifiez vos paramètres de notification dans "Mon profil" > "Paramètres" > "Notifications". Assurez-vous également que Matlouch est autorisé à vous envoyer des notifications dans les paramètres de votre appareil. Si vous utilisez l\'application web, vérifiez que vous n\'avez pas bloqué les notifications dans votre navigateur.'
+        answer: 'Vérifiez vos paramètres de notification dans "Mon profil" > "Paramètres" > "Notifications". Assurez-vous également que Matlou7ch est autorisé à vous envoyer des notifications dans les paramètres de votre appareil. Si vous utilisez l\'application web, vérifiez que vous n\'avez pas bloqué les notifications dans votre navigateur.'
       },
       {
         id: 'upload-photos',

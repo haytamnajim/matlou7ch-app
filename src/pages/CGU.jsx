@@ -121,17 +121,17 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'presentation' ? 'active' : ''}`}>
               <p>
-                Matlouch.ma est une plateforme en ligne permettant à ses utilisateurs de donner et recevoir gratuitement des objets. 
-                La plateforme est exploitée par la société Matlouch SARL, immatriculée au Registre du Commerce de Casablanca sous le numéro 123456, 
+                Matlou7ch.ma est une plateforme en ligne permettant à ses utilisateurs de donner et recevoir gratuitement des objets. 
+                La plateforme est exploitée par la société Matlou7ch SARL, immatriculée au Registre du Commerce de Casablanca sous le numéro 123456, 
                 dont le siège social est situé au 123 Avenue Mohammed V, Casablanca, Maroc.
               </p>
               <p>
                 Les présentes Conditions Générales d'Utilisation (ci-après "CGU") ont pour objet de définir les modalités et conditions d'utilisation 
-                des services proposés sur le site Matlouch.ma (ci-après "le Site") ainsi que de définir les droits et obligations des parties dans ce cadre.
+                des services proposés sur le site Matlou7ch.ma (ci-après "le Site") ainsi que de définir les droits et obligations des parties dans ce cadre.
               </p>
               <div className="cgu-example">
                 <h4>Exemple :</h4>
-                <p>Matlouch permet à un utilisateur de donner un canapé dont il n'a plus l'utilité à un autre utilisateur qui en a besoin, sans aucune contrepartie financière.</p>
+                <p>Matlou7ch permet à un utilisateur de donner un canapé dont il n'a plus l'utilité à un autre utilisateur qui en a besoin, sans aucune contrepartie financière.</p>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@ function CGU() {
                 il doit renoncer à accéder au Site et à utiliser ses services.
               </p>
               <p>
-                Matlouch se réserve le droit de modifier à tout moment les CGU. Les modifications prennent effet dès leur publication sur le Site. 
+                Matlou7ch se réserve le droit de modifier à tout moment les CGU. Les modifications prennent effet dès leur publication sur le Site. 
                 L'utilisateur est réputé accepter la dernière version des CGU à chaque nouvelle connexion au Site.
               </p>
             </div>
@@ -175,12 +175,12 @@ function CGU() {
                 Toute utilisation du Site avec ses identifiants sera présumée être effectuée par l'utilisateur et sous sa responsabilité.
               </p>
               <p>
-                En cas d'utilisation frauduleuse de son compte, l'utilisateur doit immédiatement en informer Matlouch par email à l'adresse : 
-                support@matlouch.ma.
+                En cas d'utilisation frauduleuse de son compte, l'utilisateur doit immédiatement en informer Matlou7ch par email à l'adresse : 
+                support@matlou7ch.ma.
               </p>
               <div className="cgu-example">
                 <h4>Important :</h4>
-                <p>Choisissez un mot de passe fort et ne le partagez avec personne. Matlouch ne vous demandera jamais votre mot de passe par email ou téléphone.</p>
+                <p>Choisissez un mot de passe fort et ne le partagez avec personne. Matlou7ch ne vous demandera jamais votre mot de passe par email ou téléphone.</p>
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'principes' ? 'active' : ''}`}>
               <p>
-                Matlouch.ma est une plateforme de dons d'objets. Tous les objets proposés sur le Site doivent être donnés gratuitement, 
+                Matlou7ch.ma est une plateforme de dons d'objets. Tous les objets proposés sur le Site doivent être donnés gratuitement, 
                 sans contrepartie financière directe ou indirecte.
               </p>
               <p>
@@ -238,7 +238,7 @@ function CGU() {
                 <li>De coordonnées personnelles visibles publiquement (numéro de téléphone, adresse email, etc.)</li>
               </ul>
               <p>
-                Matlouch se réserve le droit de supprimer, sans préavis, toute annonce ne respectant pas ces règles ou les présentes CGU.
+                Matlou7ch se réserve le droit de supprimer, sans préavis, toute annonce ne respectant pas ces règles ou les présentes CGU.
               </p>
               <div className="cgu-example">
                 <h4>Conseil :</h4>
@@ -257,13 +257,13 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'transactions' ? 'active' : ''}`}>
               <p>
-                Matlouch.ma est uniquement une plateforme de mise en relation entre donneurs et receveurs. Matlouch n'est pas partie aux 
+                Matlou7ch.ma est uniquement une plateforme de mise en relation entre donneurs et receveurs. Matlou7ch n'est pas partie aux 
                 transactions entre utilisateurs et n'exerce aucun contrôle sur la qualité, la sécurité ou la légalité des objets donnés, 
                 ni sur la capacité des utilisateurs à donner ou recevoir ces objets.
               </p>
               <p>
                 Les utilisateurs sont seuls responsables de la remise des objets et doivent prendre toutes les précautions nécessaires lors 
-                des rencontres avec d'autres utilisateurs. Matlouch recommande :
+                des rencontres avec d'autres utilisateurs. Matlou7ch recommande :
               </p>
               <ul>
                 <li>De privilégier les rencontres dans des lieux publics</li>
@@ -289,7 +289,7 @@ function CGU() {
             <div className={`cgu-section-content ${activeSection === 'notation' ? 'active' : ''}`}>
               <p>
                 Après chaque transaction, les utilisateurs peuvent s'évaluer mutuellement. Ces évaluations doivent être objectives et 
-                respectueuses. Toute évaluation abusive pourra être supprimée par Matlouch.
+                respectueuses. Toute évaluation abusive pourra être supprimée par Matlou7ch.
               </p>
               <p>
                 Le système de notation contribue à créer un environnement de confiance sur la plateforme. Les utilisateurs ayant des 
@@ -314,11 +314,11 @@ function CGU() {
               <p>
                 L'ensemble des éléments du Site (textes, graphismes, logos, photos, vidéos, etc.) sont protégés par le droit d'auteur, 
                 le droit des marques et/ou tout autre droit de propriété intellectuelle. Ces éléments sont la propriété exclusive de 
-                Matlouch ou de ses partenaires.
+                Matlou7ch ou de ses partenaires.
               </p>
               <p>
                 Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie des éléments 
-                du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l'autorisation préalable écrite de Matlouch.
+                du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans l'autorisation préalable écrite de Matlou7ch.
               </p>
             </div>
           </div>
@@ -333,7 +333,7 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'donnees' ? 'active' : ''}`}>
               <p>
-                Matlouch accorde une grande importance à la protection des données personnelles de ses utilisateurs. La collecte et le 
+                Matlou7ch accorde une grande importance à la protection des données personnelles de ses utilisateurs. La collecte et le 
                 traitement des données personnelles s'effectuent dans le respect de la loi 09-08 relative à la protection des personnes 
                 physiques à l'égard du traitement des données à caractère personnel.
               </p>
@@ -358,18 +358,19 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'responsabilite' ? 'active' : ''}`}>
               <p>
-                Matlouch s'efforce d'assurer au mieux l'accès et le fonctionnement du Site 24 heures sur 24 et 7 jours sur 7. 
-                Toutefois, Matlouch ne peut être tenue responsable d'une interruption de service, quelle qu'en soit la cause.
+                Matlou7ch s'efforce d'assurer au mieux l'accès et le fonctionnement du Site 24 heures sur 24 et 7 jours sur 7. 
+                Toutefois, Matlou7ch ne peut être tenue responsable d'une interruption de service, quelle qu'en soit la cause.
               </p>
               <p>
-                Matlouch ne peut être tenue responsable :
+                Matlou7ch ne peut être tenue responsable :
               </p>
               <ul>
-                <li>Des dommages de toute nature résultant de l'utilisation du Site</li>
+                <li>Des dommages de toute nature, directs ou indirects, résultant de l'utilisation du Site</li>
                 <li>Des transactions effectuées entre utilisateurs</li>
-                <li>Du contenu des annonces publiées par les utilisateurs</li>
-                <li>Des agissements des utilisateurs lors des rencontres pour la remise des objets</li>
-                <li>De l'impossibilité d'accéder temporairement au Site en cas de problèmes techniques</li>
+                <li>De la qualité, de la sécurité ou de la légalité des objets donnés</li>
+                <li>De l'exactitude des descriptions des objets publiées par les utilisateurs</li>
+                <li>De la capacité des utilisateurs à donner ou recevoir les objets</li>
+                <li>Des problèmes de communication entre utilisateurs</li>
               </ul>
             </div>
           </div>
@@ -384,7 +385,7 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'sanctions' ? 'active' : ''}`}>
               <p>
-                En cas de violation des présentes CGU, Matlouch se réserve le droit de :
+                En cas de violation des présentes CGU, Matlou7ch se réserve le droit de :
               </p>
               <ul>
                 <li>Supprimer les annonces concernées</li>
@@ -395,7 +396,7 @@ function CGU() {
               </ul>
               <div className="cgu-example">
                 <h4>Précision :</h4>
-                <p>Matlouch applique une politique de tolérance zéro concernant les tentatives de vente d'objets ou les comportements inappropriés envers d'autres utilisateurs.</p>
+                <p>Matlou7ch applique une politique de tolérance zéro concernant les tentatives de vente d'objets ou les comportements inappropriés envers d'autres utilisateurs.</p>
               </div>
             </div>
           </div>
@@ -426,11 +427,11 @@ function CGU() {
             </div>
             <div className={`cgu-section-content ${activeSection === 'contact' ? 'active' : ''}`}>
               <p>
-                Pour toute question relative aux présentes CGU ou au fonctionnement du Site, l'utilisateur peut contacter Matlouch :
+                Pour toute question relative aux présentes CGU ou au fonctionnement du Site, l'utilisateur peut contacter Matlou7ch :
               </p>
               <ul>
-                <li>Par email : contact@matlouch.ma</li>
-                <li>Par courrier : Matlouch SARL, 123 Avenue Mohammed V, Casablanca, Maroc</li>
+                <li>Par email : contact@matlou7ch.ma</li>
+                <li>Par courrier : Matlou7ch SARL, 123 Avenue Mohammed V, Casablanca, Maroc</li>
               </ul>
             </div>
           </div>
@@ -444,7 +445,7 @@ function CGU() {
             <div className={`cgu-section-content ${activeSection === 'faq' ? 'active' : ''}`}>
               <div className="cgu-faq-item">
                 <h3>Puis-je demander une petite compensation pour un objet que je donne ?</h3>
-                <p>Non, tous les objets sur Matlouch doivent être donnés gratuitement, sans aucune contrepartie financière.</p>
+                <p>Non, tous les objets sur Matlou7ch doivent être donnés gratuitement, sans aucune contrepartie financière.</p>
               </div>
               <div className="cgu-faq-item">
                 <h3>Comment signaler un utilisateur qui ne respecte pas les règles ?</h3>
@@ -459,8 +460,8 @@ function CGU() {
                 <p>Oui, vous pouvez supprimer votre compte à tout moment depuis les paramètres de votre profil. Notez que cette action est irréversible.</p>
               </div>
               <div className="cgu-faq-item">
-                <h3>Matlouch peut-il utiliser mes photos d'objets à d'autres fins ?</h3>
-                <p>Matlouch peut utiliser les photos des objets publiés uniquement pour promouvoir la plateforme, sauf opposition explicite de votre part.</p>
+                <h3>Matlou7ch peut-il utiliser mes photos d'objets à d'autres fins ?</h3>
+                <p>Matlou7ch peut utiliser les photos des objets publiés uniquement pour promouvoir la plateforme, sauf opposition explicite de votre part.</p>
               </div>
             </div>
           </div>
@@ -478,3 +479,4 @@ function CGU() {
 }
 
 export default CGU;
+
