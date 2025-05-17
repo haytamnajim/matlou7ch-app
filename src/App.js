@@ -20,11 +20,11 @@ import Contact from './pages/Contact';
 import './App.css';
 import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
+import CGU from './pages/CGU';
 
 // Pages temporaires simples
 const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
 const FAQ = () => <div style={{padding: '20px'}}><h1>FAQ</h1></div>;
-const CGU = () => <div style={{padding: '20px'}}><h1>Conditions Générales d'Utilisation</h1></div>;
 
 function App() {
   return (
