@@ -18,10 +18,10 @@ import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
 import './App.css';
 import PostAd from './components/PostAd';
+import NotreADN from './pages/NotreADN';
 
 // Pages temporaires simples
 const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
-const NotreADN = () => <div style={{padding: '20px'}}><h1>Notre ADN</h1></div>;
 const FAQ = () => <div style={{padding: '20px'}}><h1>FAQ</h1></div>;
 const CGU = () => <div style={{padding: '20px'}}><h1>Conditions Générales d'Utilisation</h1></div>;
 

@@ -1,0 +1,516 @@
+.notre-adn-page {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section Héro */
+.hero-section {
+  background-color: #a7d1f7;
+  padding: 60px 20px;
+  margin-bottom: 60px;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+  padding-right: 40px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.hero-image-container {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Qui sommes-nous */
+.who-we-are-section {
+  padding: 60px 20px;
+  margin-bottom: 40px;
+}
+
+.who-we-are-tagline {
+  font-size: 1.5rem;
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.who-we-are-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.who-we-are-content p {
+  margin-bottom: 20px;
+}
+
+/* Section Détail de la mission */
+.mission-detail-section {
+  background-color: #a7d1f7;
+  padding: 60px 20px;
+  margin-bottom: 60px;
+  border-radius: 8px;
+}
+
+.mission-detail-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.mission-detail-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.mission-detail-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.mission-detail-subtitle {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.mission-detail-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.mission-detail-list li {
+  margin-bottom: 20px;
+}
+
+.mission-detail-list li strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.mission-detail-list li p {
+  color: #555;
+  line-height: 1.5;
+}
+
+.mission-detail-image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.mission-detail-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.donate-button {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.donate-button:hover {
+  background-color: #c0392b;
+}
+
+/* Sections communes */
+.mission-section,
+.values-section,
+.team-section {
+  padding: 60px 20px;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 50px; /* Réduit de 80px à 50px */
+  height: 3px; /* Réduit de 4px à 3px */
+  background-color: #e74c3c; /* Changé de #a7d1f7 à #e74c3c pour unifier avec le thème */
+  margin: 10px auto 0; /* Réduit de 15px à 10px */
+  border-radius: 1px;
+}
+
+/* Section Mission */
+.mission-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.mission-content p {
+  margin-bottom: 20px;
+}
+
+/* Section Valeurs */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.value-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.value-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.value-title {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.value-description {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Section Équipe */
+.team-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.team-cta {
+  text-align: center;
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.contact-button {
+  display: inline-block;
+  background-color: #e74c3c; /* Changé de #4a56e2 à #e74c3c */
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+  background-color: #c0392b; /* Changé pour correspondre */
+}
+
+/* Ajout des styles pour la section manifeste */
+.manifesto-section {
+  padding: 60px 20px;
+  margin-bottom: 60px;
+  background-color: #f9f9f9;
+}
+
+.manifesto-title {
+  font-size: 2.5rem;
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.manifesto-content {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  text-align: center;
+}
+
+.manifesto-content p {
+  margin-bottom: 25px;
+  font-weight: 400; /* Réduit pour une meilleure lisibilité */
+  text-transform: none; /* Assure que le texte n'est pas en majuscules */
+}
+
+.manifesto-highlight {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-top: 30px;
+}
+
+/* Styles pour la section valeurs rouge - avec la barre comme dans l'image */
+.values-red-section {
+  background-color: #e74c3c; /* Changé de #f7941d (orange) à #e74c3c (rouge) */
+  padding: 60px 20px;
+  margin-bottom: 60px;
+  color: white;
+}
+
+.values-content {
+  display: flex;
+  gap: 40px;
+}
+
+.values-left {
+  flex: 1;
+  max-width: 300px;
+}
+
+.values-red-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.values-red-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: white;
+}
+
+.values-right {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.value-item {
+  margin-bottom: 20px;
+}
+
+.value-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 8px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.value-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background-color: white;
+}
+
+.value-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .values-content {
+    flex-direction: column;
+  }
+  
+  .values-left {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .values-right {
+    grid-template-columns: 1fr;
+  }
+  
+  .values-red-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Placeholders pour les icônes */
+.icon-placeholder {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+/* Styles spécifiques pour chaque icône (vous pouvez les personnaliser) */
+.solidarity-icon {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z' fill='black'/%3E%3C/svg%3E") no-repeat center center;
+}
+
+.durability-icon {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm3.88 11.88L12 17.77l-3.88-3.88c-1.17-1.17-1.17-3.07 0-4.24 1.17-1.17 3.07-1.17 4.24 0l.64.64.64-.64c1.17-1.17 3.07-1.17 4.24 0 1.17 1.16 1.17 3.07 0 4.24z' fill='black'/%3E%3C/svg%3E") no-repeat center center;
+}
+
+.ambition-icon {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.13 22.19L11.5 18.36C13.07 17.78 14.54 17 15.9 16.09L13.13 22.19M5.64 12.5L1.81 10.87L7.91 8.1C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39C21.61 2.39 16.66 .269 11 5.93C8.81 8.12 7.5 10.53 6.65 12.64C6.37 13.39 6.56 14.21 7.11 14.77L9.24 16.89C9.79 17.45 10.61 17.63 11.36 17.35C13.5 16.53 15.88 15.19 18.07 13C23.73 7.34 21.61 2.39 21.61 2.39M14.54 9.46C13.76 8.68 13.76 7.41 14.54 6.63S16.59 5.85 17.37 6.63C18.14 7.41 18.15 8.68 17.37 9.46C16.59 10.24 15.32 10.24 14.54 9.46M8.88 16.53L7.47 15.12L8.88 16.53Z' fill='black'/%3E%3C/svg%3E") no-repeat center center;
+}
+
+.audacity-icon {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM13 5H11V11H5V13H11V19H13V13H19V11H13V5Z' fill='black'/%3E%3C/svg%3E") no-repeat center center;
+}
+
+.value-red-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 400px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Responsive pour la section valeurs rouge */
+@media (max-width: 768px) {
+  .values-red-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .values-red-title {
+    font-size: 2.2rem;
+  }
+  
+  .value-red-name {
+    font-size: 1.5rem;
+  }
+  
+  .value-red-underline {
+    width: 80px;
+    height: 0.5px; /* Cohérent en mode responsive */
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-text {
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  
+  .hero-content {
+    flex-direction: column;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .mission-detail-title {
+    font-size: 2rem;
+  }
+  
+  .mission-detail-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .who-we-are-tagline {
+    font-size: 1.3rem;
+  }
+}
+
+/* Ajout d'une police personnalisée pour le titre principal */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+
+
+
+
+
+
+
+
+
+
+
+
