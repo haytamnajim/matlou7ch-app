@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer({ type }) {
-  // Afficher le footer complet uniquement sur les pages d'accueil et catalogue
-  if (type !== 'home' && type !== 'catalogue') {
+  // Afficher le footer complet uniquement sur les pages d'accueil, catalogue, notre-adn, faq et cgu
+  if (type !== 'home' && type !== 'catalogue' && type !== 'notre-adn' && type !== 'faq' && type !== 'cgu') {
     return null;
   }
 

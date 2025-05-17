@@ -16,7 +16,7 @@ import EmailSettings from './pages/EmailSettings';
 import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
-import Contact from './pages/Contact'; // Importez la page Contact
+import Contact from './pages/Contact';
 import './App.css';
 import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
@@ -36,7 +36,32 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const isSimpleFooterPage = ['/catalogue'].includes(location.pathname);
+  
+  // Pages qui utilisent le SimpleFooter
+  const simpleFooterPages = [
+    '/catalogue', 
+    '/favoris', 
+    '/messages', 
+    '/profile', 
+    '/mes-annonces', 
+    '/profil-public', 
+    '/modifier-profil',
+    '/parametres',
+    '/parametres/notifications',
+    '/parametres/email',
+    '/parametres/mot-de-passe',
+    '/parametres/utilisateurs-bloques',
+    '/parametres/supprimer-compte',
+    '/post-ad',
+    '/contact'
+  ];
+  
+  // Pages qui utilisent le Footer complet
+  const fullFooterPages = ['/', '/notre-adn', '/faq', '/cgu'];
+  
+  // Déterminer quel footer utiliser
+  const useSimpleFooter = simpleFooterPages.some(path => location.pathname.startsWith(path));
+  const useFullFooter = fullFooterPages.includes(location.pathname);
   
   return (
     <div className="app-container">
@@ -61,10 +86,11 @@ function AppContent() {
           <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
           <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
           <Route path="/post-ad" element={<PostAd />} />
-          <Route path="/contact" element={<Contact />} /> {/* Ajoutez la route pour la page Contact */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
-      {isSimpleFooterPage ? <SimpleFooter /> : <Footer />}
+      {useSimpleFooter && <SimpleFooter />}
+      {useFullFooter && <Footer type={location.pathname === '/' ? 'home' : 'catalogue'} />}
     </div>
   );
 }
