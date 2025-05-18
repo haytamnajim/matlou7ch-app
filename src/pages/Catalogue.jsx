@@ -111,6 +111,22 @@ function Catalogue() {
   const currentItems = results.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(results.length / itemsPerPage);
 
+  // Après le calcul de currentItems, ajoutez cette fonction pour grouper par catégorie
+  const groupItemsByCategory = (items) => {
+    const grouped = {};
+    
+    items.forEach(item => {
+      if (!grouped[item.category]) {
+        grouped[item.category] = [];
+      }
+      grouped[item.category].push(item);
+    });
+    
+    return grouped;
+  };
+
+  const groupedItems = groupItemsByCategory(currentItems);
+
   return (
     <div className="search-results-page">
       <div className="advanced-search-bar">
@@ -168,8 +184,6 @@ function Catalogue() {
           <svg className="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#aaa">
             <path d="M0 0h24v24H0V0z" fill="none"/>
             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" fill="none"/>
-            <path d="M7 9h2V7h1v2h2v1h-2v2H9v-2H7z" opacity="0.3"/>
           </svg>
           <p>Aucun résultat ne correspond à votre recherche.</p>
           <button onClick={() => {
@@ -181,45 +195,55 @@ function Catalogue() {
         </div>
       ) : (
         <>
-          <div className="product-grid">
-            {currentItems.map(item => (
-              <div key={item.id} className="product-card">
-                <Link to={`/produit/${item.id}`} className="product-link">
-                  <div className="product-image-container">
-                    <div className="product-avatar" style={{ backgroundColor: item.avatar }}>
-                      {item.user.name.charAt(0)}
-                    </div>
-                    <div className="product-user-name">{item.user.name}</div>
-                    <img src={item.image} alt={item.title} className="product-image" />
-                    <button 
-                      className="favorite-button" 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleFavorite(item.id);
-                      }}
-                    >
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        viewBox="0 0 24 24" 
-                        fill={favorites.includes(item.id) ? "#FF5733" : "none"} 
-                        stroke={favorites.includes(item.id) ? "#FF5733" : "white"} 
-                        width="24px" 
-                        height="24px"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="product-info">
-                    <h3 className="product-title">{item.title}</h3>
-                    <p className="product-location">{item.location}</p>
-                    <p className="product-time">{item.time}</p>
-                  </div>
+          {Object.keys(groupedItems).map(category => (
+            <section key={category} className="category-section">
+              <div className="section-header">
+                <h2 className="section-title">{category}</h2>
+                <Link to={`/catalogue?category=${encodeURIComponent(category)}`} className="see-all-button">
+                  Voir tout
                 </Link>
               </div>
-            ))}
-          </div>
-
+              <div className="product-grid">
+                {groupedItems[category].map(item => (
+                  <div key={item.id} className="product-card">
+                    <Link to={`/produit/${item.id}`} className="product-link">
+                      <div className="product-image-container">
+                        <div className="product-avatar" style={{ backgroundColor: item.avatar }}>
+                          {item.user.name.charAt(0)}
+                        </div>
+                        <div className="product-user-name">{item.user.name}</div>
+                        <img src={item.image} alt={item.title} className="product-image" />
+                        <button 
+                          className="favorite-button" 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toggleFavorite(item.id);
+                          }}
+                        >
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 24 24" 
+                            fill={favorites.includes(item.id) ? "#FF5733" : "none"} 
+                            stroke={favorites.includes(item.id) ? "#FF5733" : "white"} 
+                            width="24px" 
+                            height="24px"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div className="product-info">
+                        <h3 className="product-title">{item.title}</h3>
+                        <p className="product-location">{item.location}</p>
+                        <p className="product-time">{item.time}</p>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+          
           {totalPages > 1 && (
             <div className="pagination">
               <button 
