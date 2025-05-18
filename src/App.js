@@ -39,32 +39,13 @@ function App() {
 function AppContent() {
   const location = useLocation();
   
-  // Pages qui utilisent le SimpleFooter
-  const simpleFooterPages = [
-    '/catalogue', 
-    '/favoris', 
-    '/messages', 
-    '/profile', 
-    '/mes-annonces', 
-    '/profil-public', 
-    '/modifier-profil',
-    '/parametres',
-    '/parametres/notifications',
-    '/parametres/email',
-    '/parametres/mot-de-passe',
-    '/parametres/utilisateurs-bloques',
-    '/parametres/supprimer-compte',
-    '/post-ad',
-    '/contact',
-    '/informations-legales'
-  ];
-  
-  // Pages qui utilisent le Footer complet
-  const fullFooterPages = ['/', '/notre-adn', '/faq', '/cgu'];
+  // Pages qui utilisent le Footer complet (uniquement ces 3 pages)
+  const fullFooterPages = ['/', '/catalogue', '/notre-adn'];
   
   // Déterminer quel footer utiliser
-  const useSimpleFooter = simpleFooterPages.some(path => location.pathname.startsWith(path));
-  const useFullFooter = fullFooterPages.includes(location.pathname);
+  const useFullFooter = fullFooterPages.some(path => location.pathname === path);
+  // Toutes les autres pages utilisent le SimpleFooter
+  const useSimpleFooter = !useFullFooter;
   
   return (
     <div className="app-container">
@@ -94,7 +75,7 @@ function AppContent() {
         </Routes>
       </main>
       {useSimpleFooter && <SimpleFooter />}
-      {useFullFooter && <Footer type={location.pathname === '/' ? 'home' : 'catalogue'} />}
+      {useFullFooter && <Footer type={location.pathname === '/' ? 'home' : location.pathname === '/catalogue' ? 'catalogue' : 'notre-adn'} />}
     </div>
   );
 }
