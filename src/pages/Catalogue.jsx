@@ -4,137 +4,81 @@ import './Catalogue.css';
 
 function Catalogue() {
   const [searchParams] = useSearchParams();
-  const location = searchParams.get('location') || 'Paris 10 (75) - 100 km';
-  const query = searchParams.get('query') || '';
-  const category = searchParams.get('category') || 'Ameublement';
-  
-  // État pour gérer les favoris
-  const [favorites, setFavorites] = useState([]);
-  
-  // État pour la recherche avancée
-  const [searchLocation, setSearchLocation] = useState(location);
-  const [searchQuery, setSearchQuery] = useState(query);
-  const [searchCategory, setSearchCategory] = useState(category);
-  
-  // État pour les résultats
+  const [searchLocation, setSearchLocation] = useState(searchParams.get('location') || '');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || '');
+  const [searchCategory, setSearchCategory] = useState(searchParams.get('category') || '');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [isSaved, setIsSaved] = useState(false);
+  
+  const itemsPerPage = 12;
 
-  // Base de données simulée
-  const databaseItems = [
-    {
-      id: 'etagere1',
-      title: 'Petite étagère en bois',
-      location: 'Antony (Châtenay-Malabry)',
-      image: 'https://via.placeholder.com/200x180?text=Etagere',
-      date: 'il y a 20 minutes',
-      user: { name: 'Ayoub', avatar: 'A', color: '#F44336' },
-      category: 'Ameublement'
-    },
-    {
-      id: 'fauteuil1',
-      title: 'Fauteuil ancien',
-      location: 'Antony (Châtenay-Malabry)',
-      image: 'https://via.placeholder.com/200x180?text=Fauteuil',
-      date: 'il y a 2 heures',
-      user: { name: 'Ousama', avatar: 'O', color: '#4CAF50' },
-      category: 'Ameublement'
-    },
-    {
-      id: 'table1',
-      title: 'Table basse en bois',
-      location: 'Antony (Châtenay-Malabry)',
-      image: 'https://via.placeholder.com/200x180?text=Table',
-      date: 'il y a 3 heures',
-      user: { name: 'Sahra', avatar: 'S', color: '#3F51B5' },
-      category: 'Ameublement'
-    },
-    {
-      id: 'lampe1',
-      title: 'Lampe de bureau design',
-      location: 'Casablanca, Maarif',
-      image: 'https://via.placeholder.com/200x180?text=Lampe',
-      date: 'il y a 5 heures',
-      user: { name: 'Karim', avatar: 'K', color: '#FF9800' },
-      category: 'Décoration'
-    },
-    {
-      id: 'canape1',
-      title: 'Canapé 3 places gris',
-      location: 'Rabat, Agdal',
-      image: 'https://via.placeholder.com/200x180?text=Canape',
-      date: 'il y a 1 jour',
-      user: { name: 'Leila', avatar: 'L', color: '#9C27B0' },
-      category: 'Ameublement'
-    },
-    {
-      id: 'frigo1',
-      title: 'Réfrigérateur Samsung',
-      location: 'Marrakech, Guéliz',
-      image: 'https://via.placeholder.com/200x180?text=Frigo',
-      date: 'il y a 2 jours',
-      user: { name: 'Hassan', avatar: 'H', color: '#795548' },
-      category: 'Électroménager'
-    },
-    {
-      id: 'veste1',
-      title: 'Veste en cuir taille M',
-      location: 'Tanger, Centre',
-      image: 'https://via.placeholder.com/200x180?text=Veste',
-      date: 'il y a 3 jours',
-      user: { name: 'Fatima', avatar: 'F', color: '#E91E63' },
-      category: 'Vêtements'
-    },
-    {
-      id: 'miroir1',
-      title: 'Miroir mural doré',
-      location: 'Fès, Médina',
-      image: 'https://via.placeholder.com/200x180?text=Miroir',
-      date: 'il y a 4 jours',
-      user: { name: 'Youssef', avatar: 'Y', color: '#009688' },
-      category: 'Décoration'
-    },
-    {
-      id: 'machine1',
-      title: 'Machine à laver LG',
-      location: 'Agadir, Talborjt',
-      image: 'https://via.placeholder.com/200x180?text=Machine',
-      date: 'il y a 5 jours',
-      user: { name: 'Nadia', avatar: 'N', color: '#673AB7' },
-      category: 'Électroménager'
+  // Vérifier si la recherche actuelle est sauvegardée
+  useEffect(() => {
+    const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
+    const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
+    
+    if (savedSearches.includes(currentSearch)) {
+      setIsSaved(true);
+    } else {
+      setIsSaved(false);
     }
-  ];
+  }, [searchLocation, searchQuery, searchCategory]);
 
-  // Fonction pour filtrer les résultats
+  // Fonction pour basculer l'état de sauvegarde
+  const toggleSaveSearch = () => {
+    const newSavedState = !isSaved;
+    setIsSaved(newSavedState);
+    
+    const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
+    const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
+    
+    if (newSavedState) {
+      // Ajouter la recherche
+      if (!savedSearches.includes(currentSearch)) {
+        savedSearches.push(currentSearch);
+      }
+    } else {
+      // Supprimer la recherche
+      const index = savedSearches.indexOf(currentSearch);
+      if (index !== -1) {
+        savedSearches.splice(index, 1);
+      }
+    }
+    
+    localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
+  };
+
+  // Filtrer les résultats en fonction des critères de recherche
   const filterResults = () => {
     setLoading(true);
     
-    // Simuler un délai de chargement
+    // Simuler un appel API avec un délai
     setTimeout(() => {
-      let filteredItems = [...databaseItems];
+      // Ici, vous feriez normalement un appel à votre API
+      // Pour l'exemple, nous utilisons des données fictives
+      const dummyItems = Array.from({ length: 50 }, (_, i) => ({
+        id: i + 1,
+        title: `Article ${i + 1}`,
+        location: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)],
+        category: ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'][Math.floor(Math.random() * 5)],
+        time: `Il y a ${Math.floor(Math.random() * 24)} heures`,
+        image: `https://picsum.photos/300/200?random=${i}`,
+        avatar: ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'][Math.floor(Math.random() * 5)],
+        user: {
+          name: ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'][Math.floor(Math.random() * 5)]
+        }
+      }));
       
-      // Filtrer par catégorie si sélectionnée
-      if (searchCategory) {
-        filteredItems = filteredItems.filter(item => 
-          item.category.toLowerCase() === searchCategory.toLowerCase()
-        );
-      }
-      
-      // Filtrer par requête de recherche
-      if (searchQuery) {
-        filteredItems = filteredItems.filter(item => 
-          item.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }
-      
-      // Filtrer par localisation
-      if (searchLocation && searchLocation !== 'Paris 10 (75) - 100 km') {
-        filteredItems = filteredItems.filter(item => 
-          item.location.toLowerCase().includes(searchLocation.toLowerCase())
-        );
-      }
+      // Filtrer les résultats en fonction des critères de recherche
+      const filteredItems = dummyItems.filter(item => {
+        const matchesLocation = !searchLocation || item.location.toLowerCase().includes(searchLocation.toLowerCase());
+        const matchesQuery = !searchQuery || item.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = !searchCategory || item.category.toLowerCase().includes(searchCategory.toLowerCase());
+        return matchesLocation && matchesQuery && matchesCategory;
+      });
       
       setResults(filteredItems);
       setLoading(false);
@@ -161,111 +105,179 @@ function Catalogue() {
     filterResults();
   };
 
-  // Pagination
+  // Calculer les éléments à afficher pour la pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = results.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(results.length / itemsPerPage);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   return (
     <div className="search-results-page">
-      {/* Barre de recherche avancée */}
       <div className="advanced-search-bar">
         <div className="search-inputs">
-          <input 
-            type="text" 
-            placeholder="Que recherchez-vous ?" 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <input 
-            type="text" 
-            placeholder="Où cherchez-vous ?" 
+          <input
+            type="text"
+            placeholder="Ville, quartier..."
             value={searchLocation}
             onChange={(e) => setSearchLocation(e.target.value)}
           />
-          <select 
+          <input
+            type="text"
+            placeholder="Que cherchez-vous ?"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
             value={searchCategory}
             onChange={(e) => setSearchCategory(e.target.value)}
           >
-            <option value="">Toutes catégories</option>
-            <option value="Ameublement">Ameublement</option>
-            <option value="Électroménager">Électroménager</option>
+            <option value="">Toutes les catégories</option>
             <option value="Vêtements">Vêtements</option>
-            <option value="Décoration">Décoration</option>
+            <option value="Électronique">Électronique</option>
+            <option value="Meubles">Meubles</option>
+            <option value="Livres">Livres</option>
+            <option value="Jouets">Jouets</option>
           </select>
+          <button className="search-button" onClick={handleSearch}>Rechercher</button>
         </div>
-        <button className="search-button" onClick={handleSearch}>
-          Rechercher
+      </div>
+
+      <div className="search-header">
+        <div className="search-results-count">
+          {results.length} résultats
+        </div>
+        <button 
+          className={`save-search-button ${isSaved ? 'saved' : ''}`} 
+          onClick={toggleSaveSearch}
+        >
+          {isSaved ? 'Recherche sauvegardée' : 'Sauvegarder ma recherche'}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+          </svg>
         </button>
       </div>
 
-      <div className="search-results-count">
-        {results.length} résultats
-      </div>
-
-      {/* Affichage du chargement */}
       {loading ? (
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Chargement des résultats...</p>
         </div>
+      ) : results.length === 0 ? (
+        <div className="no-results">
+          <svg className="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#aaa">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" fill="none"/>
+            <path d="M7 9h2V7h1v2h2v1h-2v2H9v-2H7z" opacity="0.3"/>
+          </svg>
+          <p>Aucun résultat ne correspond à votre recherche.</p>
+          <button onClick={() => {
+            setSearchLocation('');
+            setSearchQuery('');
+            setSearchCategory('');
+            filterResults();
+          }}>Réinitialiser les filtres</button>
+        </div>
       ) : (
         <>
-          {/* Grille de résultats avec le style de la page d'accueil */}
           <div className="product-grid">
-            {currentItems.length > 0 ? (
-              currentItems.map((item) => (
-                <div className="product-card" key={item.id}>
-                  <Link to={`/produit/${item.id}`} className="product-link">
-                    <div className="product-avatar" style={{ backgroundColor: item.user.color }}>
-                      {item.user.avatar}
+            {currentItems.map(item => (
+              <div key={item.id} className="product-card">
+                <Link to={`/produit/${item.id}`} className="product-link">
+                  <div className="product-image-container">
+                    <div className="product-avatar" style={{ backgroundColor: item.avatar }}>
+                      {item.user.name.charAt(0)}
                     </div>
-                    <div className="product-image-container">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        className="product-image"
-                        onError={(e) => {
-                          e.target.onerror = null; 
-                          e.target.src = `https://via.placeholder.com/200x180?text=${encodeURIComponent(item.title)}`;
-                        }}
-                      />
-                      <button 
-                        className={`favorite-button ${favorites.includes(item.id) ? 'active' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          toggleFavorite(item.id);
-                        }}
+                    <div className="product-user-name">{item.user.name}</div>
+                    <img src={item.image} alt={item.title} className="product-image" />
+                    <button 
+                      className="favorite-button" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleFavorite(item.id);
+                      }}
+                    >
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        fill={favorites.includes(item.id) ? "#FF5733" : "none"} 
+                        stroke={favorites.includes(item.id) ? "#FF5733" : "white"} 
+                        width="24px" 
+                        height="24px"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={favorites.includes(item.id) ? "red" : "white"} width="24px" height="24px">
-                          <path d="M0 0h24v24H0z" fill="none"/>
-                          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="product-info">
-                      <h3 className="product-title">{item.title}</h3>
-                      <p className="product-location">{item.location}</p>
-                      <p className="product-time">{item.date}</p>
-                    </div>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <div className="no-results">
-                <p>Aucun résultat ne correspond à votre recherche.</p>
-                <button onClick={() => {
-                  setSearchQuery('');
-                  setSearchLocation('');
-                  setSearchCategory('');
-                  filterResults();
-                }}>Réinitialiser les filtres</button>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="product-info">
+                    <h3 className="product-title">{item.title}</h3>
+                    <p className="product-location">{item.location}</p>
+                    <p className="product-time">{item.time}</p>
+                  </div>
+                </Link>
               </div>
-            )}
+            ))}
           </div>
+
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button 
+                className="pagination-button" 
+                onClick={() => setCurrentPage(1)} 
+                disabled={currentPage === 1}
+              >
+                «
+              </button>
+              <button 
+                className="pagination-button" 
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+                disabled={currentPage === 1}
+              >
+                ‹
+              </button>
+              
+              {[...Array(totalPages)].map((_, i) => {
+                // Afficher seulement quelques pages autour de la page actuelle
+                if (
+                  i === 0 || 
+                  i === totalPages - 1 || 
+                  (i >= currentPage - 2 && i <= currentPage + 2)
+                ) {
+                  return (
+                    <button 
+                      key={i} 
+                      className={`pagination-button ${currentPage === i + 1 ? 'active' : ''}`} 
+                      onClick={() => setCurrentPage(i + 1)}
+                    >
+                      {i + 1}
+                    </button>
+                  );
+                } else if (
+                  i === currentPage - 3 || 
+                  i === currentPage + 3
+                ) {
+                  return <span key={i} className="pagination-ellipsis">...</span>;
+                }
+                return null;
+              })}
+              
+              <button 
+                className="pagination-button" 
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} 
+                disabled={currentPage === totalPages}
+              >
+                ›
+              </button>
+              <button 
+                className="pagination-button" 
+                onClick={() => setCurrentPage(totalPages)} 
+                disabled={currentPage === totalPages}
+              >
+                »
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
