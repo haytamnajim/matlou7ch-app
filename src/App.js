@@ -16,6 +16,7 @@ import EmailSettings from './pages/EmailSettings';
 import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
+import Catalogue from './pages/Catalogue';
 import Contact from './pages/Contact';
 import './App.css';
 import PostAd from './components/PostAd';
@@ -25,7 +26,7 @@ import FAQ from './pages/FAQ';
 import InformationsLegales from './pages/InformationsLegales';
 
 // Pages temporaires simples
-const Catalogue = () => <div style={{padding: '20px'}}><h1>Catalogue</h1></div>;
+
 
 function App() {
   return (
