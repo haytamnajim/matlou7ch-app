@@ -18,15 +18,14 @@ import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
 import Catalogue from './pages/Catalogue';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
 import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
 import InformationsLegales from './pages/InformationsLegales';
-
-// Pages temporaires simples
-
 
 function App() {
   return (
@@ -72,6 +71,9 @@ function AppContent() {
           <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
           <Route path="/post-ad" element={<PostAd />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Nouvelles routes pour connexion et inscription */}
+          <Route path="/connexion" element={<Login />} />
+          <Route path="/inscription" element={<Register />} />
         </Routes>
       </main>
       {useSimpleFooter && <SimpleFooter />}
