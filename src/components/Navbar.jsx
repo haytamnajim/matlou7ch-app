@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
 
 function Navbar() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
   const [location, setLocation] = useState('');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
 
   const handleDonateClick = () => {
-    navigate('/post-ad');
+    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+    if (!user) {
+      navigate('/connexion', { state: { from: { pathname: '/post-ad' } } });
+    } else {
+      navigate('/post-ad');
+    }
   };
 
   const handleSearchClick = () => {

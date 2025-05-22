@@ -139,5 +139,15 @@
   text-decoration: underline;
 }
 
-
+/* Ajouter ce style pour le message de redirection */
+.redirect-message {
+  background-color: #e8f0fe;
+  color: #4a56e2;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+  border-left: 4px solid #4a56e2;
+}
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
@@ -17,15 +18,33 @@ import PasswordSettings from './pages/PasswordSettings';
 import BlockedUsers from './pages/BlockedUsers';
 import DeleteAccount from './pages/DeleteAccount';
 import Catalogue from './pages/Catalogue';
+import ProductDetail from './pages/ProductDetail';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import './App.css';
-import PostAd from './components/PostAd';
 import NotreADN from './pages/NotreADN';
 import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
 import InformationsLegales from './pages/InformationsLegales';
+import PostAd from './components/PostAd';
+import './App.css';
+
+// Composant pour protéger les routes qui nécessitent une authentification
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    return <div className="loading-screen">Chargement...</div>;
+  }
+
+  if (!user) {
+    // Rediriger vers la page de connexion avec l'URL de retour
+    return <Navigate to="/connexion" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
@@ -38,12 +57,11 @@ function App() {
 function AppContent() {
   const location = useLocation();
   
-  // Pages qui utilisent le Footer complet (uniquement ces 3 pages)
+  // Pages qui utilisent le Footer complet
   const fullFooterPages = ['/', '/catalogue', '/notre-adn'];
   
   // Déterminer quel footer utiliser
   const useFullFooter = fullFooterPages.some(path => location.pathname === path);
-  // Toutes les autres pages utilisent le SimpleFooter
   const useSimpleFooter = !useFullFooter;
   
   return (
@@ -51,29 +69,91 @@ function AppContent() {
       <Navbar />
       <main className="main-content">
         <Routes>
+          {/* Routes publiques */}
           <Route path="/" element={<Home />} />
           <Route path="/catalogue" element={<Catalogue />} />
-          <Route path="/notre-adn" element={<NotreADN />} />
-          <Route path="/favoris" element={<Favoris />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/cgu" element={<CGU />} />
-          <Route path="/informations-legales" element={<InformationsLegales />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/mes-annonces" element={<MesAnnonces />} />
-          <Route path="/profil-public" element={<PublicProfile />} />
-          <Route path="/modifier-profil" element={<EditProfile />} />
-          <Route path="/parametres" element={<Settings />} />
-          <Route path="/parametres/notifications" element={<NotificationSettings />} />
-          <Route path="/parametres/email" element={<EmailSettings />} />
-          <Route path="/parametres/mot-de-passe" element={<PasswordSettings />} />
-          <Route path="/parametres/utilisateurs-bloques" element={<BlockedUsers />} />
-          <Route path="/parametres/supprimer-compte" element={<DeleteAccount />} />
-          <Route path="/post-ad" element={<PostAd />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* Nouvelles routes pour connexion et inscription */}
+          <Route path="/produit/:id" element={<ProductDetail />} />
           <Route path="/connexion" element={<Login />} />
           <Route path="/inscription" element={<Register />} />
+          <Route path="/cgu" element={<CGU />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/informations-legales" element={<InformationsLegales />} />
+          <Route path="/notre-adn" element={<NotreADN />} />
+          
+          {/* Routes protégées */}
+          <Route path="/favoris" element={
+            <ProtectedRoute>
+              <Favoris />
+            </ProtectedRoute>
+          } />
+          <Route path="/messages" element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/mes-annonces" element={
+            <ProtectedRoute>
+              <MesAnnonces />
+            </ProtectedRoute>
+          } />
+          <Route path="/profil-public" element={
+            <ProtectedRoute>
+              <PublicProfile />
+            </ProtectedRoute>
+          } />
+          <Route path="/modifier-profil" element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres" element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/notifications" element={
+            <ProtectedRoute>
+              <NotificationSettings />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/email" element={
+            <ProtectedRoute>
+              <EmailSettings />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/mot-de-passe" element={
+            <ProtectedRoute>
+              <PasswordSettings />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/utilisateurs-bloques" element={
+            <ProtectedRoute>
+              <BlockedUsers />
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/supprimer-compte" element={
+            <ProtectedRoute>
+              <DeleteAccount />
+            </ProtectedRoute>
+          } />
+          <Route path="/post-ad" element={
+            <ProtectedRoute>
+              <PostAd />
+            </ProtectedRoute>
+          } />
+          <Route path="/contact" element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          } />
+          
+          {/* Redirection par défaut */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       {useSimpleFooter && <SimpleFooter />}

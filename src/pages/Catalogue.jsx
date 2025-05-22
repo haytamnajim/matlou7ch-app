@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import './Catalogue.css';
 
 function Catalogue() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [searchLocation, setSearchLocation] = useState(searchParams.get('location') || '');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || '');
   const [searchCategory, setSearchCategory] = useState(searchParams.get('category') || '');
@@ -92,11 +95,21 @@ function Catalogue() {
   }, []); // Exécuter uniquement au montage du composant
 
   // Fonction pour ajouter/supprimer des favoris
-  const toggleFavorite = (itemId) => {
-    if (favorites.includes(itemId)) {
-      setFavorites(favorites.filter(id => id !== itemId));
+  const toggleFavorite = (itemId, e) => {
+    e.preventDefault(); // Empêcher la navigation vers la page de détail
+    
+    if (!user) {
+      // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+      navigate('/connexion', { 
+        state: { from: { pathname: '/catalogue' } }
+      });
     } else {
-      setFavorites([...favorites, itemId]);
+      // Logique existante pour ajouter/supprimer des favoris
+      if (favorites.includes(itemId)) {
+        setFavorites(favorites.filter(id => id !== itemId));
+      } else {
+        setFavorites([...favorites, itemId]);
+      }
     }
   };
 
