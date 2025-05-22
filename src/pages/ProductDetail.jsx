@@ -52,25 +52,6 @@ function ProductDetail() {
     }, 500);
   }, [id, location.state]);
   
-  // Fonction pour gérer le contact
-  const handleContactClick = () => {
-    if (!user) {
-      // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-      navigate('/connexion', { 
-        state: { from: { pathname: `/produit/${id}` } }
-      });
-    } else {
-      // Logique pour contacter le donneur
-      // Rediriger vers la page de messages ou ouvrir une boîte de dialogue
-      navigate(`/messages/new`, { 
-        state: { 
-          recipient: product.user,
-          product: product
-        } 
-      });
-    }
-  };
-
   // Fonction pour gérer l'ajout aux favoris
   const handleFavoriteClick = () => {
     if (!user) {
@@ -168,7 +149,19 @@ function ProductDetail() {
         
         <button 
           className="contact-button"
-          onClick={handleContactClick}
+          onClick={() => {
+            if (!user) {
+              navigate('/connexion', { state: { from: { pathname: `/produit/${id}` } } });
+            } else {
+              navigate('/messages', { 
+                state: { 
+                  recipient: product.user,
+                  product: product,
+                  newConversation: true
+                } 
+              });
+            }
+          }}
         >
           Contacter le donneur
         </button>
@@ -229,5 +222,6 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+
 
 
