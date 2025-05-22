@@ -40,7 +40,11 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-content">
         <div className="logo-section">
-          <Link to="/" className="logo">Matlou7ch.org</Link>
+          <Link to="/" className="logo">
+            <div className="logo-icon">M</div>
+            <span className="logo-text">Matlou7ch.org</span>
+          </Link>
+          <span className="logo-tagline">Donnez, recevez, partagez</span>
         </div>
         
         <div className="search-bar" onClick={handleSearchClick}>
