@@ -833,3 +833,45 @@
   background-color: var(--admin-primary);
   color: white;
 }
+
+/* Styles pour les graphiques */
+.charts-container {
+  margin-bottom: 30px;
+}
+
+.chart-panel {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--admin-shadow);
+  margin-bottom: 20px;
+}
+
+.chart-panel h2 {
+  font-size: 1.2rem;
+  margin: 0 0 20px 0;
+  color: var(--admin-dark);
+  font-weight: 600;
+}
+
+.chart-wrapper {
+  height: 300px;
+  position: relative;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 992px) {
+  .charts-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.chart-panel.half {
+  margin-bottom: 0;
+}
+
