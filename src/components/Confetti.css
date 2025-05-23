@@ -1,0 +1,60 @@
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.confetti-icon {
+  margin-bottom: 1.5rem;
+  animation: bounce 2s ease infinite;
+}
+
+.success-title {
+  font-size: 2.5rem;
+  color: #4a56e2;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.success-message {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.view-ad-button {
+  background-color: #4a56e2;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(74, 86, 226, 0.2);
+}
+
+.view-ad-button:hover {
+  background-color: #3a46d1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(74, 86, 226, 0.3);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
