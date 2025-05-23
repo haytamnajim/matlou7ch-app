@@ -8,40 +8,96 @@
 
 /* Styles pour la barre de recherche avancée */
 .advanced-search-bar {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
   margin-bottom: 30px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
 }
 
 .search-inputs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .search-inputs input, .search-inputs select {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  min-width: 200px;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  background-color: #f9f9f9;
+}
+
+.search-inputs input:focus, .search-inputs select:focus {
+  border-color: #4a56e2;
+  box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.1);
+  outline: none;
+  background-color: white;
 }
 
 .search-button {
   background-color: #4a56e2;
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
+  padding: 14px 25px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(74, 86, 226, 0.2);
 }
 
 .search-button:hover {
   background-color: #3a46c2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(74, 86, 226, 0.25);
+}
+
+.search-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(74, 86, 226, 0.2);
+}
+
+/* Styles pour les filtres supplémentaires */
+.additional-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  background-color: #f0f2ff;
+  border: 1px solid #e0e4ff;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #4a56e2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  background-color: #e0e4ff;
+}
+
+.filter-chip.active {
+  background-color: #4a56e2;
+  color: white;
+  border-color: #4a56e2;
 }
 
 /* Styles pour l'en-tête de recherche */
@@ -313,4 +369,5 @@
   margin-bottom: 20px;
   opacity: 0.7;
 }
+
 
