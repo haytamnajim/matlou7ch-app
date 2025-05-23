@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactConfetti from 'react-confetti';
 
+// Solution temporaire si react-confetti ne fonctionne pas
 function Confetti() {
   const [windowDimension, setWindowDimension] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [showConfetti, setShowConfetti] = useState(true);
@@ -23,19 +23,37 @@ function Confetti() {
     };
   }, []);
 
+  // Rendu alternatif sans la dépendance externe
+  if (!showConfetti) return null;
+
   return (
-    <>
-      {showConfetti && (
-        <ReactConfetti
-          width={windowDimension.width}
-          height={windowDimension.height}
-          recycle={false}
-          numberOfPieces={500}
-          gravity={0.2}
-          colors={['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722']}
+    <div className="confetti-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1000 }}>
+      {Array.from({ length: 100 }).map((_, i) => (
+        <div
+          key={i}
+          className="confetti-piece"
+          style={{
+            position: 'absolute',
+            width: '10px',
+            height: '10px',
+            backgroundColor: ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50'][i % 10],
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            opacity: showConfetti ? 1 : 0,
+            transition: 'opacity 1s ease',
+            animation: `fall-${i} 5s linear forwards`,
+          }}
         />
-      )}
-    </>
+      ))}
+      <style>
+        {Array.from({ length: 100 }).map((_, i) => `
+          @keyframes fall-${i} {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(${70 + Math.random() * 30}vh) rotate(${360 * (Math.random() > 0.5 ? 1 : -1)}deg); }
+          }
+        `).join('')}
+      </style>
+    </div>
   );
 }
 
