@@ -7,6 +7,35 @@
   background-color: #f5f7ff;
 }
 
+.form-group {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.05rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4a56e2;
+  box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.1);
+}
+
 .login-card {
   width: 100%;
   max-width: 500px;
@@ -15,6 +44,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 15px rgba(74, 86, 226, 0.1);
   text-align: center;
+  box-sizing: border-box;
 }
 
 .login-title {
@@ -150,4 +180,5 @@
   font-weight: 500;
   border-left: 4px solid #4a56e2;
 }
+
 

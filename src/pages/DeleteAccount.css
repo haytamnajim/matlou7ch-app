@@ -7,6 +7,28 @@
   padding: 20px;
 }
 
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
 .delete-account-container {
   width: 100%;
   max-width: 550px;
@@ -14,6 +36,7 @@
   border-radius: 8px;
   padding: 30px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-sizing: border-box;
 }
 
 .delete-account-header {

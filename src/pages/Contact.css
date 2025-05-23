@@ -118,6 +118,7 @@
 
 .form-group {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .form-group label {
@@ -135,6 +136,7 @@
   border-radius: 4px;
   font-size: 1rem;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -155,6 +157,8 @@
   display: block;
   width: 100%;
   font-weight: 500;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .submit-button:hover {
@@ -269,4 +273,5 @@
     padding: 10px 20px;
   }
 }
+
 

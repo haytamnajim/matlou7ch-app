@@ -15,6 +15,7 @@
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(74, 86, 226, 0.15);
   position: relative;
+  box-sizing: border-box;
 }
 
 .back-button {
@@ -44,6 +45,7 @@
 
 .form-group {
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .form-group label {
@@ -61,6 +63,7 @@
   border-radius: 10px;
   font-size: 16px;
   transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -159,4 +162,5 @@
     font-size: 16px;
   }
 }
+
 
