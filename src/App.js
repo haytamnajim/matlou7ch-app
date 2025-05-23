@@ -27,6 +27,14 @@ import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
 import InformationsLegales from './pages/InformationsLegales';
 import PostAd from './components/PostAd';
+
+// Pages d'administration
+import AdminLogin from './pages/Admin/Login';
+import AdminDashboard from './pages/Admin/Dashboard';
+import AdminUsers from './pages/Admin/Users';
+import AdminListings from './pages/Admin/Listings';
+import AdminReports from './pages/Admin/Reports';
+
 import './App.css';
 
 // Composant pour protéger les routes qui nécessitent une authentification
@@ -46,119 +54,142 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
-function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
-function AppContent() {
+// Composant pour protéger les routes d'administration
+function AdminRoute({ children }) {
+  const adminToken = localStorage.getItem('adminToken');
   const location = useLocation();
   
-  // Pages qui utilisent le Footer complet
-  const fullFooterPages = ['/', '/catalogue', '/notre-adn'];
+  if (!adminToken) {
+    return <Navigate to="/admin/login" state={{ from: location }} replace />;
+  }
   
-  // Déterminer quel footer utiliser
-  const useFullFooter = fullFooterPages.some(path => location.pathname === path);
-  const useSimpleFooter = !useFullFooter;
+  return children;
+}
+
+function App() {
+  const { currentUser } = useAuth();
   
   return (
-    <div className="app-container">
-      <Navbar />
-      <main className="main-content">
-        <Routes>
-          {/* Routes publiques */}
-          <Route path="/" element={<Home />} />
-          <Route path="/catalogue" element={<Catalogue />} />
-          <Route path="/produit/:id" element={<ProductDetail />} />
-          <Route path="/connexion" element={<Login />} />
-          <Route path="/inscription" element={<Register />} />
-          <Route path="/cgu" element={<CGU />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/informations-legales" element={<InformationsLegales />} />
-          <Route path="/notre-adn" element={<NotreADN />} />
-          
-          {/* Routes protégées */}
-          <Route path="/favoris" element={
-            <ProtectedRoute>
-              <Favoris />
-            </ProtectedRoute>
-          } />
-          <Route path="/messages" element={
-            <ProtectedRoute>
-              <Messages />
-            </ProtectedRoute>
-          } />
-          <Route path="/profile" element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          } />
-          <Route path="/mes-annonces" element={
-            <ProtectedRoute>
-              <MesAnnonces />
-            </ProtectedRoute>
-          } />
-          <Route path="/profil-public" element={
-            <ProtectedRoute>
-              <PublicProfile />
-            </ProtectedRoute>
-          } />
-          <Route path="/modifier-profil" element={
-            <ProtectedRoute>
-              <EditProfile />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres" element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/notifications" element={
-            <ProtectedRoute>
-              <NotificationSettings />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/email" element={
-            <ProtectedRoute>
-              <EmailSettings />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/mot-de-passe" element={
-            <ProtectedRoute>
-              <PasswordSettings />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/utilisateurs-bloques" element={
-            <ProtectedRoute>
-              <BlockedUsers />
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/supprimer-compte" element={
-            <ProtectedRoute>
-              <DeleteAccount />
-            </ProtectedRoute>
-          } />
-          <Route path="/post-ad" element={
-            <ProtectedRoute>
-              <PostAd />
-            </ProtectedRoute>
-          } />
-          <Route path="/contact" element={
-            <ProtectedRoute>
-              <Contact />
-            </ProtectedRoute>
-          } />
-          
-          {/* Redirection par défaut */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
-      {useSimpleFooter && <SimpleFooter />}
-      {useFullFooter && <Footer type={location.pathname === '/' ? 'home' : location.pathname === '/catalogue' ? 'catalogue' : 'notre-adn'} />}
-    </div>
+    <Router>
+      <Routes>
+        {/* Routes d'administration */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={
+          <AdminRoute>
+            <AdminDashboard />
+          </AdminRoute>
+        } />
+        <Route path="/admin/users" element={
+          <AdminRoute>
+            <AdminUsers />
+          </AdminRoute>
+        } />
+        <Route path="/admin/listings" element={
+          <AdminRoute>
+            <AdminListings />
+          </AdminRoute>
+        } />
+        <Route path="/admin/reports" element={
+          <AdminRoute>
+            <AdminReports />
+          </AdminRoute>
+        } />
+        
+        {/* Routes principales du site */}
+        <Route path="/" element={
+          <>
+            <Navbar />
+            <Home />
+            <Footer />
+          </>
+        } />
+        
+        {/* Autres routes existantes */}
+        <Route path="/favoris" element={
+          <>
+            <Navbar />
+            <Favoris />
+            <Footer />
+          </>
+        } />
+        <Route path="/messages" element={
+          <ProtectedRoute>
+            <Messages />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } />
+        <Route path="/mes-annonces" element={
+          <ProtectedRoute>
+            <MesAnnonces />
+          </ProtectedRoute>
+        } />
+        <Route path="/profil-public" element={
+          <ProtectedRoute>
+            <PublicProfile />
+          </ProtectedRoute>
+        } />
+        <Route path="/modifier-profil" element={
+          <ProtectedRoute>
+            <EditProfile />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres" element={
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres/notifications" element={
+          <ProtectedRoute>
+            <NotificationSettings />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres/email" element={
+          <ProtectedRoute>
+            <EmailSettings />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres/mot-de-passe" element={
+          <ProtectedRoute>
+            <PasswordSettings />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres/utilisateurs-bloques" element={
+          <ProtectedRoute>
+            <BlockedUsers />
+          </ProtectedRoute>
+        } />
+        <Route path="/parametres/supprimer-compte" element={
+          <ProtectedRoute>
+            <DeleteAccount />
+          </ProtectedRoute>
+        } />
+        <Route path="/post-ad" element={
+          <ProtectedRoute>
+            <PostAd />
+          </ProtectedRoute>
+        } />
+        <Route path="/contact" element={
+          <ProtectedRoute>
+            <Contact />
+          </ProtectedRoute>
+        } />
+        <Route path="/catalogue" element={<Catalogue />} />
+        <Route path="/produit/:id" element={<ProductDetail />} />
+        <Route path="/connexion" element={<Login />} />
+        <Route path="/inscription" element={<Register />} />
+        <Route path="/cgu" element={<CGU />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/informations-legales" element={<InformationsLegales />} />
+        <Route path="/notre-adn" element={<NotreADN />} />
+        
+        {/* Redirection par défaut */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
