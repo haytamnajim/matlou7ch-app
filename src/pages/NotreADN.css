@@ -269,18 +269,19 @@
 
 .contact-button {
   display: inline-block;
-  background-color: #e74c3c; /* Changé de #4a56e2 à #e74c3c */
+  background-color: #e74c3c;
   color: white;
-  padding: 12px 30px;
+  padding: 12px 25px;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 600;
-  margin-top: 15px;
   transition: background-color 0.3s;
+  max-width: 180px; /* Ajout d'une largeur maximale */
+  text-align: center; /* Centrer le texte */
 }
 
 .contact-button:hover {
-  background-color: #c0392b; /* Changé pour correspondre */
+  background-color: #c0392b;
 }
 
 /* Ajout des styles pour la section manifeste */

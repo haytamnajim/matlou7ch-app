@@ -241,6 +241,8 @@
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  max-width: 180px; /* Ajout d'une largeur maximale */
+  text-align: center; /* Centrer le texte */
 }
 
 .contact-button:hover {
