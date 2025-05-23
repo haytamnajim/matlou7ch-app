@@ -95,7 +95,7 @@ function App() {
           </AdminRoute>
         } />
         
-        {/* Routes principales du site */}
+        {/* Routes principales du site avec Footer complet */}
         <Route path="/" element={
           <>
             <Navbar />
@@ -103,88 +103,186 @@ function App() {
             <Footer />
           </>
         } />
-        
-        {/* Autres routes existantes */}
+        <Route path="/catalogue" element={
+          <>
+            <Navbar />
+            <Catalogue />
+            <Footer />
+          </>
+        } />
+        <Route path="/notre-adn" element={
+          <>
+            <Navbar />
+            <NotreADN />
+            <Footer />
+          </>
+        } />
+
+        {/* Routes avec SimpleFooter */}
+        <Route path="/connexion" element={
+          <>
+            <Navbar />
+            <Login />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/inscription" element={
+          <>
+            <Navbar />
+            <Register />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/faq" element={
+          <>
+            <Navbar />
+            <FAQ />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/contact" element={
+          <>
+            <Navbar />
+            <Contact />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/cgu" element={
+          <>
+            <Navbar />
+            <CGU />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/informations-legales" element={
+          <>
+            <Navbar />
+            <InformationsLegales />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/produit/:id" element={
+          <>
+            <Navbar />
+            <ProductDetail />
+            <SimpleFooter />
+          </>
+        } />
         <Route path="/favoris" element={
           <>
             <Navbar />
             <Favoris />
-            <Footer />
+            <SimpleFooter />
           </>
         } />
         <Route path="/messages" element={
           <ProtectedRoute>
-            <Messages />
+            <>
+              <Navbar />
+              <Messages />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/profile" element={
           <ProtectedRoute>
-            <Profile />
+            <>
+              <Navbar />
+              <Profile />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/mes-annonces" element={
           <ProtectedRoute>
-            <MesAnnonces />
+            <>
+              <Navbar />
+              <MesAnnonces />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/profil-public" element={
           <ProtectedRoute>
-            <PublicProfile />
+            <>
+              <Navbar />
+              <PublicProfile />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/modifier-profil" element={
           <ProtectedRoute>
-            <EditProfile />
+            <>
+              <Navbar />
+              <EditProfile />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres" element={
           <ProtectedRoute>
-            <Settings />
+            <>
+              <Navbar />
+              <Settings />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres/notifications" element={
           <ProtectedRoute>
-            <NotificationSettings />
+            <>
+              <Navbar />
+              <NotificationSettings />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres/email" element={
           <ProtectedRoute>
-            <EmailSettings />
+            <>
+              <Navbar />
+              <EmailSettings />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres/mot-de-passe" element={
           <ProtectedRoute>
-            <PasswordSettings />
+            <>
+              <Navbar />
+              <PasswordSettings />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres/utilisateurs-bloques" element={
           <ProtectedRoute>
-            <BlockedUsers />
+            <>
+              <Navbar />
+              <BlockedUsers />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/parametres/supprimer-compte" element={
           <ProtectedRoute>
-            <DeleteAccount />
+            <>
+              <Navbar />
+              <DeleteAccount />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
         <Route path="/post-ad" element={
           <ProtectedRoute>
-            <PostAd />
+            <>
+              <Navbar />
+              <PostAd />
+              <SimpleFooter />
+            </>
           </ProtectedRoute>
         } />
-        <Route path="/contact" element={
-          <ProtectedRoute>
-            <Contact />
-          </ProtectedRoute>
-        } />
-        <Route path="/catalogue" element={<Catalogue />} />
-        <Route path="/produit/:id" element={<ProductDetail />} />
-        <Route path="/connexion" element={<Login />} />
-        <Route path="/inscription" element={<Register />} />
-        <Route path="/cgu" element={<CGU />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/informations-legales" element={<InformationsLegales />} />
-        <Route path="/notre-adn" element={<NotreADN />} />
         
         {/* Redirection par défaut */}
         <Route path="*" element={<Navigate to="/" replace />} />
