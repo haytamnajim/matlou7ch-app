@@ -96,7 +96,7 @@ function Catalogue() {
 
   // Fonction pour ajouter/supprimer des favoris
   const toggleFavorite = (itemId, e) => {
-    e.preventDefault(); // Empêcher la navigation vers la page de détail
+    if (e) e.preventDefault(); // Vérifier si e existe avant d'appeler preventDefault
     
     if (!user) {
       // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
@@ -230,7 +230,7 @@ function Catalogue() {
                           className="favorite-button" 
                           onClick={(e) => {
                             e.preventDefault();
-                            toggleFavorite(item.id);
+                            toggleFavorite(item.id, e);  // Passer l'événement e à la fonction
                           }}
                         >
                           <svg 
