@@ -27,6 +27,8 @@ import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
 import InformationsLegales from './pages/InformationsLegales';
 import PostAd from './components/PostAd';
+import UserProducts from './pages/UserProducts';
+import UserProfile from './pages/UserProfile';
 
 // Pages d'administration
 import AdminLogin from './pages/Admin/Login';
@@ -283,6 +285,8 @@ function App() {
             </>
           </ProtectedRoute>
         } />
+        <Route path="/utilisateur/:userId" element={<UserProducts />} />
+        <Route path="/profil/:userId" element={<UserProfile />} />
         
         {/* Redirection par défaut */}
         <Route path="*" element={<Navigate to="/" replace />} />

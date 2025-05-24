@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { FaHeart, FaRegHeart, FaMapMarkerAlt, FaCalendarAlt, FaShare, FaArrowRight } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaMapMarkerAlt, FaCalendarAlt, FaShare, FaArrowRight, FaUserCircle } from 'react-icons/fa';
 import './ProductDetail.css';
 
 function ProductDetail() {
@@ -180,28 +180,37 @@ function ProductDetail() {
         
         <hr className="divider" />
         
-        {/* Informations sur le donneur */}
-        <div className="donor-info">
-          <div className="donor-avatar" style={{ backgroundColor: product.user.avatarColor }}>
-            {product.user.avatar}
+        {/* Section d'information sur le donneur - style amélioré */}
+        <div className="donor-section">
+          <h2 className="section-title">À propos du donneur</h2>
+          <div className="donor-card">
+            <Link to={`/profil/${product.user.id}`} className="donor-avatar-link">
+              <div className="donor-avatar" style={{ backgroundColor: product.user.avatarColor }}>
+                {product.user.avatar}
+              </div>
+            </Link>
+            <div className="donor-info">
+              <Link to={`/profil/${product.user.id}`} className="donor-name">
+                {product.user.name}
+              </Link>
+              <div className="donor-meta">
+                <span className="donor-location">
+                  <FaMapMarkerAlt /> {product.user.location}
+                </span>
+                <span className="donor-member-since">
+                  <FaUserCircle /> Membre depuis {product.user.memberSince}
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="donor-details">
-            <h2>{product.user.name}</h2>
-            <p className="donor-location">
-              <FaMapMarkerAlt /> {product.user.location}
-            </p>
-            <p className="donor-member-since">
-              <FaCalendarAlt /> Membre depuis le {product.user.memberSince}
-            </p>
-          </div>
+          
+          {/* Description du donneur avec style amélioré */}
+          {product.user.description && (
+            <div className="donor-description">
+              <p>{product.user.description}</p>
+            </div>
+          )}
         </div>
-        
-        {/* Description du donneur */}
-        {product.user.description && (
-          <div className="donor-description">
-            <p>{product.user.description}</p>
-          </div>
-        )}
         
         <hr className="divider" />
         
@@ -222,6 +231,10 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+
+
+
+
 
 
 

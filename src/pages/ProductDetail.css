@@ -206,10 +206,48 @@
   margin: 20px 0;
 }
 
-.donor-info {
+/* Styles améliorés pour la section donneur */
+.donor-section {
+  margin: 25px 0;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  height: calc(100% - 8px);
+  width: 4px;
+  background-color: #4a56e2;
+  border-radius: 2px;
+}
+
+.donor-card {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.donor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.donor-avatar-link {
+  text-decoration: none;
+  margin-right: 15px;
 }
 
 .donor-avatar {
@@ -221,18 +259,37 @@
   justify-content: center;
   color: white;
   font-size: 24px;
-  margin-right: 15px;
   font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
-.donor-details {
+.donor-avatar-link:hover .donor-avatar {
+  transform: scale(1.05);
+}
+
+.donor-info {
   flex: 1;
 }
 
-.donor-details h2 {
+.donor-name {
+  display: block;
   font-size: 18px;
-  margin: 0 0 5px 0;
+  font-weight: 600;
   color: #333;
+  margin-bottom: 8px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.donor-name:hover {
+  color: #4a56e2;
+}
+
+.donor-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .donor-location, .donor-member-since {
@@ -240,19 +297,20 @@
   align-items: center;
   color: #666;
   font-size: 14px;
-  margin: 4px 0;
 }
 
 .donor-location svg, .donor-member-since svg {
-  margin-right: 5px;
-  font-size: 12px;
+  margin-right: 8px;
+  color: #4a56e2;
+  font-size: 14px;
 }
 
 .donor-description {
-  background-color: #f5f5f5;
+  background-color: #f5f7fa;
+  border-radius: 10px;
   padding: 15px;
-  border-radius: 8px;
   margin-top: 15px;
+  border-left: 3px solid #4a56e2;
 }
 
 .donor-description p {
@@ -260,6 +318,7 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
+  font-style: italic;
 }
 
 .loading-spinner {
@@ -308,6 +367,13 @@
     height: 50px;
     font-size: 20px;
   }
+  
+  .donor-name {
+    font-size: 16px;
+  }
+  
+  .donor-location, .donor-member-since {
+    font-size: 13px;
+  }
 }
-
 

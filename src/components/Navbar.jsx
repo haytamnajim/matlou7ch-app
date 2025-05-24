@@ -73,7 +73,9 @@ function Navbar() {
             </svg>
             <span>Messages</span>
           </Link>
-          <Link to="/profile" className="user-avatar">H</Link>
+          <Link to="/profile" className="user-avatar">
+            <span style={{ fontSize: '20px' }}>H</span>
+          </Link>
         </div>
       </div>
       
