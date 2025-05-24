@@ -241,15 +241,38 @@
 }
 
 .menu-item {
+  color: #333;
   text-decoration: none;
-  color: #2c3e50;
+  padding: 8px 15px;
   font-weight: 500;
   position: relative;
+  transition: color 0.3s ease;
 }
 
-/* Suppression du point rouge sous Accueil */
-.menu-item.active::after {
-  display: none;
+.menu-item:hover {
+  color: #4a56e2;
+}
+
+/* Animation de soulignement au survol */
+.menu-item::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #4a56e2;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.menu-item:hover::after {
+  width: 70%;
+}
+
+/* Animation au clic */
+.menu-item:active {
+  transform: scale(0.95);
 }
 
 .advanced-search-overlay {
