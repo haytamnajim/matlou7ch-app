@@ -25,22 +25,29 @@
 .back-button {
   position: absolute;
   left: 20px;
-  top: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #333;
   text-decoration: none;
   transition: transform 0.2s ease;
+  z-index: 10;
 }
 
 .back-button:hover {
-  transform: translateX(-3px);
+  transform: translateY(-50%) translateX(-3px);
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
 }
 
 .avatar-container {
   margin-right: 15px;
-  margin-left: 30px; /* Ajouté pour laisser de l'espace pour le bouton retour */
+  margin-left: 40px; /* Augmenté pour laisser de l'espace pour le bouton retour */
 }
 
 .user-avatar {
@@ -184,6 +191,7 @@
     padding: 0;
   }
 }
+
 
 
 
