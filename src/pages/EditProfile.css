@@ -3,25 +3,26 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 120px);
-  background-color: #f0f0f0;
-  padding: 20px;
+  background-color: var(--secondary-color);
+  padding: 30px 20px;
 }
 
 .edit-profile-container {
   width: 100%;
   max-width: 550px;
   background-color: white;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  border: 1px solid #4a9af8;
+  border-radius: var(--border-radius);
+  padding: 35px;
+  box-shadow: var(--shadow);
+  border: none;
   box-sizing: border-box;
 }
 
 .edit-profile-header {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
+  position: relative;
 }
 
 .back-button {
@@ -29,39 +30,62 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333;
+  color: var(--primary-color);
   text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-3px);
+}
+
+.back-button svg {
+  fill: var(--primary-color);
 }
 
 .edit-profile-title {
-  color: #4a56e2;
-  font-size: 24px;
+  color: var(--text-color);
+  font-size: 26px;
+  font-weight: 700;
   margin: 0;
   flex-grow: 1;
   text-align: center;
-  margin-right: 24px; /* Pour compenser l'icône de retour */
+  margin-right: 24px;
+  position: relative;
+}
+
+/* Suppression de la ligne blanche sous le titre */
+.edit-profile-title::after {
+  display: none; /* Retire la ligne sous le titre */
 }
 
 .photo-section {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .profile-avatar {
-  width: 70px;
-  height: 70px;
-  background-color: #777;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color); /* Utilise la couleur primaire bleue */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
-  margin-right: 20px;
+  margin-right: 25px;
+  box-shadow: var(--shadow);
+  border: 4px solid white;
+  transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
 }
 
 .change-photo-button {
@@ -70,33 +94,65 @@
   justify-content: space-between;
   flex-grow: 1;
   cursor: pointer;
+  padding: 12px 20px;
+  background-color: var(--hover-color);
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease;
+}
+
+.change-photo-button:hover {
+  background-color: var(--border-color);
+}
+
+.change-photo-button span {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.change-photo-button svg {
+  fill: var(--primary-color);
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   width: 100%;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 15px;
 }
 
-.form-input {
+.form-input, .input-container input {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 14px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
   font-size: 16px;
-  color: #333;
+  color: var(--text-color);
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  background-color: var(--secondary-color);
+}
+
+.form-input:focus, .input-container input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.15);
+}
+
+.input-container {
+  position: relative;
 }
 
 .clear-button {
   position: absolute;
-  right: 10px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
@@ -104,44 +160,84 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.clear-button:hover {
+  color: var(--text-color);
 }
 
 .check-icon {
   position: absolute;
-  right: 10px;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--success-color);
 }
 
 .input-hint {
-  margin-top: 5px;
-  font-size: 12px;
-  color: #777;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.5;
 }
 
+/* Style amélioré pour le bouton de soumission */
 .submit-button {
-  background-color: #4a9af8;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  padding: 14px 24px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   display: block;
   margin-left: auto;
   margin-right: 0;
-  max-width: 150px;
+  max-width: 180px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(74, 86, 226, 0.2);
+}
+
+.submit-button:hover {
+  background-color: #3a46d1; /* Version légèrement plus foncée */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(74, 86, 226, 0.25);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(74, 86, 226, 0.2);
 }
 
 @media (max-width: 600px) {
   .edit-profile-container {
-    padding: 20px;
+    padding: 25px 20px;
   }
   
   .submit-button {
     max-width: 100%;
   }
+  
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+  }
+  
+  .edit-profile-title {
+    font-size: 22px;
+  }
 }
+
+
+
+
+
