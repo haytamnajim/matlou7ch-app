@@ -19,10 +19,28 @@
   padding: 20px;
   background-color: white;
   border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-3px);
 }
 
 .avatar-container {
   margin-right: 15px;
+  margin-left: 30px; /* Ajouté pour laisser de l'espace pour le bouton retour */
 }
 
 .user-avatar {
@@ -166,6 +184,7 @@
     padding: 0;
   }
 }
+
 
 
 
