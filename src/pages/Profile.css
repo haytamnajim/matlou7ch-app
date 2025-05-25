@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: white;
   border-bottom: 1px solid #eee;
 }
 
@@ -26,16 +26,18 @@
 }
 
 .user-avatar {
-  width: 50px;
-  height: 50px;
-  background-color: #ff5722;
+  width: 60px;
+  height: 60px;
+  background-color: #FF5722; /* Couleur orange de la plateforme */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 24px;
+  box-shadow: 0 3px 8px rgba(247, 148, 29, 0.2); /* Ombre adaptée à la couleur orange */
+  border: 3px solid white;
 }
 
 .profile-info {
@@ -45,13 +47,22 @@
 .profile-name {
   margin: 0;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
+  color: #333;
 }
 
 .profile-public-link {
   margin: 5px 0 0;
   font-size: 14px;
-  color: #666;
+  color: #4a56e2; /* Couleur principale bleue */
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+
+.profile-public-link:hover {
+  color: #3a46d1; /* Version légèrement plus foncée */
+  text-decoration: underline;
 }
 
 .chevron-right {
@@ -65,10 +76,15 @@
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 16px 20px;
   text-decoration: none;
   color: #333;
   border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item:hover {
+  background-color: #f9f9f9;
 }
 
 .menu-item:last-child {
@@ -81,21 +97,33 @@
   align-items: center;
 }
 
+.menu-icon svg {
+  fill: #4a56e2; /* Couleur principale bleue */
+}
+
 .menu-item span {
   flex: 1;
   font-size: 16px;
+  font-weight: 500;
 }
 
 .profile-footer {
   padding: 20px;
+  background-color: #f9f9f9;
 }
 
 .footer-link {
   display: block;
-  padding: 10px 0;
+  padding: 12px 0;
   text-decoration: none;
-  color: #333;
+  color: #666;
   border-bottom: 1px solid #eee;
+  transition: color 0.2s ease;
+  font-size: 15px;
+}
+
+.footer-link:hover {
+  color: #4a56e2; /* Couleur principale bleue */
 }
 
 .logout-button {
@@ -103,14 +131,42 @@
   align-items: center;
   background: none;
   border: none;
-  padding: 10px 0;
+  padding: 12px 0;
   cursor: pointer;
   width: 100%;
   text-align: left;
-  color: #333;
-  margin-top: 10px;
+  color: #dc3545; /* Rouge pour la déconnexion */
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.logout-button:hover {
+  color: #c82333; /* Rouge plus foncé */
 }
 
 .logout-button svg {
   margin-right: 10px;
+  fill: #dc3545; /* Rouge pour la déconnexion */
 }
+
+.logout-button:hover svg {
+  fill: #c82333; /* Rouge plus foncé */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-container {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .profile-page {
+    padding: 0;
+  }
+}
+
+
+
+
