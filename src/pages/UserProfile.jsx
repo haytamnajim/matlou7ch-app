@@ -136,30 +136,14 @@ function UserProfile() {
               
               <div className="profile-stats">
                 <div className="stat-item">
-                  <span className="stat-value">{user.totalItems || 4}</span>
-                  <span className="stat-label">objets</span>
+                  <div className="stat-value">{user.donationsGiven}</div>
+                  <div className="stat-label">Dons donnés</div>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-value">{user.activeItems || 3}</span>
-                  <span className="stat-label">objets actifs</span>
+                  <div className="stat-value">{user.donationsReceived}</div>
+                  <div className="stat-label">Dons reçus</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="profile-stats-section">
-          <div className="stats-card">
-            <div className="stat-item">
-              <div className="stat-value">{user.donationsGiven}</div>
-              <div className="stat-label">Dons donnés</div>
-            </div>
-            
-            <div className="stat-divider"></div>
-            
-            <div className="stat-item">
-              <div className="stat-value">{user.donationsReceived}</div>
-              <div className="stat-label">Dons reçus</div>
             </div>
           </div>
         </div>
@@ -223,3 +207,5 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
+
