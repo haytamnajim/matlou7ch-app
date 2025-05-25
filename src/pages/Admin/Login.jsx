@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaLock } from 'react-icons/fa';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaLock, FaArrowLeft } from 'react-icons/fa';
 import './Admin.css';
 
 function AdminLogin() {
@@ -48,20 +48,9 @@ function AdminLogin() {
   return (
     <div className="admin-login-page">
       <div className="admin-login-container">
-        <div className="admin-login-logo">
-          <img 
-            src="/images/logo.png" 
-            alt="Matlou7ch Admin" 
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = 'https://via.placeholder.com/150?text=Matlou7ch';
-            }}
-          />
-          <h1>Matlou7ch Admin</h1>
-        </div>
-        
         <div className="admin-login-card">
           <div className="admin-login-header">
+            <h1 className="admin-title">Matlou7ch Admin</h1>
             <FaLock className="lock-icon" />
             <h2>Connexion Administrateur</h2>
             <p>Veuillez vous connecter pour accéder au panneau d'administration</p>
@@ -106,8 +95,10 @@ function AdminLogin() {
           </form>
           
           <div className="admin-login-footer">
-            <a href="#forgot-password">Mot de passe oublié?</a>
-            <a href="/">Retour au site</a>
+            <a href="#forgot-password" className="forgot-password-link">Mot de passe oublié?</a>
+            <Link to="/" className="back-to-site-link">
+              <FaArrowLeft className="back-icon" /> Retour au site
+            </Link>
           </div>
         </div>
       </div>
@@ -116,3 +107,4 @@ function AdminLogin() {
 }
 
 export default AdminLogin;
+

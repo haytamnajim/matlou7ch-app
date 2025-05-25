@@ -1,6 +1,6 @@
 /* Styles généraux pour l'administration */
 :root {
-  --admin-primary: #4a56e2;
+  --admin-primary: #4a56e2; /* Changé de #4a56e2 à #FF5722 (orange) */
   --admin-secondary: #6c757d;
   --admin-success: #28a745;
   --admin-danger: #dc3545;
@@ -8,7 +8,7 @@
   --admin-info: #17a2b8;
   --admin-light: #f8f9fa;
   --admin-dark: #343a40;
-  --admin-bg: #f5f7fb;
+  --admin-bg: #dae5fd;
   --admin-sidebar-width: 250px;
   --admin-header-height: 70px;
   --admin-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -425,37 +425,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--admin-bg);
+  background-color: white; /* Changé en blanc */
   padding: 20px;
 }
 
 .admin-login-container {
   width: 100%;
   max-width: 450px;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.admin-login-logo {
-  text-align: center;
-  margin-bottom: 30px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.admin-login-logo img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-.admin-login-logo h1 {
-  font-size: 1.8rem;
+.admin-title {
+  font-size: 2rem;
   color: var(--admin-primary);
-  margin: 10px 0 0 0;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+  text-align: center;
 }
 
 .admin-login-card {
   background-color: white;
-  border-radius: 10px;
-  box-shadow: var(--admin-shadow);
-  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(255, 87, 34, 0.1); /* Ombre teintée d'orange */
+  padding: 35px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 5px solid var(--admin-primary); /* Bordure orange en haut */
+}
+
+.admin-login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(255, 87, 34, 0.15); /* Ombre teintée d'orange */
 }
 
 .admin-login-header {
@@ -467,128 +471,153 @@
   font-size: 2.5rem;
   color: var(--admin-primary);
   margin-bottom: 15px;
+  background-color: rgba(255, 87, 34, 0.1); /* Fond légèrement teinté d'orange */
+  padding: 15px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 .admin-login-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--admin-dark);
   margin: 0 0 10px 0;
+  font-weight: 700;
 }
 
 .admin-login-header p {
   color: var(--admin-secondary);
   margin: 0;
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .admin-login-error {
   background-color: rgba(220, 53, 69, 0.1);
   color: var(--admin-danger);
-  padding: 12px 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  border-left: 4px solid var(--admin-danger);
 }
 
 .admin-login-form .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .admin-login-form label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
   color: var(--admin-dark);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .admin-login-form input {
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
 }
 
 .admin-login-form input:focus {
   border-color: var(--admin-primary);
   outline: none;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1); /* Ombre teintée d'orange */
 }
 
 .admin-login-button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: var(--admin-primary);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.2); /* Ombre teintée d'orange */
 }
 
 .admin-login-button:hover {
-  background-color: #3a46c2;
+  background-color: #e64a19; /* Orange plus foncé */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 87, 34, 0.3); /* Ombre teintée d'orange */
+}
+
+.admin-login-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(255, 87, 34, 0.2); /* Ombre teintée d'orange */
 }
 
 .admin-login-button:disabled {
-  background-color: #a0a8e8;
+  background-color: #ffab91; /* Orange plus clair */
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .admin-login-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  font-size: 0.9rem;
+  align-items: center;
+  margin-top: 25px;
+  font-size: 0.95rem;
 }
 
-.admin-login-footer a {
-  color: var(--admin-primary);
+.forgot-password-link {
+  color: var(--admin-secondary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.admin-login-footer a:hover {
+.forgot-password-link:hover {
+  color: var(--admin-primary);
   text-decoration: underline;
 }
 
+.back-to-site-link {
+  color: var(--admin-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.back-icon {
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+.back-to-site-link:hover {
+  transform: translateX(-3px);
+  color: #e64a19; /* Orange plus foncé */
+}
+
 /* Responsive */
-@media (max-width: 768px) {
-  .admin-sidebar {
-    width: 70px;
-    overflow: hidden;
+@media (max-width: 576px) {
+  .admin-login-card {
+    padding: 25px;
   }
   
-  .admin-logo h2 {
-    display: none;
+  .admin-login-footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
   
-  .admin-nav-item span {
-    display: none;
+  .admin-title {
+    font-size: 1.8rem;
   }
   
-  .admin-nav-item {
-    justify-content: center;
-    padding: 15px;
-  }
-  
-  .admin-nav-item svg {
-    margin-right: 0;
-    font-size: 1.5rem;
-  }
-  
-  .admin-sidebar-footer {
-    display: none;
-  }
-  
-  .admin-main {
-    margin-left: 70px;
-  }
-  
-  .badge {
-    right: 10px;
+  .admin-login-header h2 {
+    font-size: 1.4rem;
   }
 }
 
@@ -874,5 +903,8 @@
 .chart-panel.half {
   margin-bottom: 0;
 }
+
+
+
 
 
