@@ -20,12 +20,6 @@ function Profile() {
             <h2 className="profile-name">haytamnajim</h2>
             <Link to="/profil-public" className="profile-public-link">Voir mon profil public</Link>
           </div>
-          <div className="chevron-right">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#888" width="24px" height="24px">
-              <path d="M0 0h24v24H0z" fill="none"/>
-              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-            </svg>
-          </div>
         </div>
 
         <div className="profile-menu">
