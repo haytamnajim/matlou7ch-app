@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FaMapMarkerAlt, FaUserCircle, FaBoxOpen, FaArrowLeft } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaUserCircle, FaBoxOpen, FaArrowLeft, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { useAuth } from '../contexts/AuthContext';
 import './UserProfile.css';
 
 function UserProfile() {
@@ -9,6 +10,25 @@ function UserProfile() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  
+  // Charger les favoris depuis localStorage au chargement du composant
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    setFavorites(savedFavorites);
+  }, []);
+  
+  // Fonction pour ajouter/supprimer des favoris
+  const toggleFavorite = (productId, e) => {
+    e.preventDefault(); // Empêcher la navigation vers la page du produit
+    
+    const newFavorites = favorites.includes(productId)
+      ? favorites.filter(id => id !== productId)
+      : [...favorites, productId];
+    
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  };
 
   useEffect(() => {
     // Simuler le chargement des données de l'utilisateur
@@ -174,6 +194,16 @@ function UserProfile() {
                         e.target.src = `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.title)}`;
                       }}
                     />
+                    <button 
+                      className="favorite-button" 
+                      onClick={(e) => toggleFavorite(product.id, e)}
+                    >
+                      {favorites.includes(product.id) ? (
+                        <FaHeart color="#FF5733" size={24} />
+                      ) : (
+                        <FaRegHeart color="white" size={24} />
+                      )}
+                    </button>
                   </div>
                   <div className="product-info">
                     <h3 className="product-title">{product.title}</h3>

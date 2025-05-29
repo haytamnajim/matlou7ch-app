@@ -523,3 +523,24 @@
 .delete-product-button:hover {
   background-color: var(--danger-700, #b91c1c);
 }
+
+.favorite-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.2s;
+}
+
+.favorite-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
