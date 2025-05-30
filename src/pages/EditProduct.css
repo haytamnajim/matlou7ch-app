@@ -22,11 +22,28 @@
   align-items: center;
   color: #333;
   text-decoration: none;
-  margin-right: 16px;
+  transition: all 0.2s ease;
+  position: fixed;
+  top: 80px; /* Déplacé plus bas */
+  left: 15px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  background-color: white;
+  padding: 6px 12px;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+.back-button:hover {
+  color: #2563eb;
+  transform: translateX(-3px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 .back-button svg {
-  margin-right: 8px;
+  margin-right: 6px;
+  font-size: 1rem;
 }
 
 .edit-product-title {
@@ -144,3 +161,6 @@
 .error-message {
   color: #dc2626;
 }
+
+
+
