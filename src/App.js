@@ -286,8 +286,20 @@ function App() {
             </>
           </ProtectedRoute>
         } />
-        <Route path="/utilisateur/:userId" element={<UserProducts />} />
-        <Route path="/profil/:userId" element={<UserProfile />} />
+        <Route path="/utilisateur/:userId" element={
+          <>
+            <Navbar />
+            <UserProducts />
+            <SimpleFooter />
+          </>
+        } />
+        <Route path="/profil/:userId" element={
+          <>
+            <Navbar />
+            <UserProfile />
+            <SimpleFooter />
+          </>
+        } />
         <Route path="/modifier-produit/:productId" element={
           <>
             <Navbar />
