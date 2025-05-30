@@ -242,15 +242,48 @@
 }
 
 .product-card {
-  background-color: var(--neutral-100, #ffffff);
-  border-radius: var(--border-radius-md, 8px);
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.1));
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-decoration: none;
-  color: inherit;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-product-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #f8f9fa;
+  color: #dc3545;
+  border: none;
+  border-top: 1px solid #e9ecef;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.report-product-button:hover {
+  background-color: #f1f3f5;
+  color: #c82333;
+}
+
+.report-product-button svg {
+  font-size: 14px;
 }
 
 .product-card:hover {

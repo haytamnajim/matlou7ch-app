@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FaMapMarkerAlt, FaUserCircle, FaBoxOpen, FaArrowLeft, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaUserCircle, FaBoxOpen, FaArrowLeft, FaHeart, FaRegHeart, FaFlag } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import './UserProfile.css';
 
@@ -11,6 +11,9 @@ function UserProfile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportProductId, setReportProductId] = useState(null);
+  const [reportReason, setReportReason] = useState('');
   
   // Charger les favoris depuis localStorage au chargement du composant
   useEffect(() => {
@@ -28,6 +31,27 @@ function UserProfile() {
     
     setFavorites(newFavorites);
     localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  };
+
+  // Fonction pour gérer le clic sur le bouton de signalement
+  const handleReportClick = (productId, e) => {
+    e.preventDefault(); // Empêcher la navigation vers la page du produit
+    setReportProductId(productId);
+    setShowReportModal(true);
+  };
+
+  // Fonction pour soumettre un signalement
+  const submitReport = () => {
+    // Dans une application réelle, vous feriez un appel API ici
+    console.log(`Signalement du produit ${reportProductId} pour la raison: ${reportReason}`);
+    
+    // Réinitialiser et fermer la modal
+    setReportReason('');
+    setReportProductId(null);
+    setShowReportModal(false);
+    
+    // Afficher un message de confirmation
+    alert('Merci pour votre signalement. Notre équipe va l\'examiner dans les plus brefs délais.');
   };
 
   useEffect(() => {
@@ -179,44 +203,51 @@ function UserProfile() {
           {products.length > 0 ? (
             <div className="products-grid">
               {products.map(product => (
-                <Link 
-                  to={`/produit/${product.id}`} 
-                  className="product-card" 
-                  key={product.id}
-                >
-                  <div className="product-image-container">
-                    <img 
-                      src={product.image} 
-                      alt={product.title} 
-                      className="product-image"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.title)}`;
-                      }}
-                    />
-                    <button 
-                      className="favorite-button" 
-                      onClick={(e) => toggleFavorite(product.id, e)}
-                    >
-                      {favorites.includes(product.id) ? (
-                        <FaHeart color="#FF5733" size={24} />
-                      ) : (
-                        <FaRegHeart color="white" size={24} />
-                      )}
-                    </button>
-                  </div>
-                  <div className="product-info">
-                    <h3 className="product-title">{product.title}</h3>
-                    <p className="product-meta">
-                      <span className="product-location">{product.location}</span>
-                      <span className="product-time">{product.timeAgo}</span>
-                    </p>
-                    <div className="product-details">
-                      <span className="product-category">{product.category}</span>
-                      <span className="product-condition">{product.condition}</span>
+                <div className="product-card" key={product.id}>
+                  <Link 
+                    to={`/produit/${product.id}`} 
+                    className="product-link"
+                  >
+                    <div className="product-image-container">
+                      <img 
+                        src={product.image} 
+                        alt={product.title} 
+                        className="product-image"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.title)}`;
+                        }}
+                      />
+                      <button 
+                        className="favorite-button" 
+                        onClick={(e) => toggleFavorite(product.id, e)}
+                      >
+                        {favorites.includes(product.id) ? (
+                          <FaHeart color="#FF5733" size={24} />
+                        ) : (
+                          <FaRegHeart color="white" size={24} />
+                        )}
+                      </button>
                     </div>
-                  </div>
-                </Link>
+                    <div className="product-info">
+                      <h3 className="product-title">{product.title}</h3>
+                      <p className="product-meta">
+                        <span className="product-location">{product.location}</span>
+                        <span className="product-time">{product.timeAgo}</span>
+                      </p>
+                      <div className="product-details">
+                        <span className="product-category">{product.category}</span>
+                        <span className="product-condition">{product.condition}</span>
+                      </div>
+                    </div>
+                  </Link>
+                  <button 
+                    className="report-product-button"
+                    onClick={(e) => handleReportClick(product.id, e)}
+                  >
+                    <FaFlag /> Signaler ce produit
+                  </button>
+                </div>
               ))}
             </div>
           ) : (
