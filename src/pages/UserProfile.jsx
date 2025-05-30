@@ -215,27 +215,6 @@ function UserProfile() {
                       <span className="product-category">{product.category}</span>
                       <span className="product-condition">{product.condition}</span>
                     </div>
-                    <div className="product-actions">
-                      <Link 
-                        to={`/modifier-produit/${product.id}`} 
-                        className="edit-product-button"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Modifier
-                      </Link>
-                      <button 
-                        className="delete-product-button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if(window.confirm("Êtes-vous sûr de vouloir supprimer ce produit?")) {
-                            // Logique de suppression à implémenter
-                            console.log("Supprimer produit:", product.id);
-                          }
-                        }}
-                      >
-                        Supprimer
-                      </button>
-                    </div>
                   </div>
                 </Link>
               ))}
