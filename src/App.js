@@ -29,6 +29,7 @@ import InformationsLegales from './pages/InformationsLegales';
 import PostAd from './components/PostAd';
 import UserProducts from './pages/UserProducts';
 import UserProfile from './pages/UserProfile';
+import EditProduct from './pages/EditProduct';
 
 // Pages d'administration
 import AdminLogin from './pages/Admin/Login';
@@ -287,6 +288,13 @@ function App() {
         } />
         <Route path="/utilisateur/:userId" element={<UserProducts />} />
         <Route path="/profil/:userId" element={<UserProfile />} />
+        <Route path="/modifier-produit/:productId" element={
+          <>
+            <Navbar />
+            <EditProduct />
+            <SimpleFooter />
+          </>
+        } />
         
         {/* Redirection par défaut */}
         <Route path="*" element={<Navigate to="/" replace />} />
