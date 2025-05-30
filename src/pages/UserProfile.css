@@ -577,3 +577,162 @@
 .favorite-button:hover {
   background: rgba(0, 0, 0, 0.7);
 }
+
+/* Styles pour l'overlay de la modal de signalement */
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Styles pour la modal de signalement améliorée */
+.report-modal {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.report-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.report-modal-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.report-product-info {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.report-product-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.report-product-details {
+  flex: 1;
+}
+
+.report-product-title {
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.report-product-location {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.report-form-group {
+  margin-bottom: 20px;
+}
+
+.report-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.report-reason-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.report-user-info {
+  background-color: #f0f7ff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.report-user-info p {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.report-user-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.report-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancel-report-button, .submit-report-button {
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.cancel-report-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.submit-report-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.submit-report-button:disabled {
+  background-color: #e9a8ae;
+  cursor: not-allowed;
+}
+
+.cancel-report-button:hover {
+  background-color: #e0e0e0;
+}
+
+.submit-report-button:hover:not(:disabled) {
+  background-color: #c82333;
+}

@@ -6,6 +6,7 @@ import './UserProfile.css';
 
 function UserProfile() {
   const { userId } = useParams();
+  const { user: currentUser } = useAuth(); // Récupérer l'utilisateur connecté
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ function UserProfile() {
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportProductId, setReportProductId] = useState(null);
   const [reportReason, setReportReason] = useState('');
+  const [reportProduct, setReportProduct] = useState(null);
   
   // Charger les favoris depuis localStorage au chargement du composant
   useEffect(() => {
@@ -36,22 +38,77 @@ function UserProfile() {
   // Fonction pour gérer le clic sur le bouton de signalement
   const handleReportClick = (productId, e) => {
     e.preventDefault(); // Empêcher la navigation vers la page du produit
-    setReportProductId(productId);
-    setShowReportModal(true);
+    
+    // Vérifier si l'utilisateur est connecté
+    if (!currentUser) {
+      alert("Vous devez être connecté pour signaler un produit.");
+      return;
+    }
+    
+    // Trouver le produit correspondant à l'ID
+    const productToReport = products.find(p => p.id === productId);
+    if (productToReport) {
+      setReportProductId(productId);
+      setReportProduct(productToReport);
+      setShowReportModal(true);
+    }
   };
 
   // Fonction pour soumettre un signalement
   const submitReport = () => {
-    // Dans une application réelle, vous feriez un appel API ici
-    console.log(`Signalement du produit ${reportProductId} pour la raison: ${reportReason}`);
+    // Vérifier que toutes les informations nécessaires sont présentes
+    if (!currentUser || !reportProductId || !reportReason || !reportProduct) {
+      alert("Informations manquantes pour le signalement.");
+      return;
+    }
     
-    // Réinitialiser et fermer la modal
-    setReportReason('');
-    setReportProductId(null);
-    setShowReportModal(false);
+    // Créer l'objet de signalement
+    const reportData = {
+      productId: reportProductId,
+      productTitle: reportProduct.title,
+      reason: reportReason,
+      reportedBy: {
+        id: currentUser.id,
+        name: currentUser.name,
+        email: currentUser.email
+      },
+      timestamp: new Date().toISOString()
+    };
     
-    // Afficher un message de confirmation
-    alert('Merci pour votre signalement. Notre équipe va l\'examiner dans les plus brefs délais.');
+    // Demander confirmation à l'utilisateur
+    const confirmReport = window.confirm(
+      `Êtes-vous sûr de vouloir signaler "${reportProduct.title}" pour la raison: ${getReasonLabel(reportReason)}?`
+    );
+    
+    if (confirmReport) {
+      // Dans une application réelle, vous feriez un appel API ici
+      console.log("Envoi du signalement:", reportData);
+      
+      // Simuler une requête API
+      setTimeout(() => {
+        // Réinitialiser et fermer la modal
+        setReportReason('');
+        setReportProductId(null);
+        setReportProduct(null);
+        setShowReportModal(false);
+        
+        // Afficher un message de confirmation
+        alert('Merci pour votre signalement. Notre équipe va l\'examiner dans les plus brefs délais.');
+      }, 500);
+    }
+  };
+  
+  // Fonction pour obtenir le libellé d'une raison de signalement
+  const getReasonLabel = (reasonCode) => {
+    const reasons = {
+      'inappropriate': 'Contenu inapproprié',
+      'spam': 'Spam',
+      'scam': 'Arnaque',
+      'offensive': 'Contenu offensant',
+      'other': 'Autre raison'
+    };
+    
+    return reasons[reasonCode] || reasonCode;
   };
 
   useEffect(() => {
@@ -263,6 +320,76 @@ function UserProfile() {
           )}
         </div>
       </div>
+      {/* Modal de signalement */}
+      {showReportModal && (
+        <div className="report-modal-overlay">
+          <div className="report-modal">
+            <h3 className="report-modal-title">Signaler un produit</h3>
+            <p className="report-modal-subtitle">
+              Vous êtes sur le point de signaler "{reportProduct?.title}"
+            </p>
+            
+            <div className="report-product-info">
+              <img 
+                src={reportProduct?.image} 
+                alt={reportProduct?.title}
+                className="report-product-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://via.placeholder.com/100x100?text=${encodeURIComponent(reportProduct?.title || '')}`;
+                }}
+              />
+              <div className="report-product-details">
+                <p className="report-product-title">{reportProduct?.title}</p>
+                <p className="report-product-location">{reportProduct?.location}</p>
+              </div>
+            </div>
+            
+            <div className="report-form-group">
+              <label htmlFor="report-reason">Raison du signalement:</label>
+              <select 
+                id="report-reason"
+                className="report-reason-select"
+                value={reportReason}
+                onChange={(e) => setReportReason(e.target.value)}
+              >
+                <option value="">Sélectionnez une raison</option>
+                <option value="inappropriate">Contenu inapproprié</option>
+                <option value="spam">Spam</option>
+                <option value="scam">Arnaque</option>
+                <option value="offensive">Contenu offensant</option>
+                <option value="other">Autre</option>
+              </select>
+            </div>
+            
+            <div className="report-user-info">
+              <p>Votre signalement sera envoyé en tant que:</p>
+              <p className="report-user-name">{currentUser?.name || 'Utilisateur anonyme'}</p>
+            </div>
+            
+            <div className="report-modal-actions">
+              <button 
+                className="cancel-report-button"
+                onClick={() => {
+                  setShowReportModal(false);
+                  setReportProductId(null);
+                  setReportProduct(null);
+                  setReportReason('');
+                }}
+              >
+                Annuler
+              </button>
+              <button 
+                className="submit-report-button"
+                onClick={submitReport}
+                disabled={!reportReason}
+              >
+                Confirmer le signalement
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
