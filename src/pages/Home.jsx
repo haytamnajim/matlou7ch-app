@@ -13,12 +13,12 @@ function Home() {
           </div>
           <div className="banner-image-container">
             <img
-              src="/images/furniture-collection.png"
-              alt="Collection de meubles"
+              src="/image.png"
+              alt="Image principale"
               className="banner-image"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/400x300?text=Mobilier';
+                e.target.src = 'https://via.placeholder.com/400x300?text=Image';
               }}
             />
           </div>
