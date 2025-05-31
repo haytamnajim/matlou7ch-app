@@ -30,12 +30,12 @@ function Home() {
         <h2 className="section-title">Catégories populaires</h2>
         <div className="categories-grid">
           {[
-            { image: '/images/categories/furniture.jpg', name: 'Meubles' },
-            { image: '/images/categories/clothing.jpg', name: 'Vêtements' },
-            { image: '/images/categories/electronics.jpg', name: 'Électronique' },
-            { image: '/images/categories/toys.jpg', name: 'Jouets' },
-            { image: '/images/categories/books.jpg', name: 'Livres' },
-            { image: '/images/categories/home.jpg', name: 'Maison' },
+            { image: '/images/categories/meubles.jpg', name: 'Meubles' },
+            { image: '/images/categories/vetement.jpg', name: 'Vêtements' },
+            { image: '/images/categories/electronique.jpg', name: 'Électronique' },
+            { image: '/images/categories/jouet.jpg', name: 'Jouets' },
+            { image: '/images/categories/livre.jpg', name: 'Livres' },
+            { image: '/images/categories/maison.jpg', name: 'Maison' },
           ].map((cat, index) => (
             <div className="category-card" key={index}>
               <div className="category-image-container">
@@ -45,7 +45,7 @@ function Home() {
                   className="category-image"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/100x100?text=' + cat.name;
+                    // e.target.src = 'https://via.placeholder.com/100x100?text=' + cat.name;
                   }}
                 />
               </div>
