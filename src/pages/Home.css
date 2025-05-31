@@ -272,10 +272,18 @@
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-decoration: none;
 }
 
 .see-all-button:hover {
   background-color: #3a7bc8;
+  text-decoration: none;
+}
+
+/* Si le bouton est un lien (a href) */
+a.see-all-button {
+  text-decoration: none;
+  display: inline-block;
 }
 
 /* RESPONSIVE */

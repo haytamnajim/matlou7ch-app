@@ -370,4 +370,28 @@
   opacity: 0.7;
 }
 
+/* Styles pour les boutons "Voir tout" */
+.see-all-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.see-all-button:hover {
+  background-color: #3a7bc8;
+  text-decoration: none;
+}
+
+a.see-all-button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+
 
