@@ -108,6 +108,19 @@
   margin-bottom: 40px;
   width: 100%;
   max-width: 500px;
+  text-decoration: none;
+}
+
+.edit-profile-button:hover {
+  text-decoration: none;
+}
+
+.edit-profile-button::after {
+  display: none;
+}
+
+.edit-profile-button::before {
+  display: none;
 }
 
 .edit-profile-button svg {
