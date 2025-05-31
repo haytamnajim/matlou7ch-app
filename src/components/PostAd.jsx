@@ -39,7 +39,22 @@ function PostAd() {
   if (isSubmitted) {
     return (
       <div className="success-container">
-        <Confetti />
+        <Confetti 
+          pieces={250}
+          duration={6000}
+          colors={['#2ecc71', '#3498db', '#f1c40f', '#e74c3c', '#9b59b6']}
+          shapes={['circle', 'square', 'triangle', 'diamond']}
+          gravity={0.1}
+          wind={0.03}
+          spread={80}
+          size={{ min: 6, max: 18 }}
+          rotation={true}
+          recycle={false}
+          fadeOut={true}
+          confettiSource="center"
+          burst={true}
+          swirl={0.3}
+        />
         <div className="confetti-icon">
           <ConfettiIcon />
         </div>
