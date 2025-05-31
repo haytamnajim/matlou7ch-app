@@ -89,7 +89,7 @@ function NotreADN() {
                 </li>
               </ul>
               
-              {/* Le bouton reste à sa position d'origine, ne pas ajouter ici */}
+              {/* Conservez le bouton existant tel quel */}
             </div>
             
             <div className="mission-detail-image">
