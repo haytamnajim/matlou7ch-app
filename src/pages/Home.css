@@ -41,17 +41,86 @@
 }
 
 .banner-text {
-  font-size: 32px;
-  font-weight: normal;
-  color: white;
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
   max-width: 50%;
   line-height: 1.4;
-  font-family: 'Brush Script MT', cursive;
-  font-style: italic;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  transform: rotate(-5deg);
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
   z-index: 2;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  animation: fadeInUp 1.2s ease-out, colorChange 8s infinite alternate;
+  background: linear-gradient(45deg, #4a56e2, #3498db);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
 }
+
+.banner-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0) 100%);
+  animation: shine 3s infinite;
+}
+
+.banner-text::after {
+  content: '"';
+  position: absolute;
+  font-size: 60px;
+  color: rgba(74, 86, 226, 0.2);
+  top: -20px;
+  left: -15px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Ajoutez cette balise dans votre <head> du fichier HTML */
+/* <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> */
 
 .banner-image-container {
   width: 50%;
@@ -314,6 +383,26 @@ a.see-all-button {
 
   .product-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.highlight-word {
+  position: relative;
+  display: inline-block;
+  animation: bounce 2s ease infinite;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-3px);
   }
 }
 

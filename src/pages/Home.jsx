@@ -9,7 +9,7 @@ function Home() {
       <section className="banner-section" id="section-15">
         <div className="banner-content">
           <div className="banner-text">
-            "La première plateforme marocaine où tout se donne gratuitement 100% !"
+            <span className="highlight-word">La première</span> plateforme marocaine où tout se donne <span className="highlight-word">gratuitement 100%</span> !
           </div>
           <div className="banner-image-container">
             <img

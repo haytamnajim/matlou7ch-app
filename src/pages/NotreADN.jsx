@@ -9,7 +9,7 @@ function NotreADN() {
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-title">
-              "Ne jetons plus, <br />donnons !"
+              "Ne jetons plus, <br /><span className="highlight-word">donnons</span> !"
             </h1>
             <p className="hero-description">
               Une conviction, une mission et des femmes et des hommes qui 
@@ -89,7 +89,7 @@ function NotreADN() {
                 </li>
               </ul>
               
-              <Link to="/post-ad" className="donate-button">+ Donner et recevoir</Link>
+              {/* Le bouton reste à sa position d'origine, ne pas ajouter ici */}
             </div>
             
             <div className="mission-detail-image">
@@ -201,12 +201,4 @@ function NotreADN() {
 }
 
 export default NotreADN;
-
-
-
-
-
-
-
-
 

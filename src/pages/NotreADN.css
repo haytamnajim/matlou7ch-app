@@ -33,17 +33,48 @@
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 20px;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
+  color: #e74c3c;
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: fadeInLeft 1.2s ease-out;
+}
+
+.hero-title::before {
+  content: '"';
+  position: absolute;
+  left: -30px;
+  top: -20px;
+  font-size: 5rem;
+  color: rgba(231, 76, 60, 0.2);
+  font-family: 'Georgia', serif;
+}
+
+.hero-title::after {
+  content: '"';
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  font-size: 5rem;
+  color: rgba(231, 76, 60, 0.2);
+  font-family: 'Georgia', serif;
 }
 
 .hero-description {
   font-size: 1.2rem;
-  color: #333;
-  line-height: 1.6;
+  line-height: 1.8;
+  color: #555;
   max-width: 600px;
+  margin-bottom: 2rem;
+  position: relative;
+  animation: fadeInRight 1.2s ease-out;
+  border-left: 4px solid #e74c3c;
+  padding-left: 20px;
+  font-style: italic;
 }
 
 .hero-image-container {
@@ -108,39 +139,97 @@
 }
 
 .mission-detail-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #4a56e2;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  animation: slideInFromLeft 1s ease-out;
+}
+
+.mission-detail-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4a56e2, #3498db);
+  animation: expandWidth 1.5s ease-out forwards;
 }
 
 .mission-detail-subtitle {
-  font-size: 1.3rem;
-  color: #333;
-  margin-bottom: 30px;
+  font-size: 1.5rem;
   font-weight: 500;
+  color: #555;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+  animation: fadeIn 1.2s ease-out;
 }
 
 .mission-detail-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 30px;
+  margin: 0;
 }
 
 .mission-detail-list li {
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px;
   margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.mission-detail-list li:nth-child(1) {
+  animation-delay: 0.2s;
+  border-left: 5px solid #e74c3c;
+}
+
+.mission-detail-list li:nth-child(2) {
+  animation-delay: 0.4s;
+  border-left: 5px solid #3498db;
+}
+
+.mission-detail-list li:nth-child(3) {
+  animation-delay: 0.6s;
+  border-left: 5px solid #2ecc71;
+}
+
+.mission-detail-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.mission-detail-list li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(74, 86, 226, 0.05), rgba(52, 152, 219, 0.05));
+  z-index: -1;
 }
 
 .mission-detail-list li strong {
   display: block;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+  font-size: 1.3rem;
   color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .mission-detail-list li p {
-  color: #555;
-  line-height: 1.5;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
 }
 
 .mission-detail-image {
@@ -159,17 +248,41 @@
 
 .donate-button {
   display: inline-block;
-  background-color: #e74c3c;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
   color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
   font-weight: 600;
-  transition: background-color 0.3s;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .donate-button:hover {
-  background-color: #c0392b;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+  color: white;
+  text-decoration: none;
+}
+
+.donate-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #c0392b, #e74c3c);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.donate-button:hover::after {
+  opacity: 1;
 }
 
 /* Sections communes */
@@ -503,15 +616,85 @@
 /* Ajout d'une police personnalisée pour le titre principal */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+/* Animation pour mettre en évidence "donnons" */
+.highlight-word {
+  display: inline-block;
+  position: relative;
+  color: #e74c3c;
+  font-weight: 800;
+  animation: pulse 2s infinite;
+}
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
+}
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
-
-
-
-
-
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
