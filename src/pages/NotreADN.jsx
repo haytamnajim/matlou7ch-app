@@ -19,7 +19,7 @@ function NotreADN() {
           </div>
           <div className="hero-image-container">
             <img 
-              src="/images/notre-adn-hero.png" 
+              src="image.png" 
               alt="Illustration de notre mission" 
               className="hero-image"
               onError={(e) => {
@@ -94,7 +94,7 @@ function NotreADN() {
             
             <div className="mission-detail-image">
               <img 
-                src="/images/mission-detail.png" 
+                src="m1s8v9otltiq73nl.png" 
                 alt="Illustration de notre mission" 
                 onError={(e) => {
                   e.target.onerror = null;
