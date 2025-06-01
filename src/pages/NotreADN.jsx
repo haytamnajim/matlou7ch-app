@@ -89,7 +89,9 @@ function NotreADN() {
                 </li>
               </ul>
               
-              {/* Conservez le bouton existant tel quel */}
+              <Link to="/post-ad" className="donate-receive-button">
+                Donner et recevoir
+              </Link>
             </div>
             
             <div className="mission-detail-image">
