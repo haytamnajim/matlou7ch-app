@@ -74,7 +74,7 @@ function Home() {
                   Ayoub
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/multimedia1/300/300`}
+                  src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3"
                   alt="Console de jeux PS5" 
                   className="product-image"
                   onError={(e) => {
@@ -103,7 +103,7 @@ function Home() {
                   Youssef
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/multimedia2/300/300`}
+                  src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32"
                   alt="Appareil photo Canon" 
                   className="product-image"
                   onError={(e) => {
@@ -132,7 +132,7 @@ function Home() {
                   Bilal
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/multimedia3/300/300`}
+                  src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
                   alt="Ordinateur portable HP" 
                   className="product-image"
                   onError={(e) => {
@@ -161,7 +161,7 @@ function Home() {
                   Rachid
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/multimedia4/300/300`}
+                  src="https://images.unsplash.com/photo-1550291652-6ea9114a47b1"
                   alt="Guitare acoustique" 
                   className="product-image"
                   onError={(e) => {
@@ -199,7 +199,7 @@ function Home() {
                   Ayoub
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/vetements1/300/300`}
+                  src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea"
                   alt="Veste rouge tendance" 
                   className="product-image"
                   onError={(e) => {
@@ -228,7 +228,7 @@ function Home() {
                   Sara
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/vetements2/300/300`}
+                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
                   alt="Chaussures de sport Nike" 
                   className="product-image"
                   onError={(e) => {
@@ -257,7 +257,7 @@ function Home() {
                   Fatima
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/vetements3/300/300`}
+                  src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956"
                   alt="Robe de soirée élégante" 
                   className="product-image"
                   onError={(e) => {
@@ -286,7 +286,7 @@ function Home() {
                   Imane
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/vetements4/300/300`}
+                  src="https://images.unsplash.com/photo-1551028719-00167b16eac5"
                   alt="Manteau d'hiver pour femme" 
                   className="product-image"
                   onError={(e) => {
@@ -324,7 +324,7 @@ function Home() {
                   Mohammed
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/maison1/300/300`}
+                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc"
                   alt="Table basse en bois" 
                   className="product-image"
                   onError={(e) => {
@@ -353,7 +353,7 @@ function Home() {
                   Zineb
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/maison2/300/300`}
+                  src="https://images.unsplash.com/photo-1463320726281-696a485928c7"
                   alt="Lot de plantes d'intérieur" 
                   className="product-image"
                   onError={(e) => {
@@ -382,7 +382,7 @@ function Home() {
                   Jamila
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/maison3/300/300`}
+                  src="https://images.unsplash.com/photo-1551376347-075b0121a65b"
                   alt="Tapis berbère authentique" 
                   className="product-image"
                   onError={(e) => {
@@ -411,7 +411,7 @@ function Home() {
                   Hassan
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/maison4/300/300`}
+                  src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c"
                   alt="Lampe design moderne" 
                   className="product-image"
                   onError={(e) => {
@@ -449,7 +449,7 @@ function Home() {
                   Laila
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/accessoires1/300/300`}
+                  src="https://images.unsplash.com/photo-1584917865442-de89df76afd3"
                   alt="Sac à main cuir véritable" 
                   className="product-image"
                   onError={(e) => {
@@ -478,7 +478,7 @@ function Home() {
                   Omar
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/accessoires2/300/300`}
+                  src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3"
                   alt="Montre homme automatique" 
                   className="product-image"
                   onError={(e) => {
@@ -507,7 +507,7 @@ function Home() {
                   Dounia
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/accessoires3/300/300`}
+                  src="https://images.unsplash.com/photo-1513104890138-7c749655a031"
                   alt="Bijoux en argent fait main" 
                   className="product-image"
                   onError={(e) => {
@@ -536,7 +536,7 @@ function Home() {
                   Karim
                 </Link>
                 <img 
-                  src={`https://picsum.photos/seed/accessoires4/300/300`}
+                  src="https://images.unsplash.com/photo-1507143550189-6a196cb93314"
                   alt="Lunettes de soleil Ray-Ban" 
                   className="product-image"
                   onError={(e) => {
