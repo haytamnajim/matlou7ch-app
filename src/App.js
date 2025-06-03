@@ -25,7 +25,6 @@ import Register from './pages/Register';
 import NotreADN from './pages/NotreADN';
 import CGU from './pages/CGU';
 import FAQ from './pages/FAQ';
-import InformationsLegales from './pages/InformationsLegales';
 import PostAd from './components/PostAd';
 import UserProducts from './pages/UserProducts';
 import UserProfile from './pages/UserProfile';
@@ -154,13 +153,6 @@ function App() {
           <>
             <Navbar />
             <CGU />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/informations-legales" element={
-          <>
-            <Navbar />
-            <InformationsLegales />
             <SimpleFooter />
           </>
         } />

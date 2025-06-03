@@ -12,14 +12,14 @@ function NotreADN() {
               "Ne jetons plus, <br /><span className="highlight-word">donnons</span> !"
             </h1>
             <p className="hero-description">
-              Une conviction, une mission et des femmes et des hommes qui 
-              travaillent en coulisse pour créer une communauté où l'on 
-              donne les objets plutôt que de les jeter.
+              Notre mission est de créer une communauté solidaire où le don d'objets 
+              devient une alternative au gaspillage, contribuant ainsi à un Maroc 
+              plus durable et plus uni.
             </p>
           </div>
           <div className="hero-image-container">
             <img 
-              src="image.png" 
+              src="/images/notre-mission.jpg" 
               alt="Illustration de notre mission" 
               className="hero-image"
               onError={(e) => {
@@ -40,24 +40,26 @@ function NotreADN() {
           
           <div className="who-we-are-content">
             <p>
-              Créée en 2023 par une équipe de jeunes entrepreneurs marocains, Matlou7ch.ma est la première plateforme 
-              gratuite de dons d'objets au Maroc, réunissant près de 10 000 membres. Notre plateforme vise à réduire le gaspillage 
-              et à promouvoir l'économie circulaire, une entreprise sociale créée avec la conviction que chaque objet mérite une seconde vie.
+              Fondée en 2025 par une équipe passionnée d'entrepreneurs marocains, Matlou7ch est née d'une vision simple mais puissante : 
+              transformer la façon dont nous gérons nos objets inutilisés. Notre plateforme connecte les personnes souhaitant donner des 
+              objets dont elles n'ont plus besoin avec celles qui en ont l'utilité.
             </p>
             
             <p>
-              Dans cette lignée, Matlou7ch a pour mission de faire du don d'objets une norme.
+              En quelques mois seulement, nous avons réuni une communauté grandissante de Marocains partageant nos valeurs de solidarité 
+              et de durabilité. Chaque jour, des centaines d'objets trouvent une seconde vie grâce à notre plateforme, évitant ainsi 
+              d'être jetés et contribuant à réduire notre impact environnemental collectif.
             </p>
             
             <p>
-              Une norme parce qu'aujourd'hui trop d'objets réutilisables ayant une valeur marchande sont encore jetés tandis que 
-              des millions de citoyens seraient prêts à les récupérer gratuitement pour faire des économies de pouvoir d'achat. Une 
-              norme parce que l'urgence écologique nous oblige à réemployer tout objet qui pourrait avoir une seconde vie et ainsi 
-              éviter la production d'un nouveau déchet.
+              Notre mission va au-delà de la simple réduction des déchets. Nous créons des liens sociaux, favorisons l'entraide et 
+              contribuons à une économie plus circulaire et solidaire. Chaque don représente non seulement un objet sauvé, mais aussi 
+              une connexion humaine établie.
             </p>
             
             <p>
-              Matlou7ch s'engage tous les jours pour faire de la seconde vie des objets un puissant levier de changement.
+              Matlou7ch s'engage à rendre le don d'objets aussi simple, sécurisé et accessible que possible pour tous les Marocains, 
+              où qu'ils se trouvent dans le pays.
             </p>
           </div>
         </div>
@@ -74,18 +76,18 @@ function NotreADN() {
               
               <ul className="mission-detail-list">
                 <li>
-                  <strong>Un système de géolocalisation.</strong>
-                  <p>Pour que vous trouviez tout ce que vous voulez à côté de chez vous.</p>
+                  <strong>Une plateforme locale et de proximité.</strong>
+                  <p>Notre système de géolocalisation vous permet de trouver et donner des objets près de chez vous, réduisant ainsi les déplacements et l'empreinte carbone.</p>
                 </li>
                 
                 <li>
-                  <strong>Donner n'a jamais été aussi simple.</strong>
-                  <p>Donnez et recevez en quelques clics seulement.</p>
+                  <strong>Une expérience utilisateur simplifiée.</strong>
+                  <p>Notre interface intuitive permet de publier une annonce ou de contacter un donneur en quelques clics seulement.</p>
                 </li>
                 
                 <li>
-                  <strong>Confiance et confidentialité.</strong>
-                  <p>Les utilisateurs sont notés et la messagerie est 100% sécurisée, pour vous permettre de donner et recevoir en toute sécurité.</p>
+                  <strong>Un environnement sécurisé et bienveillant.</strong>
+                  <p>Notre système de notation des utilisateurs et notre messagerie sécurisée garantissent des échanges en toute confiance.</p>
                 </li>
               </ul>
               
@@ -96,7 +98,7 @@ function NotreADN() {
             
             <div className="mission-detail-image">
               <img 
-                src="m1s8v9otltiq73nl.png" 
+                src="/images/notre-mission-detail.jpg" 
                 alt="Illustration de notre mission" 
                 onError={(e) => {
                   e.target.onerror = null;
@@ -110,31 +112,29 @@ function NotreADN() {
 
       <section className="manifesto-section">
         <div className="container">
-          <h2 className="manifesto-title">DONNER. DONNER. DONNER.</h2>
+          <h2 className="manifesto-title">NOTRE VISION POUR LE MAROC</h2>
           
           <div className="manifesto-content">
             <p>
-              L'urgence écologique et sociale que nous vivons est sans précédent. Chaque jour, les inégalités sociales se creusent encore un peu plus. Chaque 
-              jour, notre planète nous rappelle les conséquences de nos choix : mers engorgées de plastique, sols saturés de déchets, équilibres naturels 
-              fragilisés.
+              Au Maroc, comme partout dans le monde, nous faisons face à des défis environnementaux et sociaux majeurs. La surconsommation 
+              et le gaspillage des ressources menacent notre avenir commun, tandis que les inégalités économiques persistent.
             </p>
             
             <p>
-              Au milieu de ces signaux alarmants, une réalité se dégage : nous sommes à un tournant décisif. Un tournant social, sociétal et environnemental. 
-              Chaque objet jeté, chaque ressource non valorisée alourdit le poids de notre empreinte sur cette planète.
+              Nous croyons fermement que de petites actions, multipliées à grande échelle, peuvent engendrer des changements profonds. 
+              Chaque objet donné plutôt que jeté représente une victoire pour notre environnement et notre société.
             </p>
             
             <p>
-              Mais tout n'est pas perdu.
+              Notre vision est celle d'un Maroc où la générosité et le partage font partie intégrante de notre quotidien. Un pays où 
+              les objets circulent librement entre ceux qui n'en ont plus l'utilité et ceux qui en ont besoin, créant ainsi un cycle 
+              vertueux de solidarité et de durabilité.
             </p>
             
             <p>
-              Oui tout n'est pas perdu, car avec Matlou7ch, nous relevons un défi. Celui de, tous ensemble, inverser la tendance. Résolument et 
-              audacieusement. Le défi de mettre un maximum d'utilisateurs sur la plateforme afin de créer un puissant effet de levier et amorcer un changement, 
-              profond, durable, impactant. Atteindre des millions de foyers, c'est aussi supprimer potentiellement des milliers de tonnes de déchets, éviter des 
-              tonnes d'émissions de CO2 et faire des millions d'économies. Ce défi, c'est l'espoir qui s'ancre dans la réalité. En insufflant une nouvelle 
-              vie à chaque objet, en promouvant le don comme alternative au fait de jeter des biens réutilisables, on change de paradigme et on s'assure un 
-              avenir meilleur.
+              En développant Matlou7ch, nous aspirons à créer un mouvement national qui transforme notre rapport aux objets et à la 
+              consommation. Nous voulons inspirer chaque Marocain à se demander, avant de jeter un objet : "Quelqu'un pourrait-il 
+              en avoir besoin ?"
             </p>
             
             <p className="manifesto-highlight">
@@ -149,35 +149,35 @@ function NotreADN() {
           <div className="values-content">
             <div className="values-left">
               <h2 className="values-red-title">Nos valeurs</h2>
-              <p className="values-red-subtitle">Celles qui nous font nous lever<br />tous les matins !</p>
+              <p className="values-red-subtitle">Ce qui guide chacune de nos actions</p>
             </div>
             
             <div className="values-right">
               <div className="value-item">
                 <h3 className="value-name">Solidarité</h3>
                 <p className="value-description">
-                  Parce que le don est une des plus belles façons de recréer du lien social.
+                  Nous croyons au pouvoir du don pour créer des liens sociaux et renforcer le tissu communautaire marocain.
                 </p>
               </div>
               
               <div className="value-item">
                 <h3 className="value-name">Durabilité</h3>
                 <p className="value-description">
-                  Parce que chaque don d'objet est un objet en moins de produit, et donc moins de CO² rejeté dans l'atmosphère.
+                  Chaque objet réutilisé contribue à préserver nos ressources naturelles et à réduire notre impact environnemental collectif.
                 </p>
               </div>
               
               <div className="value-item">
-                <h3 className="value-name">Ambition</h3>
+                <h3 className="value-name">Innovation</h3>
                 <p className="value-description">
-                  Parce que nous sommes convaincus que le geste de donner peut amorcer un changement immense et sans précédent dans notre société.
+                  Nous utilisons la technologie pour faciliter et démocratiser le don d'objets, rendant cette pratique accessible à tous.
                 </p>
               </div>
               
               <div className="value-item">
-                <h3 className="value-name">Audace</h3>
+                <h3 className="value-name">Confiance</h3>
                 <p className="value-description">
-                  Parce que sans audace, point de réussite.
+                  Nous créons un environnement sécurisé où chacun peut donner et recevoir en toute sérénité.
                 </p>
               </div>
             </div>
@@ -187,13 +187,13 @@ function NotreADN() {
 
       <section className="team-section">
         <div className="container">
-          <h2 className="section-title">L'Équipe Derrière Matlou7ch</h2>
+          <h2 className="section-title">L'Équipe Matlou7ch</h2>
           <p className="team-intro">
-            Nous sommes une équipe passionnée de développeurs, designers et entrepreneurs marocains 
-            unis par la conviction que le partage peut changer positivement notre société.
+            Nous sommes une équipe de jeunes professionnels marocains passionnés par l'innovation sociale 
+            et l'économie circulaire, déterminés à faire du don d'objets une pratique courante au Maroc.
           </p>
           <div className="team-cta">
-            <p>Vous souhaitez nous rejoindre ou en savoir plus sur notre projet ?</p>
+            <p>Vous partagez notre vision et souhaitez contribuer à notre mission ?</p>
             <a href="/contact" className="contact-button">Contactez-nous</a>
           </div>
         </div>

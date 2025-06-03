@@ -105,7 +105,8 @@ function Footer({ type }) {
           <Link to="/faq" className="footer-page-link">FAQ</Link>
           <Link to="/cgu" className="footer-page-link">Conditions d'utilisation</Link>
           <Link to="/contact" className="footer-page-link">Contact</Link>
-          <Link to="/informations-legales" className="footer-page-link">Informations légales</Link>
+          {/* Supprimer le lien vers les informations légales */}
+          {/* <Link to="/informations-legales" className="footer-page-link">Informations légales</Link> */}
         </div>
         <p className="footer-copyright">© {currentYear} Matlou7ch. Tous droits réservés.</p>
       </div>

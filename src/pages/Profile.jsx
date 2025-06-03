@@ -86,7 +86,8 @@ function Profile() {
             </div>
           </Link>
 
-          <Link to="/informations-legales" className="menu-item">
+          {/* Supprimer le lien vers les informations légales */}
+          {/* <Link to="/informations-legales" className="menu-item">
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -100,7 +101,7 @@ function Profile() {
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
               </svg>
             </div>
-          </Link>
+          </Link> */}
         </div>
 
         <div className="profile-footer">

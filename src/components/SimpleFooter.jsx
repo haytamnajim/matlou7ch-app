@@ -29,7 +29,8 @@ function SimpleFooter() {
         <Link to="/faq" className="footer-link">FAQ</Link>
         <Link to="/cgu" className="footer-link">Conditions d'utilisation</Link>
         <Link to="/contact" className="footer-link">Contact</Link>
-        <Link to="/informations-legales" className="footer-link">Informations légales</Link>
+        {/* Supprimer le lien vers les informations légales */}
+        {/* <Link to="/informations-legales" className="footer-link">Informations légales</Link> */}
       </div>
       
       <p className="simple-footer-copyright">© {currentYear} Matlou7ch. Tous droits réservés.</p>
