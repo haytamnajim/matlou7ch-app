@@ -1,21 +1,45 @@
+:root {
+  --primary-color: #4a56e2;
+  --primary-hover: #3a46d1;
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+  --text-color: #333;
+  --text-light: #777;
+  --border-color: #e0e0e0;
+  --bg-color: #f5f7ff;
+  --card-bg: white;
+  --shadow: 0 4px 20px rgba(74, 86, 226, 0.15);
+  --border-radius: 16px;
+  --input-radius: 10px;
+  --button-radius: 50px;
+  --transition: all 0.3s ease;
+}
+
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 60px);
   padding: 30px;
-  background-color: #f5f7ff;
+  background-color: var(--bg-color);
+  font-family: 'Roboto', sans-serif;
 }
 
 .register-card {
   width: 100%;
   max-width: 600px;
   padding: 50px 40px;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(74, 86, 226, 0.15);
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   position: relative;
   box-sizing: border-box;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .back-button {
@@ -23,24 +47,50 @@
   top: 25px;
   left: 25px;
   font-size: 28px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(74, 86, 226, 0.1);
+  transition: var(--transition);
 }
 
 .back-button a {
-  color: #4a56e2;
+  color: var(--primary-color);
   text-decoration: none;
-  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
-.back-button a:hover {
-  color: #3a46d1;
+.back-button:hover {
+  background-color: rgba(74, 86, 226, 0.2);
+  transform: translateX(-3px);
 }
 
 .register-title {
   font-size: 2.2rem;
-  color: #4a56e2;
+  color: var(--primary-color);
   margin-bottom: 40px;
   font-weight: 600;
   text-align: center;
+  position: relative;
+}
+
+.register-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
 }
 
 .form-group {
@@ -52,30 +102,43 @@
   display: block;
   margin-bottom: 10px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   font-size: 1.05rem;
+  transition: var(--transition);
 }
 
 .form-group input {
   width: 100%;
   padding: 16px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 10px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--input-radius);
   font-size: 16px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: var(--transition);
   box-sizing: border-box;
+  background-color: #f9f9f9;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #4a56e2;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.1);
+  background-color: white;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
 }
 
 .input-hint {
   font-size: 0.85rem;
-  color: #777;
+  color: var(--text-light);
   margin-top: 8px;
+  transition: var(--transition);
+  padding-left: 5px;
+}
+
+.form-group:focus-within .input-hint {
+  color: var(--primary-color);
 }
 
 .checkbox-group {
@@ -83,6 +146,7 @@
   align-items: flex-start;
   margin-bottom: 18px;
   padding: 5px 0;
+  transition: var(--transition);
 }
 
 .checkbox-group input {
@@ -90,62 +154,122 @@
   margin-top: 4px;
   width: 18px;
   height: 18px;
-  accent-color: #4a56e2;
+  accent-color: var(--primary-color);
+  cursor: pointer;
 }
 
 .checkbox-group label {
   font-size: 15px;
-  color: #555;
+  color: var(--text-light);
   line-height: 1.5;
+  cursor: pointer;
+}
+
+.checkbox-group:hover label {
+  color: var(--text-color);
 }
 
 .link-highlight {
-  color: #4a56e2;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
+  position: relative;
+  transition: var(--transition);
 }
 
-.link-highlight:hover {
-  text-decoration: underline;
+.link-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.link-highlight:hover::after {
+  width: 100%;
 }
 
 .register-button {
   width: 100%;
   padding: 16px;
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: var(--button-radius);
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: var(--transition);
   margin-top: 30px;
   box-shadow: 0 4px 10px rgba(74, 86, 226, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition);
 }
 
 .register-button:hover {
-  background-color: #3a46d1;
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(74, 86, 226, 0.3);
+}
+
+.register-button:hover::before {
+  left: 100%;
 }
 
 .register-button:active {
   transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(74, 86, 226, 0.2);
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 12px;
-  border-radius: 10px;
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--error-color);
+  padding: 15px;
+  border-radius: var(--input-radius);
   margin-bottom: 25px;
   text-align: center;
   font-weight: 500;
+  border-left: 4px solid var(--error-color);
+  animation: shake 0.5s ease;
 }
 
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Styles pour les champs valides */
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: var(--success-color);
+  background-color: rgba(46, 204, 113, 0.05);
+}
+
+/* Styles pour les champs invalides après interaction */
+.form-group input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.05);
+}
+
+/* Responsive design */
 @media (max-width: 480px) {
   .register-card {
     padding: 40px 25px;
+    border-radius: 12px;
   }
   
   .register-title {
@@ -161,6 +285,10 @@
     padding: 14px;
     font-size: 16px;
   }
+  
+  .back-button {
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+  }
 }
-
-

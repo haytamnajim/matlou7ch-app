@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaChevronLeft, FaUser, FaEnvelope, FaPhone, FaLock, FaMapMarkerAlt } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import './Register.css';
 
 function Register() {
   const [pseudo, setPseudo] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [city, setCity] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -21,7 +23,7 @@ function Register() {
     setError('');
     
     // Validation basique
-    if (!pseudo || !email || !password || !city) {
+    if (!pseudo || !email || !password || !city || !phone) {
       setError('Veuillez remplir tous les champs');
       return;
     }
@@ -36,6 +38,13 @@ function Register() {
       return;
     }
     
+    // Validation du numéro de téléphone (format marocain)
+    const phoneRegex = /^(0|\+212)[5-7][0-9]{8}$/;
+    if (!phoneRegex.test(phone)) {
+      setError('Veuillez entrer un numéro de téléphone valide');
+      return;
+    }
+    
     if (!acceptTerms) {
       setError('Vous devez accepter les conditions générales');
       return;
@@ -43,7 +52,7 @@ function Register() {
     
     // Simulation d'inscription
     try {
-      register({ name: pseudo, email, password, city });
+      register({ name: pseudo, email, password, phone, city });
       navigate('/');
     } catch (error) {
       setError('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
@@ -54,7 +63,7 @@ function Register() {
     <div className="register-container">
       <div className="register-card">
         <div className="back-button">
-          <Link to="/connexion">←</Link>
+          <Link to="/connexion"><FaChevronLeft /></Link>
         </div>
         
         <h1 className="register-title">Créer mon compte</h1>
@@ -63,7 +72,9 @@ function Register() {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="pseudo">Pseudo</label>
+            <label htmlFor="pseudo">
+              <FaUser style={{ marginRight: '8px' }} /> Pseudo
+            </label>
             <input
               type="text"
               id="pseudo"
@@ -76,7 +87,9 @@ function Register() {
           </div>
           
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              <FaEnvelope style={{ marginRight: '8px' }} /> Email
+            </label>
             <input
               type="email"
               id="email"
@@ -88,7 +101,24 @@ function Register() {
           </div>
           
           <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="phone">
+              <FaPhone style={{ marginRight: '8px' }} /> Téléphone
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Entrez votre numéro de téléphone"
+              required
+            />
+            <div className="input-hint">Format: 06XXXXXXXX ou +212 6XXXXXXXX</div>
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">
+              <FaLock style={{ marginRight: '8px' }} /> Mot de passe
+            </label>
             <input
               type="password"
               id="password"
@@ -101,7 +131,9 @@ function Register() {
           </div>
           
           <div className="form-group">
-            <label htmlFor="city">Ville</label>
+            <label htmlFor="city">
+              <FaMapMarkerAlt style={{ marginRight: '8px' }} /> Ville
+            </label>
             <input
               type="text"
               id="city"
