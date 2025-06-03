@@ -32,7 +32,7 @@ function SimpleFooter() {
         <Link to="/informations-legales" className="footer-link">Informations légales</Link>
       </div>
       
-      <p className="simple-footer-copyright">© {currentYear} Matlouch. Tous droits réservés.</p>
+      <p className="simple-footer-copyright">© {currentYear} Matlou7ch. Tous droits réservés.</p>
     </footer>
   );
 }
