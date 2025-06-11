@@ -80,14 +80,21 @@
 
 /* Styles pour l'upload des photos */
 .photo-upload-container {
-  margin-bottom: 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .photo-upload-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  justify-content: center;
 }
 
 .photo-upload-box {
@@ -96,6 +103,7 @@
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  margin: 0 auto;
 }
 
 .photo-preview {
@@ -145,6 +153,7 @@
   cursor: pointer;
   background-color: #f9f9f9;
   transition: all 0.2s;
+  margin: 0 auto;
 }
 
 .upload-button:hover {
@@ -165,9 +174,10 @@
 }
 
 .photo-count {
-  text-align: right;
+  text-align: center;
   color: #666;
   font-size: 14px;
+  margin-top: 5px;
 }
 
 .next-button {
