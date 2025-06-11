@@ -9,6 +9,9 @@ function Users() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const usersPerPage = 10;
 
   useEffect(() => {
@@ -32,6 +35,63 @@ function Users() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Fonctions pour gérer les actions sur les utilisateurs
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+    setShowViewModal(true);
+  };
+
+  const handleEditUser = (user) => {
+    setSelectedUser({...user});
+    setShowEditModal(true);
+  };
+
+  const handleToggleUserStatus = (userId) => {
+    // Confirmer l'action
+    const userToToggle = users.find(user => user.id === userId);
+    const isBlocking = userToToggle.status === 'active';
+    const confirmMessage = isBlocking 
+      ? `Êtes-vous sûr de vouloir bloquer l'utilisateur ${userToToggle.name} ?` 
+      : `Êtes-vous sûr de vouloir débloquer l'utilisateur ${userToToggle.name} ?`;
+    
+    if (window.confirm(confirmMessage)) {
+      // Mettre à jour le statut de l'utilisateur
+      const updatedUsers = users.map(user => {
+        if (user.id === userId) {
+          return {
+            ...user,
+            status: user.status === 'active' ? 'blocked' : 'active'
+          };
+        }
+        return user;
+      });
+      
+      setUsers(updatedUsers);
+      
+      // Afficher un message de confirmation
+      const actionMessage = isBlocking 
+        ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.` 
+        : `L'utilisateur ${userToToggle.name} a été débloqué avec succès.`;
+      alert(actionMessage);
+    }
+  };
+
+  const handleSaveEdit = () => {
+    if (!selectedUser) return;
+    
+    // Mettre à jour l'utilisateur dans la liste
+    const updatedUsers = users.map(user => {
+      if (user.id === selectedUser.id) {
+        return selectedUser;
+      }
+      return user;
+    });
+    
+    setUsers(updatedUsers);
+    setShowEditModal(false);
+    alert(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
+  };
 
   // Filtrer les utilisateurs
   const filteredUsers = users.filter(user => {
@@ -64,6 +124,163 @@ function Users() {
       month: '2-digit',
       year: 'numeric'
     });
+  };
+
+  // Composant Modal pour voir les détails d'un utilisateur
+  const ViewUserModal = () => {
+    if (!selectedUser) return null;
+    
+    return (
+      <div className="admin-modal-overlay" onClick={() => setShowViewModal(false)}>
+        <div className="admin-modal" onClick={e => e.stopPropagation()}>
+          <div className="admin-modal-header">
+            <h2>Profil de l'utilisateur</h2>
+            <button className="modal-close-btn" onClick={() => setShowViewModal(false)}>×</button>
+          </div>
+          <div className="admin-modal-body">
+            <div className="user-profile-header">
+              <img 
+                src={selectedUser.avatar} 
+                alt={selectedUser.name}
+                className="user-profile-avatar"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  const initials = selectedUser.name.split(' ').map(n => n[0]).join('');
+                  const colors = ['#FF5252', '#448AFF', '#69F0AE', '#FFAB40', '#7C4DFF'];
+                  const colorIndex = selectedUser.id % colors.length;
+                  const div = document.createElement('div');
+                  div.className = 'user-profile-avatar';
+                  div.style.backgroundColor = colors[colorIndex];
+                  div.textContent = initials;
+                  e.target.parentNode.replaceChild(div, e.target);
+                }}
+              />
+              <div className="user-profile-info">
+                <h3>{selectedUser.name}</h3>
+                <p>{selectedUser.email}</p>
+                <span className={`status-badge ${selectedUser.status}`}>
+                  {selectedUser.status === 'active' ? 'Actif' : 'Bloqué'}
+                </span>
+              </div>
+            </div>
+            
+            <div className="user-profile-details">
+              <div className="detail-item">
+                <span className="detail-label">Ville:</span>
+                <span className="detail-value">{selectedUser.city}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Date d'inscription:</span>
+                <span className="detail-value">{formatDate(selectedUser.registrationDate)}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Nombre d'annonces:</span>
+                <span className="detail-value">{selectedUser.listings}</span>
+              </div>
+            </div>
+          </div>
+          <div className="admin-modal-footer">
+            <button 
+              className="admin-btn secondary" 
+              onClick={() => setShowViewModal(false)}
+            >
+              Fermer
+            </button>
+            <button 
+              className="admin-btn primary" 
+              onClick={() => {
+                setShowViewModal(false);
+                handleEditUser(selectedUser);
+              }}
+            >
+              Modifier
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Composant Modal pour modifier un utilisateur
+  const EditUserModal = () => {
+    if (!selectedUser) return null;
+    
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setSelectedUser(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    };
+    
+    return (
+      <div className="admin-modal-overlay" onClick={() => setShowEditModal(false)}>
+        <div className="admin-modal" onClick={e => e.stopPropagation()}>
+          <div className="admin-modal-header">
+            <h2>Modifier l'utilisateur</h2>
+            <button className="modal-close-btn" onClick={() => setShowEditModal(false)}>×</button>
+          </div>
+          <div className="admin-modal-body">
+            <div className="form-group">
+              <label htmlFor="name">Nom</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={selectedUser.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={selectedUser.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="city">Ville</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={selectedUser.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="status">Statut</label>
+              <select
+                id="status"
+                name="status"
+                value={selectedUser.status}
+                onChange={handleChange}
+              >
+                <option value="active">Actif</option>
+                <option value="blocked">Bloqué</option>
+              </select>
+            </div>
+          </div>
+          <div className="admin-modal-footer">
+            <button 
+              className="admin-btn secondary" 
+              onClick={() => setShowEditModal(false)}
+            >
+              Annuler
+            </button>
+            <button 
+              className="admin-btn primary" 
+              onClick={handleSaveEdit}
+            >
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   if (loading) {
@@ -153,18 +370,34 @@ function Users() {
                 </td>
                 <td>
                   <div className="table-actions">
-                    <button className="action-btn view" title="Voir le profil">
+                    <button 
+                      className="action-btn view" 
+                      title="Voir le profil"
+                      onClick={() => handleViewUser(user)}
+                    >
                       <FaEye />
                     </button>
-                    <button className="action-btn edit" title="Modifier">
+                    <button 
+                      className="action-btn edit" 
+                      title="Modifier"
+                      onClick={() => handleEditUser(user)}
+                    >
                       <FaEdit />
                     </button>
                     {user.status === 'active' ? (
-                      <button className="action-btn delete" title="Bloquer">
+                      <button 
+                        className="action-btn delete" 
+                        title="Bloquer"
+                        onClick={() => handleToggleUserStatus(user.id)}
+                      >
                         <FaBan />
                       </button>
                     ) : (
-                      <button className="action-btn view" title="Débloquer">
+                      <button 
+                        className="action-btn view" 
+                        title="Débloquer"
+                        onClick={() => handleToggleUserStatus(user.id)}
+                      >
                         <FaUserCheck />
                       </button>
                     )}
@@ -230,6 +463,10 @@ function Users() {
           </div>
         )}
       </div>
+      
+      {/* Modals */}
+      {showViewModal && <ViewUserModal />}
+      {showEditModal && <EditUserModal />}
     </AdminLayout>
   );
 }
