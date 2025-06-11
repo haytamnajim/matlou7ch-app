@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import ConfettiIcon from './ConfettiIcon';
 import './PostAd.css';
 import Confetti from './Confetti';
 
 function PostAd() {
+  // Cette fonction crée un objet global pour stocker les annonces
+  useEffect(() => {
+    // Initialiser l'objet global s'il n'existe pas
+    if (!window.matlouchAppData) {
+      window.matlouchAppData = {
+        myAds: JSON.parse(localStorage.getItem('myAds') || '[]')
+      };
+    }
+  }, []);
+
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
+  const [submittedProductId, setSubmittedProductId] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -17,21 +28,39 @@ function PostAd() {
     signature: '',
     photos: []
   });
+  const navigate = useNavigate();
   
+  // Fonction pour convertir une image en base64
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   // Fonction pour gérer l'upload d'images
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     if (e.target.files) {
       const newPhotos = [...formData.photos];
       const filesArray = Array.from(e.target.files);
       
-      filesArray.forEach(file => {
+      for (const file of filesArray) {
         if (newPhotos.length < 5) {
-          newPhotos.push({
-            file,
-            preview: URL.createObjectURL(file)
-          });
+          try {
+            // Convertir l'image en base64
+            const base64 = await convertToBase64(file);
+            
+            newPhotos.push({
+              file,
+              preview: base64 // Utiliser la chaîne base64 au lieu de l'URL
+            });
+          } catch (error) {
+            console.error("Erreur lors de la conversion de l'image:", error);
+          }
         }
-      });
+      }
       
       setFormData({
         ...formData,
@@ -61,11 +90,51 @@ function PostAd() {
   };
 
   // Soumettre le formulaire après confirmation
-  const confirmSubmit = () => {
-    console.log('Données du formulaire soumises:', formData);
-    // Ici vous pourriez envoyer les données à votre API
-    setIsSubmitted(true);
-    setPreviewMode(false);
+  const confirmSubmit = async () => {
+    try {
+      console.log("Photos avant sauvegarde:", formData.photos);
+      
+      // Créer un objet annonce avec toutes les données nécessaires
+      const newAd = {
+        id: 'product-' + Date.now(),
+        title: formData.title,
+        category: formData.category,
+        condition: formData.condition,
+        city: formData.city,
+        description: formData.description,
+        signature: formData.signature,
+        // Sauvegardez les URLs des images
+        photos: formData.photos.map(photo => photo.preview),
+        date: new Date().toISOString(),
+        isActive: true
+      };
+      
+      console.log('Annonce complète à sauvegarder:', newAd);
+      console.log('Photos sauvegardées:', newAd.photos);
+      
+      // Récupérer les annonces existantes
+      const existingAds = JSON.parse(localStorage.getItem('myAds') || '[]');
+      
+      // Ajouter la nouvelle annonce
+      const updatedAds = [newAd, ...existingAds];
+      
+      // Sauvegarder dans localStorage
+      localStorage.setItem('myAds', JSON.stringify(updatedAds));
+      
+      // Vérifier que les données sont bien sauvegardées
+      const savedAds = JSON.parse(localStorage.getItem('myAds') || '[]');
+      console.log('Annonces sauvegardées dans localStorage:', savedAds);
+      
+      // Stocker l'ID du produit soumis
+      setSubmittedProductId(newAd.id);
+      
+      // Marquer comme soumis
+      setIsSubmitted(true);
+      setPreviewMode(false);
+    } catch (error) {
+      console.error('Erreur lors de la soumission:', error);
+      alert('Une erreur est survenue lors de la publication de votre annonce.');
+    }
   };
 
   const handleNextStep = () => {
@@ -91,6 +160,12 @@ function PostAd() {
     
     // Afficher l'aperçu avant soumission
     showPreview();
+  };
+
+  const goToMyAds = () => {
+    navigate('/mes-annonces');
+    // Force reload to ensure the component fetches fresh data
+    window.location.reload();
   };
 
   if (isSubmitted) {
@@ -119,9 +194,20 @@ function PostAd() {
         <p className="success-message">
           Votre annonce a bien été enregistrée. Elle sera en ligne dans quelques secondes
         </p>
-        <Link to="/mes-annonces" className="view-ad-button">
-          Voir mon annonce
-        </Link>
+        <div className="success-actions">
+          <button 
+            onClick={() => window.location.href = '/mes-annonces'} 
+            className="view-ad-button"
+          >
+            Voir mon annonce
+          </button>
+          <button 
+            onClick={() => window.location.href = '/mes-annonces'} 
+            className="my-ads-button"
+          >
+            Mes annonces
+          </button>
+        </div>
       </div>
     );
   }
@@ -306,7 +392,6 @@ function PostAd() {
           
           <div className="form-actions">
             <button className="back-button" onClick={() => setStep(step - 1)}>Précédent</button>
-            <button className="preview-button" onClick={showPreview}>Prévisualiser</button>
             <button className="submit-button" onClick={handleSubmit}>Publier</button>
           </div>
         </div>
