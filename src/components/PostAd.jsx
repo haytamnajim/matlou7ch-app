@@ -7,6 +7,7 @@ import Confetti from './Confetti';
 function PostAd() {
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [previewMode, setPreviewMode] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -16,6 +17,56 @@ function PostAd() {
     signature: '',
     photos: []
   });
+  
+  // Fonction pour gérer l'upload d'images
+  const handleImageUpload = (e) => {
+    if (e.target.files) {
+      const newPhotos = [...formData.photos];
+      const filesArray = Array.from(e.target.files);
+      
+      filesArray.forEach(file => {
+        if (newPhotos.length < 5) {
+          newPhotos.push({
+            file,
+            preview: URL.createObjectURL(file)
+          });
+        }
+      });
+      
+      setFormData({
+        ...formData,
+        photos: newPhotos
+      });
+    }
+  };
+  
+  // Fonction pour supprimer une image
+  const removeImage = (index) => {
+    const newPhotos = [...formData.photos];
+    newPhotos.splice(index, 1);
+    setFormData({
+      ...formData,
+      photos: newPhotos
+    });
+  };
+  
+  // Afficher l'aperçu avant soumission
+  const showPreview = () => {
+    setPreviewMode(true);
+  };
+  
+  // Revenir à l'édition
+  const backToEdit = () => {
+    setPreviewMode(false);
+  };
+
+  // Soumettre le formulaire après confirmation
+  const confirmSubmit = () => {
+    console.log('Données du formulaire soumises:', formData);
+    // Ici vous pourriez envoyer les données à votre API
+    setIsSubmitted(true);
+    setPreviewMode(false);
+  };
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -30,10 +81,16 @@ function PostAd() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Données du formulaire soumises:', formData);
-    // Ici vous pourriez envoyer les données à votre API
-    setIsSubmitted(true);
+    if (e) e.preventDefault();
+    
+    // Vérification basique des données
+    if (!formData.title || !formData.category || !formData.city) {
+      alert("Veuillez remplir tous les champs obligatoires");
+      return;
+    }
+    
+    // Afficher l'aperçu avant soumission
+    showPreview();
   };
 
   if (isSubmitted) {
@@ -91,13 +148,30 @@ function PostAd() {
             </label>
             <p className="form-hint">Ajoutez jusqu'à 5 photos</p>
             
-            <div className="photo-upload-grid">
-              {[1, 2, 3, 4, 5].map((num) => (
-                <div key={num} className="photo-upload-box">
-                  <div className="add-icon">+</div>
-                  <span className="photo-number">{num}</span>
-                </div>
-              ))}
+            <div className="photo-upload-container">
+              <div className="photo-upload-grid">
+                {formData.photos.map((photo, index) => (
+                  <div key={index} className="photo-upload-box photo-preview">
+                    <img src={photo.preview} alt={`Aperçu ${index+1}`} />
+                    <button className="remove-photo" onClick={() => removeImage(index)}>×</button>
+                    <span className="photo-number">{index + 1}</span>
+                  </div>
+                ))}
+                
+                {formData.photos.length < 5 && (
+                  <label className="photo-upload-box upload-button">
+                    <div className="add-icon">+</div>
+                    <span className="upload-text">Ajouter une photo</span>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleImageUpload} 
+                      style={{ display: 'none' }} 
+                    />
+                  </label>
+                )}
+              </div>
+              <p className="photo-count">{formData.photos.length}/5 photos</p>
             </div>
           </div>
           
@@ -230,7 +304,100 @@ function PostAd() {
             </div>
           </div>
           
-          <button className="publish-button" onClick={handleSubmit}>Publier</button>
+          <div className="form-actions">
+            <button className="back-button" onClick={() => setStep(step - 1)}>Précédent</button>
+            <button className="preview-button" onClick={showPreview}>Prévisualiser</button>
+            <button className="submit-button" onClick={handleSubmit}>Publier</button>
+          </div>
+        </div>
+      )}
+      
+      {previewMode && (
+        <div className="preview-container">
+          <h2 className="preview-title">Aperçu de votre annonce</h2>
+          
+          <div className="preview-card">
+            {/* Section des photos */}
+            <div className="preview-photos-section">
+              {formData.photos.length > 0 ? (
+                <div className="preview-gallery">
+                  <div className="preview-main-photo">
+                    <img 
+                      src={formData.photos[0].preview} 
+                      alt={formData.title} 
+                      className="main-photo-img"
+                    />
+                  </div>
+                  
+                  {formData.photos.length > 1 && (
+                    <div className="preview-thumbnails">
+                      {formData.photos.map((photo, index) => (
+                        <div key={index} className="preview-thumbnail">
+                          <img 
+                            src={photo.preview} 
+                            alt={`Photo ${index + 1}`} 
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="no-photos-placeholder">
+                  <div className="placeholder-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ccc" width="64px" height="64px">
+                      <path d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
+                  </div>
+                  <p>Aucune photo ajoutée</p>
+                </div>
+              )}
+            </div>
+            
+            {/* Section des informations */}
+            <div className="preview-info-section">
+              <h1 className="preview-product-title">{formData.title}</h1>
+              
+              <div className="preview-details">
+                <div className="preview-detail-item">
+                  <span className="detail-label">Catégorie:</span>
+                  <span className="detail-value">{formData.category}</span>
+                </div>
+                
+                <div className="preview-detail-item">
+                  <span className="detail-label">État:</span>
+                  <span className="detail-value">{formData.condition}</span>
+                </div>
+                
+                <div className="preview-detail-item">
+                  <span className="detail-label">Ville:</span>
+                  <span className="detail-value">{formData.city}</span>
+                </div>
+              </div>
+              
+              <div className="preview-description-box">
+                <h3 className="preview-section-title">Description</h3>
+                <p className="preview-description-text">{formData.description || "Aucune description fournie."}</p>
+              </div>
+              
+              {formData.signature && (
+                <div className="preview-signature-box">
+                  <h3 className="preview-section-title">Signature</h3>
+                  <p className="preview-signature-text">{formData.signature}</p>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="preview-actions">
+            <button className="back-to-edit-button" onClick={backToEdit}>
+              Modifier l'annonce
+            </button>
+            <button className="confirm-publish-button" onClick={confirmSubmit}>
+              Confirmer et publier
+            </button>
+          </div>
         </div>
       )}
     </div>
