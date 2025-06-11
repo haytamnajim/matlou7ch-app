@@ -10,6 +10,9 @@ function Listings() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedListing, setSelectedListing] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const listingsPerPage = 12;
 
   useEffect(() => {
@@ -26,7 +29,9 @@ function Listings() {
         status: statuses[Math.floor(Math.random() * statuses.length)],
         user: `Utilisateur ${Math.floor(Math.random() * 20) + 1}`,
         date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)),
-        image: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/200`
+        image: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/200`,
+        description: `Description détaillée de l'annonce ${i + 1}. Cet objet est en bon état et disponible immédiatement.`,
+        city: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)]
       }));
       
       setListings(mockListings);
@@ -35,6 +40,70 @@ function Listings() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Fonctions pour gérer les actions sur les annonces
+  const handleViewListing = (listing) => {
+    setSelectedListing(listing);
+    setShowViewModal(true);
+  };
+
+  const handleEditListing = (listing) => {
+    setSelectedListing({...listing});
+    setShowEditModal(true);
+  };
+
+  const handleDeleteListing = (listingId) => {
+    // Confirmer la suppression
+    const listingToDelete = listings.find(listing => listing.id === listingId);
+    
+    if (window.confirm(`Êtes-vous sûr de vouloir supprimer l'annonce "${listingToDelete.title}" ?`)) {
+      // Supprimer l'annonce
+      const updatedListings = listings.filter(listing => listing.id !== listingId);
+      setListings(updatedListings);
+      
+      // Afficher un message de confirmation
+      alert(`L'annonce "${listingToDelete.title}" a été supprimée avec succès.`);
+    }
+  };
+
+  const handleApproveListing = (listingId) => {
+    // Confirmer l'approbation
+    const listingToApprove = listings.find(listing => listing.id === listingId);
+    
+    if (window.confirm(`Êtes-vous sûr de vouloir approuver l'annonce "${listingToApprove.title}" ?`)) {
+      // Mettre à jour le statut de l'annonce
+      const updatedListings = listings.map(listing => {
+        if (listing.id === listingId) {
+          return {
+            ...listing,
+            status: 'active'
+          };
+        }
+        return listing;
+      });
+      
+      setListings(updatedListings);
+      
+      // Afficher un message de confirmation
+      alert(`L'annonce "${listingToApprove.title}" a été approuvée avec succès.`);
+    }
+  };
+
+  const handleSaveEdit = () => {
+    if (!selectedListing) return;
+    
+    // Mettre à jour l'annonce dans la liste
+    const updatedListings = listings.map(listing => {
+      if (listing.id === selectedListing.id) {
+        return selectedListing;
+      }
+      return listing;
+    });
+    
+    setListings(updatedListings);
+    setShowEditModal(false);
+    alert(`L'annonce "${selectedListing.title}" a été mise à jour avec succès.`);
+  };
 
   // Filtrer les annonces
   const filteredListings = listings.filter(listing => {
@@ -82,6 +151,199 @@ function Listings() {
       case 'reported': return 'Signalée';
       default: return status;
     }
+  };
+
+  // Composant Modal pour voir les détails d'une annonce
+  const ViewListingModal = () => {
+    if (!selectedListing) return null;
+    
+    return (
+      <div className="admin-modal-overlay" onClick={() => setShowViewModal(false)}>
+        <div className="admin-modal" onClick={e => e.stopPropagation()}>
+          <div className="admin-modal-header">
+            <h2>Détails de l'annonce</h2>
+            <button className="modal-close-btn" onClick={() => setShowViewModal(false)}>×</button>
+          </div>
+          <div className="admin-modal-body">
+            <div className="listing-detail-image">
+              <img 
+                src={selectedListing.image} 
+                alt={selectedListing.title}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/300x200?text=Image+non+disponible';
+                }}
+              />
+              <span className={`listing-status ${selectedListing.status}`}>
+                {getStatusLabel(selectedListing.status)}
+              </span>
+            </div>
+            
+            <h3 className="listing-detail-title">{selectedListing.title}</h3>
+            
+            <div className="listing-detail-info">
+              <div className="detail-item">
+                <span className="detail-label">Catégorie:</span>
+                <span className="detail-value">{selectedListing.category}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Utilisateur:</span>
+                <span className="detail-value">{selectedListing.user}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Date:</span>
+                <span className="detail-value">{formatDate(selectedListing.date)}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Ville:</span>
+                <span className="detail-value">{selectedListing.city}</span>
+              </div>
+            </div>
+            
+            <div className="listing-detail-description">
+              <h4>Description</h4>
+              <p>{selectedListing.description}</p>
+            </div>
+          </div>
+          <div className="admin-modal-footer">
+            <button 
+              className="admin-btn secondary" 
+              onClick={() => setShowViewModal(false)}
+            >
+              Fermer
+            </button>
+            <button 
+              className="admin-btn primary" 
+              onClick={() => {
+                setShowViewModal(false);
+                handleEditListing(selectedListing);
+              }}
+            >
+              Modifier
+            </button>
+            {selectedListing.status === 'pending' && (
+              <button 
+                className="admin-btn success" 
+                onClick={() => {
+                  setShowViewModal(false);
+                  handleApproveListing(selectedListing.id);
+                }}
+              >
+                Approuver
+              </button>
+            )}
+            <button 
+              className="admin-btn danger" 
+              onClick={() => {
+                setShowViewModal(false);
+                handleDeleteListing(selectedListing.id);
+              }}
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Composant Modal pour modifier une annonce
+  const EditListingModal = () => {
+    if (!selectedListing) return null;
+    
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setSelectedListing(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    };
+    
+    return (
+      <div className="admin-modal-overlay" onClick={() => setShowEditModal(false)}>
+        <div className="admin-modal" onClick={e => e.stopPropagation()}>
+          <div className="admin-modal-header">
+            <h2>Modifier l'annonce</h2>
+            <button className="modal-close-btn" onClick={() => setShowEditModal(false)}>×</button>
+          </div>
+          <div className="admin-modal-body">
+            <div className="form-group">
+              <label htmlFor="title">Titre</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={selectedListing.title}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="category">Catégorie</label>
+              <select
+                id="category"
+                name="category"
+                value={selectedListing.category}
+                onChange={handleChange}
+              >
+                <option value="Mobilier">Mobilier</option>
+                <option value="Électronique">Électronique</option>
+                <option value="Vêtements">Vêtements</option>
+                <option value="Livres">Livres</option>
+                <option value="Décoration">Décoration</option>
+                <option value="Jouets">Jouets</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="status">Statut</label>
+              <select
+                id="status"
+                name="status"
+                value={selectedListing.status}
+                onChange={handleChange}
+              >
+                <option value="active">Active</option>
+                <option value="pending">En attente</option>
+                <option value="reported">Signalée</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="city">Ville</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={selectedListing.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                value={selectedListing.description}
+                onChange={handleChange}
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+          <div className="admin-modal-footer">
+            <button 
+              className="admin-btn secondary" 
+              onClick={() => setShowEditModal(false)}
+            >
+              Annuler
+            </button>
+            <button 
+              className="admin-btn primary" 
+              onClick={handleSaveEdit}
+            >
+              Enregistrer
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   if (loading) {
@@ -168,15 +430,24 @@ function Listings() {
               </div>
               
               <div className="listing-actions">
-                <button className="listing-btn view">
+                <button 
+                  className="listing-btn view"
+                  onClick={() => handleViewListing(listing)}
+                >
                   <FaEye /> Voir
                 </button>
                 {listing.status === 'pending' && (
-                  <button className="listing-btn view">
+                  <button 
+                    className="listing-btn view"
+                    onClick={() => handleApproveListing(listing.id)}
+                  >
                     <FaCheck /> Approuver
                   </button>
                 )}
-                <button className="listing-btn delete">
+                <button 
+                  className="listing-btn delete"
+                  onClick={() => handleDeleteListing(listing.id)}
+                >
                   <FaTrash /> Supprimer
                 </button>
               </div>
@@ -239,6 +510,10 @@ function Listings() {
           </button>
         </div>
       )}
+      
+      {/* Modals */}
+      {showViewModal && <ViewListingModal />}
+      {showEditModal && <EditListingModal />}
     </AdminLayout>
   );
 }

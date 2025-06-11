@@ -788,6 +788,46 @@
   color: var(--admin-danger);
 }
 
+/* Styles pour les détails d'annonce */
+.listing-detail-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.listing-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listing-detail-title {
+  font-size: 1.5rem;
+  margin: 0 0 15px;
+  color: var(--admin-dark);
+}
+
+.listing-detail-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.listing-detail-info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+  color: var(--admin-dark);
+}
+
+.listing-detail-info p {
+  font-size: 1rem;
+  color: var(--admin-secondary);
+}
+
 /* Reports Page */
 .report-item {
   background-color: white;
@@ -3574,6 +3614,202 @@
 }
 
 .user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:focus {
+  outline: none;
+}
+
+.user-profile-action:disabled:active {
+  transform: none;
+}
+
+.user-profile-action:disabled:hover {
+  background-color: #ffab91;
+}
+
+.user-profile-action:disabled:active {
   background-color: #ffab91;
 }
 
