@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -48,3 +49,25 @@
   padding-bottom: 30px;
 }
 
+/* Image placeholders when online photos are removed */
+.product-image-placeholder,
+.listing-image-placeholder,
+.listing-detail-image-placeholder,
+.main-image-placeholder,
+.report-product-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  border-radius: 8px;
+}
+
+.category-image-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #e0e4e8;
+  border-radius: 50%;
+}

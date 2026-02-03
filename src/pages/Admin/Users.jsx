@@ -28,7 +28,7 @@ function Users() {
         listings: Math.floor(Math.random() * 20),
         avatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`
       }));
-      
+
       setUsers(mockUsers);
       setLoading(false);
     }, 1000);
@@ -43,7 +43,7 @@ function Users() {
   };
 
   const handleEditUser = (user) => {
-    setSelectedUser({...user});
+    setSelectedUser({ ...user });
     setShowEditModal(true);
   };
 
@@ -51,10 +51,10 @@ function Users() {
     // Confirmer l'action
     const userToToggle = users.find(user => user.id === userId);
     const isBlocking = userToToggle.status === 'active';
-    const confirmMessage = isBlocking 
-      ? `Êtes-vous sûr de vouloir bloquer l'utilisateur ${userToToggle.name} ?` 
+    const confirmMessage = isBlocking
+      ? `Êtes-vous sûr de vouloir bloquer l'utilisateur ${userToToggle.name} ?`
       : `Êtes-vous sûr de vouloir débloquer l'utilisateur ${userToToggle.name} ?`;
-    
+
     if (window.confirm(confirmMessage)) {
       // Mettre à jour le statut de l'utilisateur
       const updatedUsers = users.map(user => {
@@ -66,12 +66,12 @@ function Users() {
         }
         return user;
       });
-      
+
       setUsers(updatedUsers);
-      
+
       // Afficher un message de confirmation
-      const actionMessage = isBlocking 
-        ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.` 
+      const actionMessage = isBlocking
+        ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.`
         : `L'utilisateur ${userToToggle.name} a été débloqué avec succès.`;
       alert(actionMessage);
     }
@@ -79,7 +79,7 @@ function Users() {
 
   const handleSaveEdit = () => {
     if (!selectedUser) return;
-    
+
     // Mettre à jour l'utilisateur dans la liste
     const updatedUsers = users.map(user => {
       if (user.id === selectedUser.id) {
@@ -87,7 +87,7 @@ function Users() {
       }
       return user;
     });
-    
+
     setUsers(updatedUsers);
     setShowEditModal(false);
     alert(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
@@ -95,10 +95,10 @@ function Users() {
 
   // Filtrer les utilisateurs
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          user.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
 
@@ -129,7 +129,7 @@ function Users() {
   // Composant Modal pour voir les détails d'un utilisateur
   const ViewUserModal = () => {
     if (!selectedUser) return null;
-    
+
     return (
       <div className="admin-modal-overlay" onClick={() => setShowViewModal(false)}>
         <div className="admin-modal" onClick={e => e.stopPropagation()}>
@@ -139,22 +139,9 @@ function Users() {
           </div>
           <div className="admin-modal-body">
             <div className="user-profile-header">
-              <img 
-                src={selectedUser.avatar} 
-                alt={selectedUser.name}
-                className="user-profile-avatar"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  const initials = selectedUser.name.split(' ').map(n => n[0]).join('');
-                  const colors = ['#FF5252', '#448AFF', '#69F0AE', '#FFAB40', '#7C4DFF'];
-                  const colorIndex = selectedUser.id % colors.length;
-                  const div = document.createElement('div');
-                  div.className = 'user-profile-avatar';
-                  div.style.backgroundColor = colors[colorIndex];
-                  div.textContent = initials;
-                  e.target.parentNode.replaceChild(div, e.target);
-                }}
-              />
+              <div className="user-profile-avatar-placeholder">
+                {selectedUser.name.charAt(0)}
+              </div>
               <div className="user-profile-info">
                 <h3>{selectedUser.name}</h3>
                 <p>{selectedUser.email}</p>
@@ -163,7 +150,7 @@ function Users() {
                 </span>
               </div>
             </div>
-            
+
             <div className="user-profile-details">
               <div className="detail-item">
                 <span className="detail-label">Ville:</span>
@@ -180,14 +167,14 @@ function Users() {
             </div>
           </div>
           <div className="admin-modal-footer">
-            <button 
-              className="admin-btn secondary" 
+            <button
+              className="admin-btn secondary"
               onClick={() => setShowViewModal(false)}
             >
               Fermer
             </button>
-            <button 
-              className="admin-btn primary" 
+            <button
+              className="admin-btn primary"
               onClick={() => {
                 setShowViewModal(false);
                 handleEditUser(selectedUser);
@@ -204,7 +191,7 @@ function Users() {
   // Composant Modal pour modifier un utilisateur
   const EditUserModal = () => {
     if (!selectedUser) return null;
-    
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setSelectedUser(prev => ({
@@ -212,7 +199,7 @@ function Users() {
         [name]: value
       }));
     };
-    
+
     return (
       <div className="admin-modal-overlay" onClick={() => setShowEditModal(false)}>
         <div className="admin-modal" onClick={e => e.stopPropagation()}>
@@ -265,14 +252,14 @@ function Users() {
             </div>
           </div>
           <div className="admin-modal-footer">
-            <button 
-              className="admin-btn secondary" 
+            <button
+              className="admin-btn secondary"
               onClick={() => setShowEditModal(false)}
             >
               Annuler
             </button>
-            <button 
-              className="admin-btn primary" 
+            <button
+              className="admin-btn primary"
               onClick={handleSaveEdit}
             >
               Enregistrer
@@ -298,7 +285,7 @@ function Users() {
     <AdminLayout title="Utilisateurs">
       <div className="users-header">
         <h2><FaUsers /> Gestion des utilisateurs</h2>
-        
+
         <form onSubmit={handleSearch} className="users-search">
           <input
             type="text"
@@ -309,9 +296,9 @@ function Users() {
           <button type="submit"><FaSearch /></button>
         </form>
       </div>
-      
+
       <div className="users-filters">
-        <select 
+        <select
           className="filter-select"
           value={statusFilter}
           onChange={handleStatusChange}
@@ -321,7 +308,7 @@ function Users() {
           <option value="blocked">Bloqués</option>
         </select>
       </div>
-      
+
       <div className="admin-panel">
         <table className="admin-table">
           <thead>
@@ -340,22 +327,9 @@ function Users() {
               <tr key={user.id}>
                 <td>
                   <div className="user-cell">
-                    <img 
-                      src={user.avatar} 
-                      alt={user.name}
-                      className="user-avatar"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        const initials = user.name.split(' ').map(n => n[0]).join('');
-                        const colors = ['#FF5252', '#448AFF', '#69F0AE', '#FFAB40', '#7C4DFF'];
-                        const colorIndex = user.id % colors.length;
-                        const div = document.createElement('div');
-                        div.className = 'user-avatar';
-                        div.style.backgroundColor = colors[colorIndex];
-                        div.textContent = initials;
-                        e.target.parentNode.replaceChild(div, e.target);
-                      }}
-                    />
+                    <div className="user-avatar-placeholder">
+                      {user.name.charAt(0)}
+                    </div>
                     <span>{user.name}</span>
                   </div>
                 </td>
@@ -370,31 +344,31 @@ function Users() {
                 </td>
                 <td>
                   <div className="table-actions">
-                    <button 
-                      className="action-btn view" 
+                    <button
+                      className="action-btn view"
                       title="Voir le profil"
                       onClick={() => handleViewUser(user)}
                     >
                       <FaEye />
                     </button>
-                    <button 
-                      className="action-btn edit" 
+                    <button
+                      className="action-btn edit"
                       title="Modifier"
                       onClick={() => handleEditUser(user)}
                     >
                       <FaEdit />
                     </button>
                     {user.status === 'active' ? (
-                      <button 
-                        className="action-btn delete" 
+                      <button
+                        className="action-btn delete"
                         title="Bloquer"
                         onClick={() => handleToggleUserStatus(user.id)}
                       >
                         <FaBan />
                       </button>
                     ) : (
-                      <button 
-                        className="action-btn view" 
+                      <button
+                        className="action-btn view"
                         title="Débloquer"
                         onClick={() => handleToggleUserStatus(user.id)}
                       >
@@ -407,24 +381,24 @@ function Users() {
             ))}
           </tbody>
         </table>
-        
+
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination">
-            <button 
+            <button
               className="pagination-btn"
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
             >
               Précédent
             </button>
-            
+
             {Array.from({ length: totalPages }, (_, i) => i + 1)
               .filter(page => {
                 // Afficher seulement les pages proches de la page actuelle
-                return page === 1 || 
-                       page === totalPages || 
-                       Math.abs(page - currentPage) <= 1;
+                return page === 1 ||
+                  page === totalPages ||
+                  Math.abs(page - currentPage) <= 1;
               })
               .map((page, index, array) => {
                 // Ajouter des points de suspension si nécessaire
@@ -432,7 +406,7 @@ function Users() {
                   return (
                     <React.Fragment key={`ellipsis-${page}`}>
                       <span className="pagination-ellipsis">...</span>
-                      <button 
+                      <button
                         className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
                         onClick={() => setCurrentPage(page)}
                       >
@@ -441,9 +415,9 @@ function Users() {
                     </React.Fragment>
                   );
                 }
-                
+
                 return (
-                  <button 
+                  <button
                     key={page}
                     className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
                     onClick={() => setCurrentPage(page)}
@@ -452,8 +426,8 @@ function Users() {
                   </button>
                 );
               })}
-            
-            <button 
+
+            <button
               className="pagination-btn"
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
@@ -463,7 +437,7 @@ function Users() {
           </div>
         )}
       </div>
-      
+
       {/* Modals */}
       {showViewModal && <ViewUserModal />}
       {showEditModal && <EditUserModal />}

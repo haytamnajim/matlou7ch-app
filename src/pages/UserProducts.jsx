@@ -16,21 +16,21 @@ function UserProducts() {
   const [reportProductId, setReportProductId] = useState(null);
   const [reportReason, setReportReason] = useState('');
   const [reportProduct, setReportProduct] = useState(null);
-  
+
   // Charger les favoris depuis localStorage au chargement du composant
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavorites(savedFavorites);
   }, []);
-  
+
   // Fonction pour ajouter/supprimer des favoris
   const toggleFavorite = (productId, e) => {
     e.preventDefault(); // Empêcher la navigation vers la page du produit
-    
+
     const newFavorites = favorites.includes(productId)
       ? favorites.filter(id => id !== productId)
       : [...favorites, productId];
-    
+
     setFavorites(newFavorites);
     localStorage.setItem('favorites', JSON.stringify(newFavorites));
   };
@@ -38,13 +38,13 @@ function UserProducts() {
   // Fonction pour gérer le clic sur le bouton de signalement
   const handleReportClick = (productId, e) => {
     e.preventDefault(); // Empêcher la navigation vers la page du produit
-    
+
     // Vérifier si l'utilisateur est connecté
     if (!currentUser) {
       alert("Vous devez être connecté pour signaler un produit.");
       return;
     }
-    
+
     // Trouver le produit correspondant à l'ID
     const productToReport = products.find(p => p.id === productId);
     if (productToReport) {
@@ -61,7 +61,7 @@ function UserProducts() {
       alert("Informations manquantes pour le signalement.");
       return;
     }
-    
+
     // Créer l'objet de signalement
     const reportData = {
       productId: reportProductId,
@@ -74,16 +74,16 @@ function UserProducts() {
       },
       timestamp: new Date().toISOString()
     };
-    
+
     // Demander confirmation à l'utilisateur
     const confirmReport = window.confirm(
       `Êtes-vous sûr de vouloir signaler "${reportProduct.title}" pour la raison: ${getReasonLabel(reportReason)}?`
     );
-    
+
     if (confirmReport) {
       // Dans une application réelle, vous feriez un appel API ici
       console.log("Envoi du signalement:", reportData);
-      
+
       // Simuler une requête API
       setTimeout(() => {
         // Réinitialiser et fermer la modal
@@ -91,13 +91,13 @@ function UserProducts() {
         setReportProductId(null);
         setReportProduct(null);
         setShowReportModal(false);
-        
+
         // Afficher un message de confirmation
         alert('Merci pour votre signalement. Notre équipe va l\'examiner dans les plus brefs délais.');
       }, 500);
     }
   };
-  
+
   // Fonction pour obtenir le libellé d'une raison de signalement
   const getReasonLabel = (reasonCode) => {
     const reasons = {
@@ -107,7 +107,7 @@ function UserProducts() {
       'offensive': 'Contenu offensant',
       'other': 'Autre raison'
     };
-    
+
     return reasons[reasonCode] || reasonCode;
   };
 
@@ -241,22 +241,14 @@ function UserProducts() {
         <div className="products-grid">
           {products.map(product => (
             <div className="product-card" key={product.id}>
-              <Link 
-                to={`/produit/${product.id}`} 
+              <Link
+                to={`/produit/${product.id}`}
                 className="product-link"
               >
                 <div className="product-image-container">
-                  <img 
-                    src={product.image} 
-                    alt={product.title} 
-                    className="product-image"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.title)}`;
-                    }}
-                  />
-                  <button 
-                    className="favorite-button" 
+                  <div className="product-image-placeholder"></div>
+                  <button
+                    className="favorite-button"
                     onClick={(e) => toggleFavorite(product.id, e)}
                   >
                     {favorites.includes(product.id) ? (
@@ -278,7 +270,7 @@ function UserProducts() {
                   </div>
                 </div>
               </Link>
-              <button 
+              <button
                 className="report-product-button"
                 onClick={(e) => handleReportClick(product.id, e)}
               >
@@ -297,26 +289,18 @@ function UserProducts() {
             <p className="report-modal-subtitle">
               Vous êtes sur le point de signaler "{reportProduct?.title}"
             </p>
-            
+
             <div className="report-product-info">
-              <img 
-                src={reportProduct?.image} 
-                alt={reportProduct?.title}
-                className="report-product-image"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `https://via.placeholder.com/100x100?text=${encodeURIComponent(reportProduct?.title || '')}`;
-                }}
-              />
+              <div className="report-product-image-placeholder"></div>
               <div className="report-product-details">
                 <p className="report-product-title">{reportProduct?.title}</p>
                 <p className="report-product-location">{reportProduct?.location}</p>
               </div>
             </div>
-            
+
             <div className="report-form-group">
               <label htmlFor="report-reason">Raison du signalement:</label>
-              <select 
+              <select
                 id="report-reason"
                 className="report-reason-select"
                 value={reportReason}
@@ -330,14 +314,14 @@ function UserProducts() {
                 <option value="other">Autre</option>
               </select>
             </div>
-            
+
             <div className="report-user-info">
               <p>Votre signalement sera envoyé en tant que:</p>
               <p className="report-user-name">{currentUser?.name || 'Utilisateur anonyme'}</p>
             </div>
-            
+
             <div className="report-modal-actions">
-              <button 
+              <button
                 className="cancel-report-button"
                 onClick={() => {
                   setShowReportModal(false);
@@ -348,7 +332,7 @@ function UserProducts() {
               >
                 Annuler
               </button>
-              <button 
+              <button
                 className="submit-report-button"
                 onClick={submitReport}
                 disabled={!reportReason}

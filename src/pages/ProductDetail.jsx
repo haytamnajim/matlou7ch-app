@@ -13,12 +13,12 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Charger les favoris depuis le localStorage
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavorites(savedFavorites);
-    
+
     // Simuler le chargement des données du produit
     // Dans une application réelle, vous feriez un appel API ici
     setTimeout(() => {
@@ -51,12 +51,12 @@ function ProductDetail() {
       setLoading(false);
     }, 500);
   }, [id, location.state]);
-  
+
   // Fonction pour gérer l'ajout aux favoris
   const handleFavoriteClick = () => {
     if (!user) {
       // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-      navigate('/connexion', { 
+      navigate('/connexion', {
         state: { from: { pathname: `/produit/${id}` } }
       });
     } else {
@@ -64,12 +64,12 @@ function ProductDetail() {
       const newFavorites = favorites.includes(id)
         ? favorites.filter(itemId => itemId !== id)
         : [...favorites, id];
-      
+
       setFavorites(newFavorites);
       localStorage.setItem('favorites', JSON.stringify(newFavorites));
     }
   };
-  
+
   // Fonction pour partager le produit
   const handleShareClick = () => {
     if (navigator.share) {
@@ -78,7 +78,7 @@ function ProductDetail() {
         text: `Découvrez ${product.title} sur Matlou7ch.org`,
         url: window.location.href,
       })
-      .catch((error) => console.log('Erreur de partage', error));
+        .catch((error) => console.log('Erreur de partage', error));
     } else {
       // Copier le lien dans le presse-papier
       navigator.clipboard.writeText(window.location.href)
@@ -86,7 +86,7 @@ function ProductDetail() {
         .catch((err) => console.error('Erreur lors de la copie du lien', err));
     }
   };
-  
+
   if (loading) {
     return (
       <div className="product-detail-container">
@@ -94,7 +94,7 @@ function ProductDetail() {
       </div>
     );
   }
-  
+
   if (error) {
     return (
       <div className="product-detail-container">
@@ -105,7 +105,7 @@ function ProductDetail() {
       </div>
     );
   }
-  
+
   if (!product) {
     return (
       <div className="product-detail-container">
@@ -116,27 +116,19 @@ function ProductDetail() {
       </div>
     );
   }
-  
+
   return (
     <div className="product-detail-container">
       {/* Galerie d'images */}
       <div className="product-image-gallery">
         <div className="main-image-container">
-          <img 
-            src={product.image} 
-            alt={product.title} 
-            className="main-image"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = `https://via.placeholder.com/600x400?text=${encodeURIComponent(product.title)}`;
-            }}
-          />
+          <div className="main-image-placeholder"></div>
           {product.isPublished && (
             <div className="product-badge">Publié</div>
           )}
         </div>
       </div>
-      
+
       {/* Informations du produit */}
       <div className="product-info-container">
         <div className="product-header">
@@ -146,40 +138,40 @@ function ProductDetail() {
             <p className="interested-count">Personnes intéressées : {product.interestedCount}</p>
           </div>
         </div>
-        
-        <button 
+
+        <button
           className="contact-button"
           onClick={() => {
             if (!user) {
               navigate('/connexion', { state: { from: { pathname: `/produit/${id}` } } });
             } else {
-              navigate('/messages', { 
-                state: { 
+              navigate('/messages', {
+                state: {
                   recipient: product.user,
                   product: product,
                   newConversation: true
-                } 
+                }
               });
             }
           }}
         >
           Contacter le donneur
         </button>
-        
+
         <div className="product-details">
           <div className="detail-section">
             <h3>Catégorie</h3>
             <p>{product.category}</p>
           </div>
-          
+
           <div className="detail-section">
             <h3>Caractéristiques</h3>
             <p>État du don : <span className="condition-badge">{product.condition}</span></p>
           </div>
         </div>
-        
+
         <hr className="divider" />
-        
+
         {/* Section d'information sur le donneur - style amélioré */}
         <div className="donor-section">
           <h2 className="section-title">À propos du donneur</h2>
@@ -203,7 +195,7 @@ function ProductDetail() {
               </div>
             </div>
           </div>
-          
+
           {/* Description du donneur avec style amélioré */}
           {product.user.description && (
             <div className="donor-description">
@@ -211,14 +203,14 @@ function ProductDetail() {
             </div>
           )}
         </div>
-        
+
         <hr className="divider" />
-        
+
         {/* Autres objets du donneur - style amélioré */}
         <div className="other-products-section">
           <h2 className="other-products-title">Autres objets de ce donneur</h2>
-          <button 
-            className="see-all-products-button" 
+          <button
+            className="see-all-products-button"
             onClick={() => navigate(`/utilisateur/${product.user.id}`)}
           >
             <span>Voir tous les objets de {product.user.name}</span>

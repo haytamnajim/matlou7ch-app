@@ -12,15 +12,7 @@ function Home() {
             <span className="highlight-word">La première</span> plateforme marocaine où tout se donne <span className="highlight-word">gratuitement 100%</span> !
           </div>
           <div className="banner-image-container">
-            <img
-              src="/image.png"
-              alt="Image principale"
-              className="banner-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/400x300?text=Image';
-              }}
-            />
+            {/* Image supprimée - Conteneur vide */}
           </div>
         </div>
       </section>
@@ -39,15 +31,7 @@ function Home() {
           ].map((cat, index) => (
             <div className="category-card" key={index}>
               <div className="category-image-container">
-                <img 
-                  src={cat.image} 
-                  alt={cat.name}
-                  className="category-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    // e.target.src = 'https://via.placeholder.com/100x100?text=' + cat.name;
-                  }}
-                />
+                <div className="category-image" style={{ backgroundColor: '#e0e0e0' }}></div>
               </div>
               <div className="category-name">{cat.name}</div>
             </div>
@@ -65,23 +49,15 @@ function Home() {
           <div className="product-card">
             <Link to="/produit/1" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#FF9800"}}>A</div>
-                <Link 
-                  to="/profil/ayoub" 
+                <div className="product-avatar" style={{ backgroundColor: "#FF9800" }}>A</div>
+                <Link
+                  to="/profil/ayoub"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Ayoub
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3"
-                  alt="Console de jeux PS5" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Console de jeux PS5</h3>
@@ -90,27 +66,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/2" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#795548"}}>Y</div>
-                <Link 
-                  to="/profil/youssef" 
+                <div className="product-avatar" style={{ backgroundColor: "#795548" }}>Y</div>
+                <Link
+                  to="/profil/youssef"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Youssef
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32"
-                  alt="Appareil photo Canon" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Appareil photo Canon</h3>
@@ -119,27 +87,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/3" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#CDDC39"}}>B</div>
-                <Link 
-                  to="/profil/bilal" 
+                <div className="product-avatar" style={{ backgroundColor: "#CDDC39" }}>B</div>
+                <Link
+                  to="/profil/bilal"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Bilal
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
-                  alt="Ordinateur portable HP" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Ordinateur portable HP</h3>
@@ -148,27 +108,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/4" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#FF5722"}}>R</div>
-                <Link 
-                  to="/profil/rachid" 
+                <div className="product-avatar" style={{ backgroundColor: "#FF5722" }}>R</div>
+                <Link
+                  to="/profil/rachid"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Rachid
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1550291652-6ea9114a47b1"
-                  alt="Guitare acoustique" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Guitare acoustique</h3>
@@ -191,22 +143,14 @@ function Home() {
             <Link to="/produit/5" className="product-link">
               <div className="product-image-container">
                 <div className="product-avatar">A</div>
-                <Link 
-                  to="/profil/ayoub" 
+                <Link
+                  to="/profil/ayoub"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Ayoub
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea"
-                  alt="Veste rouge tendance" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Veste rouge tendance</h3>
@@ -215,27 +159,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/6" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#4CAF50"}}>S</div>
-                <Link 
-                  to="/profil/sara" 
+                <div className="product-avatar" style={{ backgroundColor: "#4CAF50" }}>S</div>
+                <Link
+                  to="/profil/sara"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Sara
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                  alt="Chaussures de sport Nike" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Chaussures de sport Nike</h3>
@@ -244,27 +180,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/7" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#E91E63"}}>F</div>
-                <Link 
-                  to="/profil/fatima" 
+                <div className="product-avatar" style={{ backgroundColor: "#E91E63" }}>F</div>
+                <Link
+                  to="/profil/fatima"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Fatima
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956"
-                  alt="Robe de soirée élégante" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Robe de soirée élégante</h3>
@@ -273,27 +201,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/8" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#673AB7"}}>I</div>
-                <Link 
-                  to="/profil/imane" 
+                <div className="product-avatar" style={{ backgroundColor: "#673AB7" }}>I</div>
+                <Link
+                  to="/profil/imane"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Imane
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1551028719-00167b16eac5"
-                  alt="Manteau d'hiver pour femme" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Manteau d'hiver pour femme</h3>
@@ -315,23 +235,15 @@ function Home() {
           <div className="product-card">
             <Link to="/produit/9" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#9C27B0"}}>M</div>
-                <Link 
-                  to="/profil/mohammed" 
+                <div className="product-avatar" style={{ backgroundColor: "#9C27B0" }}>M</div>
+                <Link
+                  to="/profil/mohammed"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Mohammed
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc"
-                  alt="Table basse en bois" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Table basse en bois</h3>
@@ -340,27 +252,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/10" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#607D8B"}}>Z</div>
-                <Link 
-                  to="/profil/zineb" 
+                <div className="product-avatar" style={{ backgroundColor: "#607D8B" }}>Z</div>
+                <Link
+                  to="/profil/zineb"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Zineb
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1463320726281-696a485928c7"
-                  alt="Lot de plantes d'intérieur" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Lot de plantes d'intérieur</h3>
@@ -369,27 +273,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/11" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#00BCD4"}}>J</div>
-                <Link 
-                  to="/profil/jamila" 
+                <div className="product-avatar" style={{ backgroundColor: "#00BCD4" }}>J</div>
+                <Link
+                  to="/profil/jamila"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Jamila
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1551376347-075b0121a65b"
-                  alt="Tapis berbère authentique" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Tapis berbère authentique</h3>
@@ -398,27 +294,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/12" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#3F51B5"}}>H</div>
-                <Link 
-                  to="/profil/hassan" 
+                <div className="product-avatar" style={{ backgroundColor: "#3F51B5" }}>H</div>
+                <Link
+                  to="/profil/hassan"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Hassan
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c"
-                  alt="Lampe design moderne" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Lampe design moderne</h3>
@@ -440,23 +328,15 @@ function Home() {
           <div className="product-card">
             <Link to="/produit/13" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#2196F3"}}>L</div>
-                <Link 
-                  to="/profil/laila" 
+                <div className="product-avatar" style={{ backgroundColor: "#2196F3" }}>L</div>
+                <Link
+                  to="/profil/laila"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Laila
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1584917865442-de89df76afd3"
-                  alt="Sac à main cuir véritable" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Sac à main cuir véritable</h3>
@@ -465,27 +345,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/14" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#8BC34A"}}>O</div>
-                <Link 
-                  to="/profil/omar" 
+                <div className="product-avatar" style={{ backgroundColor: "#8BC34A" }}>O</div>
+                <Link
+                  to="/profil/omar"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Omar
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3"
-                  alt="Montre homme automatique" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Montre homme automatique</h3>
@@ -494,27 +366,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/15" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#FF4081"}}>D</div>
-                <Link 
-                  to="/profil/dounia" 
+                <div className="product-avatar" style={{ backgroundColor: "#FF4081" }}>D</div>
+                <Link
+                  to="/profil/dounia"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Dounia
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1513104890138-7c749655a031"
-                  alt="Bijoux en argent fait main" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Bijoux en argent fait main</h3>
@@ -523,27 +387,19 @@ function Home() {
               </div>
             </Link>
           </div>
-          
+
           <div className="product-card">
             <Link to="/produit/16" className="product-link">
               <div className="product-image-container">
-                <div className="product-avatar" style={{backgroundColor: "#009688"}}>K</div>
-                <Link 
-                  to="/profil/karim" 
+                <div className="product-avatar" style={{ backgroundColor: "#009688" }}>K</div>
+                <Link
+                  to="/profil/karim"
                   className="product-user-name"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Karim
                 </Link>
-                <img 
-                  src="https://images.unsplash.com/photo-1507143550189-6a196cb93314"
-                  alt="Lunettes de soleil Ray-Ban" 
-                  className="product-image"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = 'https://via.placeholder.com/200x200';
-                  }}
-                />
+                {/* Image supprimée */}
               </div>
               <div className="product-info">
                 <h3 className="product-title">Lunettes de soleil Ray-Ban</h3>

@@ -8,7 +8,7 @@ function EditProduct() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // États du formulaire
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
@@ -17,25 +17,25 @@ function EditProduct() {
   const [location, setLocation] = useState('');
   const [image, setImage] = useState(null);
   const [currentImage, setCurrentImage] = useState('');
-  
+
   // Catégories disponibles
   const categories = [
-    'Ameublement', 
-    'Électronique', 
-    'Vêtements', 
-    'Livres', 
-    'Jouets', 
-    'Décoration', 
-    'Sports', 
+    'Ameublement',
+    'Électronique',
+    'Vêtements',
+    'Livres',
+    'Jouets',
+    'Décoration',
+    'Sports',
     'Multimédia'
   ];
-  
+
   // États disponibles
   const conditions = [
-    'comme neuf', 
-    'très bon état', 
-    'bon état', 
-    'état moyen', 
+    'comme neuf',
+    'très bon état',
+    'bon état',
+    'état moyen',
     'à bricoler'
   ];
 
@@ -55,7 +55,7 @@ function EditProduct() {
           location: "Casablanca",
           image: "/images/table-enfant.jpg"
         };
-        
+
         // Mettre à jour les états avec les données du produit
         setTitle(mockProduct.title);
         setCategory(mockProduct.category);
@@ -63,7 +63,7 @@ function EditProduct() {
         setDescription(mockProduct.description);
         setLocation(mockProduct.location);
         setCurrentImage(mockProduct.image);
-        
+
         setLoading(false);
       } catch (err) {
         setError("Une erreur est survenue lors du chargement des données du produit");
@@ -75,7 +75,7 @@ function EditProduct() {
   // Gérer la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Créer un objet FormData pour gérer l'upload d'image
     const formData = new FormData();
     formData.append('title', title);
@@ -86,7 +86,7 @@ function EditProduct() {
     if (image) {
       formData.append('image', image);
     }
-    
+
     // Simuler la mise à jour du produit
     // Dans une application réelle, vous feriez un appel API ici
     console.log("Données du produit à mettre à jour:", {
@@ -97,7 +97,7 @@ function EditProduct() {
       location,
       image: image ? 'Nouvelle image' : 'Image inchangée'
     });
-    
+
     // Rediriger vers la page du produit après la mise à jour
     alert("Produit mis à jour avec succès!");
     navigate(`/produit/${productId}`);
@@ -138,7 +138,7 @@ function EditProduct() {
           </Link>
           <h1 className="edit-product-title">Modifier l'annonce</h1>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="edit-product-form">
           <div className="form-group">
             <label htmlFor="title">Titre de l'annonce</label>
@@ -151,7 +151,7 @@ function EditProduct() {
               maxLength={100}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="category">Catégorie</label>
             <select
@@ -166,7 +166,7 @@ function EditProduct() {
               ))}
             </select>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="condition">État</label>
             <select
@@ -181,7 +181,7 @@ function EditProduct() {
               ))}
             </select>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea
@@ -192,7 +192,7 @@ function EditProduct() {
               maxLength={1000}
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="location">Lieu</label>
             <input
@@ -203,21 +203,13 @@ function EditProduct() {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label>Photo du produit</label>
             <div className="image-upload-container">
               {currentImage && (
                 <div className="current-image-preview">
-                  <img 
-                    src={currentImage} 
-                    alt="Aperçu du produit" 
-                    className="product-image-preview"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = `https://via.placeholder.com/300x200?text=${encodeURIComponent(title)}`;
-                    }}
-                  />
+                  <div className="product-image-preview-placeholder"></div>
                 </div>
               )}
               <div className="image-upload-button">
@@ -234,7 +226,7 @@ function EditProduct() {
               </div>
             </div>
           </div>
-          
+
           <div className="form-actions">
             <button type="button" className="cancel-button" onClick={() => navigate(`/produit/${productId}`)}>
               Annuler

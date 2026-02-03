@@ -27,22 +27,22 @@ function MesAnnonces() {
   return (
     <div className="mes-annonces-container">
       <h1 className="mes-annonces-title">Mes annonces</h1>
-      
+
       <div className="mes-annonces-tabs">
-        <button 
+        <button
           className={`tab-button ${activeTab === 'en-cours' ? 'active' : ''}`}
           onClick={() => setActiveTab('en-cours')}
         >
           En cours
         </button>
-        <button 
+        <button
           className={`tab-button ${activeTab === 'termines' ? 'active' : ''}`}
           onClick={() => setActiveTab('termines')}
         >
           Terminés
         </button>
       </div>
-      
+
       <div className="annonces-content">
         {loading ? (
           <div className="loading">Chargement...</div>
@@ -51,14 +51,7 @@ function MesAnnonces() {
             {filteredAds.map(ad => (
               <div key={ad.id} className="annonce-card">
                 <div className="annonce-image">
-                  <img 
-                    src={ad.photos && ad.photos.length > 0 ? ad.photos[0] : '/placeholder-image.jpg'} 
-                    alt={ad.title}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = 'https://via.placeholder.com/300x200?text=Image+non+disponible';
-                    }}
-                  />
+                  <div className="annonce-image-placeholder"></div>
                 </div>
                 <div className="annonce-details">
                   <h3 className="annonce-title">{ad.title}</h3>
@@ -76,7 +69,7 @@ function MesAnnonces() {
                   <Link to={`/produit/${ad.id}`} className="view-button">
                     Voir l'annonce
                   </Link>
-                  <button 
+                  <button
                     className="delete-button"
                     onClick={() => {
                       // Supprimer l'annonce
@@ -95,8 +88,8 @@ function MesAnnonces() {
           <div className="empty-state">
             <div className="annonce-icon-container">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ccc" width="80px" height="80px">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"/>
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z" />
               </svg>
             </div>
             <h2 className="empty-title">Vous n'avez aucune annonce en ligne pour le moment</h2>

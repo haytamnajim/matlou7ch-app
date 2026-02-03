@@ -21,7 +21,7 @@ function Listings() {
       // Dans une application réelle, vous feriez un appel API ici
       const categories = ['Mobilier', 'Électronique', 'Vêtements', 'Livres', 'Décoration', 'Jouets'];
       const statuses = ['active', 'pending', 'reported'];
-      
+
       const mockListings = Array.from({ length: 50 }, (_, i) => ({
         id: i + 1,
         title: `Annonce ${i + 1}`,
@@ -29,11 +29,11 @@ function Listings() {
         status: statuses[Math.floor(Math.random() * statuses.length)],
         user: `Utilisateur ${Math.floor(Math.random() * 20) + 1}`,
         date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)),
-        image: `https://picsum.photos/id/${Math.floor(Math.random() * 100)}/300/200`,
+        image: '',
         description: `Description détaillée de l'annonce ${i + 1}. Cet objet est en bon état et disponible immédiatement.`,
         city: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)]
       }));
-      
+
       setListings(mockListings);
       setLoading(false);
     }, 1000);
@@ -48,19 +48,19 @@ function Listings() {
   };
 
   const handleEditListing = (listing) => {
-    setSelectedListing({...listing});
+    setSelectedListing({ ...listing });
     setShowEditModal(true);
   };
 
   const handleDeleteListing = (listingId) => {
     // Confirmer la suppression
     const listingToDelete = listings.find(listing => listing.id === listingId);
-    
+
     if (window.confirm(`Êtes-vous sûr de vouloir supprimer l'annonce "${listingToDelete.title}" ?`)) {
       // Supprimer l'annonce
       const updatedListings = listings.filter(listing => listing.id !== listingId);
       setListings(updatedListings);
-      
+
       // Afficher un message de confirmation
       alert(`L'annonce "${listingToDelete.title}" a été supprimée avec succès.`);
     }
@@ -69,7 +69,7 @@ function Listings() {
   const handleApproveListing = (listingId) => {
     // Confirmer l'approbation
     const listingToApprove = listings.find(listing => listing.id === listingId);
-    
+
     if (window.confirm(`Êtes-vous sûr de vouloir approuver l'annonce "${listingToApprove.title}" ?`)) {
       // Mettre à jour le statut de l'annonce
       const updatedListings = listings.map(listing => {
@@ -81,9 +81,9 @@ function Listings() {
         }
         return listing;
       });
-      
+
       setListings(updatedListings);
-      
+
       // Afficher un message de confirmation
       alert(`L'annonce "${listingToApprove.title}" a été approuvée avec succès.`);
     }
@@ -91,7 +91,7 @@ function Listings() {
 
   const handleSaveEdit = () => {
     if (!selectedListing) return;
-    
+
     // Mettre à jour l'annonce dans la liste
     const updatedListings = listings.map(listing => {
       if (listing.id === selectedListing.id) {
@@ -99,7 +99,7 @@ function Listings() {
       }
       return listing;
     });
-    
+
     setListings(updatedListings);
     setShowEditModal(false);
     alert(`L'annonce "${selectedListing.title}" a été mise à jour avec succès.`);
@@ -107,11 +107,11 @@ function Listings() {
 
   // Filtrer les annonces
   const filteredListings = listings.filter(listing => {
-    const matchesSearch = listing.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          listing.user.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      listing.user.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || listing.status === statusFilter;
     const matchesCategory = categoryFilter === 'all' || listing.category === categoryFilter;
-    
+
     return matchesSearch && matchesStatus && matchesCategory;
   });
 
@@ -145,7 +145,7 @@ function Listings() {
   };
 
   const getStatusLabel = (status) => {
-    switch(status) {
+    switch (status) {
       case 'active': return 'Active';
       case 'pending': return 'En attente';
       case 'reported': return 'Signalée';
@@ -156,7 +156,7 @@ function Listings() {
   // Composant Modal pour voir les détails d'une annonce
   const ViewListingModal = () => {
     if (!selectedListing) return null;
-    
+
     return (
       <div className="admin-modal-overlay" onClick={() => setShowViewModal(false)}>
         <div className="admin-modal" onClick={e => e.stopPropagation()}>
@@ -166,21 +166,14 @@ function Listings() {
           </div>
           <div className="admin-modal-body">
             <div className="listing-detail-image">
-              <img 
-                src={selectedListing.image} 
-                alt={selectedListing.title}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = 'https://via.placeholder.com/300x200?text=Image+non+disponible';
-                }}
-              />
+              <div className="listing-detail-image-placeholder"></div>
               <span className={`listing-status ${selectedListing.status}`}>
                 {getStatusLabel(selectedListing.status)}
               </span>
             </div>
-            
+
             <h3 className="listing-detail-title">{selectedListing.title}</h3>
-            
+
             <div className="listing-detail-info">
               <div className="detail-item">
                 <span className="detail-label">Catégorie:</span>
@@ -199,21 +192,21 @@ function Listings() {
                 <span className="detail-value">{selectedListing.city}</span>
               </div>
             </div>
-            
+
             <div className="listing-detail-description">
               <h4>Description</h4>
               <p>{selectedListing.description}</p>
             </div>
           </div>
           <div className="admin-modal-footer">
-            <button 
-              className="admin-btn secondary" 
+            <button
+              className="admin-btn secondary"
               onClick={() => setShowViewModal(false)}
             >
               Fermer
             </button>
-            <button 
-              className="admin-btn primary" 
+            <button
+              className="admin-btn primary"
               onClick={() => {
                 setShowViewModal(false);
                 handleEditListing(selectedListing);
@@ -222,8 +215,8 @@ function Listings() {
               Modifier
             </button>
             {selectedListing.status === 'pending' && (
-              <button 
-                className="admin-btn success" 
+              <button
+                className="admin-btn success"
                 onClick={() => {
                   setShowViewModal(false);
                   handleApproveListing(selectedListing.id);
@@ -232,8 +225,8 @@ function Listings() {
                 Approuver
               </button>
             )}
-            <button 
-              className="admin-btn danger" 
+            <button
+              className="admin-btn danger"
               onClick={() => {
                 setShowViewModal(false);
                 handleDeleteListing(selectedListing.id);
@@ -250,7 +243,7 @@ function Listings() {
   // Composant Modal pour modifier une annonce
   const EditListingModal = () => {
     if (!selectedListing) return null;
-    
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setSelectedListing(prev => ({
@@ -258,7 +251,7 @@ function Listings() {
         [name]: value
       }));
     };
-    
+
     return (
       <div className="admin-modal-overlay" onClick={() => setShowEditModal(false)}>
         <div className="admin-modal" onClick={e => e.stopPropagation()}>
@@ -328,14 +321,14 @@ function Listings() {
             </div>
           </div>
           <div className="admin-modal-footer">
-            <button 
-              className="admin-btn secondary" 
+            <button
+              className="admin-btn secondary"
               onClick={() => setShowEditModal(false)}
             >
               Annuler
             </button>
-            <button 
-              className="admin-btn primary" 
+            <button
+              className="admin-btn primary"
               onClick={handleSaveEdit}
             >
               Enregistrer
@@ -361,7 +354,7 @@ function Listings() {
     <AdminLayout title="Annonces">
       <div className="users-header">
         <h2><FaBoxOpen /> Gestion des annonces</h2>
-        
+
         <form onSubmit={handleSearch} className="users-search">
           <input
             type="text"
@@ -372,9 +365,9 @@ function Listings() {
           <button type="submit"><FaSearch /></button>
         </form>
       </div>
-      
+
       <div className="users-filters">
-        <select 
+        <select
           className="filter-select"
           value={statusFilter}
           onChange={handleStatusChange}
@@ -384,8 +377,8 @@ function Listings() {
           <option value="pending">En attente</option>
           <option value="reported">Signalées</option>
         </select>
-        
-        <select 
+
+        <select
           className="filter-select"
           value={categoryFilter}
           onChange={handleCategoryChange}
@@ -399,52 +392,45 @@ function Listings() {
           <option value="Jouets">Jouets</option>
         </select>
       </div>
-      
+
       <div className="listings-grid">
         {currentListings.map(listing => (
           <div key={listing.id} className="listing-card">
             <div className="listing-image">
-              <img 
-                src={listing.image} 
-                alt={listing.title}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = 'https://via.placeholder.com/300x200?text=Image+non+disponible';
-                }}
-              />
+              <div className="listing-image-placeholder"></div>
               <span className={`listing-status ${listing.status}`}>
                 {getStatusLabel(listing.status)}
               </span>
             </div>
-            
+
             <div className="listing-content">
               <h3 className="listing-title">{listing.title}</h3>
-              
+
               <div className="listing-info">
                 <span>{listing.category}</span>
                 <span>{formatDate(listing.date)}</span>
               </div>
-              
+
               <div className="listing-info">
                 <span>Par: {listing.user}</span>
               </div>
-              
+
               <div className="listing-actions">
-                <button 
+                <button
                   className="listing-btn view"
                   onClick={() => handleViewListing(listing)}
                 >
                   <FaEye /> Voir
                 </button>
                 {listing.status === 'pending' && (
-                  <button 
+                  <button
                     className="listing-btn view"
                     onClick={() => handleApproveListing(listing.id)}
                   >
                     <FaCheck /> Approuver
                   </button>
                 )}
-                <button 
+                <button
                   className="listing-btn delete"
                   onClick={() => handleDeleteListing(listing.id)}
                 >
@@ -455,24 +441,24 @@ function Listings() {
           </div>
         ))}
       </div>
-      
+
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="pagination">
-          <button 
+          <button
             className="pagination-btn"
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
             Précédent
           </button>
-          
+
           {Array.from({ length: totalPages }, (_, i) => i + 1)
             .filter(page => {
               // Afficher seulement les pages proches de la page actuelle
-              return page === 1 || 
-                     page === totalPages || 
-                     Math.abs(page - currentPage) <= 1;
+              return page === 1 ||
+                page === totalPages ||
+                Math.abs(page - currentPage) <= 1;
             })
             .map((page, index, array) => {
               // Ajouter des points de suspension si nécessaire
@@ -480,7 +466,7 @@ function Listings() {
                 return (
                   <React.Fragment key={`ellipsis-${page}`}>
                     <span className="pagination-ellipsis">...</span>
-                    <button 
+                    <button
                       className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
                       onClick={() => setCurrentPage(page)}
                     >
@@ -489,9 +475,9 @@ function Listings() {
                   </React.Fragment>
                 );
               }
-              
+
               return (
-                <button 
+                <button
                   key={page}
                   className={`pagination-btn ${currentPage === page ? 'active' : ''}`}
                   onClick={() => setCurrentPage(page)}
@@ -500,8 +486,8 @@ function Listings() {
                 </button>
               );
             })}
-          
-          <button 
+
+          <button
             className="pagination-btn"
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
@@ -510,7 +496,7 @@ function Listings() {
           </button>
         </div>
       )}
-      
+
       {/* Modals */}
       {showViewModal && <ViewListingModal />}
       {showEditModal && <EditListingModal />}

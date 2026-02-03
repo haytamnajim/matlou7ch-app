@@ -15,14 +15,14 @@ function Catalogue() {
   const [favorites, setFavorites] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSaved, setIsSaved] = useState(false);
-  
+
   const itemsPerPage = 12;
 
   // Vérifier si la recherche actuelle est sauvegardée
   useEffect(() => {
     const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
     const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
-    
+
     if (savedSearches.includes(currentSearch)) {
       setIsSaved(true);
     } else {
@@ -34,10 +34,10 @@ function Catalogue() {
   const toggleSaveSearch = () => {
     const newSavedState = !isSaved;
     setIsSaved(newSavedState);
-    
+
     const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
     const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
-    
+
     if (newSavedState) {
       // Ajouter la recherche
       if (!savedSearches.includes(currentSearch)) {
@@ -50,14 +50,14 @@ function Catalogue() {
         savedSearches.splice(index, 1);
       }
     }
-    
+
     localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
   };
 
   // Filtrer les résultats en fonction des critères de recherche
   const filterResults = () => {
     setLoading(true);
-    
+
     // Simuler un appel API avec un délai
     setTimeout(() => {
       // Ici, vous feriez normalement un appel à votre API
@@ -68,13 +68,13 @@ function Catalogue() {
         location: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)],
         category: ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'][Math.floor(Math.random() * 5)],
         time: `Il y a ${Math.floor(Math.random() * 24)} heures`,
-        image: `https://picsum.photos/300/200?random=${i}`,
+        image: '',
         avatar: ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'][Math.floor(Math.random() * 5)],
         user: {
           name: ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'][Math.floor(Math.random() * 5)]
         }
       }));
-      
+
       // Filtrer les résultats en fonction des critères de recherche
       const filteredItems = dummyItems.filter(item => {
         const matchesLocation = !searchLocation || item.location.toLowerCase().includes(searchLocation.toLowerCase());
@@ -82,7 +82,7 @@ function Catalogue() {
         const matchesCategory = !searchCategory || item.category.toLowerCase().includes(searchCategory.toLowerCase());
         return matchesLocation && matchesQuery && matchesCategory;
       });
-      
+
       setResults(filteredItems);
       setLoading(false);
       setCurrentPage(1);
@@ -97,10 +97,10 @@ function Catalogue() {
   // Fonction pour ajouter/supprimer des favoris
   const toggleFavorite = (itemId, e) => {
     if (e) e.preventDefault(); // Vérifier si e existe avant d'appeler preventDefault
-    
+
     if (!user) {
       // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-      navigate('/connexion', { 
+      navigate('/connexion', {
         state: { from: { pathname: '/catalogue' } }
       });
     } else {
@@ -127,14 +127,14 @@ function Catalogue() {
   // Après le calcul de currentItems, ajoutez cette fonction pour grouper par catégorie
   const groupItemsByCategory = (items) => {
     const grouped = {};
-    
+
     items.forEach(item => {
       if (!grouped[item.category]) {
         grouped[item.category] = [];
       }
       grouped[item.category].push(item);
     });
-    
+
     return grouped;
   };
 
@@ -175,14 +175,14 @@ function Catalogue() {
         <div className="search-results-count">
           {results.length} résultats
         </div>
-        <button 
-          className={`save-search-button ${isSaved ? 'saved' : ''}`} 
+        <button
+          className={`save-search-button ${isSaved ? 'saved' : ''}`}
           onClick={toggleSaveSearch}
         >
           {isSaved ? 'Recherche sauvegardée' : 'Sauvegarder ma recherche'}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
-            <path d="M0 0h24v24H0z" fill="none"/>
-            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
           </svg>
         </button>
       </div>
@@ -195,8 +195,8 @@ function Catalogue() {
       ) : results.length === 0 ? (
         <div className="no-results">
           <svg className="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#aaa">
-            <path d="M0 0h24v24H0V0z" fill="none"/>
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
           </svg>
           <p>Aucun résultat ne correspond à votre recherche.</p>
           <button onClick={() => {
@@ -225,20 +225,21 @@ function Catalogue() {
                           {item.user.name.charAt(0)}
                         </div>
                         <div className="product-user-name">{item.user.name}</div>
-                        <img src={item.image} alt={item.title} className="product-image" />
-                        <button 
-                          className="favorite-button" 
+                        {item.image && <img src={item.image} alt={item.title} className="product-image" />}
+                        {!item.image && <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>}
+                        <button
+                          className="favorite-button"
                           onClick={(e) => {
                             e.preventDefault();
                             toggleFavorite(item.id, e);  // Passer l'événement e à la fonction
                           }}
                         >
-                          <svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            viewBox="0 0 24 24" 
-                            fill={favorites.includes(item.id) ? "#FF5733" : "none"} 
-                            stroke={favorites.includes(item.id) ? "#FF5733" : "white"} 
-                            width="24px" 
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill={favorites.includes(item.id) ? "#FF5733" : "none"}
+                            stroke={favorites.includes(item.id) ? "#FF5733" : "white"}
+                            width="24px"
                             height="24px"
                           >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -256,59 +257,59 @@ function Catalogue() {
               </div>
             </section>
           ))}
-          
+
           {totalPages > 1 && (
             <div className="pagination">
-              <button 
-                className="pagination-button" 
-                onClick={() => setCurrentPage(1)} 
+              <button
+                className="pagination-button"
+                onClick={() => setCurrentPage(1)}
                 disabled={currentPage === 1}
               >
                 «
               </button>
-              <button 
-                className="pagination-button" 
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+              <button
+                className="pagination-button"
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
               >
                 ‹
               </button>
-              
+
               {[...Array(totalPages)].map((_, i) => {
                 // Afficher seulement quelques pages autour de la page actuelle
                 if (
-                  i === 0 || 
-                  i === totalPages - 1 || 
+                  i === 0 ||
+                  i === totalPages - 1 ||
                   (i >= currentPage - 2 && i <= currentPage + 2)
                 ) {
                   return (
-                    <button 
-                      key={i} 
-                      className={`pagination-button ${currentPage === i + 1 ? 'active' : ''}`} 
+                    <button
+                      key={i}
+                      className={`pagination-button ${currentPage === i + 1 ? 'active' : ''}`}
                       onClick={() => setCurrentPage(i + 1)}
                     >
                       {i + 1}
                     </button>
                   );
                 } else if (
-                  i === currentPage - 3 || 
+                  i === currentPage - 3 ||
                   i === currentPage + 3
                 ) {
                   return <span key={i} className="pagination-ellipsis">...</span>;
                 }
                 return null;
               })}
-              
-              <button 
-                className="pagination-button" 
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} 
+
+              <button
+                className="pagination-button"
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
               >
                 ›
               </button>
-              <button 
-                className="pagination-button" 
-                onClick={() => setCurrentPage(totalPages)} 
+              <button
+                className="pagination-button"
+                onClick={() => setCurrentPage(totalPages)}
                 disabled={currentPage === totalPages}
               >
                 »
