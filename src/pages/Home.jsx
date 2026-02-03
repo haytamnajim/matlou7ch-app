@@ -2,6 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
+// Constantes extraites pour éviter les recréations à chaque render
+const CATEGORIES = [
+  { id: 'meubles', image: '/images/categories/meubles.jpg', name: 'Meubles' },
+  { id: 'vetement', image: '/images/categories/vetement.jpg', name: 'Vêtements' },
+  { id: 'electronique', image: '/images/categories/electronique.jpg', name: 'Électronique' },
+  { id: 'jouet', image: '/images/categories/jouet.jpg', name: 'Jouets' },
+  { id: 'livre', image: '/images/categories/livre.jpg', name: 'Livres' },
+  { id: 'maison', image: '/images/categories/maison.jpg', name: 'Maison' },
+];
+
+const CATEGORY_IMAGE_STYLE = { backgroundColor: '#e0e0e0' };
+
 function Home() {
   return (
     <div className="home-page">
@@ -21,17 +33,10 @@ function Home() {
       <section className="categories-section">
         <h2 className="section-title">Catégories populaires</h2>
         <div className="categories-grid">
-          {[
-            { image: '/images/categories/meubles.jpg', name: 'Meubles' },
-            { image: '/images/categories/vetement.jpg', name: 'Vêtements' },
-            { image: '/images/categories/electronique.jpg', name: 'Électronique' },
-            { image: '/images/categories/jouet.jpg', name: 'Jouets' },
-            { image: '/images/categories/livre.jpg', name: 'Livres' },
-            { image: '/images/categories/maison.jpg', name: 'Maison' },
-          ].map((cat, index) => (
-            <div className="category-card" key={index}>
+          {CATEGORIES.map((cat) => (
+            <div className="category-card" key={cat.id}>
               <div className="category-image-container">
-                <div className="category-image" style={{ backgroundColor: '#e0e0e0' }}></div>
+                <div className="category-image" style={CATEGORY_IMAGE_STYLE}></div>
               </div>
               <div className="category-name">{cat.name}</div>
             </div>

@@ -54,8 +54,14 @@ function Catalogue() {
     localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
   };
 
+  // Constantes pour la génération de données fictives
+  const LOCATIONS = ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'];
+  const CATEGORIES_LIST = ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'];
+  const AVATAR_COLORS = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'];
+  const USER_NAMES = ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'];
+
   // Filtrer les résultats en fonction des critères de recherche
-  const filterResults = () => {
+  const filterResults = React.useCallback(() => {
     setLoading(true);
 
     // Simuler un appel API avec un délai
@@ -65,13 +71,13 @@ function Catalogue() {
       const dummyItems = Array.from({ length: 50 }, (_, i) => ({
         id: i + 1,
         title: `Article ${i + 1}`,
-        location: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)],
-        category: ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'][Math.floor(Math.random() * 5)],
+        location: LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)],
+        category: CATEGORIES_LIST[Math.floor(Math.random() * CATEGORIES_LIST.length)],
         time: `Il y a ${Math.floor(Math.random() * 24)} heures`,
         image: '',
-        avatar: ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'][Math.floor(Math.random() * 5)],
+        avatar: AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
         user: {
-          name: ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'][Math.floor(Math.random() * 5)]
+          name: USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)]
         }
       }));
 
@@ -87,7 +93,7 @@ function Catalogue() {
       setLoading(false);
       setCurrentPage(1);
     }, 500); // Délai de 500ms pour simuler le chargement
-  };
+  }, [searchLocation, searchQuery, searchCategory]);
 
   // Charger les résultats au chargement initial et lors des changements de filtres
   useEffect(() => {
@@ -95,7 +101,7 @@ function Catalogue() {
   }, []); // Exécuter uniquement au montage du composant
 
   // Fonction pour ajouter/supprimer des favoris
-  const toggleFavorite = (itemId, e) => {
+  const toggleFavorite = React.useCallback((itemId, e) => {
     if (e) e.preventDefault(); // Vérifier si e existe avant d'appeler preventDefault
 
     if (!user) {
@@ -111,7 +117,7 @@ function Catalogue() {
         setFavorites([...favorites, itemId]);
       }
     }
-  };
+  }, [user, navigate, favorites]);
 
   // Fonction pour gérer la recherche
   const handleSearch = () => {
