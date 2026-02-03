@@ -4,40 +4,43 @@ import { useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
-import Home from './pages/Home';
-import Favoris from './pages/Favoris';
-import Messages from './pages/Messages';
-import Profile from './pages/Profile';
-import MesAnnonces from './pages/MesAnnonces';
-import PublicProfile from './pages/PublicProfile';
-import EditProfile from './pages/EditProfile';
-import Settings from './pages/Settings';
-import NotificationSettings from './pages/NotificationSettings';
-import EmailSettings from './pages/EmailSettings';
-import PasswordSettings from './pages/PasswordSettings';
-import BlockedUsers from './pages/BlockedUsers';
-import DeleteAccount from './pages/DeleteAccount';
-import Catalogue from './pages/Catalogue';
-import ProductDetail from './pages/ProductDetail';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import NotreADN from './pages/NotreADN';
-import CGU from './pages/CGU';
-import FAQ from './pages/FAQ';
-import PostAd from './components/PostAd';
-import UserProducts from './pages/UserProducts';
-import UserProfile from './pages/UserProfile';
-import EditProduct from './pages/EditProduct';
+import './App.css';
+
+// Pages principales
+const Home = React.lazy(() => import('./pages/Home'));
+const Favoris = React.lazy(() => import('./pages/Favoris'));
+const Messages = React.lazy(() => import('./pages/Messages'));
+const Profile = React.lazy(() => import('./pages/Profile'));
+const MesAnnonces = React.lazy(() => import('./pages/MesAnnonces'));
+const PublicProfile = React.lazy(() => import('./pages/PublicProfile'));
+const EditProfile = React.lazy(() => import('./pages/EditProfile'));
+const Settings = React.lazy(() => import('./pages/Settings'));
+const NotificationSettings = React.lazy(() => import('./pages/NotificationSettings'));
+const EmailSettings = React.lazy(() => import('./pages/EmailSettings'));
+const PasswordSettings = React.lazy(() => import('./pages/PasswordSettings'));
+const BlockedUsers = React.lazy(() => import('./pages/BlockedUsers'));
+const DeleteAccount = React.lazy(() => import('./pages/DeleteAccount'));
+const Catalogue = React.lazy(() => import('./pages/Catalogue'));
+const ProductDetail = React.lazy(() => import('./pages/ProductDetail'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
+const NotreADN = React.lazy(() => import('./pages/NotreADN'));
+const CGU = React.lazy(() => import('./pages/CGU'));
+const FAQ = React.lazy(() => import('./pages/FAQ'));
+const UserProducts = React.lazy(() => import('./pages/UserProducts'));
+const UserProfile = React.lazy(() => import('./pages/UserProfile'));
+const EditProduct = React.lazy(() => import('./pages/EditProduct'));
+
+// Composants
+const PostAd = React.lazy(() => import('./components/PostAd'));
 
 // Pages d'administration
-import AdminLogin from './pages/Admin/Login';
-import AdminDashboard from './pages/Admin/Dashboard';
-import AdminUsers from './pages/Admin/Users';
-import AdminListings from './pages/Admin/Listings';
-import AdminReports from './pages/Admin/Reports';
-
-import './App.css';
+const AdminLogin = React.lazy(() => import('./pages/Admin/Login'));
+const AdminDashboard = React.lazy(() => import('./pages/Admin/Dashboard'));
+const AdminUsers = React.lazy(() => import('./pages/Admin/Users'));
+const AdminListings = React.lazy(() => import('./pages/Admin/Listings'));
+const AdminReports = React.lazy(() => import('./pages/Admin/Reports'));
 
 // Composant pour protéger les routes qui nécessitent une authentification
 function ProtectedRoute({ children }) {
@@ -60,249 +63,251 @@ function ProtectedRoute({ children }) {
 function AdminRoute({ children }) {
   const adminToken = localStorage.getItem('adminToken');
   const location = useLocation();
-  
+
   if (!adminToken) {
     return <Navigate to="/admin/login" state={{ from: location }} replace />;
   }
-  
+
   return children;
 }
 
 function App() {
   const { currentUser } = useAuth();
-  
+
   return (
     <Router>
-      <Routes>
-        {/* Routes d'administration */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        } />
-        <Route path="/admin/users" element={
-          <AdminRoute>
-            <AdminUsers />
-          </AdminRoute>
-        } />
-        <Route path="/admin/listings" element={
-          <AdminRoute>
-            <AdminListings />
-          </AdminRoute>
-        } />
-        <Route path="/admin/reports" element={
-          <AdminRoute>
-            <AdminReports />
-          </AdminRoute>
-        } />
-        
-        {/* Routes principales du site avec Footer complet */}
-        <Route path="/" element={
-          <>
-            <Navbar />
-            <Home />
-            <Footer />
-          </>
-        } />
-        <Route path="/catalogue" element={
-          <>
-            <Navbar />
-            <Catalogue />
-            <Footer />
-          </>
-        } />
-        <Route path="/notre-adn" element={
-          <>
-            <Navbar />
-            <NotreADN />
-            <Footer />
-          </>
-        } />
+      <React.Suspense fallback={<div className="loading-screen">Chargement...</div>}>
+        <Routes>
+          {/* Routes d'administration */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          } />
+          <Route path="/admin/users" element={
+            <AdminRoute>
+              <AdminUsers />
+            </AdminRoute>
+          } />
+          <Route path="/admin/listings" element={
+            <AdminRoute>
+              <AdminListings />
+            </AdminRoute>
+          } />
+          <Route path="/admin/reports" element={
+            <AdminRoute>
+              <AdminReports />
+            </AdminRoute>
+          } />
 
-        {/* Routes avec SimpleFooter */}
-        <Route path="/connexion" element={
-          <>
-            <Navbar />
-            <Login />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/inscription" element={
-          <>
-            <Navbar />
-            <Register />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/faq" element={
-          <>
-            <Navbar />
-            <FAQ />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/contact" element={
-          <>
-            <Navbar />
-            <Contact />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/cgu" element={
-          <>
-            <Navbar />
-            <CGU />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/produit/:id" element={
-          <>
-            <Navbar />
-            <ProductDetail />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/favoris" element={
-          <>
-            <Navbar />
-            <Favoris />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/messages" element={
-          <ProtectedRoute>
+          {/* Routes principales du site avec Footer complet */}
+          <Route path="/" element={
             <>
               <Navbar />
-              <Messages />
-              <SimpleFooter />
+              <Home />
+              <Footer />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/profile" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/catalogue" element={
             <>
               <Navbar />
-              <Profile />
-              <SimpleFooter />
+              <Catalogue />
+              <Footer />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/mes-annonces" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/notre-adn" element={
             <>
               <Navbar />
-              <MesAnnonces />
-              <SimpleFooter />
+              <NotreADN />
+              <Footer />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/profil-public" element={
-          <ProtectedRoute>
+          } />
+
+          {/* Routes avec SimpleFooter */}
+          <Route path="/connexion" element={
             <>
               <Navbar />
-              <PublicProfile />
+              <Login />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/modifier-profil" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/inscription" element={
             <>
               <Navbar />
-              <EditProfile />
+              <Register />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/faq" element={
             <>
               <Navbar />
-              <Settings />
+              <FAQ />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres/notifications" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/contact" element={
             <>
               <Navbar />
-              <NotificationSettings />
+              <Contact />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres/email" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/cgu" element={
             <>
               <Navbar />
-              <EmailSettings />
+              <CGU />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres/mot-de-passe" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/produit/:id" element={
             <>
               <Navbar />
-              <PasswordSettings />
+              <ProductDetail />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres/utilisateurs-bloques" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/favoris" element={
             <>
               <Navbar />
-              <BlockedUsers />
+              <Favoris />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/parametres/supprimer-compte" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/messages" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <Messages />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <Profile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/mes-annonces" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <MesAnnonces />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/profil-public" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <PublicProfile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/modifier-profil" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <EditProfile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <Settings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/notifications" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <NotificationSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/email" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <EmailSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/mot-de-passe" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <PasswordSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/utilisateurs-bloques" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <BlockedUsers />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/supprimer-compte" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <DeleteAccount />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/post-ad" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <PostAd />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/utilisateur/:userId" element={
             <>
               <Navbar />
-              <DeleteAccount />
+              <UserProducts />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/post-ad" element={
-          <ProtectedRoute>
+          } />
+          <Route path="/profil/:userId" element={
             <>
               <Navbar />
-              <PostAd />
+              <UserProfile />
               <SimpleFooter />
             </>
-          </ProtectedRoute>
-        } />
-        <Route path="/utilisateur/:userId" element={
-          <>
-            <Navbar />
-            <UserProducts />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/profil/:userId" element={
-          <>
-            <Navbar />
-            <UserProfile />
-            <SimpleFooter />
-          </>
-        } />
-        <Route path="/modifier-produit/:productId" element={
-          <>
-            <Navbar />
-            <EditProduct />
-            <SimpleFooter />
-          </>
-        } />
-        
-        {/* Redirection par défaut */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          } />
+          <Route path="/modifier-produit/:productId" element={
+            <>
+              <Navbar />
+              <EditProduct />
+              <SimpleFooter />
+            </>
+          } />
+
+          {/* Redirection par défaut */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </React.Suspense>
     </Router>
   );
 }
