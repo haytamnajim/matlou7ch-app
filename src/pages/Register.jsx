@@ -182,16 +182,19 @@ function Register() {
 
           <div className="checkbox-section">
             <div className="checkbox-group">
-              <input
-                type="checkbox"
-                id="acceptTerms"
-                checked={acceptTerms}
-                onChange={(e) => setAcceptTerms(e.target.checked)}
-                required
-              />
-              <label htmlFor="acceptTerms">
-                J'accepte les <Link to="/cgu" className="link-highlight">Conditions Générales</Link> et la <Link to="/confidentialite" className="link-highlight">Politique de Confidentialité</Link>
-              </label>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                <input
+                  type="checkbox"
+                  id="acceptTerms"
+                  checked={acceptTerms}
+                  onChange={(e) => setAcceptTerms(e.target.checked)}
+                  required
+                  style={{ marginTop: '4px', flexShrink: 0 }}
+                />
+                <span>
+                  J'accepte les <Link to="/cgu" className="link-highlight">Conditions Générales</Link> et la <Link to="/confidentialite" className="link-highlight">Politique de Confidentialité</Link>
+                </span>
+              </div>
             </div>
 
             <div className="checkbox-group">
