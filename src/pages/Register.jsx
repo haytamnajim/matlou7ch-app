@@ -14,48 +14,76 @@ function Register() {
   const [rejectNewsletter, setRejectNewsletter] = useState(false);
   const [rejectNotifications, setRejectNotifications] = useState(false);
   const [error, setError] = useState('');
-  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+    setIsSubmitting(true);
+
     // Validation basique
     if (!pseudo || !email || !password || !city || !phone) {
       setError('Veuillez remplir tous les champs');
+      setIsSubmitting(false);
       return;
     }
-    
+
     if (pseudo.length < 2 || pseudo.length > 30) {
       setError('Le pseudo doit contenir entre 2 et 30 caractères');
+      setIsSubmitting(false);
       return;
     }
-    
-    if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères');
+
+    if (password.length < 6) { // Supabase requiert 6 char min par défaut
+      setError('Le mot de passe doit contenir au moins 6 caractères');
+      setIsSubmitting(false);
       return;
     }
-    
+
     // Validation du numéro de téléphone (format marocain)
     const phoneRegex = /^(0|\+212)[5-7][0-9]{8}$/;
     if (!phoneRegex.test(phone)) {
       setError('Veuillez entrer un numéro de téléphone valide');
+      setIsSubmitting(false);
       return;
     }
-    
+
     if (!acceptTerms) {
       setError('Vous devez accepter les conditions générales');
+      setIsSubmitting(false);
       return;
     }
-    
-    // Simulation d'inscription
+
+    // Inscription avec Supabase
     try {
-      register({ name: pseudo, email, password, phone, city });
-      navigate('/');
-    } catch (error) {
-      setError('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+      const { user, session } = await register({
+        name: pseudo,
+        email,
+        password,
+        phone,
+        city
+      });
+
+      // Si l'inscription réussit mais pas de session (email confirm required), informer l'utilisateur
+      if (user && !session) {
+        alert('Compte créé avec succès ! Veuillez vérifier votre email pour confirmer votre inscription.');
+        navigate('/connexion');
+      } else {
+        // Redirection directe
+        navigate('/');
+      }
+    } catch (err) {
+      console.error(err);
+      if (err.message.includes('User already registered')) {
+        setError('Un compte existe déjà avec cette adresse email.');
+      } else {
+        setError('Une erreur est survenue lors de l\'inscription : ' + err.message);
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -65,11 +93,11 @@ function Register() {
         <div className="back-button">
           <Link to="/connexion"><FaChevronLeft /></Link>
         </div>
-        
+
         <h1 className="register-title">Créer mon compte</h1>
-        
+
         {error && <div className="error-message">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="pseudo">
@@ -83,9 +111,9 @@ function Register() {
               placeholder="Choisissez un pseudo"
               required
             />
-            <div className="input-hint">De 2 à 30 caractères comprenant des lettres, chiffres, espaces ou tirets.</div>
+            <div className="input-hint">De 2 à 30 caractères.</div>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="email">
               <FaEnvelope style={{ marginRight: '8px' }} /> Email
@@ -99,7 +127,7 @@ function Register() {
               required
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="phone">
               <FaPhone style={{ marginRight: '8px' }} /> Téléphone
@@ -114,7 +142,7 @@ function Register() {
             />
             <div className="input-hint">Format: 06XXXXXXXX ou +212 6XXXXXXXX</div>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">
               <FaLock style={{ marginRight: '8px' }} /> Mot de passe
@@ -127,9 +155,9 @@ function Register() {
               placeholder="Créer un mot de passe"
               required
             />
-            <div className="input-hint">8 caractères min. 64 caractères max. 1 min. 1 maj. 1 chiffre</div>
+            <div className="input-hint">6 caractères minimum.</div>
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="city">
               <FaMapMarkerAlt style={{ marginRight: '8px' }} /> Ville
@@ -143,7 +171,7 @@ function Register() {
               required
             />
           </div>
-          
+
           <div className="checkbox-group">
             <input
               type="checkbox"
@@ -156,7 +184,7 @@ function Register() {
               En vous inscrivant, vous acceptez les <Link to="/cgu" className="link-highlight">CGU</Link> et la <Link to="/confidentialite" className="link-highlight">politique de confidentialité</Link>
             </label>
           </div>
-          
+
           <div className="checkbox-group">
             <input
               type="checkbox"
@@ -168,7 +196,7 @@ function Register() {
               En cochant cette case, je confirme que je ne souhaite pas recevoir de newsletter de la part de Matlou7ch
             </label>
           </div>
-          
+
           <div className="checkbox-group">
             <input
               type="checkbox"
@@ -180,9 +208,9 @@ function Register() {
               En cochant cette case, je confirme que je ne souhaite pas recevoir de notification de la part de Matlou7ch
             </label>
           </div>
-          
-          <button type="submit" className="register-button">
-            Valider
+
+          <button type="submit" className="register-button" disabled={isSubmitting}>
+            {isSubmitting ? 'Inscription...' : 'Valider'}
           </button>
         </form>
       </div>
