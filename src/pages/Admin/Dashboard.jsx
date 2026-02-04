@@ -15,6 +15,7 @@ import {
   Legend,
 } from 'chart.js';
 import AdminLayout from './AdminLayout';
+import { statsService, listingService, userService } from '../../services/dataService';
 import './Admin.css';
 
 // Enregistrer les composants Chart.js
@@ -38,6 +39,8 @@ function Dashboard() {
     reports: 0,
     newUsers: 0
   });
+  const [recentUsers, setRecentUsers] = useState([]);
+  const [recentListings, setRecentListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -64,12 +67,13 @@ function Dashboard() {
     ],
   };
 
+  const cityData = listingService.getByCity();
   const barChartData = {
-    labels: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès', 'Agadir'],
+    labels: Object.keys(cityData),
     datasets: [
       {
         label: 'Nombre d\'annonces par ville',
-        data: [4500, 3200, 2800, 2100, 1800, 1500],
+        data: Object.values(cityData),
         backgroundColor: [
           'rgba(74, 86, 226, 0.7)',
           'rgba(40, 167, 69, 0.7)',
@@ -82,12 +86,13 @@ function Dashboard() {
     ],
   };
 
+  const categoryData = listingService.getByCategory();
   const pieChartData = {
-    labels: ['Électronique', 'Meubles', 'Vêtements', 'Livres', 'Sports', 'Autres'],
+    labels: Object.keys(categoryData),
     datasets: [
       {
         label: 'Catégories d\'annonces',
-        data: [30, 22, 18, 12, 10, 8],
+        data: Object.values(categoryData),
         backgroundColor: [
           'rgba(74, 86, 226, 0.7)',
           'rgba(40, 167, 69, 0.7)',
@@ -116,18 +121,27 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    // Simuler un chargement de données
+    // Charger les données réelles depuis localStorage
     const timer = setTimeout(() => {
-      // Dans une application réelle, vous feriez un appel API ici
-      setStats({
-        users: 9876,
-        listings: 15432,
-        activeListings: 8765,
-        reports: 42,
-        newUsers: 156
-      });
+      const globalStats = statsService.getGlobalStats();
+      setStats(globalStats);
+
+      // Charger les 3 derniers utilisateurs
+      const allUsers = userService.getAll();
+      const sortedUsers = allUsers.sort((a, b) =>
+        new Date(b.registrationDate) - new Date(a.registrationDate)
+      );
+      setRecentUsers(sortedUsers.slice(0, 3));
+
+      // Charger les 3 dernières annonces
+      const allListings = listingService.getAll();
+      const sortedListings = allListings.sort((a, b) =>
+        new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setRecentListings(sortedListings.slice(0, 3));
+
       setLoading(false);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -157,7 +171,7 @@ function Dashboard() {
               <p className="stat-change positive">+{stats.newUsers} cette semaine</p>
             </div>
           </div>
-          
+
           <div className="stat-card">
             <div className="stat-icon listings">
               <FaBoxOpen />
@@ -168,7 +182,7 @@ function Dashboard() {
               <p className="stat-change positive">+243 cette semaine</p>
             </div>
           </div>
-          
+
           <div className="stat-card">
             <div className="stat-icon active">
               <FaBoxOpen />
@@ -176,10 +190,10 @@ function Dashboard() {
             <div className="stat-details">
               <h3>Annonces actives</h3>
               <p className="stat-value">{stats.activeListings.toLocaleString()}</p>
-              <p className="stat-change neutral">{Math.round(stats.activeListings/stats.listings*100)}% du total</p>
+              <p className="stat-change neutral">{Math.round(stats.activeListings / stats.listings * 100)}% du total</p>
             </div>
           </div>
-          
+
           <div className="stat-card">
             <div className="stat-icon reports">
               <FaFlag />
@@ -191,7 +205,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        
+
         {/* Section des graphiques */}
         <div className="charts-container">
           <div className="chart-panel">
@@ -200,15 +214,15 @@ function Dashboard() {
               <Line data={lineChartData} options={chartOptions} />
             </div>
           </div>
-          
+
           <div className="charts-row">
             <div className="chart-panel half">
               <h2>Annonces par ville</h2>
               <div className="chart-wrapper">
-                <Bar data={barChartData} options={{...chartOptions, indexAxis: 'y'}} />
+                <Bar data={barChartData} options={{ ...chartOptions, indexAxis: 'y' }} />
               </div>
             </div>
-            
+
             <div className="chart-panel half">
               <h2>Répartition par catégorie</h2>
               <div className="chart-wrapper">
@@ -217,7 +231,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        
+
         <div className="admin-panels">
           <div className="admin-panel recent-users">
             <h2>Nouveaux utilisateurs</h2>
@@ -231,59 +245,34 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div className="user-cell">
-                      <div className="user-avatar" style={{backgroundColor: '#FF5252'}}>S</div>
-                      <span>Sara Alaoui</span>
-                    </div>
-                  </td>
-                  <td>Il y a 2 heures</td>
-                  <td>Casablanca</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn edit">Éditer</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="user-cell">
-                      <div className="user-avatar" style={{backgroundColor: '#448AFF'}}>K</div>
-                      <span>Karim Benjelloun</span>
-                    </div>
-                  </td>
-                  <td>Il y a 5 heures</td>
-                  <td>Rabat</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn edit">Éditer</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="user-cell">
-                      <div className="user-avatar" style={{backgroundColor: '#69F0AE'}}>F</div>
-                      <span>Fatima Zahra</span>
-                    </div>
-                  </td>
-                  <td>Il y a 8 heures</td>
-                  <td>Marrakech</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn edit">Éditer</button>
-                    </div>
-                  </td>
-                </tr>
+                {recentUsers.map(user => (
+                  <tr key={user.id}>
+                    <td>
+                      <div className="user-cell">
+                        <div className="user-avatar" style={{ backgroundColor: user.avatarColor }}>{user.avatar}</div>
+                        <span>{user.name}</span>
+                      </div>
+                    </td>
+                    <td>{new Date(user.registrationDate).toLocaleString('fr-FR', {
+                      day: 'numeric',
+                      month: 'short',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}</td>
+                    <td>{user.city}</td>
+                    <td>
+                      <div className="table-actions">
+                        <button className="action-btn view" onClick={() => navigate('/admin/users')}>Voir</button>
+                        <button className="action-btn edit">Éditer</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <Link to="/admin/users" className="view-all-link">Voir tous les utilisateurs</Link>
           </div>
-          
+
           <div className="admin-panel recent-listings">
             <h2>Dernières annonces</h2>
             <table className="admin-table">
@@ -296,39 +285,24 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Canapé en cuir</td>
-                  <td>Mohammed A.</td>
-                  <td>Il y a 1 heure</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn delete">Supprimer</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Vélo de montagne</td>
-                  <td>Yasmine B.</td>
-                  <td>Il y a 3 heures</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn delete">Supprimer</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Livres de cuisine</td>
-                  <td>Hassan M.</td>
-                  <td>Il y a 5 heures</td>
-                  <td>
-                    <div className="table-actions">
-                      <button className="action-btn view">Voir</button>
-                      <button className="action-btn delete">Supprimer</button>
-                    </div>
-                  </td>
-                </tr>
+                {recentListings.map(listing => (
+                  <tr key={listing.id}>
+                    <td>{listing.title}</td>
+                    <td>{listing.userName}</td>
+                    <td>{new Date(listing.createdAt).toLocaleString('fr-FR', {
+                      day: 'numeric',
+                      month: 'short',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}</td>
+                    <td>
+                      <div className="table-actions">
+                        <button className="action-btn view" onClick={() => navigate('/admin/listings')}>Voir</button>
+                        <button className="action-btn delete">Supprimer</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             <Link to="/admin/listings" className="view-all-link">Voir toutes les annonces</Link>
