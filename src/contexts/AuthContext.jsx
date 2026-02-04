@@ -106,10 +106,50 @@ export function AuthProvider({ children }) {
 
   // Fonction de déconnexion
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-    setUser(null);
-    setProfile(null);
+    console.log("AuthContext: Tentative de déconnexion...");
+    try {
+      // Tenter de se déconnecter de Supabase
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.warn("AuthContext: Erreur lors du signOut Supabase:", error);
+      }
+    } catch (err) {
+      console.warn("AuthContext: Exception lors du logout:", err);
+    } finally {
+      // Réinitialisation de l'état local dans tous les cas
+      setUser(null);
+      setProfile(null);
+      console.log("AuthContext: État déconnecté.");
+    }
+  };
+
+  // Fonction de suppression de compte
+  const deleteAccount = async () => {
+    if (!user) return;
+    console.log("AuthContext: Suppression du compte pour:", user.id);
+
+    try {
+      // 1. Supprimer le profil dans public.users
+      // Note: La row level security doit autoriser l'utilisateur à supprimer sa propre ligne
+      const { error: profileError } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', user.id);
+
+      if (profileError) {
+        console.error("AuthContext: Erreur suppression profil:", profileError);
+        throw profileError;
+      }
+
+      // 2. Déconnexion
+      await logout();
+
+      console.log("AuthContext: Compte supprimé avec succès.");
+      return { success: true };
+    } catch (err) {
+      console.error("AuthContext: Exception suppression compte:", err);
+      throw err;
+    }
   };
 
   // Fonction d'inscription
@@ -150,6 +190,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     register,
+    deleteAccount,
     loginWithSocial,
     isAuthenticated: !!user,
     isAdmin: profile?.email === 'admin@matlou7ch.ma' || false
