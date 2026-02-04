@@ -60,13 +60,14 @@ function ProtectedRoute({ children }) {
 }
 
 // Composant pour protéger les routes d'administration
+// DÉSACTIVÉ : Accès direct sans mot de passe
 function AdminRoute({ children }) {
-  const adminToken = localStorage.getItem('adminToken');
-  const location = useLocation();
+  // const adminToken = localStorage.getItem('adminToken');
+  // const location = useLocation();
 
-  if (!adminToken) {
-    return <Navigate to="/admin/login" state={{ from: location }} replace />;
-  }
+  // if (!adminToken) {
+  //   return <Navigate to="/admin/login" state={{ from: location }} replace />;
+  // }
 
   return children;
 }
