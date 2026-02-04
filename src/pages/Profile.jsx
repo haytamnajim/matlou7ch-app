@@ -8,15 +8,14 @@ function Profile() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    alert("Déconnexion en cours...");
-    console.log("Profile: Bouton déconnexion cliqué");
+    console.log("Profile: Déconnexion initiée");
     try {
       await logout();
-      console.log("Profile: Logout réussi, redirection...");
-      navigate('/connexion');
+      console.log("Profile: Déconnexion réussie");
+      navigate('/');  // Rediriger vers la page d'accueil
     } catch (error) {
-      console.error("Profile: Erreur déconnexion:", error);
-      alert("Erreur lors de la déconnexion: " + error.message);
+      console.error("Profile: Erreur lors de la déconnexion:", error);
+      alert("Erreur lors de la déconnexion. Veuillez réessayer.");
     }
   };
 
