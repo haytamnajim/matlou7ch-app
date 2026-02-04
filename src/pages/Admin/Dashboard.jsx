@@ -15,7 +15,7 @@ import {
   Legend,
 } from 'chart.js';
 import AdminLayout from './AdminLayout';
-import { statsService, listingService, userService } from '../../services/dataService';
+import { statsService, listingService, userService } from '../../services/supabaseDataService';
 import './Admin.css';
 
 // Enregistrer les composants Chart.js
