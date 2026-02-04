@@ -8,11 +8,15 @@ function Profile() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    alert("Déconnexion en cours...");
+    console.log("Profile: Bouton déconnexion cliqué");
     try {
       await logout();
-      navigate('/connexion'); // ou navigate('/') selon préférence
+      console.log("Profile: Logout réussi, redirection...");
+      navigate('/connexion');
     } catch (error) {
-      console.error("Erreur lors de la déconnexion:", error);
+      console.error("Profile: Erreur déconnexion:", error);
+      alert("Erreur lors de la déconnexion: " + error.message);
     }
   };
 
@@ -136,7 +140,15 @@ function Profile() {
           <Link to="/notre-adn" className="footer-link">Notre ADN</Link>
           <Link to="/faq" className="footer-link">FAQ</Link>
           <Link to="/cgu" className="footer-link">CGU</Link>
-          <button className="logout-button" onClick={handleLogout}>
+          <button
+            type="button"
+            className="logout-button"
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("Profile: Clic bouton détecté");
+              handleLogout();
+            }}
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="20px" height="20px">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
