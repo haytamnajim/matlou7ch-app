@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { FaEnvelope, FaLock, FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 import './Login.css';
 
 function Login() {
-  const { login, loginWithSocial } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -44,20 +44,15 @@ function Login() {
       navigate(from, { replace: true });
     } catch (err) {
       console.error(err);
-      setError('Échec de la connexion. Vérifiez votre email et mot de passe.');
+      if (err.message && err.message.includes("Email not confirmed")) {
+        setError("Veuillez confirmer votre email avant de vous connecter.");
+      } else if (err.message && err.message.includes("Invalid login credentials")) {
+        setError("Email ou mot de passe incorrect.");
+      } else {
+        setError('Une erreur est survenue (' + (err.message || 'Erreur inconnue') + ')');
+      }
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleSocialLogin = async (provider) => {
-    try {
-      setError('');
-      await loginWithSocial(provider);
-      // La redirection est gérée par Supabase OAuth (window.location.origin)
-    } catch (err) {
-      console.error(err);
-      setError(`Erreur lors de la connexion avec ${provider}`);
     }
   };
 
@@ -75,30 +70,6 @@ function Login() {
         )}
 
         {error && <div className="error-message">{error}</div>}
-
-        <div className="social-login-buttons">
-          <button
-            className="facebook-login-button"
-            onClick={() => handleSocialLogin('Facebook')}
-          >
-            <FaFacebook className="social-icon" />
-            Continuer avec Facebook
-          </button>
-
-          <button
-            className="google-login-button"
-            onClick={() => handleSocialLogin('Google')}
-          >
-            <FaGoogle className="social-icon" />
-            Continuer avec Google
-          </button>
-        </div>
-
-        <div className="separator">
-          <div className="separator-line"></div>
-          <div className="separator-text">ou avec votre email</div>
-          <div className="separator-line"></div>
-        </div>
 
         <form onSubmit={handleEmailLogin} className="email-login-form">
           <div className="form-group">

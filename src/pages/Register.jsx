@@ -99,118 +99,128 @@ function Register() {
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="pseudo">
-              <FaUser style={{ marginRight: '8px' }} /> Pseudo
-            </label>
-            <input
-              type="text"
-              id="pseudo"
-              value={pseudo}
-              onChange={(e) => setPseudo(e.target.value)}
-              placeholder="Choisissez un pseudo"
-              required
-            />
-            <div className="input-hint">De 2 à 30 caractères.</div>
+          <div className="form-grid">
+            {/* Colonne Gauche */}
+            <div className="form-column">
+              <div className="form-group">
+                <label htmlFor="pseudo">
+                  <FaUser /> Pseudo
+                </label>
+                <input
+                  type="text"
+                  id="pseudo"
+                  value={pseudo}
+                  onChange={(e) => setPseudo(e.target.value)}
+                  placeholder="Choisissez un pseudo"
+                  required
+                />
+                <div className="input-hint">De 2 à 30 caractères.</div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">
+                  <FaPhone /> Téléphone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="06XXXXXXXX"
+                  required
+                />
+                <div className="input-hint">Format marocain valide.</div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="city">
+                  <FaMapMarkerAlt /> Ville
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Votre ville"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Colonne Droite */}
+            <div className="form-column">
+              <div className="form-group">
+                <label htmlFor="email">
+                  <FaEnvelope /> Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Ex: nom@exemple.com"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">
+                  <FaLock /> Mot de passe
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Créer un mot de passe"
+                  required
+                />
+                <div className="input-hint">6 caractères minimum.</div>
+              </div>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email">
-              <FaEnvelope style={{ marginRight: '8px' }} /> Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Entrez votre email"
-              required
-            />
-          </div>
+          <div className="checkbox-section">
+            <div className="checkbox-group">
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                required
+              />
+              <label htmlFor="acceptTerms">
+                J'accepte les <Link to="/cgu" className="link-highlight">Conditions Générales</Link> et la <Link to="/confidentialite" className="link-highlight">Politique de Confidentialité</Link>
+              </label>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="phone">
-              <FaPhone style={{ marginRight: '8px' }} /> Téléphone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Entrez votre numéro de téléphone"
-              required
-            />
-            <div className="input-hint">Format: 06XXXXXXXX ou +212 6XXXXXXXX</div>
-          </div>
+            <div className="checkbox-group">
+              <input
+                type="checkbox"
+                id="rejectNewsletter"
+                checked={rejectNewsletter}
+                onChange={(e) => setRejectNewsletter(e.target.checked)}
+              />
+              <label htmlFor="rejectNewsletter">
+                Je ne souhaite pas recevoir la newsletter
+              </label>
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="password">
-              <FaLock style={{ marginRight: '8px' }} /> Mot de passe
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Créer un mot de passe"
-              required
-            />
-            <div className="input-hint">6 caractères minimum.</div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="city">
-              <FaMapMarkerAlt style={{ marginRight: '8px' }} /> Ville
-            </label>
-            <input
-              type="text"
-              id="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="Entrez le nom de votre ville"
-              required
-            />
-          </div>
-
-          <div className="checkbox-group">
-            <input
-              type="checkbox"
-              id="acceptTerms"
-              checked={acceptTerms}
-              onChange={(e) => setAcceptTerms(e.target.checked)}
-              required
-            />
-            <label htmlFor="acceptTerms">
-              En vous inscrivant, vous acceptez les <Link to="/cgu" className="link-highlight">CGU</Link> et la <Link to="/confidentialite" className="link-highlight">politique de confidentialité</Link>
-            </label>
-          </div>
-
-          <div className="checkbox-group">
-            <input
-              type="checkbox"
-              id="rejectNewsletter"
-              checked={rejectNewsletter}
-              onChange={(e) => setRejectNewsletter(e.target.checked)}
-            />
-            <label htmlFor="rejectNewsletter">
-              En cochant cette case, je confirme que je ne souhaite pas recevoir de newsletter de la part de Matlou7ch
-            </label>
-          </div>
-
-          <div className="checkbox-group">
-            <input
-              type="checkbox"
-              id="rejectNotifications"
-              checked={rejectNotifications}
-              onChange={(e) => setRejectNotifications(e.target.checked)}
-            />
-            <label htmlFor="rejectNotifications">
-              En cochant cette case, je confirme que je ne souhaite pas recevoir de notification de la part de Matlou7ch
-            </label>
+            <div className="checkbox-group">
+              <input
+                type="checkbox"
+                id="rejectNotifications"
+                checked={rejectNotifications}
+                onChange={(e) => setRejectNotifications(e.target.checked)}
+              />
+              <label htmlFor="rejectNotifications">
+                Je ne souhaite pas recevoir de notifications
+              </label>
+            </div>
           </div>
 
           <button type="submit" className="register-button" disabled={isSubmitting}>
-            {isSubmitting ? 'Inscription...' : 'Valider'}
+            {isSubmitting ? 'Inscription en cours...' : 'Valider mon inscription'}
           </button>
         </form>
       </div>

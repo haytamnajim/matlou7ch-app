@@ -82,7 +82,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -99,7 +99,7 @@
   opacity: 0.8;
 }
 
-.logo:hover + .logo-tagline {
+.logo:hover+.logo-tagline {
   opacity: 1;
 }
 
@@ -108,12 +108,12 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
   }
-  
+
   70% {
     transform: scale(1.1);
     box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
   }
-  
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
@@ -126,11 +126,11 @@
     left: -50%;
     opacity: 0;
   }
-  
+
   30% {
     opacity: 0.5;
   }
-  
+
   100% {
     top: 150%;
     left: 150%;
@@ -144,13 +144,13 @@
     -webkit-background-clip: text;
     background-clip: text;
   }
-  
+
   50% {
     background: linear-gradient(45deg, #3498db, #4a56e2);
     -webkit-background-clip: text;
     background-clip: text;
   }
-  
+
   100% {
     background: linear-gradient(45deg, #4a56e2, #3498db);
     -webkit-background-clip: text;
@@ -237,7 +237,7 @@
   width: 80%;
   max-width: 600px;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .menu-item {
@@ -305,6 +305,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -363,7 +364,8 @@
   font-weight: 500;
 }
 
-.search-field input, .search-field select {
+.search-field input,
+.search-field select {
   width: 100%;
   padding: 14px 16px;
   border: 1px solid #e0e0e0;
@@ -373,7 +375,8 @@
   background-color: #f9f9f9;
 }
 
-.search-field input:focus, .search-field select:focus {
+.search-field input:focus,
+.search-field select:focus {
   border-color: #4a56e2;
   box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.1);
   outline: none;
@@ -502,4 +505,18 @@
   cursor: pointer;
 }
 
+.nav-login-btn {
+  text-decoration: none;
+  color: #4a56e2;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 2px solid #4a56e2;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
 
+.nav-login-btn:hover {
+  background-color: #4a56e2;
+  color: white;
+}

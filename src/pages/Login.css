@@ -68,82 +68,6 @@
   line-height: 1.5;
 }
 
-.social-login-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.facebook-login-button,
-.google-login-button,
-.email-login-button {
-  width: 100%;
-  padding: 14px 20px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  border: 1px solid #ddd;
-}
-
-.facebook-login-button {
-  background-color: white;
-  color: #4267B2;
-}
-
-.google-login-button {
-  background-color: white;
-  color: #db4437;
-}
-
-.email-login-button {
-  background-color: #4a56e2;
-  color: white;
-  border: none;
-  font-weight: 500;
-}
-
-.facebook-login-button:hover,
-.google-login-button:hover {
-  background-color: #f5f7ff;
-}
-
-.email-login-button:hover {
-  background-color: #3a46d1;
-}
-
-.social-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-  /* background-size: contain; remove this is FontAwesome is used which is implied by React component usage */
-}
-
-/* SVG backgrounds removed as we use react-icons now */
-
-.separator {
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.separator-line {
-  flex: 1;
-  height: 1px;
-  background-color: #ddd;
-}
-
-.separator-text {
-  padding: 0 15px;
-  color: #777;
-  font-size: 0.9rem;
-}
-
 .register-prompt {
   margin-top: 25px;
   color: #666;
@@ -161,7 +85,6 @@
   text-decoration: underline;
 }
 
-/* Ajouter ce style pour le message de redirection */
 .redirect-message {
   background-color: #e8f0fe;
   color: #4a56e2;
@@ -183,7 +106,6 @@
   border-left: 4px solid #c62828;
 }
 
-/* Email Login Form Styles */
 .email-login-form {
   margin-top: 20px;
   animation: fadeIn 0.3s ease-in-out;
@@ -211,17 +133,6 @@
 .login-submit-btn:disabled {
   background-color: #a0a6eb;
   cursor: not-allowed;
-}
-
-.back-btn {
-  background: none;
-  border: none;
-  color: #666;
-  margin-top: 15px;
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: 0.9rem;
-  width: 100%;
 }
 
 @keyframes fadeIn {
