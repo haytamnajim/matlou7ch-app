@@ -16,13 +16,38 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Sécurité : Si le chargement prend plus de 10 secondes, on force l'affichage
+    const timer = setTimeout(() => {
+      if (loading) {
+        console.warn("AuthContext: Timeout de chargement atteint ! Force de l'arrêt...");
+        setLoading(false);
+      }
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [loading]);
+
+  useEffect(() => {
+    console.log("AuthContext: Initialisation...");
     // 1. Récupérer la session actuelle
     const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchProfile(session.user.id);
-      } else {
+      console.log("AuthContext: Récupération de la session...");
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) {
+          console.error("AuthContext: Erreur getSession:", error);
+          setLoading(false);
+          return;
+        }
+        console.log("AuthContext: Session récupérée:", !!session);
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          await fetchProfile(session.user.id);
+        } else {
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("AuthContext: Exception getSession:", err);
         setLoading(false);
       }
     };
@@ -30,7 +55,8 @@ export function AuthProvider({ children }) {
     getSession();
 
     // 2. Écouter les changements d'état (connexion, déconnexion)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("AuthContext: État Auth changé:", event);
       setUser(session?.user ?? null);
       if (session?.user) {
         await fetchProfile(session.user.id);
@@ -41,12 +67,13 @@ export function AuthProvider({ children }) {
     });
 
     return () => {
-      subscription.unsubscribe();
+      if (subscription) subscription.unsubscribe();
     };
   }, []);
 
   // Récupérer le profil utilisateur depuis public.users
   const fetchProfile = async (userId) => {
+    console.log("AuthContext: Chargement du profil pour:", userId);
     try {
       const { data, error } = await supabase
         .from('users')
@@ -55,12 +82,13 @@ export function AuthProvider({ children }) {
         .single();
 
       if (error) {
-        console.error('Erreur lors du chargement du profil:', error);
+        console.error('AuthContext: Erreur fetchProfile:', error);
       } else {
+        console.log("AuthContext: Profil chargé.");
         setProfile(data);
       }
     } catch (err) {
-      console.error('Exception lors du chargement du profil:', err);
+      console.error('AuthContext: Exception fetchProfile:', err);
     } finally {
       setLoading(false);
     }
@@ -87,25 +115,19 @@ export function AuthProvider({ children }) {
   // Fonction d'inscription
   const register = async (userData) => {
     const { email, password, name, phone, city } = userData;
-
-    // Inscription dans Supabase Auth
-    // Les métadonnées seront utilisées par le trigger SQL pour créer le profil public
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           name,
-          phone, // Optionnel, stocké dans les métadonnées auth
-          city   // Optionnel, stocké dans les métadonnées auth
+          phone,
+          city
         }
       }
     });
 
     if (error) throw error;
-
-    // Si l'inscription réussit, on met à jour le profil localement si nécessaire
-    // Mais le trigger s'en chargera côté DB
     return data;
   };
 
@@ -114,7 +136,7 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider.toLowerCase(),
       options: {
-        redirectTo: window.location.origin, // Rediriger vers l'accueil après connexion
+        redirectTo: window.location.origin,
       }
     });
     if (error) throw error;
@@ -122,20 +144,40 @@ export function AuthProvider({ children }) {
   };
 
   const value = {
-    user,      // L'utilisateur authentifié (Auth Supabase)
-    profile,   // Le profil public (Table public.users)
+    user,
+    profile,
     loading,
     login,
     logout,
     register,
     loginWithSocial,
     isAuthenticated: !!user,
-    isAdmin: profile?.email === 'admin@matlou7ch.ma' || false // TODO: Remplacer par un vrai rôle admin plus tard
+    isAdmin: profile?.email === 'admin@matlou7ch.ma' || false
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? (
+        <div style={{
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: 'sans-serif',
+          color: '#4a56e2'
+        }}>
+          <div className="spinner" style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #4a56e2',
+            borderRadius: '50%',
+            marginBottom: '20px'
+          }}></div>
+          Chargement de Matlou7ch...
+        </div>
+      ) : children}
     </AuthContext.Provider>
   );
 }

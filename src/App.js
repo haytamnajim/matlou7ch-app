@@ -73,8 +73,6 @@ function AdminRoute({ children }) {
 }
 
 function App() {
-  const { currentUser } = useAuth();
-
   return (
     <Router>
       <React.Suspense fallback={<div className="loading-screen">Chargement...</div>}>
