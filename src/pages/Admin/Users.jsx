@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaUsers, FaSearch, FaEdit, FaTrash, FaEye, FaBan, FaUserCheck } from 'react-icons/fa';
 import AdminLayout from './AdminLayout';
+import { userService } from '../../services/supabaseDataService';
 import './Admin.css';
 
 function Users() {
@@ -14,26 +15,22 @@ function Users() {
   const [showEditModal, setShowEditModal] = useState(false);
   const usersPerPage = 10;
 
-  useEffect(() => {
-    // Simuler un chargement de données
-    const timer = setTimeout(() => {
-      // Dans une application réelle, vous feriez un appel API ici
-      const mockUsers = Array.from({ length: 50 }, (_, i) => ({
-        id: i + 1,
-        name: `Utilisateur ${i + 1}`,
-        email: `user${i + 1}@example.com`,
-        city: ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'][Math.floor(Math.random() * 5)],
-        status: Math.random() > 0.2 ? 'active' : 'blocked',
-        registrationDate: new Date(Date.now() - Math.floor(Math.random() * 10000000000)),
-        listings: Math.floor(Math.random() * 20),
-        avatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`
-      }));
-
-      setUsers(mockUsers);
+  // Charger les utilisateurs depuis Supabase
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const data = await userService.getAll();
+      setUsers(data);
+    } catch (error) {
+      console.error('Erreur lors du chargement des utilisateurs:', error);
+      alert('Impossible de charger les utilisateurs.');
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
+  };
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
   // Fonctions pour gérer les actions sur les utilisateurs
@@ -47,56 +44,81 @@ function Users() {
     setShowEditModal(true);
   };
 
-  const handleToggleUserStatus = (userId) => {
-    // Confirmer l'action
+  const handleToggleUserStatus = async (userId) => {
     const userToToggle = users.find(user => user.id === userId);
     const isBlocking = userToToggle.status === 'active';
+    const newStatus = isBlocking ? 'blocked' : 'active';
+
     const confirmMessage = isBlocking
       ? `Êtes-vous sûr de vouloir bloquer l'utilisateur ${userToToggle.name} ?`
       : `Êtes-vous sûr de vouloir débloquer l'utilisateur ${userToToggle.name} ?`;
 
     if (window.confirm(confirmMessage)) {
-      // Mettre à jour le statut de l'utilisateur
-      const updatedUsers = users.map(user => {
-        if (user.id === userId) {
-          return {
-            ...user,
-            status: user.status === 'active' ? 'blocked' : 'active'
-          };
-        }
-        return user;
-      });
+      try {
+        await userService.update(userId, { status: newStatus });
 
-      setUsers(updatedUsers);
+        // Mettre à jour l'état local
+        setUsers(users.map(user =>
+          user.id === userId ? { ...user, status: newStatus } : user
+        ));
 
-      // Afficher un message de confirmation
-      const actionMessage = isBlocking
-        ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.`
-        : `L'utilisateur ${userToToggle.name} a été débloqué avec succès.`;
-      alert(actionMessage);
+        const actionMessage = isBlocking
+          ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.`
+          : `L'utilisateur ${userToToggle.name} a été débloqué avec succès.`;
+        alert(actionMessage);
+      } catch (error) {
+        console.error('Erreur lors de la mise à jour du statut:', error);
+        alert('Erreur lors de la mise à jour du statut.');
+      }
     }
   };
 
-  const handleSaveEdit = () => {
+  const handleDeleteUser = async (userId) => {
+    const userToDelete = users.find(user => user.id === userId);
+    if (window.confirm(`⚠️ ATTENTION : Êtes-vous sûr de vouloir SUPPRIMER DÉFINITIVEMENT l'utilisateur ${userToDelete.name} ? Cette action est irréversible.`)) {
+      try {
+        await userService.delete(userId);
+        setUsers(users.filter(user => user.id !== userId));
+        alert(`L'utilisateur ${userToDelete.name} a été supprimé.`);
+      } catch (error) {
+        console.error('Erreur lors de la suppression:', error);
+        alert('Erreur lors de la suppression de l\'utilisateur.');
+      }
+    }
+  };
+
+  const handleSaveEdit = async () => {
     if (!selectedUser) return;
 
-    // Mettre à jour l'utilisateur dans la liste
-    const updatedUsers = users.map(user => {
-      if (user.id === selectedUser.id) {
-        return selectedUser;
-      }
-      return user;
-    });
+    try {
+      const { id, ...updates } = selectedUser;
+      // On ne garde que les champs modifiables
+      const updateData = {
+        name: updates.name,
+        email: updates.email,
+        city: updates.city,
+        status: updates.status
+      };
 
-    setUsers(updatedUsers);
-    setShowEditModal(false);
-    alert(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
+      await userService.update(id, updateData);
+
+      // Mettre à jour la liste locale
+      setUsers(users.map(user =>
+        user.id === id ? { ...user, ...updateData } : user
+      ));
+
+      setShowEditModal(false);
+      alert(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      alert('Erreur lors de la mise à jour de l\'utilisateur.');
+    }
   };
 
   // Filtrer les utilisateurs
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (user.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+      (user.email?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
 
     return matchesSearch && matchesStatus;
@@ -110,16 +132,16 @@ function Users() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // La recherche est déjà gérée par le filtrage en temps réel
   };
 
   const handleStatusChange = (e) => {
     setStatusFilter(e.target.value);
-    setCurrentPage(1); // Réinitialiser à la première page lors du changement de filtre
+    setCurrentPage(1);
   };
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('fr-FR', {
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Date inconnue';
+    return new Date(dateString).toLocaleDateString('fr-FR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
@@ -139,8 +161,8 @@ function Users() {
           </div>
           <div className="admin-modal-body">
             <div className="user-profile-header">
-              <div className="user-profile-avatar-placeholder">
-                {selectedUser.name.charAt(0)}
+              <div className="user-profile-avatar-placeholder" style={{ backgroundColor: selectedUser.avatar_color || '#ccc' }}>
+                {selectedUser.avatar || selectedUser.name?.charAt(0)}
               </div>
               <div className="user-profile-info">
                 <h3>{selectedUser.name}</h3>
@@ -154,15 +176,15 @@ function Users() {
             <div className="user-profile-details">
               <div className="detail-item">
                 <span className="detail-label">Ville:</span>
-                <span className="detail-value">{selectedUser.city}</span>
+                <span className="detail-value">{selectedUser.city || 'Non renseignée'}</span>
               </div>
               <div className="detail-item">
                 <span className="detail-label">Date d'inscription:</span>
-                <span className="detail-value">{formatDate(selectedUser.registrationDate)}</span>
+                <span className="detail-value">{formatDate(selectedUser.created_at)}</span>
               </div>
               <div className="detail-item">
                 <span className="detail-label">Nombre d'annonces:</span>
-                <span className="detail-value">{selectedUser.listings}</span>
+                <span className="detail-value">{selectedUser.listings_count || 0}</span>
               </div>
             </div>
           </div>
@@ -214,7 +236,7 @@ function Users() {
                 type="text"
                 id="name"
                 name="name"
-                value={selectedUser.name}
+                value={selectedUser.name || ''}
                 onChange={handleChange}
               />
             </div>
@@ -224,7 +246,7 @@ function Users() {
                 type="email"
                 id="email"
                 name="email"
-                value={selectedUser.email}
+                value={selectedUser.email || ''}
                 onChange={handleChange}
               />
             </div>
@@ -234,7 +256,7 @@ function Users() {
                 type="text"
                 id="city"
                 name="city"
-                value={selectedUser.city}
+                value={selectedUser.city || ''}
                 onChange={handleChange}
               />
             </div>
@@ -243,7 +265,7 @@ function Users() {
               <select
                 id="status"
                 name="status"
-                value={selectedUser.status}
+                value={selectedUser.status || 'active'}
                 onChange={handleChange}
               >
                 <option value="active">Actif</option>
@@ -323,62 +345,75 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {currentUsers.map(user => (
-              <tr key={user.id}>
-                <td>
-                  <div className="user-cell">
-                    <div className="user-avatar-placeholder">
-                      {user.name.charAt(0)}
+            {currentUsers.length > 0 ? (
+              currentUsers.map(user => (
+                <tr key={user.id}>
+                  <td>
+                    <div className="user-cell">
+                      <div className="user-avatar-placeholder" style={{ backgroundColor: user.avatar_color || '#ccc' }}>
+                        {user.avatar || user.name?.charAt(0)}
+                      </div>
+                      <span>{user.name}</span>
                     </div>
-                    <span>{user.name}</span>
-                  </div>
-                </td>
-                <td>{user.email}</td>
-                <td>{user.city}</td>
-                <td>{formatDate(user.registrationDate)}</td>
-                <td>{user.listings}</td>
-                <td>
-                  <span className={`status-badge ${user.status}`}>
-                    {user.status === 'active' ? 'Actif' : 'Bloqué'}
-                  </span>
-                </td>
-                <td>
-                  <div className="table-actions">
-                    <button
-                      className="action-btn view"
-                      title="Voir le profil"
-                      onClick={() => handleViewUser(user)}
-                    >
-                      <FaEye />
-                    </button>
-                    <button
-                      className="action-btn edit"
-                      title="Modifier"
-                      onClick={() => handleEditUser(user)}
-                    >
-                      <FaEdit />
-                    </button>
-                    {user.status === 'active' ? (
-                      <button
-                        className="action-btn delete"
-                        title="Bloquer"
-                        onClick={() => handleToggleUserStatus(user.id)}
-                      >
-                        <FaBan />
-                      </button>
-                    ) : (
+                  </td>
+                  <td>{user.email}</td>
+                  <td>{user.city}</td>
+                  <td>{formatDate(user.created_at)}</td>
+                  <td>{user.listings_count || 0}</td>
+                  <td>
+                    <span className={`status-badge ${user.status}`}>
+                      {user.status === 'active' ? 'Actif' : 'Bloqué'}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="table-actions">
                       <button
                         className="action-btn view"
-                        title="Débloquer"
-                        onClick={() => handleToggleUserStatus(user.id)}
+                        title="Voir le profil"
+                        onClick={() => handleViewUser(user)}
                       >
-                        <FaUserCheck />
+                        <FaEye />
                       </button>
-                    )}
-                  </div>
-                </td>
+                      <button
+                        className="action-btn edit"
+                        title="Modifier"
+                        onClick={() => handleEditUser(user)}
+                      >
+                        <FaEdit />
+                      </button>
+                      {user.status === 'active' ? (
+                        <button
+                          className="action-btn warning"
+                          title="Bloquer"
+                          onClick={() => handleToggleUserStatus(user.id)}
+                        >
+                          <FaBan />
+                        </button>
+                      ) : (
+                        <button
+                          className="action-btn success"
+                          title="Débloquer"
+                          onClick={() => handleToggleUserStatus(user.id)}
+                        >
+                          <FaUserCheck />
+                        </button>
+                      )}
+                      <button
+                        className="action-btn delete"
+                        title="Supprimer définitivement"
+                        onClick={() => handleDeleteUser(user.id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="text-center">Aucun utilisateur trouvé</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
 
@@ -395,13 +430,11 @@ function Users() {
 
             {Array.from({ length: totalPages }, (_, i) => i + 1)
               .filter(page => {
-                // Afficher seulement les pages proches de la page actuelle
                 return page === 1 ||
                   page === totalPages ||
                   Math.abs(page - currentPage) <= 1;
               })
               .map((page, index, array) => {
-                // Ajouter des points de suspension si nécessaire
                 if (index > 0 && array[index - 1] !== page - 1) {
                   return (
                     <React.Fragment key={`ellipsis-${page}`}>
