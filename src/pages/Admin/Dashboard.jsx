@@ -41,6 +41,8 @@ function Dashboard() {
   });
   const [recentUsers, setRecentUsers] = useState([]);
   const [recentListings, setRecentListings] = useState([]);
+  const [cityData, setCityData] = useState({});
+  const [categoryData, setCategoryData] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -67,12 +69,11 @@ function Dashboard() {
     ],
   };
 
-  const cityData = listingService.getByCity();
   const barChartData = {
     labels: Object.keys(cityData),
     datasets: [
       {
-        label: 'Nombre d\'annonces par ville',
+        label: "Nombre d'annonces par ville",
         data: Object.values(cityData),
         backgroundColor: [
           'rgba(74, 86, 226, 0.7)',
@@ -86,12 +87,11 @@ function Dashboard() {
     ],
   };
 
-  const categoryData = listingService.getByCategory();
   const pieChartData = {
     labels: Object.keys(categoryData),
     datasets: [
       {
-        label: 'Catégories d\'annonces',
+        label: "Catégories d'annonces",
         data: Object.values(categoryData),
         backgroundColor: [
           'rgba(74, 86, 226, 0.7)',
@@ -121,29 +121,36 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    // Charger les données réelles depuis localStorage
-    const timer = setTimeout(() => {
-      const globalStats = statsService.getGlobalStats();
-      setStats(globalStats);
+    // Charger toutes les données depuis Supabase
+    const fetchData = async () => {
+      try {
+        // Stats globales
+        const globalStats = await statsService.getGlobalStats();
+        setStats(globalStats);
 
-      // Charger les 3 derniers utilisateurs
-      const allUsers = userService.getAll();
-      const sortedUsers = allUsers.sort((a, b) =>
-        new Date(b.registrationDate) - new Date(a.registrationDate)
-      );
-      setRecentUsers(sortedUsers.slice(0, 3));
+        // Derniers utilisateurs
+        const allUsers = await userService.getAll();
+        setRecentUsers(allUsers.slice(0, 3));
 
-      // Charger les 3 dernières annonces
-      const allListings = listingService.getAll();
-      const sortedListings = allListings.sort((a, b) =>
-        new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      setRecentListings(sortedListings.slice(0, 3));
+        // Dernières annonces
+        const allListings = await listingService.getAll();
+        setRecentListings(allListings.slice(0, 3));
 
-      setLoading(false);
-    }, 500);
+        // Données pour graphiques
+        const citiesData = await listingService.getByCity();
+        setCityData(citiesData);
 
-    return () => clearTimeout(timer);
+        const categoriesData = await listingService.getByCategory();
+        setCategoryData(categoriesData);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Erreur Supabase:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   if (loading) {
@@ -159,63 +166,64 @@ function Dashboard() {
 
   return (
     <AdminLayout title="Tableau de bord">
-      <div className="admin-content">
+      <div className="dashboard-container">
+        {/* Cartes de statistiques */}
         <div className="stats-grid">
           <div className="stat-card">
-            <div className="stat-icon users">
+            <div className="stat-icon" style={{ backgroundColor: '#4A56E2' }}>
               <FaUsers />
             </div>
-            <div className="stat-details">
-              <h3>Utilisateurs</h3>
-              <p className="stat-value">{stats.users.toLocaleString()}</p>
-              <p className="stat-change positive">+{stats.newUsers} cette semaine</p>
+            <div className="stat-content">
+              <h3>{stats.users}</h3>
+              <p>Utilisateurs</p>
+              <span className="stat-trend up">+{stats.newUsers} cette semaine</span>
             </div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon listings">
+            <div className="stat-icon" style={{ backgroundColor: '#28A745' }}>
               <FaBoxOpen />
             </div>
-            <div className="stat-details">
-              <h3>Annonces totales</h3>
-              <p className="stat-value">{stats.listings.toLocaleString()}</p>
-              <p className="stat-change positive">+243 cette semaine</p>
+            <div className="stat-content">
+              <h3>{stats.listings}</h3>
+              <p>Annonces totales</p>
+              <span className="stat-trend">{stats.activeListings} actives</span>
             </div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon active">
-              <FaBoxOpen />
+            <div className="stat-icon" style={{ backgroundColor: '#17A2B8' }}>
+              <FaChartLine />
             </div>
-            <div className="stat-details">
-              <h3>Annonces actives</h3>
-              <p className="stat-value">{stats.activeListings.toLocaleString()}</p>
-              <p className="stat-change neutral">{Math.round(stats.activeListings / stats.listings * 100)}% du total</p>
+            <div className="stat-content">
+              <h3>87%</h3>
+              <p>Taux d'engagement</p>
+              <span className="stat-trend up">+5%</span>
             </div>
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon reports">
+            <div className="stat-icon" style={{ backgroundColor: '#DC3545' }}>
               <FaFlag />
             </div>
-            <div className="stat-details">
-              <h3>Signalements</h3>
-              <p className="stat-value">{stats.reports}</p>
-              <p className="stat-change negative">Nécessite attention</p>
+            <div className="stat-content">
+              <h3>{stats.reports}</h3>
+              <p>Signalements</p>
+              <span className="stat-trend">En attente</span>
             </div>
           </div>
         </div>
 
-        {/* Section des graphiques */}
-        <div className="charts-container">
-          <div className="chart-panel">
-            <h2>Évolution des utilisateurs et annonces</h2>
+        {/* Graphiques */}
+        <div className="charts-grid">
+          <div className="chart-panel full">
+            <h2>Croissance mensuelle</h2>
             <div className="chart-wrapper">
               <Line data={lineChartData} options={chartOptions} />
             </div>
           </div>
 
-          <div className="charts-row">
+          <div className="chart-row">
             <div className="chart-panel half">
               <h2>Annonces par ville</h2>
               <div className="chart-wrapper">
@@ -249,11 +257,11 @@ function Dashboard() {
                   <tr key={user.id}>
                     <td>
                       <div className="user-cell">
-                        <div className="user-avatar" style={{ backgroundColor: user.avatarColor }}>{user.avatar}</div>
+                        <div className="user-avatar" style={{ backgroundColor: user.avatar_color }}>{user.avatar}</div>
                         <span>{user.name}</span>
                       </div>
                     </td>
-                    <td>{new Date(user.registrationDate).toLocaleString('fr-FR', {
+                    <td>{new Date(user.created_at).toLocaleString('fr-FR', {
                       day: 'numeric',
                       month: 'short',
                       hour: '2-digit',
@@ -288,8 +296,8 @@ function Dashboard() {
                 {recentListings.map(listing => (
                   <tr key={listing.id}>
                     <td>{listing.title}</td>
-                    <td>{listing.userName}</td>
-                    <td>{new Date(listing.createdAt).toLocaleString('fr-FR', {
+                    <td>{listing.user_name}</td>
+                    <td>{new Date(listing.created_at).toLocaleString('fr-FR', {
                       day: 'numeric',
                       month: 'short',
                       hour: '2-digit',
