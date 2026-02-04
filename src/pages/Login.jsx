@@ -14,7 +14,6 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showEmailForm, setShowEmailForm] = useState(false); // Pour basculer entre l'accueil login et le formulaire
 
   // Récupérer l'URL de redirection
   const from = location.state?.from?.pathname || '/';
@@ -77,86 +76,64 @@ function Login() {
 
         {error && <div className="error-message">{error}</div>}
 
-        {!showEmailForm ? (
-          /* VUE INITIALE : CHOIX DE CONNEXION */
-          <>
-            <div className="social-login-buttons">
-              <button
-                className="facebook-login-button"
-                onClick={() => handleSocialLogin('Facebook')}
-              >
-                <FaFacebook className="social-icon" />
-                Continuer avec Facebook
-              </button>
+        <div className="social-login-buttons">
+          <button
+            className="facebook-login-button"
+            onClick={() => handleSocialLogin('Facebook')}
+          >
+            <FaFacebook className="social-icon" />
+            Continuer avec Facebook
+          </button>
 
-              <button
-                className="google-login-button"
-                onClick={() => handleSocialLogin('Google')}
-              >
-                <FaGoogle className="social-icon" />
-                Continuer avec Google
-              </button>
+          <button
+            className="google-login-button"
+            onClick={() => handleSocialLogin('Google')}
+          >
+            <FaGoogle className="social-icon" />
+            Continuer avec Google
+          </button>
+        </div>
 
-              <button
-                className="email-login-button"
-                onClick={() => setShowEmailForm(true)}
-              >
-                <FaEnvelope className="social-icon" />
-                Continuer avec un email
-              </button>
-            </div>
+        <div className="separator">
+          <div className="separator-line"></div>
+          <div className="separator-text">ou avec votre email</div>
+          <div className="separator-line"></div>
+        </div>
 
-            <div className="separator">
-              <div className="separator-line"></div>
-              <div className="separator-text">ou</div>
-              <div className="separator-line"></div>
-            </div>
+        <form onSubmit={handleEmailLogin} className="email-login-form">
+          <div className="form-group">
+            <label htmlFor="email"><FaEnvelope /> Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Votre email"
+              required
+            />
+          </div>
 
-            <div className="register-prompt">
-              Vous n'avez pas de compte ?
-              <Link to="/inscription" className="create-account-link">Créer un compte</Link>
-            </div>
-          </>
-        ) : (
-          /* VUE FORMULAIRE EMAIL */
-          <form onSubmit={handleEmailLogin} className="email-login-form">
-            <div className="form-group">
-              <label htmlFor="email"><FaEnvelope /> Email</label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre email"
-                required
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="password"><FaLock /> Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Votre mot de passe"
+              required
+            />
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="password"><FaLock /> Mot de passe</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Votre mot de passe"
-                required
-              />
-            </div>
+          <button type="submit" className="login-submit-btn" disabled={loading}>
+            {loading ? 'Connexion...' : 'Se connecter'}
+          </button>
+        </form>
 
-            <button type="submit" className="login-submit-btn" disabled={loading}>
-              {loading ? 'Connexion...' : 'Se connecter'}
-            </button>
-
-            <button
-              type="button"
-              className="back-btn"
-              onClick={() => setShowEmailForm(false)}
-            >
-              Retour aux options
-            </button>
-          </form>
-        )}
+        <div className="register-prompt">
+          Vous n'avez pas de compte ?
+          <Link to="/inscription" className="create-account-link">Créer un compte</Link>
+        </div>
       </div>
     </div>
   );
