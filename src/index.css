@@ -5,11 +5,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0f0f0;
+  background-color: #f8fafc;
+  /* Lighter, cleaner background */
   min-height: 100vh;
 }
 
-html, body, #root {
+:root {
+  /* Natural Theme: Green (Generosity) & Blue (Peace) */
+  --primary-color: #10B981;
+  /* Emerald 500 */
+  --primary-hover: #059669;
+  /* Emerald 600 */
+  --primary-light: #D1FAE5;
+  /* Emerald 100 */
+
+  --secondary-color: #3B82F6;
+  /* Blue 500 */
+  --secondary-hover: #2563EB;
+  /* Blue 600 */
+  --secondary-light: #DBEAFE;
+  /* Blue 100 */
+
+  --accent-warm: #F59E0B;
+  /* Amber 500 - for subtle warmth */
+
+  --text-main: #1e293b;
+  /* Slate 800 */
+  --text-muted: #64748b;
+  /* Slate 500 */
+
+  --bg-white: #ffffff;
+  --bg-soft: #f0fdf4;
+  /* Very subtle green tint */
+}
+
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -17,4 +49,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-

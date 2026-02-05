@@ -50,7 +50,7 @@
   width: 36px;
   height: 36px;
   margin-right: 12px;
-  background: linear-gradient(135deg, #FF6B6B 0%, #EE5253 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -58,12 +58,12 @@
   color: white;
   font-weight: 900;
   font-size: 20px;
-  box-shadow: 0 4px 10px rgba(238, 82, 83, 0.3);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
   transform: rotate(-5deg);
 }
 
 .logo-text {
-  background: linear-gradient(90deg, #2c3e50 0%, #4a56e2 100%);
+  background: linear-gradient(90deg, var(--text-main) 0%, var(--primary-color) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -72,7 +72,7 @@
 
 .logo-tagline {
   font-size: 13px;
-  color: #95a5a6;
+  color: var(--text-muted);
   font-weight: 500;
   margin-top: -2px;
   margin-left: 50px;
@@ -84,23 +84,24 @@
   border-radius: 50px;
   overflow: hidden;
   border: 2px solid transparent;
-  background-color: #f7f9fc;
+  background-color: white;
   width: 45%;
   max-width: 450px;
   cursor: text;
   transition: all 0.3s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .search-bar:hover {
-  background-color: #f0f4f8;
-  border-color: rgba(74, 86, 226, 0.1);
+  background-color: #fff;
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.05);
 }
 
 .search-bar:focus-within {
   background-color: white;
-  border-color: #4a56e2;
-  box-shadow: 0 0 0 4px rgba(74, 86, 226, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
 }
 
 .search-bar input {
@@ -110,15 +111,15 @@
   outline: none;
   background: transparent;
   font-size: 15px;
-  color: #2c3e50;
+  color: var(--text-main);
 }
 
 .search-bar input::placeholder {
-  color: #a0aec0;
+  color: #94a3b8;
 }
 
 .search-button {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   border: none;
   color: white;
   padding: 8px 20px;
@@ -129,11 +130,11 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(74, 86, 226, 0.3);
+  box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
 }
 
 .search-button:hover {
-  background-color: #3b46b8;
+  background-color: var(--primary-hover);
   transform: translateY(-1px);
 }
 
@@ -144,7 +145,7 @@
 }
 
 .donate-button {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -154,7 +155,7 @@
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
@@ -162,7 +163,7 @@
 
 .donate-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .icon-link {
@@ -170,7 +171,7 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 11px;
   font-weight: 600;
   gap: 4px;
@@ -181,23 +182,23 @@
 
 .icon-link svg {
   transition: all 0.2s ease;
-  fill: #64748b;
+  fill: var(--text-muted);
 }
 
 .icon-link:hover {
-  color: #4a56e2;
-  background-color: rgba(74, 86, 226, 0.05);
+  color: var(--secondary-color);
+  background-color: var(--secondary-light);
 }
 
 .icon-link:hover svg {
-  fill: #4a56e2;
+  fill: var(--secondary-color);
   transform: translateY(-2px);
 }
 
 .user-avatar {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-hover) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -212,23 +213,23 @@
 
 .user-avatar:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .nav-login-btn {
   text-decoration: none;
-  color: #4a56e2;
+  color: var(--secondary-color);
   font-weight: 700;
   padding: 10px 24px;
-  border: 2px solid rgba(74, 86, 226, 0.2);
+  border: 2px solid rgba(59, 130, 246, 0.2);
   border-radius: 50px;
   transition: all 0.3s ease;
   font-size: 14px;
 }
 
 .nav-login-btn:hover {
-  background-color: rgba(74, 86, 226, 0.05);
-  border-color: #4a56e2;
+  background-color: var(--secondary-light);
+  border-color: var(--secondary-color);
   transform: translateY(-1px);
 }
 

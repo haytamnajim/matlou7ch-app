@@ -59,8 +59,8 @@
 }
 
 .footer-link:hover {
-  color: #60a5fa;
-  /* Blue 400 - Bright accent on hover */
+  color: var(--secondary-color);
+  /* Blue 500 */
   transform: translateX(3px);
 }
 
@@ -90,9 +90,10 @@
 
 .social-icon:hover {
   color: white;
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
+  /* Emerald 500 */
   transform: translateY(-4px);
-  box-shadow: 0 10px 15px -3px rgba(74, 86, 226, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
 }
 
 .footer-bottom {
