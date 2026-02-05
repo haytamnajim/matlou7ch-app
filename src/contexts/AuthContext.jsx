@@ -107,20 +107,46 @@ export function AuthProvider({ children }) {
   // Fonction de déconnexion
   const logout = async () => {
     console.log("AuthContext: Tentative de déconnexion...");
+
+    // Réinitialiser l'état local immédiatement
+    setUser(null);
+    setProfile(null);
+    console.log("AuthContext: État local réinitialisé");
+
+    // NETTOYAGE FORCÉ DU LOCALSTORAGE
+    // Suppression manuelle des tokens Supabase pour empêcher la reconnexion automatique
     try {
-      // Tenter de se déconnecter de Supabase
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        console.warn("AuthContext: Erreur lors du signOut Supabase:", error);
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+          keysToRemove.push(key);
+        }
       }
-    } catch (err) {
-      console.warn("AuthContext: Exception lors du logout:", err);
-    } finally {
-      // Réinitialisation de l'état local dans tous les cas
-      setUser(null);
-      setProfile(null);
-      console.log("AuthContext: État déconnecté.");
+      keysToRemove.forEach(key => {
+        console.log("AuthContext: Suppression de la clé:", key);
+        localStorage.removeItem(key);
+      });
+    } catch (e) {
+      console.warn("AuthContext: Erreur lors du nettoyage localStorage:", e);
     }
+
+    // Tenter de se déconnecter de Supabase en arrière-plan avec timeout
+    try {
+      // Créer une promesse avec timeout de 2 secondes
+      const signOutPromise = supabase.auth.signOut();
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout')), 2000)
+      );
+
+      await Promise.race([signOutPromise, timeoutPromise]);
+      console.log("AuthContext: Déconnexion Supabase réussie");
+    } catch (err) {
+      console.warn("AuthContext: Supabase signOut échoué ou timeout (ignoré):", err.message);
+    }
+
+    console.log("AuthContext: Déconnexion terminée");
+    return { success: true };
   };
 
   // Fonction de suppression de compte

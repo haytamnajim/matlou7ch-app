@@ -8,14 +8,15 @@ function Profile() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    console.log("Profile: Déconnexion initiée");
+    console.log("=== LOGOUT STARTED ===");
     try {
       await logout();
-      console.log("Profile: Déconnexion réussie");
-      navigate('/');  // Rediriger vers la page d'accueil
+      console.log("Logout successful, redirecting...");
+      // Force navigation using replace to avoid history issues
+      window.location.replace('/');
     } catch (error) {
-      console.error("Profile: Erreur lors de la déconnexion:", error);
-      alert("Erreur lors de la déconnexion. Veuillez réessayer.");
+      console.error("Logout error:", error);
+      window.location.replace('/');
     }
   };
 
@@ -144,6 +145,7 @@ function Profile() {
             className="logout-button"
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               console.log("Profile: Clic bouton détecté");
               handleLogout();
             }}
