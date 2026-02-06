@@ -78,7 +78,7 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #4a56e2, #3498db);
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   border-radius: 3px;
 }
 
@@ -115,8 +115,8 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #4a56e2;
-  box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
   outline: none;
   background-color: #fff;
 }
@@ -239,20 +239,18 @@
   .edit-product-container {
     padding: 25px 20px;
   }
-  
+
   .edit-product-title {
     font-size: 1.5rem;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }
-  
-  .cancel-button, 
+
+  .cancel-button,
   .save-button {
     width: 100%;
     text-align: center;
   }
 }
-
-

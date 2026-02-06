@@ -1,11 +1,12 @@
 .contact-page {
   background-color: #f9f9f9;
   min-height: calc(100vh - 120px);
-  padding-bottom: 60px; /* Ajout d'un padding en bas pour compenser la suppression de la carte */
+  padding-bottom: 60px;
+  /* Ajout d'un padding en bas pour compenser la suppression de la carte */
 }
 
 .contact-hero {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   color: white;
   padding: 60px 20px;
   text-align: center;
@@ -141,12 +142,12 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #4a56e2;
+  border-color: var(--primary-color);
   outline: none;
 }
 
 .submit-button {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 25px;
@@ -162,7 +163,7 @@
 }
 
 .submit-button:hover {
-  background-color: #3a46d2;
+  background-color: var(--primary-hover);
 }
 
 .error-message {
@@ -225,11 +226,11 @@
   .contact-container {
     flex-direction: column;
   }
-  
+
   .contact-info {
     border-radius: 8px 8px 0 0;
   }
-  
+
   .contact-form-container {
     border-radius: 0 0 8px 8px;
   }
@@ -239,11 +240,11 @@
   .contact-title {
     font-size: 2rem;
   }
-  
+
   .contact-container {
     margin-top: -20px;
   }
-  
+
   .contact-info,
   .contact-form-container {
     padding: 30px;
@@ -254,24 +255,22 @@
   .contact-hero {
     padding: 40px 20px;
   }
-  
+
   .contact-title {
     font-size: 1.8rem;
   }
-  
+
   .contact-info,
   .contact-form-container {
     padding: 20px;
   }
-  
+
   .form-group input,
   .form-group textarea {
     padding: 10px;
   }
-  
+
   .submit-button {
     padding: 10px 20px;
   }
 }
-
-

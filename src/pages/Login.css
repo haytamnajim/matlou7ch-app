@@ -32,8 +32,8 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #4a56e2;
-  box-shadow: 0 0 0 3px rgba(74, 86, 226, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .login-card {
@@ -49,7 +49,7 @@
 
 .login-title {
   font-size: 2.2rem;
-  color: #4a56e2;
+  color: var(--primary-color);
   margin-bottom: 30px;
   font-weight: 600;
 }
@@ -74,7 +74,7 @@
 }
 
 .create-account-link {
-  color: #4a56e2;
+  color: var(--secondary-color);
   text-decoration: none;
   font-weight: 500;
   margin-top: 8px;
@@ -87,13 +87,13 @@
 
 .redirect-message {
   background-color: #e8f0fe;
-  color: #4a56e2;
+  color: var(--primary-color);
   padding: 12px 15px;
   border-radius: 8px;
   margin-bottom: 20px;
   text-align: center;
   font-weight: 500;
-  border-left: 4px solid #4a56e2;
+  border-left: 4px solid var(--primary-color);
 }
 
 .error-message {
@@ -115,7 +115,7 @@
 .login-submit-btn {
   width: 100%;
   padding: 16px;
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50px;
@@ -127,7 +127,7 @@
 }
 
 .login-submit-btn:hover {
-  background-color: #3a46d1;
+  background-color: var(--primary-hover);
 }
 
 .login-submit-btn:disabled {

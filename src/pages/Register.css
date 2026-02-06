@@ -1,20 +1,5 @@
-:root {
-  --primary-color: #4a56e2;
-  --primary-hover: #3a46d1;
-  --error-color: #e74c3c;
-  --success-color: #2ecc71;
-  --text-color: #333;
-  --text-light: #777;
-  --border-color: #e0e0e0;
-  --bg-color: #f5f7ff;
-  --card-bg: white;
-  --shadow-soft: 0 10px 30px rgba(74, 86, 226, 0.08);
-  /* Ombre douce plus premium */
-  --border-radius: 20px;
-  --input-radius: 12px;
-  --button-radius: 50px;
-  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+/* :root variables removed to inherit from global index.css */
+/* Uses var(--primary-color), var(--secondary-color) from global scope */
 
 .register-container {
   display: flex;
@@ -34,7 +19,7 @@
   padding: 50px;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
   position: relative;
   box-sizing: border-box;
   animation: slideUp 0.6s ease-out;
@@ -79,7 +64,7 @@
 .back-button:hover {
   background-color: var(--primary-color);
   transform: translateX(-3px);
-  box-shadow: 0 4px 10px rgba(74, 86, 226, 0.2);
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
 }
 
 .back-button:hover a {
@@ -104,7 +89,7 @@
   transform: translateX(-50%);
   width: 50px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), #a29bfe);
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
   border-radius: 2px;
 }
 
@@ -156,7 +141,7 @@
   outline: none;
   border-color: var(--primary-color);
   background-color: white;
-  box-shadow: 0 0 0 4px rgba(74, 86, 226, 0.1);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
   transform: translateY(-1px);
 }
 
@@ -212,7 +197,7 @@
 .register-button {
   width: 100%;
   padding: 18px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #6c5ce7 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
   border-radius: var(--button-radius);
@@ -221,13 +206,13 @@
   cursor: pointer;
   transition: var(--transition);
   margin-top: 20px;
-  box-shadow: 0 10px 20px rgba(74, 86, 226, 0.25);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
   letter-spacing: 0.5px;
 }
 
 .register-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(74, 86, 226, 0.35);
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.35);
 }
 
 .register-button:disabled {
