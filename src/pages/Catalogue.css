@@ -1,8 +1,7 @@
-/* Styles pour la page catalogue */
 .search-results-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px 20px;
   font-family: 'Roboto', sans-serif;
 }
 

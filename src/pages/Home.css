@@ -27,7 +27,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 60px;
+  padding: 140px 60px 100px;
+  /* Increased top padding to 140px */
   text-align: center;
 }
 

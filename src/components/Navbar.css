@@ -11,7 +11,6 @@
 
 .navbar-content {
   max-width: 1400px;
-  /* Wider for better spacing */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -27,28 +26,28 @@
 }
 
 .logo-icon {
-  background: var(--bg-sage);
+  background: linear-gradient(135deg, var(--bg-sage), #a4bc5c);
   color: var(--bg-main);
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 22px;
+  box-shadow: 0 4px 10px rgba(133, 159, 61, 0.3);
 }
 
 .logo-text {
   color: var(--text-white);
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: -0.5px;
-}
-
-.logo-tagline {
-  display: none;
-  /* Removed for cleaner look on premium UI */
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  background: linear-gradient(to right, #fff, var(--text-white));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Redesigned Search Bar */
@@ -56,21 +55,25 @@
   flex: 1;
   max-width: 500px;
   margin: 0 40px;
-  background: rgba(255, 255, 255, 0.08);
-  /* Slightly more visible */
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  /* More rounded */
+  border-radius: 24px;
   padding: 4px 6px 4px 20px;
   display: flex;
   align-items: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .search-bar:focus-within {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(25, 25, 25, 0.8);
   border-color: var(--bg-sage);
-  box-shadow: 0 0 0 4px rgba(133, 159, 61, 0.1);
+  box-shadow: 0 0 0 4px rgba(133, 159, 61, 0.15), 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input {
@@ -81,21 +84,22 @@
   width: 100%;
   outline: none;
   font-size: 15px;
+  font-weight: 500;
   font-family: var(--font-main);
 }
 
 .search-button {
   background: var(--bg-sage) !important;
-  /* Force green theme */
   border: none;
   width: 44px;
   height: 40px;
-  border-radius: 14px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 8px rgba(133, 159, 61, 0.2);
 }
 
 .search-button svg {
@@ -103,14 +107,15 @@
 }
 
 .search-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(133, 159, 61, 0.3);
 }
 
 /* Navigation Actions */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 28px;
 }
 
 .icon-link {
@@ -120,11 +125,30 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  transition: color 0.2s;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
 .icon-link:hover {
   color: var(--text-white);
+  transform: translateY(-2px);
+}
+
+.icon-link::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--bg-sage);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.icon-link:hover::after {
+  width: 12px;
 }
 
 .icon-link svg {
@@ -135,25 +159,28 @@
 
 .icon-link span {
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .donate-button {
-  background: var(--bg-sage);
+  background: linear-gradient(135deg, var(--bg-sage), #a4bc5c);
   color: var(--bg-main) !important;
-  padding: 10px 20px;
-  border-radius: 14px;
-  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 16px;
+  font-weight: 800;
   text-transform: uppercase;
   font-size: 13px;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(133, 159, 61, 0.2);
+  border: none;
 }
 
 .donate-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(133, 159, 61, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(133, 159, 61, 0.4);
 }
 
 /* Profile Pill Button */
@@ -161,52 +188,70 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--text-white);
-  /* Match request for white H style */
-  padding: 10px 18px;
-  border-radius: 16px;
+  background: #ffffff;
+  padding: 9px 20px;
+  border-radius: 20px;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .nav-profile-pill:hover {
-  background: #ffffff;
+  background: #f8f9fa;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .profile-pill-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: #1a1a1a;
 }
 
 .profile-pill-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .profile-pill-text {
-  color: #000000;
-  font-weight: 500;
-  font-size: 15px;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 14px;
   font-family: var(--font-main);
+}
+
+.nav-login-btn {
+  color: var(--text-white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s;
+}
+
+.nav-login-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-white);
 }
 
 /* Secondary Menu with Bulge Effect */
 .nav-menu {
   background: var(--bg-main);
-  padding: 12px 0 22px;
+  padding: 12px 0 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  /* Controlled gap */
   position: relative;
   border-top: 1px solid var(--glass-border);
   margin-top: -1px;
+  overflow: visible;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .menu-item {
@@ -217,78 +262,94 @@
   position: relative;
   z-index: 10;
   width: 90px;
-  /* Fixed width for better mapping */
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-icon-wrapper {
   color: var(--text-dim);
-  transition: all 0.4s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
 }
 
 .menu-icon-wrapper svg {
   width: 24px;
   height: 24px;
+  stroke-width: 2;
 }
 
 .menu-label {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-dim);
+  font-weight: 700;
+  color: var(--bg-main);
   margin-top: 4px;
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.4s;
+  transform: translateY(5px);
+  transition: all 0.3s;
+  position: relative;
+  /* Changed from absolute to relative for better flow */
 }
 
 /* Active State - THE BULGE */
 .menu-item.active .menu-icon-wrapper {
-  background: var(--bg-sage);
+  background: linear-gradient(135deg, var(--bg-sage), #a4bc5c);
   color: var(--bg-main);
-  transform: translateY(-25px);
-  box-shadow: 0 10px 20px rgba(133, 159, 61, 0.3);
+  transform: translateY(-24px);
+  /* Slightly reduced lift */
+  box-shadow: 0 10px 20px rgba(133, 159, 61, 0.4);
 }
 
 .menu-item.active .menu-label {
   opacity: 1;
-  transform: translateY(0);
-}
-
-/* The Notch / Dip in the bar */
-.nav-menu::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-main);
-  z-index: 1;
+  transform: translateY(22px);
+  /* Positioned below the bulged icon */
+  color: var(--text-white);
 }
 
 /* Indicator - This creates the curved cutout shape */
 .nav-menu-indicator {
   position: absolute;
-  top: -20px;
-  width: 90px;
-  height: 60px;
+  top: -24px;
+  width: 100px;
+  height: 64px;
   background: var(--bg-main);
   border-radius: 50%;
-  border: 1px solid var(--glass-border);
+  border-top: 2px solid var(--glass-border);
   z-index: 5;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   justify-content: center;
+  filter: drop-shadow(0 -4px 10px rgba(0, 0, 0, 0.1));
 }
 
-/* Position mapping for the indicator based on (item_width + gap) */
-/* Distance = 90px + 30px = 120px */
+/* Small pseudo elements for smooth corners on the notch */
+.nav-menu-indicator::before,
+.nav-menu-indicator::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+.nav-menu-indicator::before {
+  left: -20px;
+  border-radius: 0 20px 0 0;
+  box-shadow: 5px -5px 0 0 var(--bg-main);
+}
+
+.nav-menu-indicator::after {
+  right: -20px;
+  border-radius: 20px 0 0 0;
+  box-shadow: -5px -5px 0 0 var(--bg-main);
+}
+
+/* Position mapping */
 .menu-item:nth-child(1).active~.nav-menu-indicator {
   transform: translateX(calc(-1.5 * 120px));
 }
@@ -312,8 +373,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   z-index: 2000;
   display: flex;
   justify-content: center;
@@ -322,187 +384,170 @@
 }
 
 .advanced-search-container {
-  background: var(--bg-main);
-  width: 100%;
-  max-width: 600px;
-  border-radius: 24px;
+  background: var(--bg-dark);
+  width: 92%;
+  max-width: 650px;
+  border-radius: 32px;
   border: 1px solid var(--glass-border);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  animation: slideDown 0.3s ease-out;
+  animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideDown {
+@keyframes modalIn {
   from {
-    transform: translateY(-30px);
+    transform: translateY(40px) scale(0.95);
     opacity: 0;
   }
 
   to {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
 
 .advanced-search-header {
-  padding: 25px 30px;
+  padding: 30px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .advanced-search-header h3 {
   margin: 0;
   color: var(--text-white);
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .close-button {
-  background: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--glass-border);
-  color: var(--text-dim);
-  width: 32px;
-  height: 32px;
+  color: var(--text-white);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 20px;
-  transition: all 0.2s;
+  font-size: 22px;
+  transition: all 0.3s;
 }
 
 .close-button:hover {
-  background: var(--bg-sage);
-  color: var(--bg-main);
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+  transform: rotate(90deg);
 }
 
 .advanced-search-form {
-  padding: 30px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.search-field {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 24px;
 }
 
 .search-field label {
-  color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 600;
+  color: var(--bg-sage);
+  font-size: 12px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .search-field input {
-  background: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  padding: 12px 18px;
+  border-radius: 16px;
+  padding: 16px 20px;
   color: var(--text-white);
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
   outline: none;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
 }
 
 .search-field input:focus {
   border-color: var(--bg-sage);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(133, 159, 61, 0.1);
 }
 
 .search-submit-button {
   background: var(--bg-sage);
   color: var(--bg-main);
   border: none;
-  border-radius: 16px;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: 700;
+  border-radius: 20px;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: transform 0.2s;
+  margin-top: 16px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .search-submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(133, 159, 61, 0.2);
-}
-
-.search-submit-button svg {
-  fill: var(--bg-main);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(133, 159, 61, 0.4);
 }
 
 .recent-searches {
-  padding: 20px 30px;
-  background: rgba(0, 0, 0, 0.1);
+  padding: 24px 40px;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
 .recent-search-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--bg-dark);
-  padding: 8px 14px;
-  border-radius: 12px;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 18px;
+  border-radius: 14px;
   border: 1px solid var(--glass-border);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 
 .recent-search-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--bg-sage);
-}
-
-.recent-search-item .search-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--bg-main);
-  background: var(--bg-sage);
-  /* Unified theme */
+  transform: scale(1.05);
 }
 
 .recent-search-item .search-text {
-  color: var(--text-dim);
-  font-size: 13px;
+  color: var(--text-white);
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.input-with-clear {
-  position: relative;
-  display: flex;
-}
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 0 20px;
+  }
 
-.input-with-clear input {
-  width: 100%;
-  padding-right: 40px;
-}
+  .search-bar {
+    display: none;
+  }
 
-.clear-input {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: var(--text-dim);
-  font-size: 18px;
-  cursor: pointer;
+  .nav-actions {
+    gap: 15px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
 }

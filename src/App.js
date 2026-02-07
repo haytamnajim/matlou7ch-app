@@ -4,6 +4,7 @@ import { useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
+import Loader from './components/Loader';
 import './App.css';
 
 // Pages principales
@@ -48,7 +49,7 @@ function ProtectedRoute({ children }) {
   const location = useLocation();
 
   if (loading) {
-    return <div className="loading-screen">Chargement...</div>;
+    return <Loader />;
   }
 
   if (!user) {
@@ -75,7 +76,7 @@ function AdminRoute({ children }) {
 function App() {
   return (
     <Router>
-      <React.Suspense fallback={<div className="loading-screen">Chargement...</div>}>
+      <React.Suspense fallback={<Loader />}>
         <Routes>
           {/* Routes d'administration */}
           <Route path="/admin/login" element={<AdminLogin />} />
