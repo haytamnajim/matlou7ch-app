@@ -51,7 +51,6 @@ function Navbar() {
             <div className="logo-icon">M</div>
             <span className="logo-text">Matlou7ch.org</span>
           </Link>
-          <span className="logo-tagline">Donnez, recevez, partagez</span>
         </div>
 
         <div className="search-bar" onClick={handleSearchClick}>
@@ -85,7 +84,7 @@ function Navbar() {
 
           {user ? (
             <Link to="/profile" className="user-avatar" style={{
-              backgroundColor: profile?.avatar_color || '#f39c12',
+              backgroundColor: profile?.avatar_color || 'var(--text-white)',
               backgroundImage: profile?.avatar && profile.avatar.length > 5 ? `url(${profile.avatar})` : 'none',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
@@ -101,10 +100,10 @@ function Navbar() {
       </div>
 
       <div className="nav-menu">
-        <Link to="/" className="menu-item">Accueil</Link>
-        <Link to="/catalogue" className="menu-item">Catalogue</Link>
-        <Link to="/notre-adn" className="menu-item">Notre ADN</Link>
-        <Link to="/contact" className="menu-item">Contact</Link>
+        <Link to="/" className={`menu-item ${window.location.pathname === '/' ? 'active' : ''}`}>Accueil</Link>
+        <Link to="/catalogue" className={`menu-item ${window.location.pathname === '/catalogue' ? 'active' : ''}`}>Catalogue</Link>
+        <Link to="/notre-adn" className={`menu-item ${window.location.pathname === '/notre-adn' ? 'active' : ''}`}>Notre ADN</Link>
+        <Link to="/contact" className={`menu-item ${window.location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
       </div>
 
       {showAdvancedSearch && (

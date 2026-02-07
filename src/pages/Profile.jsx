@@ -32,7 +32,7 @@ function Profile() {
           </Link>
           <div className="avatar-container">
             <div className="user-avatar" style={{
-              backgroundColor: profile?.avatar_color || 'var(--primary-color)',
+              backgroundColor: profile?.avatar_color || 'var(--text-white)',
               backgroundImage: profile?.avatar && profile.avatar.length > 5 ? `url(${profile.avatar})` : 'none',
               backgroundSize: 'cover',
               backgroundPosition: 'center',

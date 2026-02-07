@@ -1,33 +1,31 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
-  /* Lighter, cleaner background */
-  min-height: 100vh;
+:root {
+  /* Premium Green Mobile-UI Palette */
+  --bg-main: #31511E;
+  --bg-sage: #859F3D;
+  --bg-dark: #1A1A19;
+  --text-white: #F6FCDF;
+  --text-dim: rgba(246, 252, 223, 0.7);
+
+  --primary-color: #859F3D;
+  --primary-hover: #163832;
+  --primary-light: rgba(133, 159, 61, 0.2);
+
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(15px);
+
+  --card-radius: 24px;
+  --font-main: 'Outfit', sans-serif;
 }
 
-:root {
-  /* Custom Green Palette Integration */
-  --primary-color: #235347;
-  --primary-hover: #163832;
-  --primary-light: #DAF1DE;
-
-  --secondary-color: #8EB69B;
-  --secondary-hover: #235347;
-  --secondary-light: #DAF1DE;
-
-  --accent-warm: #8EB69B;
-
-  --text-main: #051F20;
-  --text-muted: #163832;
-
-  --bg-white: #ffffff;
-  --bg-soft: #DAF1DE;
-  /* Palette light green */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-white);
+  min-height: 100vh;
 }
 
 html,
