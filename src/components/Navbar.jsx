@@ -83,15 +83,14 @@ function Navbar() {
           </Link>
 
           {user ? (
-            <Link to="/profile" className="user-avatar" style={{
-              backgroundColor: profile?.avatar_color || 'var(--text-white)',
-              backgroundImage: profile?.avatar && profile.avatar.length > 5 ? `url(${profile.avatar})` : 'none',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}>
-              {(!profile?.avatar || profile.avatar.length <= 5) && (
-                <span style={{ fontSize: '20px' }}>{getInitial()}</span>
-              )}
+            <Link to="/profile" className="nav-profile-pill">
+              <div className="profile-pill-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <span className="profile-pill-text">Profile</span>
             </Link>
           ) : (
             <Link to="/connexion" className="nav-login-btn">Se connecter</Link>
@@ -100,10 +99,45 @@ function Navbar() {
       </div>
 
       <div className="nav-menu">
-        <Link to="/" className={`menu-item ${window.location.pathname === '/' ? 'active' : ''}`}>Accueil</Link>
-        <Link to="/catalogue" className={`menu-item ${window.location.pathname === '/catalogue' ? 'active' : ''}`}>Catalogue</Link>
-        <Link to="/notre-adn" className={`menu-item ${window.location.pathname === '/notre-adn' ? 'active' : ''}`}>Notre ADN</Link>
-        <Link to="/contact" className={`menu-item ${window.location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
+        <Link to="/" className={`menu-item ${window.location.pathname === '/' ? 'active' : ''}`}>
+          <div className="menu-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <span className="menu-label">Accueil</span>
+        </Link>
+        <Link to="/catalogue" className={`menu-item ${window.location.pathname === '/catalogue' ? 'active' : ''}`}>
+          <div className="menu-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <span className="menu-label">Catalogue</span>
+        </Link>
+        <Link to="/notre-adn" className={`menu-item ${window.location.pathname === '/notre-adn' ? 'active' : ''}`}>
+          <div className="menu-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5H12z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <span className="menu-label">Notre ADN</span>
+        </Link>
+        <Link to="/contact" className={`menu-item ${window.location.pathname === '/contact' ? 'active' : ''}`}>
+          <div className="menu-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <span className="menu-label">Contact</span>
+        </Link>
+        {/* Animated Background Notch */}
+        <div className="nav-menu-indicator"></div>
       </div>
 
       {showAdvancedSearch && (
