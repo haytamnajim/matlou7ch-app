@@ -1,6 +1,6 @@
 /* Variables globales */
 :root {
-  --primary-color: #4a56e2;
+  --primary-color: var(--primary-color);
   --secondary-color: #f9f9f9;
   --text-color: #333;
   --border-color: #eee;
@@ -241,8 +241,10 @@
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
-  max-width: 180px; /* Ajout d'une largeur maximale */
-  text-align: center; /* Centrer le texte */
+  max-width: 180px;
+  /* Ajout d'une largeur maximale */
+  text-align: center;
+  /* Centrer le texte */
 }
 
 .contact-button:hover {
@@ -280,11 +282,11 @@
   .faq-sidebar {
     display: block;
   }
-  
+
   .faq-categories-mobile {
     display: none;
   }
-  
+
   .faq-container {
     margin-left: 20px;
   }
@@ -294,15 +296,15 @@
   .faq-title {
     font-size: 2rem;
   }
-  
+
   .faq-category-header h2 {
     font-size: 1.2rem;
   }
-  
+
   .faq-hero {
     padding: 40px 20px;
   }
-  
+
   .faq-question h3 {
     font-size: 1rem;
   }

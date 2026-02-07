@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #4a56e2;
+  --primary-color: var(--primary-color);
   --border-color: #e0e0e0;
   --border-radius: 8px;
 }
@@ -105,11 +105,11 @@
   .legal-hero {
     padding: 30px 15px;
   }
-  
+
   .legal-title {
     font-size: 2rem;
   }
-  
+
   .legal-content {
     padding: 20px;
   }

@@ -22,7 +22,7 @@
 
 .profile-banner {
   height: 140px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   position: relative;
 }
 
@@ -68,7 +68,8 @@
   margin-bottom: 20px;
 }
 
-.profile-location, .profile-member-since {
+.profile-location,
+.profile-member-since {
   display: flex;
   align-items: center;
   color: #64748b;
@@ -77,7 +78,7 @@
 
 .profile-icon {
   margin-right: 10px;
-  color: #6366f1;
+  color: var(--primary-color);
 }
 
 .profile-description {
@@ -85,7 +86,7 @@
   border-radius: 12px;
   padding: 18px;
   margin: 20px 0;
-  border-left: 4px solid #6366f1;
+  border-left: 4px solid var(--primary-color);
 }
 
 .profile-description p {
@@ -117,7 +118,7 @@
 .stat-value {
   font-size: 32px;
   font-weight: 700;
-  color: #6366f1;
+  color: var(--primary-color);
   margin-bottom: 8px;
 }
 
@@ -159,7 +160,7 @@
 .profile-stats .stat-value {
   font-size: 32px;
   font-weight: 700;
-  color: #6366f1;
+  color: var(--primary-color);
   margin-bottom: 8px;
 }
 
@@ -176,16 +177,16 @@
     text-align: center;
     padding: 20px 15px;
   }
-  
+
   .profile-avatar-wrapper {
     margin-right: 0;
     margin-bottom: 20px;
   }
-  
+
   .profile-meta {
     align-items: center;
   }
-  
+
   .profile-stats {
     justify-content: center;
   }
@@ -336,7 +337,8 @@
   gap: 8px;
 }
 
-.product-category, .product-condition {
+.product-category,
+.product-condition {
   background-color: var(--neutral-200, #f5f7fa);
   padding: 4px 8px;
   border-radius: 4px;
@@ -388,7 +390,8 @@
   line-height: 1.5;
 }
 
-.loading-spinner, .error-message {
+.loading-spinner,
+.error-message {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -407,22 +410,22 @@
     align-items: flex-start;
     padding-top: 30px;
   }
-  
+
   .profile-avatar-wrapper {
     margin-top: -70px;
     margin-right: 30px;
     margin-bottom: 0;
   }
-  
+
   .profile-info-section {
     text-align: left;
     padding-top: 20px;
   }
-  
+
   .profile-meta {
     align-items: flex-start;
   }
-  
+
   .profile-avatar {
     width: 120px;
     height: 120px;
@@ -434,47 +437,47 @@
   .user-profile-container {
     gap: 15px;
   }
-  
+
   .profile-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-  
+
   .back-button {
     margin-bottom: 10px;
   }
-  
+
   .stats-card {
     padding: 15px;
   }
-  
+
   .stat-value {
     font-size: 28px;
   }
-  
+
   .stat-label {
     font-size: 13px;
   }
-  
+
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-  
+
   .empty-listings-card {
     padding: 30px 20px;
   }
-  
+
   .empty-icon {
     font-size: 40px;
     width: 90px;
     height: 90px;
   }
-  
+
   .empty-title {
     font-size: 18px;
   }
-  
+
   .empty-message {
     font-size: 14px;
   }
@@ -484,37 +487,37 @@
   .user-profile-page {
     padding: 20px 15px;
   }
-  
+
   .profile-banner {
     height: 100px;
   }
-  
+
   .profile-content {
     padding: 0 20px 20px;
   }
-  
+
   .profile-avatar {
     width: 90px;
     height: 90px;
     font-size: 36px;
   }
-  
+
   .profile-username {
     font-size: 20px;
   }
-  
+
   .profile-description {
     padding: 12px;
   }
-  
+
   .profile-description p {
     font-size: 14px;
   }
-  
+
   .section-title {
     font-size: 18px;
   }
-  
+
   .products-grid {
     grid-template-columns: 1fr;
   }
@@ -528,7 +531,8 @@
   border-top: 1px solid var(--neutral-200, #e5e7eb);
 }
 
-.edit-product-button, .delete-product-button {
+.edit-product-button,
+.delete-product-button {
   padding: 6px 12px;
   border-radius: var(--border-radius-sm, 4px);
   font-size: 0.85rem;
@@ -611,6 +615,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -706,7 +711,8 @@
   gap: 12px;
 }
 
-.cancel-report-button, .submit-report-button {
+.cancel-report-button,
+.submit-report-button {
   padding: 10px 16px;
   border-radius: 4px;
   font-weight: 500;

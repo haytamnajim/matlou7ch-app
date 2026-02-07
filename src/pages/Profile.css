@@ -10,7 +10,7 @@
   background-color: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .profile-header {
@@ -47,13 +47,15 @@
 
 .avatar-container {
   margin-right: 15px;
-  margin-left: 40px; /* Augmenté pour laisser de l'espace pour le bouton retour */
+  margin-left: 40px;
+  /* Augmenté pour laisser de l'espace pour le bouton retour */
 }
 
 .user-avatar {
   width: 60px;
   height: 60px;
-  background-color: #FF5722; /* Couleur orange de la plateforme */
+  background-color: #FF5722;
+  /* Couleur orange de la plateforme */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -61,7 +63,8 @@
   color: white;
   font-weight: bold;
   font-size: 24px;
-  box-shadow: 0 3px 8px rgba(247, 148, 29, 0.2); /* Ombre adaptée à la couleur orange */
+  box-shadow: 0 3px 8px rgba(247, 148, 29, 0.2);
+  /* Ombre adaptée à la couleur orange */
   border: 3px solid white;
 }
 
@@ -79,14 +82,16 @@
 .profile-public-link {
   margin: 5px 0 0;
   font-size: 14px;
-  color: #4a56e2; /* Couleur principale bleue */
+  color: var(--primary-color);
+  /* Couleur principale verte */
   text-decoration: none;
   display: inline-block;
   transition: color 0.2s ease;
 }
 
 .profile-public-link:hover {
-  color: #3a46d1; /* Version légèrement plus foncée */
+  color: #3a46d1;
+  /* Version légèrement plus foncée */
   text-decoration: underline;
 }
 
@@ -123,7 +128,8 @@
 }
 
 .menu-icon svg {
-  fill: #4a56e2; /* Couleur principale bleue */
+  fill: var(--primary-color);
+  /* Couleur principale verte */
 }
 
 .menu-item span {
@@ -148,7 +154,8 @@
 }
 
 .footer-link:hover {
-  color: #4a56e2; /* Couleur principale bleue */
+  color: var(--primary-color);
+  /* Couleur principale verte */
 }
 
 .logout-button {
@@ -160,7 +167,8 @@
   cursor: pointer;
   width: 100%;
   text-align: left;
-  color: #dc3545; /* Rouge pour la déconnexion */
+  color: #dc3545;
+  /* Rouge pour la déconnexion */
   margin-top: 15px;
   font-weight: 500;
   font-size: 15px;
@@ -168,16 +176,19 @@
 }
 
 .logout-button:hover {
-  color: #c82333; /* Rouge plus foncé */
+  color: #c82333;
+  /* Rouge plus foncé */
 }
 
 .logout-button svg {
   margin-right: 10px;
-  fill: #dc3545; /* Rouge pour la déconnexion */
+  fill: #dc3545;
+  /* Rouge pour la déconnexion */
 }
 
 .logout-button:hover svg {
-  fill: #c82333; /* Rouge plus foncé */
+  fill: #c82333;
+  /* Rouge plus foncé */
 }
 
 /* Responsive design */
@@ -186,14 +197,8 @@
     border-radius: 0;
     box-shadow: none;
   }
-  
+
   .profile-page {
     padding: 0;
   }
 }
-
-
-
-
-
-

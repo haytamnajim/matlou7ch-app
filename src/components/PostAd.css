@@ -363,7 +363,7 @@
   left: 0;
   right: 0;
   height: 6px;
-  background: linear-gradient(90deg, #2ecc71, #3498db, #9b59b6, #e74c3c, #f1c40f);
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-hover));
 }
 
 .confetti-icon {

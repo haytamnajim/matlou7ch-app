@@ -32,7 +32,7 @@ function Profile() {
           </Link>
           <div className="avatar-container">
             <div className="user-avatar" style={{
-              backgroundColor: profile?.avatar_color || '#f39c12',
+              backgroundColor: profile?.avatar_color || 'var(--primary-color)',
               backgroundImage: profile?.avatar && profile.avatar.length > 5 ? `url(${profile.avatar})` : 'none',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
@@ -150,7 +150,7 @@ function Profile() {
               handleLogout();
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="20px" height="20px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--primary-color)" width="20px" height="20px">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
             </svg>

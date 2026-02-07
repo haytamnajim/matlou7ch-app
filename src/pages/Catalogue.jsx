@@ -57,7 +57,7 @@ function Catalogue() {
   // Constantes pour la génération de données fictives
   const LOCATIONS = ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'];
   const CATEGORIES_LIST = ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'];
-  const AVATAR_COLORS = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'];
+  const AVATAR_COLORS = ['#235347', '#163832', '#8EB69B', '#163832', '#235347'];
   const USER_NAMES = ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'];
 
   // Filtrer les résultats en fonction des critères de recherche
@@ -243,8 +243,8 @@ function Catalogue() {
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
-                            fill={favorites.includes(item.id) ? "#FF5733" : "none"}
-                            stroke={favorites.includes(item.id) ? "#FF5733" : "white"}
+                            fill={favorites.includes(item.id) ? "var(--primary-color)" : "none"}
+                            stroke={favorites.includes(item.id) ? "var(--primary-color)" : "white"}
                             width="24px"
                             height="24px"
                           >

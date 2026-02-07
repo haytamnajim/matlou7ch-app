@@ -40,7 +40,7 @@
   padding: 80px 60px;
   overflow: hidden;
   height: 400px;
-  background-color: #a7d1f7 !important;
+  background-color: var(--primary-light) !important;
   width: 100%;
   box-sizing: border-box;
 }
@@ -236,7 +236,7 @@
 
 .product-card {
   position: relative;
-  border: 2px solid #4a90e2;
+  border: 2px solid var(--primary-color);
   border-radius: 12px;
   background-color: white;
   overflow: hidden;
@@ -381,7 +381,7 @@
 }
 
 .see-all-button:hover {
-  background-color: #3a7bc8;
+  background-color: var(--primary-hover);
   text-decoration: none;
 }
 
@@ -426,7 +426,7 @@ a.see-all-button {
   position: relative;
   display: inline-block;
   animation: bounce 2s ease infinite;
-  color: #e74c3c;
+  color: var(--primary-color);
   font-weight: 700;
 }
 

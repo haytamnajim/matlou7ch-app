@@ -1,7 +1,8 @@
 .messages-page {
   padding: 30px;
   background-color: #f0f0f0;
-  min-height: calc(100vh - 120px); /* Ajuster selon la hauteur de votre navbar et footer */
+  min-height: calc(100vh - 120px);
+  /* Ajuster selon la hauteur de votre navbar et footer */
 }
 
 .messages-container-wrapper {
@@ -16,20 +17,21 @@
   background-color: white;
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .messages-detail-container {
   flex: 1;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  min-height: 500px; /* Hauteur minimale pour que le conteneur soit visible */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  min-height: 500px;
+  /* Hauteur minimale pour que le conteneur soit visible */
 }
 
 .messages-title {
   text-align: center;
-  color: #4a56e2;
+  color: var(--primary-color);
   margin-bottom: 30px;
   font-size: 28px;
 }
@@ -53,7 +55,7 @@
 }
 
 .tab-button.active {
-  color: #4a56e2;
+  color: var(--primary-color);
   font-weight: 500;
 }
 
@@ -64,7 +66,7 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
 }
 
 .empty-state {
@@ -75,7 +77,8 @@
   text-align: center;
 }
 
-.message-icon-container, .trash-icon-container {
+.message-icon-container,
+.trash-icon-container {
   background-color: #f5f5f5;
   border-radius: 50%;
   width: 120px;
@@ -117,8 +120,9 @@
   .messages-container-wrapper {
     flex-direction: column;
   }
-  
+
   .messages-detail-container {
-    display: none; /* Cacher le deuxième conteneur sur mobile */
+    display: none;
+    /* Cacher le deuxième conteneur sur mobile */
   }
 }

@@ -272,7 +272,7 @@ function UserProfile() {
                         onClick={(e) => toggleFavorite(product.id, e)}
                       >
                         {favorites.includes(product.id) ? (
-                          <FaHeart color="#FF5733" size={24} />
+                          <FaHeart color="var(--primary-color)" size={24} />
                         ) : (
                           <FaRegHeart color="white" size={24} />
                         )}

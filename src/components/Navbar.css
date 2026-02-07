@@ -213,7 +213,7 @@
 
 .user-avatar:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(35, 83, 71, 0.3);
 }
 
 .nav-login-btn {
@@ -267,7 +267,7 @@
 }
 
 .menu-item:hover {
-  color: #4a56e2;
+  color: var(--primary-color);
 }
 
 .menu-item::after {
@@ -277,7 +277,7 @@
   height: 3px;
   bottom: 0;
   left: 0;
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -404,8 +404,8 @@
 
 .search-field input:focus,
 .search-field select:focus {
-  border-color: #4a56e2;
-  box-shadow: 0 0 0 4px rgba(74, 86, 226, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(35, 83, 71, 0.1);
   outline: none;
 }
 
@@ -439,7 +439,7 @@
 .search-submit-button {
   width: 100%;
   padding: 18px;
-  background: linear-gradient(135deg, #4a56e2 0%, #3b46b8 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -451,13 +451,13 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(74, 86, 226, 0.3);
+  box-shadow: 0 4px 12px rgba(35, 83, 71, 0.3);
   margin-top: 15px;
 }
 
 .search-submit-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(74, 86, 226, 0.4);
+  box-shadow: 0 8px 20px rgba(35, 83, 71, 0.4);
 }
 
 .recent-searches {

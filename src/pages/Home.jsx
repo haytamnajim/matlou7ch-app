@@ -55,7 +55,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/1" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#FF9800" }}>A</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-color)" }}>A</div>
               <Link
                 to="/profil/ayoub"
                 className="product-user-name"
@@ -78,7 +78,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/2" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#795548" }}>Y</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-hover)" }}>Y</div>
               <Link
                 to="/profil/youssef"
                 className="product-user-name"
@@ -101,7 +101,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/3" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#CDDC39" }}>B</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--secondary-color)" }}>B</div>
               <Link
                 to="/profil/bilal"
                 className="product-user-name"
@@ -124,7 +124,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/4" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#FF5722" }}>R</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-color)" }}>R</div>
               <Link
                 to="/profil/rachid"
                 className="product-user-name"
@@ -179,7 +179,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/6" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#4CAF50" }}>S</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-hover)" }}>S</div>
               <Link
                 to="/profil/sara"
                 className="product-user-name"
@@ -202,7 +202,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/7" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#E91E63" }}>F</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--secondary-color)" }}>F</div>
               <Link
                 to="/profil/fatima"
                 className="product-user-name"
@@ -225,7 +225,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/8" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#673AB7" }}>I</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-color)" }}>I</div>
               <Link
                 to="/profil/imane"
                 className="product-user-name"
@@ -257,7 +257,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/9" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#9C27B0" }}>M</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-hover)" }}>M</div>
               <Link
                 to="/profil/mohammed"
                 className="product-user-name"
@@ -280,7 +280,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/10" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#607D8B" }}>Z</div>
+              <div className="product-avatar" style={{ backgroundColor: "#163832" }}>Z</div>
               <Link
                 to="/profil/zineb"
                 className="product-user-name"
@@ -303,7 +303,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/11" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#00BCD4" }}>J</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--secondary-color)" }}>J</div>
               <Link
                 to="/profil/jamila"
                 className="product-user-name"
@@ -326,7 +326,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/12" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#3F51B5" }}>H</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-color)" }}>H</div>
               <Link
                 to="/profil/hassan"
                 className="product-user-name"
@@ -358,7 +358,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/13" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#2196F3" }}>L</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-hover)" }}>L</div>
               <Link
                 to="/profil/laila"
                 className="product-user-name"
@@ -381,7 +381,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/14" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#8BC34A" }}>O</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--secondary-color)" }}>O</div>
               <Link
                 to="/profil/omar"
                 className="product-user-name"
@@ -404,7 +404,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/15" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#FF4081" }}>D</div>
+              <div className="product-avatar" style={{ backgroundColor: "var(--primary-color)" }}>D</div>
               <Link
                 to="/profil/dounia"
                 className="product-user-name"
@@ -427,7 +427,7 @@ function Home() {
           <div className="product-card">
             <div className="product-image-container">
               <Link to="/produit/16" className="product-link-overlay"></Link>
-              <div className="product-avatar" style={{ backgroundColor: "#009688" }}>K</div>
+              <div className="product-avatar" style={{ backgroundColor: "#163832" }}>K</div>
               <Link
                 to="/profil/karim"
                 className="product-user-name"

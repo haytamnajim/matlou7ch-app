@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 30px 20px;
-  background-color: #f8f9fa;
+  background-color: var(--primary-light);
   min-height: calc(100vh - 80px);
 }
 
@@ -22,7 +22,7 @@
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, #4a56e2, #3498db);
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
 }
 
 .edit-product-header {

@@ -11,32 +11,23 @@ body {
 }
 
 :root {
-  /* Natural Theme: Green (Generosity) & Blue (Peace) */
-  --primary-color: #10B981;
-  /* Emerald 500 */
-  --primary-hover: #059669;
-  /* Emerald 600 */
-  --primary-light: #D1FAE5;
-  /* Emerald 100 */
+  /* Custom Green Palette Integration */
+  --primary-color: #235347;
+  --primary-hover: #163832;
+  --primary-light: #DAF1DE;
 
-  --secondary-color: #3B82F6;
-  /* Blue 500 */
-  --secondary-hover: #2563EB;
-  /* Blue 600 */
-  --secondary-light: #DBEAFE;
-  /* Blue 100 */
+  --secondary-color: #8EB69B;
+  --secondary-hover: #235347;
+  --secondary-light: #DAF1DE;
 
-  --accent-warm: #F59E0B;
-  /* Amber 500 - for subtle warmth */
+  --accent-warm: #8EB69B;
 
-  --text-main: #1e293b;
-  /* Slate 800 */
-  --text-muted: #64748b;
-  /* Slate 500 */
+  --text-main: #051F20;
+  --text-muted: #163832;
 
   --bg-white: #ffffff;
-  --bg-soft: #f0fdf4;
-  /* Very subtle green tint */
+  --bg-soft: #DAF1DE;
+  /* Palette light green */
 }
 
 html,

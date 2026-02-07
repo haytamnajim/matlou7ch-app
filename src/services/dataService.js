@@ -13,7 +13,7 @@ const INITIAL_USERS = [
         registrationDate: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // Il y a 2 heures
         listings: 3,
         avatar: 'S',
-        avatarColor: '#FF5252',
+        avatarColor: '#235347',
     },
     {
         id: 2,
@@ -24,7 +24,7 @@ const INITIAL_USERS = [
         registrationDate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
         listings: 5,
         avatar: 'K',
-        avatarColor: '#448AFF',
+        avatarColor: '#163832',
     },
     {
         id: 3,
@@ -35,7 +35,7 @@ const INITIAL_USERS = [
         registrationDate: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
         listings: 2,
         avatar: 'F',
-        avatarColor: '#69F0AE',
+        avatarColor: '#8EB69B',
     },
 ];
 

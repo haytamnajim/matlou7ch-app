@@ -292,14 +292,16 @@
   gap: 6px;
 }
 
-.donor-location, .donor-member-since {
+.donor-location,
+.donor-member-since {
   display: flex;
   align-items: center;
   color: #666;
   font-size: 14px;
 }
 
-.donor-location svg, .donor-member-since svg {
+.donor-location svg,
+.donor-member-since svg {
   margin-right: 8px;
   color: #4a56e2;
   font-size: 14px;
@@ -357,23 +359,23 @@
   .product-title {
     font-size: 20px;
   }
-  
+
   .main-image-container {
     height: 250px;
   }
-  
+
   .donor-avatar {
     width: 50px;
     height: 50px;
     font-size: 20px;
   }
-  
+
   .donor-name {
     font-size: 16px;
   }
-  
-  .donor-location, .donor-member-since {
+
+  .donor-location,
+  .donor-member-since {
     font-size: 13px;
   }
 }
-

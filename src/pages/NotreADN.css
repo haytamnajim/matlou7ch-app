@@ -141,7 +141,7 @@
 .mission-detail-title {
   font-size: 2.8rem;
   font-weight: 800;
-  color: #4a56e2;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
   position: relative;
   display: inline-block;
@@ -155,7 +155,7 @@
   left: 0;
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #4a56e2, #3498db);
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   animation: expandWidth 1.5s ease-out forwards;
 }
 
@@ -214,7 +214,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, rgba(74, 86, 226, 0.05), rgba(52, 152, 219, 0.05));
+  background: linear-gradient(45deg, rgba(35, 83, 71, 0.05), rgba(142, 182, 155, 0.05));
   z-index: -1;
 }
 
@@ -248,7 +248,7 @@
 
 .donate-button {
   display: inline-block;
-  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  background: var(--primary-color);
   color: white;
   font-weight: 600;
   padding: 15px 30px;
@@ -275,7 +275,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #c0392b, #e74c3c);
+  background: var(--primary-color);
   z-index: -1;
   transition: opacity 0.3s ease;
   opacity: 0;
@@ -287,7 +287,7 @@
 
 .donate-receive-button {
   display: inline-block;
-  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  background: var(--primary-color);
   color: white;
   font-weight: 600;
   padding: 15px 30px;
@@ -316,7 +316,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #c0392b, #e74c3c);
+  background: var(--primary-color);
   z-index: -1;
   transition: opacity 0.3s ease;
   opacity: 0;
@@ -345,10 +345,14 @@
 .section-title:after {
   content: '';
   display: block;
-  width: 50px; /* Réduit de 80px à 50px */
-  height: 3px; /* Réduit de 4px à 3px */
-  background-color: #e74c3c; /* Changé de #a7d1f7 à #e74c3c pour unifier avec le thème */
-  margin: 10px auto 0; /* Réduit de 15px à 10px */
+  width: 50px;
+  /* Réduit de 80px à 50px */
+  height: 3px;
+  /* Réduit de 4px à 3px */
+  background-color: #e74c3c;
+  /* Changé de #a7d1f7 à #e74c3c pour unifier avec le thème */
+  margin: 10px auto 0;
+  /* Réduit de 15px à 10px */
   border-radius: 1px;
 }
 
@@ -430,8 +434,10 @@
   text-decoration: none;
   font-weight: 600;
   transition: background-color 0.3s;
-  max-width: 180px; /* Ajout d'une largeur maximale */
-  text-align: center; /* Centrer le texte */
+  max-width: 180px;
+  /* Ajout d'une largeur maximale */
+  text-align: center;
+  /* Centrer le texte */
 }
 
 .contact-button:hover {
@@ -464,8 +470,10 @@
 
 .manifesto-content p {
   margin-bottom: 25px;
-  font-weight: 400; /* Réduit pour une meilleure lisibilité */
-  text-transform: none; /* Assure que le texte n'est pas en majuscules */
+  font-weight: 400;
+  /* Réduit pour une meilleure lisibilité */
+  text-transform: none;
+  /* Assure que le texte n'est pas en majuscules */
 }
 
 .manifesto-highlight {
@@ -477,7 +485,8 @@
 
 /* Styles pour la section valeurs rouge - avec la barre comme dans l'image */
 .values-red-section {
-  background-color: #e74c3c; /* Changé de #f7941d (orange) à #e74c3c (rouge) */
+  background-color: #e74c3c;
+  /* Changé de #f7941d (orange) à #e74c3c (rouge) */
   padding: 60px 20px;
   margin-bottom: 60px;
   color: white;
@@ -554,16 +563,16 @@
   .values-content {
     flex-direction: column;
   }
-  
+
   .values-left {
     max-width: 100%;
     margin-bottom: 30px;
   }
-  
+
   .values-right {
     grid-template-columns: 1fr;
   }
-  
+
   .values-red-title {
     font-size: 2.5rem;
   }
@@ -607,18 +616,19 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
+
   .values-red-title {
     font-size: 2.2rem;
   }
-  
+
   .value-red-name {
     font-size: 1.5rem;
   }
-  
+
   .value-red-underline {
     width: 80px;
-    height: 0.5px; /* Cohérent en mode responsive */
+    height: 0.5px;
+    /* Cohérent en mode responsive */
   }
 }
 
@@ -627,28 +637,28 @@
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-text {
     padding-right: 0;
     margin-bottom: 30px;
   }
-  
+
   .hero-content {
     flex-direction: column;
   }
-  
+
   .section-title {
     font-size: 1.8rem;
   }
-  
+
   .mission-detail-title {
     font-size: 2rem;
   }
-  
+
   .mission-detail-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .who-we-are-tagline {
     font-size: 1.3rem;
   }
@@ -662,6 +672,7 @@
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -673,6 +684,7 @@
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -692,9 +704,11 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(1);
   }
@@ -705,6 +719,7 @@
     transform: translateX(-50px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -715,6 +730,7 @@
   from {
     width: 0;
   }
+
   to {
     width: 80px;
   }
@@ -724,6 +740,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -734,6 +751,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
