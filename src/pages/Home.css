@@ -9,7 +9,10 @@
 .home-content-wrapper {
   background-color: #163020;
   /* Deep uniform green */
-  padding: 60px 0;
+  padding: 40px 0 60px;
+  /* Reduced top padding to move content up into the transition area */
+  position: relative;
+  z-index: 2;
 }
 
 .home-content-wrapper>* {
