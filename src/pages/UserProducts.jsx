@@ -246,7 +246,7 @@ function UserProducts() {
                 className="product-link"
               >
                 <div className="product-image-container">
-                  <div className="product-image-placeholder"></div>
+                  <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
                   <button
                     className="favorite-button"
                     onClick={(e) => toggleFavorite(product.id, e)}

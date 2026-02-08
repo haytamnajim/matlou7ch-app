@@ -111,7 +111,7 @@ function PublicProfile() {
               <div className="product-card" key={product.id}>
                 <Link to={`/produit/${product.id}`} className="product-link">
                   <div className="product-image-container">
-                    <div className="product-image-placeholder"></div>
+                    <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
                   </div>
                   <div className="product-info">
                     <h3 className="product-title">{product.title}</h3>

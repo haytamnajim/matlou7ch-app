@@ -51,7 +51,7 @@ function MesAnnonces() {
             {filteredAds.map(ad => (
               <div key={ad.id} className="annonce-card">
                 <div className="annonce-image">
-                  <div className="annonce-image-placeholder"></div>
+                  <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
                 </div>
                 <div className="annonce-details">
                   <h3 className="annonce-title">{ad.title}</h3>

@@ -5,9 +5,9 @@ import './ModernNavbar.css';
 
 const NAV_LINKS = [
     { name: 'Accueil', path: '/' },
-    { name: 'À propos', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Projets', path: '/projects' },
+    { name: 'Catalogue', path: '/catalogue' },
+    { name: 'Notre ADN', path: '/notre-adn' },
+    { name: 'FAQ', path: '/faq' },
     { name: 'Contact', path: '/contact' },
 ];
 
