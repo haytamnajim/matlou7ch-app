@@ -41,7 +41,7 @@
 }
 
 .modern-logo svg {
-    filter: drop-shadow(0 4px 8px rgba(133, 159, 61, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(98, 130, 93, 0.3));
 }
 
 .modern-logo-text {
@@ -56,10 +56,11 @@
     display: flex;
     align-items: center;
     gap: 32px;
-    background: rgba(255, 255, 255, 0.03);
+    background: #F5F1E5;
+    /* Cream background for the pill */
     padding: 10px 24px;
     border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .modern-nav-link {
@@ -101,14 +102,14 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #F6FCDF;
+    color: #333333;
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.05);
+    background: #F5F1E5;
     padding: 6px 16px 6px 6px;
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -121,12 +122,12 @@
 .modern-profile-avatar {
     width: 32px;
     height: 32px;
-    background: #859F3D;
+    background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1A1A19;
+    color: white;
 }
 
 .modern-profile-avatar svg {
@@ -177,7 +178,7 @@
     display: block;
     width: 100%;
     height: 2px;
-    background: #F6FCDF;
+    background: #333333;
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -201,7 +202,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(26, 26, 25, 0.98);
+    background: white;
     backdrop-filter: blur(15px);
     display: flex;
     flex-direction: column;
@@ -232,20 +233,20 @@
 .modern-mobile-link {
     font-size: 28px;
     font-weight: 700;
-    color: #F6FCDF;
+    color: #333333;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .modern-mobile-link:hover,
 .modern-mobile-link.active {
-    color: #859F3D;
+    color: var(--accent-color);
 }
 
 .modern-mobile-cta {
     margin-top: 20px;
-    background: #859F3D;
-    color: #1A1A19;
+    background: var(--accent-color);
+    color: white;
     padding: 16px 40px;
     border-radius: 100px;
     font-weight: 800;

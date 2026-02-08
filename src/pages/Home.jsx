@@ -9,48 +9,48 @@ function Home() {
     <div className="home-page-new">
       <HomeBanner />
 
-      {/* Section 1: We Made Modern & Creative Concepts */}
+      {/* Section 1: Concepts Reimagined as Mission */}
       <section className="concepts-section">
-        <h2 className="concepts-title">WE MADE<br />MODERN & CREATIVE<br />CONCEPTS</h2>
+        <h2 className="concepts-title">DONNEZ UNE<br />SECONDE VIE<br />À VOS OBJETS</h2>
         <div className="concepts-grid">
           <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600" alt="Concept 1" />
+            <img src="https://images.unsplash.com/photo-1532622785990-d2c36a76f5a6?auto=format&fit=crop&q=80&w=600" alt="Solidarité" />
           </div>
           <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600" alt="Concept 2" />
+            <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=600" alt="Écologie" />
           </div>
           <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=600" alt="Concept 3" />
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600" alt="Communauté" />
           </div>
         </div>
-        <button className="concepts-cta">Get Started</button>
-        <p className="concepts-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit euismod tincidunt ut laoreet</p>
+        <button className="concepts-cta">Commencer un don</button>
+        <p className="concepts-text">Matlou7ch est la première plateforme marocaine d'entraide dédiée au don d'objets entre particuliers.</p>
       </section>
 
-      {/* Section 2: Features (Quality, Shipping, Warranty) */}
+      {/* Section 2: Valeurs de la plateforme */}
       <section className="features-section">
         <div className="features-grid">
           <div className="feature-card">
             <div className="feature-icon"><FaAward /></div>
-            <h3 className="feature-name">Best Quality</h3>
+            <h3 className="feature-name">Don 100% Gratuit</h3>
           </div>
           <div className="feature-card">
             <div className="feature-icon"><FaTruck /></div>
-            <h3 className="feature-name">Free Shipping</h3>
+            <h3 className="feature-name">Entraide Locale</h3>
           </div>
           <div className="feature-card">
             <div className="feature-icon"><FaShieldAlt /></div>
-            <h3 className="feature-name">Warranty</h3>
+            <h3 className="feature-name">Communauté de Confiance</h3>
           </div>
         </div>
       </section>
 
-      {/* Section 3: We Provide You The Best Experience */}
+      {/* Section 3: L'expérience Matlou7ch */}
       <section className="experience-section">
         <div className="experience-header">
-          <h2 className="experience-title">WE PROVIDE YOU THE<br />BEST EXPERIENCE</h2>
+          <h2 className="experience-title">VOTRE IMPACT AU SEIN<br />DE LA COMMUNAUTÉ</h2>
           <p className="experience-desc">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, nostrud exerci tation ullamcorper
+            Chaque objet que vous donnez trouve un nouveau foyer et aide une personne dans le besoin. Ensemble, nous réduisons le gaspillage au Maroc tout en renforçant les liens sociaux.
           </p>
         </div>
         <div className="experience-gallery">
