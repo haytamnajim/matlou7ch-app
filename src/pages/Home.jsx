@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import HomeBanner from '../components/HomeBanner';
 import './Home.css';
 
 // Constantes extraites pour éviter les recréations à chaque render
@@ -21,17 +22,7 @@ const CATEGORY_IMAGE_STYLE = { backgroundColor: 'var(--bg-sage)' };
 function Home() {
   return (
     <div className="home-page">
-      {/* Bannière */}
-      <section className="banner-section" id="section-15">
-        <div className="banner-content">
-          <div className="banner-text">
-            <span className="highlight-word">La première</span> plateforme marocaine où tout se donne <span className="highlight-word">gratuitement 100%</span> !
-          </div>
-          <div className="banner-image-container">
-            {/* Image supprimée - Conteneur vide */}
-          </div>
-        </div>
-      </section>
+      <HomeBanner />
 
       {/* Catégories */}
       <section className="categories-section">

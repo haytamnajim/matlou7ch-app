@@ -7,41 +7,11 @@
   color: var(--text-white);
 }
 
-.home-page>*:not(.banner-section) {
+.home-page>*:not(.home-banner) {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
-}
-
-/* BANNIÈRE */
-.banner-section {
-  margin-bottom: 40px;
-  position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background-color: var(--bg-main);
-}
-
-.banner-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 140px 60px 100px;
-  /* Increased top padding to 140px */
-  text-align: center;
-}
-
-.banner-text {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--text-white);
-  line-height: 1.3;
-  font-family: var(--font-main);
-}
-
-.highlight-word {
-  color: var(--bg-sage);
 }
 
 /* CATÉGORIES */
