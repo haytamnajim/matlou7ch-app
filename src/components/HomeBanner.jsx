@@ -18,14 +18,11 @@ const HomeBanner = () => {
                     </div>
                 </div>
                 <div className="home-banner-right">
-                    <div className="banner-image-wrapper">
-                        <img
-                            src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80&w=1000"
-                            alt="Donation and Community"
-                            className="banner-image"
-                        />
-                        <div className="banner-image-overlay"></div>
-                    </div>
+                    <img
+                        src="/image.png"
+                        alt="Donation and Community"
+                        className="banner-image"
+                    />
                 </div>
             </div>
         </section>
