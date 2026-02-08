@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
-import Navbar from './components/Navbar';
+import Navbar from './components/ModernNavbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
 import Loader from './components/Loader';
