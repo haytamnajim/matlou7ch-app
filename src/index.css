@@ -1,14 +1,21 @@
 :root {
-  /* Premium Green Mobile-UI Palette */
-  --bg-main: #31511E;
-  --bg-sage: #859F3D;
+  /* Premium Palette from Reference */
+  --bg-main: #FFFFFF;
+  --bg-sage: #62825D;
+  --bg-cream: #F5F1E5;
   --bg-dark: #1A1A19;
-  --text-white: #F6FCDF;
-  --text-dim: rgba(246, 252, 223, 0.7);
 
-  --primary-color: #859F3D;
-  --primary-hover: #163832;
-  --primary-light: rgba(133, 159, 61, 0.2);
+  --primary-color: #62825D;
+  /* Sage Green */
+  --primary-hover: #4F6B4A;
+  --accent-color: #BC7C4E;
+  /* Terracotta/Ochre */
+  --accent-hover: #A06841;
+
+  --text-dark: #333333;
+  --text-muted: #666666;
+  --text-white: #FFFFFF;
+  --text-cream: #F6FCDF;
 
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);

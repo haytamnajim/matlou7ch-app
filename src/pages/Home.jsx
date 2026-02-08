@@ -1,198 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FaTshirt, FaMobileAlt, FaHome, FaGem, FaTools,
-  FaLeaf, FaGamepad, FaRunning, FaBook
-} from 'react-icons/fa';
+import { FaAward, FaTruck, FaShieldAlt } from 'react-icons/fa';
 import HomeBanner from '../components/HomeBanner';
 import './Home.css';
 
-// Constantes extraites pour éviter les recréations à chaque render
-const CATEGORIES = [
-  { id: 'vetements', icon: <FaTshirt />, name: 'Vêtements' },
-  { id: 'multimedia', icon: <FaMobileAlt />, name: 'Multimédia' },
-  { id: 'maison', icon: <FaHome />, name: 'Maison' },
-  { id: 'accessoires', icon: <FaGem />, name: 'Accessoires' },
-  { id: 'bricolage', icon: <FaTools />, name: 'Bricolage' },
-  { id: 'jardin', icon: <FaLeaf />, name: 'Jardin' },
-  { id: 'jouets', icon: <FaGamepad />, name: 'Jouets' },
-  { id: 'sport', icon: <FaRunning />, name: 'Sport' },
-  { id: 'livre', icon: <FaBook />, name: 'Livres' },
-];
-
 function Home() {
   return (
-    <div className="home-page">
+    <div className="home-page-new">
       <HomeBanner />
 
-      <div className="home-content-wrapper">
-        {/* Catégories populaires */}
-        <section className="categories-section">
-          <h2 className="section-title">Catégories populaires</h2>
-          <div className="categories-container">
-            <div className="categories-grid">
-              {CATEGORIES.map((cat, index) => (
-                <div className="category-card" key={`${cat.id}-${index}`}>
-                  <div className="category-icon-wrapper">
-                    {cat.icon}
-                  </div>
-                  <span className="category-name">{cat.name}</span>
-                </div>
-              ))}
-            </div>
+      {/* Section 1: We Made Modern & Creative Concepts */}
+      <section className="concepts-section">
+        <h2 className="concepts-title">WE MADE<br />MODERN & CREATIVE<br />CONCEPTS</h2>
+        <div className="concepts-grid">
+          <div className="concept-item">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=600" alt="Concept 1" />
           </div>
-        </section>
-
-        {/* Section Multimédia */}
-        <section className="category-products-section">
-          <div className="section-header">
-            <h2 className="category-section-title">Multimédia</h2>
-            <Link to="/catalogue?category=multimedia" className="see-all-link">Voir tout</Link>
+          <div className="concept-item">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600" alt="Concept 2" />
           </div>
-          <div className="product-grid">
-            {/* Produit 1 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "var(--primary-color)" }}>A</div>
-                <Link to="/profil/ayoub" className="product-username-small">Ayoub</Link>
-              </div>
-              <Link to="/produit/1" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/1" className="product-title-link">
-                  <h3 className="product-title-text">Console de jeux PS5</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Casablanca (Casablanca-Settat)</span>
-                  <span className="product-time-text">Il y a 2 heures</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Produit 2 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "#31511E" }}>Y</div>
-                <Link to="/profil/youssef" className="product-username-small">Youssef</Link>
-              </div>
-              <Link to="/produit/2" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/2" className="product-title-link">
-                  <h3 className="product-title-text">Appareil photo Canon</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Agadir (Souss-Massa)</span>
-                  <span className="product-time-text">Il y a 1 jour</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Produit 3 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "#E9C46A" }}>M</div>
-                <Link to="/profil/mehdi" className="product-username-small">Mehdi</Link>
-              </div>
-              <Link to="/produit/3" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/3" className="product-title-link">
-                  <h3 className="product-title-text">Casque Audio Bose</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Tanger (Tanger-Tétouan)</span>
-                  <span className="product-time-text">Il y a 3 heures</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Produit 4 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "#E76F51" }}>L</div>
-                <Link to="/profil/leila" className="product-username-small">Leila</Link>
-              </div>
-              <Link to="/produit/4" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/4" className="product-title-link">
-                  <h3 className="product-title-text">Smartphone Samsung</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Marrakech (Marrakech-Safi)</span>
-                  <span className="product-time-text">Il y a 5 heures</span>
-                </div>
-              </div>
-            </div>
+          <div className="concept-item">
+            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=600" alt="Concept 3" />
           </div>
-        </section>
+        </div>
+        <button className="concepts-cta">Get Started</button>
+        <p className="concepts-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit euismod tincidunt ut laoreet</p>
+      </section>
 
-        {/* Section Vêtements */}
-        <section className="category-products-section">
-          <div className="section-header">
-            <h2 className="category-section-title">Vêtements</h2>
-            <Link to="/catalogue?category=vetements" className="see-all-link">Voir tout</Link>
+      {/* Section 2: Features (Quality, Shipping, Warranty) */}
+      <section className="features-section">
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon"><FaAward /></div>
+            <h3 className="feature-name">Best Quality</h3>
           </div>
-          <div className="product-grid">
-            {/* Produit 5 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "var(--primary-color)" }}>A</div>
-                <Link to="/profil/ayoub" className="product-username-small">Ayoub</Link>
-              </div>
-              <Link to="/produit/5" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/5" className="product-title-link">
-                  <h3 className="product-title-text">Veste rouge tendance</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Azemmour (Casablanca-Settat)</span>
-                  <span className="product-time-text">Il y a 5 minutes</span>
-                </div>
-              </div>
-            </div>
+          <div className="feature-card">
+            <div className="feature-icon"><FaTruck /></div>
+            <h3 className="feature-name">Free Shipping</h3>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon"><FaShieldAlt /></div>
+            <h3 className="feature-name">Warranty</h3>
+          </div>
+        </div>
+      </section>
 
-            {/* Produit 6 */}
-            <div className="product-card">
-              <div className="product-card-user">
-                <div className="product-avatar-small" style={{ backgroundColor: "#31511E" }}>S</div>
-                <Link to="/profil/sara" className="product-username-small">Sara</Link>
-              </div>
-              <Link to="/produit/6" className="product-image-link">
-                <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundColor: '#f5f5f5' }}></div>
-                </div>
-              </Link>
-              <div className="product-info-modern">
-                <Link to="/produit/6" className="product-title-link">
-                  <h3 className="product-title-text">Chaussures de sport Nike</h3>
-                </Link>
-                <div className="product-meta-modern">
-                  <span className="product-location-text">Rabat (Rabat-Salé-Kénitra)</span>
-                  <span className="product-time-text">Il y a 10 minutes</span>
-                </div>
-              </div>
-            </div>
+      {/* Section 3: We Provide You The Best Experience */}
+      <section className="experience-section">
+        <div className="experience-header">
+          <h2 className="experience-title">WE PROVIDE YOU THE<br />BEST EXPERIENCE</h2>
+          <p className="experience-desc">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, nostrud exerci tation ullamcorper
+          </p>
+        </div>
+        <div className="experience-gallery">
+          <div className="gallery-item">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600" alt="Experience 1" />
           </div>
-        </section>
-      </div>
+          <div className="gallery-item">
+            <img src="https://images.unsplash.com/photo-1484101403633-562f65bd896b?auto=format&fit=crop&q=80&w=600" alt="Experience 2" />
+          </div>
+          <div className="gallery-item">
+            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600" alt="Experience 3" />
+          </div>
+        </div>
+        <div className="gallery-arrows">
+          <span>{">>>>>>"}</span>
+        </div>
+      </section>
     </div>
   );
 }

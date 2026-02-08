@@ -5,17 +5,17 @@
     width: 100%;
     z-index: 2000;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: transparent;
-    padding: 20px 0;
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .modern-navbar.scrolled {
-    background: rgba(26, 26, 25, 0.85);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .modern-navbar-container {
@@ -47,7 +47,7 @@
 .modern-logo-text {
     font-size: 22px;
     font-weight: 800;
-    color: #F6FCDF;
+    color: #333333;
     letter-spacing: -0.5px;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .modern-nav-link {
-    color: rgba(246, 252, 223, 0.7);
+    color: #666666;
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
@@ -72,11 +72,11 @@
 }
 
 .modern-nav-link:hover {
-    color: #F6FCDF;
+    color: #333333;
 }
 
 .modern-nav-link.active {
-    color: #859F3D;
+    color: var(--accent-color);
 }
 
 .modern-nav-link::after {
@@ -86,7 +86,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: #859F3D;
+    background: var(--accent-color);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(-50%);
     border-radius: 10px;
@@ -142,21 +142,21 @@
 }
 
 .modern-cta-button {
-    background: linear-gradient(135deg, #859F3D, #31511E);
-    color: #F6FCDF;
+    background: var(--accent-color);
+    color: white;
     padding: 12px 28px;
     border-radius: 14px;
     font-weight: 700;
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(133, 159, 61, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(188, 124, 78, 0.2);
 }
 
 .modern-cta-button:hover {
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(133, 159, 61, 0.3);
+    box-shadow: 0 8px 25px rgba(188, 124, 78, 0.3);
 }
 
 /* Mobile Toggle */
