@@ -278,7 +278,7 @@ function App() {
               <>
                 <Navbar />
                 <PostAd />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />

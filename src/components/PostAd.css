@@ -2,11 +2,11 @@
   max-width: 900px;
   margin: 40px auto;
   background-color: #ffffff;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-  /* Softer, deeper shadow */
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  border-radius: var(--card-radius);
+  padding: 50px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  font-family: var(--font-main);
   animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -24,10 +24,11 @@
 
 .post-ad-title {
   text-align: center;
-  color: #1e293b;
+  color: var(--primary-color);
   margin-bottom: 40px;
-  font-size: 32px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 850;
+  text-transform: uppercase;
   letter-spacing: -1px;
 }
 
@@ -274,9 +275,10 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 16px;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .next-button {
@@ -288,8 +290,8 @@
 .publish-button:hover,
 .submit-button:hover,
 .confirm-publish-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(74, 86, 226, 0.4);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .back-button,
