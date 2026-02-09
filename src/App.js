@@ -215,7 +215,7 @@ function App() {
               <>
                 <Navbar />
                 <EditProfile />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
