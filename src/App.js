@@ -141,12 +141,14 @@ function App() {
           } />
           <Route path="/faq" element={
             <>
+              <Navbar />
               <FAQ />
               <SimpleFooter />
             </>
           } />
           <Route path="/contact" element={
             <>
+              <Navbar />
               <Contact />
               <SimpleFooter />
             </>
