@@ -1,71 +1,84 @@
 .profile-page {
-  padding: 20px;
-  background-color: #f5f5f5;
-  min-height: calc(100vh - 120px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent backdrop */
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .profile-container {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
   background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .profile-header {
-  display: flex;
-  align-items: center;
   padding: 20px;
   background-color: white;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
   position: relative;
 }
 
 .back-button {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
   color: #333;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-  z-index: 10;
+  margin-right: 15px;
+  transition: background-color 0.2s;
+  cursor: pointer;
 }
 
 .back-button:hover {
-  transform: translateY(-50%) translateX(-3px);
-}
-
-.back-button svg {
-  width: 24px;
-  height: 24px;
+  background-color: #e0e0e0;
 }
 
 .avatar-container {
   margin-right: 15px;
-  margin-left: 40px;
-  /* Augmenté pour laisser de l'espace pour le bouton retour */
 }
 
 .user-avatar {
-  width: 60px;
-  height: 60px;
-  background-color: #FF5722;
-  /* Couleur orange de la plateforme */
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  background-color: #FF5722;
+  /* Restored Orange */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;
-  box-shadow: 0 3px 8px rgba(247, 148, 29, 0.2);
-  /* Ombre adaptée à la couleur orange */
-  border: 3px solid white;
+  font-weight: 600;
+  font-size: 20px;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(255, 87, 34, 0.2);
 }
 
 .profile-info {
@@ -74,131 +87,113 @@
 
 .profile-name {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #333;
 }
 
 .profile-public-link {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: var(--primary-color);
-  /* Couleur principale verte */
+  font-size: 13px;
+  color: #888;
   text-decoration: none;
-  display: inline-block;
-  transition: color 0.2s ease;
+  margin-top: 2px;
+  display: block;
 }
 
 .profile-public-link:hover {
-  color: #3a46d1;
-  /* Version légèrement plus foncée */
   text-decoration: underline;
-}
-
-.chevron-right {
-  color: #888;
+  color: #666;
 }
 
 .profile-menu {
-  border-bottom: 1px solid #eee;
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
 }
 
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: 15px 25px;
   text-decoration: none;
   color: #333;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
 .menu-item:hover {
   background-color: #f9f9f9;
 }
 
-.menu-item:last-child {
-  border-bottom: none;
-}
-
 .menu-icon {
   margin-right: 15px;
+  color: #555;
   display: flex;
   align-items: center;
 }
 
 .menu-icon svg {
-  fill: var(--primary-color);
-  /* Couleur principale verte */
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
 }
 
 .menu-item span {
   flex: 1;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
+}
+
+.chevron-right {
+  color: #ccc;
 }
 
 .profile-footer {
   padding: 20px;
-  background-color: #f9f9f9;
+  border-top: 1px solid #f0f0f0;
 }
 
 .footer-link {
   display: block;
-  padding: 12px 0;
-  text-decoration: none;
+  padding: 10px 0;
   color: #666;
-  border-bottom: 1px solid #eee;
-  transition: color 0.2s ease;
-  font-size: 15px;
+  /* Gray text for footer links */
+  text-decoration: none;
+  font-size: 14px;
 }
 
 .footer-link:hover {
-  color: var(--primary-color);
-  /* Couleur principale verte */
+  color: #FF5722;
+  /* Orange hover for consistency/accent */
 }
 
 .logout-button {
   display: flex;
   align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 10px;
   background: none;
   border: none;
-  padding: 12px 0;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
   color: #dc3545;
-  /* Rouge pour la déconnexion */
-  margin-top: 15px;
-  font-weight: 500;
+  /* Red for logout */
   font-size: 15px;
-  transition: color 0.2s ease;
-}
-
-.logout-button:hover {
-  color: #c82333;
-  /* Rouge plus foncé */
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
 }
 
 .logout-button svg {
   margin-right: 10px;
-  fill: #dc3545;
-  /* Rouge pour la déconnexion */
+  fill: currentColor;
 }
 
-.logout-button:hover svg {
-  fill: #c82333;
-  /* Rouge plus foncé */
+.logout-button:hover {
+  color: #c82333;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
+/* Responsive adjustment */
+@media (max-width: 480px) {
   .profile-container {
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .profile-page {
-    padding: 0;
+    max-width: 100%;
   }
 }

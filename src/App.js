@@ -170,7 +170,7 @@ function App() {
             <>
               <Navbar />
               <Favoris />
-              <SimpleFooter />
+              <Footer />
             </>
           } />
           <Route path="/messages" element={
@@ -178,7 +178,7 @@ function App() {
               <>
                 <Navbar />
                 <Messages />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />

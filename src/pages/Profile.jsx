@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './Profile.css';
 
-function Profile() {
+function Profile({ onClose }) {
+  // Sidebar mode active
   const { logout, user, profile } = useAuth();
   const navigate = useNavigate();
 
@@ -20,16 +21,53 @@ function Profile() {
     }
   };
 
+  const handleBackdropClick = (e) => {
+    if (onClose) {
+      onClose();
+    } else {
+      // Navigate back if history exists, otherwise go home
+      if (window.history.length > 2) {
+        navigate(-1);
+      } else {
+        navigate('/');
+      }
+    }
+  };
+
+  const handleCloseClick = (e) => {
+    e.preventDefault();
+    if (onClose) {
+      onClose();
+    } else {
+      if (window.history.length > 2) {
+        navigate(-1);
+      } else {
+        navigate('/');
+      }
+    }
+  };
+
   return (
-    <div className="profile-page">
-      <div className="profile-container">
+    <div className="profile-page" onClick={handleBackdropClick}>
+      <div className="profile-container" onClick={(e) => e.stopPropagation()}>
         <div className="profile-header">
-          <Link to="/" className="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-          </Link>
+          {/* Back button logic: if onClose exists, just close. If not, link to / */}
+          {onClose ? (
+            <button className="back-button" onClick={handleBackdropClick} style={{ border: 'none', background: '#f5f5f5' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>
+            </button>
+          ) : (
+            <Link to="/" className="back-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+            </Link>
+          )}
+
           <div className="avatar-container">
             <div className="user-avatar" style={{
               backgroundColor: profile?.avatar_color || 'var(--text-white)',
@@ -50,12 +88,12 @@ function Profile() {
           </div>
           <div className="profile-info">
             <h2 className="profile-name">{profile?.name || user?.email || 'Utilisateur'}</h2>
-            <Link to="/profil-public" className="profile-public-link">Voir mon profil public</Link>
+            <Link to="/profil-public" className="profile-public-link" onClick={onClose}>Voir mon profil public</Link>
           </div>
         </div>
 
         <div className="profile-menu">
-          <Link to="/messages" className="menu-item">
+          <Link to="/messages" className="menu-item" onClick={onClose}>
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -71,7 +109,7 @@ function Profile() {
             </div>
           </Link>
 
-          <Link to="/favoris" className="menu-item">
+          <Link to="/favoris" className="menu-item" onClick={onClose}>
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -87,7 +125,7 @@ function Profile() {
             </div>
           </Link>
 
-          <Link to="/mes-annonces" className="menu-item">
+          <Link to="/mes-annonces" className="menu-item" onClick={onClose}>
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -102,7 +140,7 @@ function Profile() {
               </svg>
             </div>          </Link>
 
-          <Link to="/parametres" className="menu-item">
+          <Link to="/parametres" className="menu-item" onClick={onClose}>
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -117,29 +155,12 @@ function Profile() {
               </svg>
             </div>
           </Link>
-
-          {/* Supprimer le lien vers les informations légales */}
-          {/* <Link to="/informations-legales" className="menu-item">
-            <div className="menu-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-              </svg>
-            </div>
-            <span>Information légales</span>
-            <div className="chevron-right">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#888" width="24px" height="24px">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-              </svg>
-            </div>
-          </Link> */}
         </div>
 
         <div className="profile-footer">
-          <Link to="/notre-adn" className="footer-link">Notre ADN</Link>
-          <Link to="/faq" className="footer-link">FAQ</Link>
-          <Link to="/cgu" className="footer-link">CGU</Link>
+          <Link to="/notre-adn" className="footer-link" onClick={onClose}>Notre ADN</Link>
+          <Link to="/faq" className="footer-link" onClick={onClose}>FAQ</Link>
+          <Link to="/cgu" className="footer-link" onClick={onClose}>CGU</Link>
           <button
             type="button"
             className="logout-button"
@@ -163,6 +184,3 @@ function Profile() {
 }
 
 export default Profile;
-
-
-
