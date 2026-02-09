@@ -5,59 +5,131 @@
 /* Section: Concepts */
 .concepts-section {
   background-color: var(--primary-color);
-  padding: 100px 40px;
+  padding: 120px 40px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.concepts-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .concepts-title {
   color: white;
-  font-size: 42px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 60px;
-  letter-spacing: 1px;
+  font-size: 36px;
+  font-weight: 850;
+  line-height: 1.25;
+  margin-bottom: 50px;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .concepts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto 60px;
+  gap: 32px;
+  margin-bottom: 70px;
 }
 
 .concept-item {
-  border-radius: 20px;
+  position: relative;
+  border-radius: 32px;
   overflow: hidden;
-  height: 400px;
+  height: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.concept-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+.concept-image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .concept-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .concept-item:hover img {
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
+
+.concept-overlay {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.concept-label {
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.concept-item:hover .concept-overlay {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-5px);
+}
+
+.concepts-footer {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .concepts-cta {
   background-color: var(--accent-color);
   color: white;
-  padding: 16px 40px;
+  padding: 20px 48px;
   border: none;
-  border-radius: 8px;
-  font-weight: 700;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 18px;
   text-transform: uppercase;
   cursor: pointer;
-  margin-bottom: 24px;
-  transition: background 0.3s ease;
+  margin-bottom: 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
 }
 
 .concepts-cta:hover {
   background-color: var(--accent-hover);
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.concepts-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .concepts-text {

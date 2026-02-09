@@ -11,20 +11,43 @@ function Home() {
 
       {/* Section 1: Concepts Reimagined as Mission */}
       <section className="concepts-section">
-        <h2 className="concepts-title">DONNEZ UNE<br />SECONDE VIE<br />À VOS OBJETS</h2>
-        <div className="concepts-grid">
-          <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1532622785990-d2c36a76f5a6?auto=format&fit=crop&q=80&w=600" alt="Solidarité" />
+        <div className="concepts-container">
+          <h2 className="concepts-title">DONNEZ UNE<br />SECONDE VIE<br />À VOS OBJETS</h2>
+
+          <div className="concepts-grid">
+            <div className="concept-item">
+              <div className="concept-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1532622785990-d2c36a76f5a6?auto=format&fit=crop&q=80&w=600" alt="Solidarité" />
+                <div className="concept-overlay">
+                  <span className="concept-label">Solidarité</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="concept-item">
+              <div className="concept-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=600" alt="Écologie" />
+                <div className="concept-overlay">
+                  <span className="concept-label">Écologie</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="concept-item">
+              <div className="concept-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600" alt="Communauté" />
+                <div className="concept-overlay">
+                  <span className="concept-label">Communauté</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=600" alt="Écologie" />
-          </div>
-          <div className="concept-item">
-            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600" alt="Communauté" />
+
+          <div className="concepts-footer">
+            <button className="concepts-cta">Commencer un don</button>
+            <p className="concepts-text">Matlou7ch est la première plateforme marocaine d'entraide dédiée au don d'objets entre particuliers.</p>
           </div>
         </div>
-        <button className="concepts-cta">Commencer un don</button>
-        <p className="concepts-text">Matlou7ch est la première plateforme marocaine d'entraide dédiée au don d'objets entre particuliers.</p>
       </section>
 
       {/* Section 2: Valeurs de la plateforme */}
