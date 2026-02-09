@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './ModernNavbar.css';
+import Profile from '../pages/Profile';
 
 const NAV_LINKS = [
     { name: 'Accueil', path: '/' },
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 const ModernNavbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
     const { user } = useAuth();
     const location = useLocation();
 
@@ -60,7 +62,7 @@ const ModernNavbar = () => {
                     </Link>
 
                     {user ? (
-                        <Link to="/profile" className="modern-profile-link" onClick={() => setIsMenuOpen(false)}>
+                        <div className="modern-profile-link" onClick={() => { setIsMenuOpen(false); setIsProfileOpen(true); }} style={{ cursor: 'pointer' }}>
                             <div className="modern-profile-avatar">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -68,7 +70,7 @@ const ModernNavbar = () => {
                                 </svg>
                             </div>
                             <span>Profil</span>
-                        </Link>
+                        </div>
                     ) : (
                         <Link to="/connexion" className="modern-cta-button">
                             S'inscrire
@@ -101,9 +103,9 @@ const ModernNavbar = () => {
                         Donner un objet
                     </Link>
                     {user ? (
-                        <Link to="/profile" className="modern-mobile-link" onClick={() => setIsMenuOpen(false)}>
+                        <div className="modern-mobile-link" onClick={() => { setIsMenuOpen(false); setIsProfileOpen(true); }}>
                             Profil
-                        </Link>
+                        </div>
                     ) : (
                         <Link to="/connexion" className="modern-mobile-cta" onClick={() => setIsMenuOpen(false)}>
                             S'inscrire
@@ -111,6 +113,7 @@ const ModernNavbar = () => {
                     )}
                 </div>
             </div>
+            {isProfileOpen && <Profile onClose={() => setIsProfileOpen(false)} />}
         </nav>
     );
 };
