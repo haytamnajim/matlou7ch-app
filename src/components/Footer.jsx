@@ -12,6 +12,12 @@ function Footer({ type }) {
   return (
     <footer className="modern-footer">
       <div className="footer-container">
+        <div className="footer-logo-section">
+          <Link to="/" className="footer-logo">
+            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="footer-logo-image" />
+            <span className="footer-logo-text">Matlou7ch</span>
+          </Link>
+        </div>
         <div className="footer-main-grid">
           {/* Colonne 1: Toutes les catégories */}
           <section className="footer-column">

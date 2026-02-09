@@ -60,7 +60,7 @@ function Navbar() {
       <div className="navbar-content">
         <div className="logo-section">
           <Link to="/" className="logo">
-            <div className="logo-icon">M</div>
+            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="logo-image" />
             <span className="logo-text">Matlou7ch.org</span>
           </Link>
         </div>

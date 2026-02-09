@@ -12,6 +12,38 @@
   padding: 0 40px;
 }
 
+.footer-logo-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+}
+
+.footer-logo-image {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.footer-logo-text {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
 .footer-main-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

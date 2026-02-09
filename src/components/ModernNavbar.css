@@ -40,8 +40,11 @@
     transform: scale(1.02);
 }
 
-.modern-logo svg {
-    filter: drop-shadow(0 4px 8px rgba(98, 130, 93, 0.3));
+.modern-logo-image {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .modern-logo-text {

@@ -25,18 +25,11 @@
   text-decoration: none;
 }
 
-.logo-icon {
-  background: linear-gradient(135deg, var(--bg-sage), #a4bc5c);
-  color: var(--bg-main);
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 22px;
-  box-shadow: 0 4px 10px rgba(133, 159, 61, 0.3);
+.logo-image {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .logo-text {
