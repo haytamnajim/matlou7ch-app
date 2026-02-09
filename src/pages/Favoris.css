@@ -4,8 +4,8 @@
   background-color: white;
   border-radius: var(--card-radius);
   padding: 50px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .favoris-title {
@@ -66,13 +66,13 @@
 .search-icon-container,
 .heart-icon-container {
   background-color: var(--bg-cream);
-  border-radius: 32px;
-  width: 140px;
-  height: 140px;
+  border-radius: 20px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   transition: transform 0.3s ease;
 }
 

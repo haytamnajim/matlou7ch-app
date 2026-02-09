@@ -48,10 +48,14 @@
 }
 
 .modern-logo-text {
-    font-size: 22px;
-    font-weight: 800;
-    color: #333333;
-    letter-spacing: -0.5px;
+    font-size: 24px;
+    font-weight: 850;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.05));
 }
 
 /* Nav Links - Desktop */

@@ -44,7 +44,9 @@ function Home() {
           </div>
 
           <div className="concepts-footer">
-            <button className="concepts-cta">Commencer un don</button>
+            <Link to="/post-ad">
+              <button className="concepts-cta">Commencer un don</button>
+            </Link>
             <p className="concepts-text">Matlou7ch est la première plateforme marocaine d'entraide dédiée au don d'objets entre particuliers.</p>
           </div>
         </div>

@@ -19,7 +19,7 @@
   padding: 50px;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
   position: relative;
   box-sizing: border-box;
   animation: slideUp 0.6s ease-out;

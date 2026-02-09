@@ -8,7 +8,7 @@ function Settings() {
       <div className="settings-container">
         <div className="settings-header">
           <Link to="/profile" className="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24px" height="24px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
             </svg>
@@ -26,7 +26,7 @@ function Settings() {
             </div>
             <div className="settings-item-text">Notifications</div>
             <div className="settings-item-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#999" width="24px" height="24px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
               </svg>
@@ -42,7 +42,7 @@ function Settings() {
             </div>
             <div className="settings-item-text">Email</div>
             <div className="settings-item-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#999" width="24px" height="24px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
               </svg>
@@ -58,7 +58,7 @@ function Settings() {
             </div>
             <div className="settings-item-text">Mot de passe</div>
             <div className="settings-item-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#999" width="24px" height="24px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
               </svg>
@@ -74,7 +74,7 @@ function Settings() {
             </div>
             <div className="settings-item-text">Utilisateurs bloqués</div>
             <div className="settings-item-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#999" width="24px" height="24px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
               </svg>
@@ -83,7 +83,7 @@ function Settings() {
 
           <Link to="/parametres/supprimer-compte" className="settings-item danger">
             <div className="settings-item-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--primary-color)" width="24px" height="24px">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#e74c3c" width="24px" height="24px">
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
               </svg>

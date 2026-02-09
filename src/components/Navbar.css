@@ -33,14 +33,15 @@
 }
 
 .logo-text {
-  color: var(--text-white);
-  font-weight: 800;
-  font-size: 24px;
-  letter-spacing: -0.8px;
-  background: linear-gradient(to right, #fff, var(--text-white));
+  color: white;
+  font-weight: 850;
+  font-size: 26px;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.8) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 /* Redesigned Search Bar */

@@ -42,7 +42,7 @@
   padding: 40px 30px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(74, 86, 226, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
   text-align: center;
   box-sizing: border-box;
 }

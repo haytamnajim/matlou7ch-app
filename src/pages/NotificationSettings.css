@@ -2,18 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 120px);
-  background-color: #f0f0f0;
-  padding: 20px;
+  min-height: calc(100vh - 400px);
+  background-color: var(--bg-main);
+  padding: 60px 20px;
 }
 
 .notification-settings-container {
   width: 100%;
   max-width: 700px;
   background-color: white;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: var(--card-radius);
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .notification-settings-header {
@@ -37,7 +38,8 @@
   margin: 0;
   flex-grow: 1;
   text-align: center;
-  margin-right: 24px; /* Pour compenser l'icône de retour */
+  margin-right: 24px;
+  /* Pour compenser l'icône de retour */
 }
 
 .notification-categories {
@@ -103,33 +105,33 @@
 }
 
 .toggle-button.active {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .toggle-button.push.active {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
 }
 
 .toggle-button.email.active {
-  background-color: #4a56e2;
+  background-color: var(--primary-color);
 }
 
 @media (max-width: 600px) {
   .notification-settings-container {
     padding: 20px;
   }
-  
+
   .notification-item {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .notification-description {
     margin-bottom: 15px;
     padding-right: 0;
   }
-  
+
   .notification-toggles {
     align-self: flex-end;
   }

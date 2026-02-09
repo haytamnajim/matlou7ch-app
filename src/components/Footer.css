@@ -38,10 +38,14 @@
 }
 
 .footer-logo-text {
-  font-size: 28px;
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.5px;
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff 0%, #dfdfdf 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .footer-main-grid {

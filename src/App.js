@@ -155,8 +155,9 @@ function App() {
           } />
           <Route path="/cgu" element={
             <>
+              <Navbar />
               <CGU />
-              <SimpleFooter />
+              <Footer />
             </>
           } />
           <Route path="/produit/:id" element={
@@ -196,7 +197,7 @@ function App() {
               <>
                 <Navbar />
                 <MesAnnonces />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -223,7 +224,7 @@ function App() {
               <>
                 <Navbar />
                 <Settings />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -232,7 +233,7 @@ function App() {
               <>
                 <Navbar />
                 <NotificationSettings />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -241,7 +242,7 @@ function App() {
               <>
                 <Navbar />
                 <EmailSettings />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -250,7 +251,7 @@ function App() {
               <>
                 <Navbar />
                 <PasswordSettings />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -259,7 +260,7 @@ function App() {
               <>
                 <Navbar />
                 <BlockedUsers />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
@@ -268,7 +269,7 @@ function App() {
               <>
                 <Navbar />
                 <DeleteAccount />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />

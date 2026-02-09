@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './HomeBanner.css';
 
 const HomeBanner = () => {
@@ -13,8 +13,12 @@ const HomeBanner = () => {
                         Rejoignez notre communauté engagée et donnez une seconde vie à vos objets tout en aidant les autres.
                     </p>
                     <div className="home-banner-actions">
-                        <button className="banner-primary-btn">Découvrir les dons</button>
-                        <button className="banner-secondary-btn">Comment ça marche ?</button>
+                        <Link to="/catalogue">
+                            <button className="banner-primary-btn">Découvrir les dons</button>
+                        </Link>
+                        <Link to="/faq">
+                            <button className="banner-secondary-btn">Comment ça marche ?</button>
+                        </Link>
                     </div>
                 </div>
                 <div className="home-banner-right">

@@ -1,93 +1,90 @@
-/* Variables globales */
-:root {
-  --primary-color: #4a56e2;
-  --secondary-color: #f9f9f9;
-  --text-color: #333;
-  --border-color: #eee;
-  --hover-color: #f0f0f0;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  --border-radius: 8px;
-}
-
-/* Structure de base */
 .cgu-page {
   max-width: 100%;
   padding: 0;
   margin: 0 auto;
-  background-color: var(--secondary-color);
+  background-color: var(--bg-main);
   position: relative;
+  min-height: 100vh;
 }
 
-/* Section héro */
 .cgu-hero {
   background-color: var(--primary-color);
   color: white;
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
   margin-bottom: 40px;
+  background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
 }
 
 .cgu-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 15px;
-  font-weight: 700;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .cgu-subtitle {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  font-weight: 500;
 }
 
 .cgu-download-btn {
   background-color: white;
   color: var(--primary-color);
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: 600;
+  padding: 15px 30px;
+  border-radius: 100px;
+  font-weight: 800;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .cgu-download-btn:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  background-color: var(--bg-cream);
 }
 
-/* Structure du contenu */
 .cgu-content-wrapper {
   display: flex;
   max-width: 1200px;
-  margin: 0 auto 60px;
-  position: relative;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  gap: 40px;
 }
 
-/* Sidebar et table des matières */
 .cgu-sidebar {
-  width: 280px;
+  width: 300px;
   position: sticky;
-  top: 20px;
-  height: calc(100vh - 40px);
-  padding: 20px;
+  top: 100px;
+  height: fit-content;
   display: none;
 }
 
 .cgu-toc {
   background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
+  border-radius: var(--card-radius);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .cgu-toc h3 {
   color: var(--primary-color);
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
 
 .cgu-toc ul {
@@ -97,13 +94,16 @@
 }
 
 .cgu-toc li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 12px 0;
+  border-bottom: 1.5px solid var(--bg-cream);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.2s ease;
+  gap: 12px;
+  transition: all 0.3s ease;
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 15px;
 }
 
 .cgu-toc li:last-child {
@@ -112,35 +112,41 @@
 
 .cgu-toc li:hover {
   color: var(--primary-color);
-  padding-left: 5px;
+  padding-left: 8px;
 }
 
 .cgu-toc li.active {
   color: var(--primary-color);
-  font-weight: 600;
 }
 
-/* Version mobile de la table des matières */
 .cgu-toc-mobile {
   display: block;
-  margin: 0 20px 20px;
+  margin: 0 0 30px;
 }
 
 .cgu-toc-mobile select {
   width: 100%;
-  padding: 12px;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid var(--bg-cream);
+  background-color: white;
+  font-weight: 700;
+  color: var(--text-dark);
+  outline: none;
 }
 
-/* Sections de contenu */
+.cgu-container {
+  flex: 1;
+}
+
 .cgu-section {
-  padding: 30px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.cgu-section:last-child {
-  border-bottom: none;
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
 }
 
 .cgu-section-header {
@@ -148,133 +154,124 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 15px;
+  padding: 25px 30px;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.cgu-section-header:hover {
+  background-color: #fcfbf8;
 }
 
 .cgu-section h2 {
   color: var(--primary-color);
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 850;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  letter-spacing: -0.3px;
 }
 
 .cgu-section-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0 30px;
 }
 
 .cgu-section-content.active {
-  max-height: 2000px;
+  max-height: 2500px;
+  padding: 0 30px 30px;
 }
 
 .cgu-section p {
-  margin-bottom: 15px;
-  line-height: 1.6;
-  color: var(--text-color);
+  margin-bottom: 20px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.cgu-section ul {
-  margin-left: 20px;
-  margin-bottom: 15px;
-}
-
-.cgu-section li {
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-/* Exemples et FAQ */
 .cgu-example {
-  background-color: rgba(74, 86, 226, 0.05);
-  border-left: 3px solid var(--primary-color);
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  background-color: var(--bg-cream);
+  border-left: 5px solid var(--primary-color);
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 0 15px 15px 0;
 }
 
 .cgu-example h4 {
   color: var(--primary-color);
-  margin-bottom: 10px;
-  font-weight: 600;
+  margin-bottom: 15px;
+  font-weight: 850;
+  text-transform: uppercase;
+  font-size: 15px;
 }
 
 .cgu-faq-item {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.cgu-faq-item:last-child {
-  border-bottom: none;
+  margin-bottom: 25px;
+  padding: 20px;
+  background-color: var(--bg-cream);
+  border-radius: 15px;
 }
 
 .cgu-faq-item h3 {
   color: var(--primary-color);
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 800;
 }
 
-/* Bouton retour en haut */
 .scroll-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: var(--primary-color);
+  bottom: 40px;
+  right: 40px;
+  background-color: var(--accent-color);
   color: white;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   z-index: 100;
 }
 
 .scroll-to-top:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  background-color: var(--accent-hover);
 }
 
-/* Conteneur principal */
-.cgu-container {
-  flex: 1;
-  padding: 0 20px;
-}
-
-/* Media queries */
 @media (min-width: 992px) {
   .cgu-sidebar {
     display: block;
   }
-  
+
   .cgu-toc-mobile {
     display: none;
-  }
-  
-  .cgu-container {
-    margin-left: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .cgu-title {
-    font-size: 2rem;
-  }
-  
-  .cgu-section h2 {
-    font-size: 1.3rem;
-  }
-  
   .cgu-hero {
-    padding: 40px 20px;
+    padding: 60px 20px;
+  }
+
+  .cgu-title {
+    font-size: 2.2rem;
+  }
+
+  .cgu-section-header {
+    padding: 20px;
+  }
+
+  .cgu-section h2 {
+    font-size: 1.1rem;
   }
 }
-
