@@ -1,46 +1,52 @@
 .public-profile-container {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--bg-main);
-  color: var(--text-white);
-  border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .public-profile-title {
-  color: var(--bg-sage);
-  font-size: 24px;
-  margin-bottom: 30px;
+  color: var(--primary-color);
+  font-size: 32px;
+  font-weight: 850;
+  margin-bottom: 40px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .profile-header-section {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
+  background-color: var(--bg-cream);
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
-  background-color: var(--text-white);
-  color: var(--bg-main);
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 36px;
-  font-weight: bold;
-  margin-right: 20px;
+  font-size: 40px;
+  font-weight: 800;
+  margin-right: 30px;
   flex-shrink: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info {
@@ -49,268 +55,311 @@
 }
 
 .profile-username {
-  font-size: 20px;
-  margin: 0 0 8px 0;
-  color: #333;
-  font-weight: 500;
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  color: var(--text-dark);
+  font-weight: 850;
+  letter-spacing: -0.5px;
 }
 
 .profile-location,
 .profile-member-since {
   display: flex;
   align-items: center;
-  color: #666;
-  margin-bottom: 5px;
-  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .profile-location svg,
 .profile-member-since svg {
-  margin-right: 5px;
-  min-width: 16px;
+  margin-right: 10px;
+  min-width: 18px;
+  fill: var(--primary-color);
 }
 
 .donation-stats {
   display: flex;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   justify-content: center;
-  gap: 20px;
-  max-width: 500px;
+  gap: 30px;
+  max-width: 600px;
 }
 
 .stat-box {
-  background-color: var(--bg-dark);
-  border: 1px solid var(--glass-border);
+  flex: 1;
+  background-color: var(--bg-cream);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary-color);
 }
 
 .stat-number {
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
+  font-size: 36px;
+  font-weight: 850;
+  color: var(--primary-color);
   margin-bottom: 5px;
+  line-height: 1;
 }
 
 .stat-label {
-  color: #666;
+  color: var(--text-muted);
   font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .edit-profile-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #4a9af8;
+  background-color: var(--accent-color);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 14px;
+  border-radius: 100px;
+  padding: 16px 30px;
+  font-size: 16px;
+  font-weight: 800;
   cursor: pointer;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .edit-profile-button:hover {
-  text-decoration: none;
-}
-
-.edit-profile-button::after {
-  display: none;
-}
-
-.edit-profile-button::before {
-  display: none;
+  background-color: var(--accent-hover);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .edit-profile-button svg {
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
-.empty-listings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.empty-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-  border-radius: 50%;
-  padding: 15px;
-}
-
-.empty-message {
-  color: #666;
-  font-size: 16px;
-  margin: 0;
-}
-
-@media (max-width: 600px) {
-  .donation-stats {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .profile-header-section {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .profile-avatar {
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-
-  .profile-info {
-    align-items: center;
-  }
-}
-
+/* Products Section */
 .user-products {
   width: 100%;
-  margin-top: 30px;
+  border-top: 2px solid var(--bg-cream);
+  padding-top: 40px;
 }
 
 .products-section-title {
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-bottom: 30px;
   text-align: left;
-  width: 100%;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
   width: 100%;
 }
 
 .product-card {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.product-link {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .product-image-container {
-  height: 180px;
+  height: 200px;
   overflow: hidden;
+  position: relative;
+  background-color: var(--bg-cream);
 }
 
 .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
-  background-color: #f0f0f0;
+  transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-image {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .product-info {
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .product-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  color: #333;
+  font-size: 19px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
 }
 
 .product-meta {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .product-details {
   display: flex;
-  gap: 8px;
-  font-size: 12px;
+  gap: 10px;
+  font-size: 13px;
 }
 
 .product-category,
 .product-condition {
-  background-color: #f0f0f0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  color: #555;
+  background-color: var(--bg-cream);
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
 }
 
 .product-actions {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 15px 15px;
-  border-top: 1px solid #eee;
+  gap: 12px;
+  padding: 0 20px 20px;
 }
 
 .edit-product-button,
 .delete-product-button {
-  padding: 8px 12px;
-  border-radius: 4px;
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .edit-product-button {
-  background-color: #4a9af8;
-  color: white;
-}
-
-.delete-product-button {
-  background-color: #f44336;
+  background-color: var(--primary-color);
   color: white;
   border: none;
 }
 
 .edit-product-button:hover {
-  background-color: #3a8ae8;
+  background-color: var(--primary-dark);
+}
+
+.delete-product-button {
+  background-color: white;
+  color: #e74c3c;
+  border: 1.5px solid #e74c3c;
 }
 
 .delete-product-button:hover {
-  background-color: #e53935;
+  background-color: #fff5f5;
+}
+
+/* State Handlers */
+.empty-listings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-cream);
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.empty-listings:hover .empty-icon {
+  transform: scale(1.1);
+}
+
+.empty-message {
+  color: var(--text-muted);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .loading-spinner {
   text-align: center;
-  padding: 40px;
-  color: #666;
-  font-size: 16px;
+  padding: 60px;
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .public-profile-container {
+    padding: 30px 20px;
+    margin: 20px 15px;
+  }
+
+  .donation-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .profile-header-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .profile-info {
+    align-items: center;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
 }

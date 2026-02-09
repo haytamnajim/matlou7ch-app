@@ -206,7 +206,7 @@ function App() {
               <>
                 <Navbar />
                 <PublicProfile />
-                <SimpleFooter />
+                <Footer />
               </>
             </ProtectedRoute>
           } />
