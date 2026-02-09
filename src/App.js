@@ -143,14 +143,14 @@ function App() {
             <>
               <Navbar />
               <FAQ />
-              <SimpleFooter />
+              <Footer />
             </>
           } />
           <Route path="/contact" element={
             <>
               <Navbar />
               <Contact />
-              <SimpleFooter />
+              <Footer />
             </>
           } />
           <Route path="/cgu" element={
