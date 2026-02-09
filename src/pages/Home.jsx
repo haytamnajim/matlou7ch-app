@@ -55,13 +55,13 @@ function Home() {
         </div>
         <div className="experience-gallery">
           <div className="gallery-item">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=600" alt="Experience 1" />
+            <img src="/donner1.png" alt="Impact 1" />
           </div>
           <div className="gallery-item">
-            <img src="https://images.unsplash.com/photo-1484101403633-562f65bd896b?auto=format&fit=crop&q=80&w=600" alt="Experience 2" />
+            <img src="/donner2.jpg" alt="Impact 2" />
           </div>
           <div className="gallery-item">
-            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=600" alt="Experience 3" />
+            <img src="/donner3.png" alt="Impact 3" />
           </div>
         </div>
         <div className="gallery-arrows">
