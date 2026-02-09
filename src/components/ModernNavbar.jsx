@@ -71,7 +71,7 @@ const ModernNavbar = () => {
                         </Link>
                     ) : (
                         <Link to="/connexion" className="modern-cta-button">
-                            Commencer
+                            S'inscrire
                         </Link>
                     )}
 
@@ -106,7 +106,7 @@ const ModernNavbar = () => {
                         </Link>
                     ) : (
                         <Link to="/connexion" className="modern-mobile-cta" onClick={() => setIsMenuOpen(false)}>
-                            Commencer
+                            S'inscrire
                         </Link>
                     )}
                 </div>
