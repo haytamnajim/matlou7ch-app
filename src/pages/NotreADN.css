@@ -705,9 +705,10 @@
 .highlight-word {
   display: inline-block;
   position: relative;
-  color: white;
+  color: var(--accent-color);
   font-weight: 850;
   animation: pulse 2s infinite;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes pulse {
