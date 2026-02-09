@@ -11,9 +11,9 @@
 
 /* Section Héro */
 .hero-section {
-  background-color: #a7d1f7;
-  padding: 60px 20px;
-  margin-bottom: 60px;
+  background-color: var(--primary-color);
+  padding: 100px 20px;
+  margin-bottom: 80px;
 }
 
 .hero-content {
@@ -33,14 +33,14 @@
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: 800;
+  font-weight: 850;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
-  color: #e74c3c;
+  line-height: 1.15;
+  color: white;
   position: relative;
   display: inline-block;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   animation: fadeInLeft 1.2s ease-out;
 }
 
@@ -50,7 +50,7 @@
   left: -30px;
   top: -20px;
   font-size: 5rem;
-  color: rgba(231, 76, 60, 0.2);
+  color: rgba(255, 255, 255, 0.15);
   font-family: 'Georgia', serif;
 }
 
@@ -60,21 +60,21 @@
   right: -30px;
   bottom: -40px;
   font-size: 5rem;
-  color: rgba(231, 76, 60, 0.2);
+  color: rgba(255, 255, 255, 0.15);
   font-family: 'Georgia', serif;
 }
 
 .hero-description {
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #555;
+  color: white;
   max-width: 600px;
   margin-bottom: 2rem;
   position: relative;
   animation: fadeInRight 1.2s ease-out;
-  border-left: 4px solid #e74c3c;
+  border-left: 4px solid white;
   padding-left: 20px;
-  font-style: italic;
+  font-weight: 500;
 }
 
 .hero-image-container {
@@ -99,10 +99,10 @@
 
 .who-we-are-tagline {
   font-size: 1.5rem;
-  color: #e74c3c;
+  color: var(--accent-color);
   text-align: center;
   margin-bottom: 30px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .who-we-are-content {
@@ -119,10 +119,10 @@
 
 /* Section Détail de la mission */
 .mission-detail-section {
-  background-color: #a7d1f7;
-  padding: 60px 20px;
-  margin-bottom: 60px;
-  border-radius: 8px;
+  background-color: var(--bg-cream);
+  padding: 100px 20px;
+  margin-bottom: 80px;
+  border-radius: 32px;
 }
 
 .mission-detail-content {
@@ -189,17 +189,17 @@
 
 .mission-detail-list li:nth-child(1) {
   animation-delay: 0.2s;
-  border-left: 5px solid #e74c3c;
+  border-left: 5px solid var(--accent-color);
 }
 
 .mission-detail-list li:nth-child(2) {
   animation-delay: 0.4s;
-  border-left: 5px solid #3498db;
+  border-left: 5px solid var(--primary-color);
 }
 
 .mission-detail-list li:nth-child(3) {
   animation-delay: 0.6s;
-  border-left: 5px solid #2ecc71;
+  border-left: 5px solid var(--accent-color);
 }
 
 .mission-detail-list li:hover {
@@ -346,13 +346,9 @@
   content: '';
   display: block;
   width: 50px;
-  /* Réduit de 80px à 50px */
   height: 3px;
-  /* Réduit de 4px à 3px */
-  background-color: #e74c3c;
-  /* Changé de #a7d1f7 à #e74c3c pour unifier avec le thème */
+  background-color: var(--accent-color);
   margin: 10px auto 0;
-  /* Réduit de 15px à 10px */
   border-radius: 1px;
 }
 
@@ -427,21 +423,21 @@
 
 .contact-button {
   display: inline-block;
-  background-color: #e74c3c;
+  background-color: var(--accent-color);
   color: white;
-  padding: 12px 25px;
-  border-radius: 30px;
+  padding: 14px 30px;
+  border-radius: 100px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s;
-  max-width: 180px;
-  /* Ajout d'une largeur maximale */
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
-  /* Centrer le texte */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-button:hover {
-  background-color: #c0392b;
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Ajout des styles pour la section manifeste */
@@ -453,10 +449,12 @@
 
 .manifesto-title {
   font-size: 2.5rem;
-  color: #e74c3c;
+  color: var(--primary-color);
   text-align: center;
   margin-bottom: 40px;
-  font-weight: 700;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
 }
 
 .manifesto-content {
@@ -478,17 +476,18 @@
 
 .manifesto-highlight {
   font-size: 1.5rem;
-  font-weight: 700;
-  color: #e74c3c;
+  font-weight: 800;
+  color: var(--accent-color);
   margin-top: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Styles pour la section valeurs rouge - avec la barre comme dans l'image */
+/* Styles pour la section valeurs - avec la barre comme dans l'image */
 .values-red-section {
-  background-color: #e74c3c;
-  /* Changé de #f7941d (orange) à #e74c3c (rouge) */
-  padding: 60px 20px;
-  margin-bottom: 60px;
+  background-color: var(--primary-color);
+  padding: 100px 20px;
+  margin-bottom: 80px;
   color: white;
 }
 
@@ -695,8 +694,8 @@
 .highlight-word {
   display: inline-block;
   position: relative;
-  color: #e74c3c;
-  font-weight: 800;
+  color: white;
+  font-weight: 850;
   animation: pulse 2s infinite;
 }
 
