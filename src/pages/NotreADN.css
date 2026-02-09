@@ -248,13 +248,20 @@
   min-width: 300px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.mission-detail-image img {
+.mission-image {
   max-width: 100%;
+  width: 500px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mission-image:hover {
+  transform: scale(1.05);
 }
 
 .donate-button {

@@ -18,7 +18,7 @@ function NotreADN() {
             </p>
           </div>
           <div className="hero-image-container">
-            <div className="hero-image-placeholder"></div>
+            <img src="/image.png" alt="Notre ADN" className="hero-image" />
           </div>
         </div>
       </section>
@@ -89,7 +89,7 @@ function NotreADN() {
             </div>
 
             <div className="mission-detail-image">
-              <div className="mission-detail-image-placeholder"></div>
+              <img src="/adn.png" alt="Notre Mission" className="mission-image" />
             </div>
           </div>
         </div>
