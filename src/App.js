@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 import { ToastProvider, ToastContainer } from './components/Toast';
 import Navbar from './components/ModernNavbar';
 import Footer from './components/Footer';
@@ -76,7 +77,8 @@ function AdminRoute({ children }) {
 function App() {
   return (
     <ToastProvider>
-      <Router>
+      <NotificationProvider>
+        <Router>
         <React.Suspense fallback={<Loader />}>
           <Routes>
           {/* Routes d'administration */}
@@ -311,6 +313,7 @@ function App() {
       </React.Suspense>
       <ToastContainer />
     </Router>
+    </NotificationProvider>
     </ToastProvider>
   );
 }
