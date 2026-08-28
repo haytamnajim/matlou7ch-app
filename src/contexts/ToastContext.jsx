@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { ToastContainer } from '../components/Toast';
 
 const ToastContext = createContext();
 
@@ -26,6 +27,7 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ addToast, removeToast, success, error, warning, info, toasts }}>
       {children}
+      <ToastContainer toasts={toasts} removeToast={removeToast} />
     </ToastContext.Provider>
   );
 }

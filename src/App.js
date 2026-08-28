@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { ToastProvider } from './contexts/ToastContext';
-import { ToastContainer } from './components/Toast';
 import Navbar from './components/ModernNavbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
@@ -312,7 +311,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </React.Suspense>
-      <ToastContainer />
     </Router>
     </NotificationProvider>
     </ToastProvider>
