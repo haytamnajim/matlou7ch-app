@@ -18,7 +18,24 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     console.log("AuthContext: Initialisation...");
+    
+    // Si Supabase n'est pas configuré, désactiver le chargement
+    if (!supabase) {
+      console.warn("AuthContext: Supabase non configuré, mode dégradé activé");
+      setLoading(false);
+      return;
+    }
+
     let mounted = true;
+    let timeoutId;
+    
+    // Timeout de sécurité pour éviter le chargement infini
+    timeoutId = setTimeout(() => {
+      if (mounted && loading) {
+        console.warn("AuthContext: Timeout de chargement, forçage du loading=false");
+        setLoading(false);
+      }
+    }, 5000);
     
     // 1. Récupérer la session actuelle
     const getSession = async () => {
@@ -63,6 +80,7 @@ export function AuthProvider({ children }) {
 
     return () => {
       mounted = false;
+      if (timeoutId) clearTimeout(timeoutId);
       subscription.unsubscribe();
     };
   }, []);

@@ -104,7 +104,7 @@ function App() {
             </AdminRoute>
           } />
 
-          {/* Routes principales du site avec Footer complet */}
+          {/* Routes principales du site avec Footer complet (Grand Footer) */}
           <Route path="/" element={
             <>
               <Navbar />
@@ -124,22 +124,6 @@ function App() {
               <Navbar />
               <NotreADN />
               <Footer />
-            </>
-          } />
-
-          {/* Routes avec SimpleFooter */}
-          <Route path="/connexion" element={
-            <>
-              <Navbar />
-              <Login />
-              <SimpleFooter />
-            </>
-          } />
-          <Route path="/inscription" element={
-            <>
-              <Navbar />
-              <Register />
-              <SimpleFooter />
             </>
           } />
           <Route path="/faq" element={
@@ -163,13 +147,6 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="/produit/:id" element={
-            <>
-              <Navbar />
-              <ProductDetail />
-              <SimpleFooter />
-            </>
-          } />
           <Route path="/favoris" element={
             <>
               <Navbar />
@@ -186,92 +163,11 @@ function App() {
               </>
             </ProtectedRoute>
           } />
-          <Route path="/profile" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <Profile />
-                <SimpleFooter />
-              </>
-            </ProtectedRoute>
-          } />
           <Route path="/mes-annonces" element={
             <ProtectedRoute>
               <>
                 <Navbar />
                 <MesAnnonces />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/profil-public" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <PublicProfile />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/modifier-profil" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <EditProfile />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <Settings />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/notifications" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <NotificationSettings />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/email" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <EmailSettings />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/mot-de-passe" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <PasswordSettings />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/utilisateurs-bloques" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <BlockedUsers />
-                <Footer />
-              </>
-            </ProtectedRoute>
-          } />
-          <Route path="/parametres/supprimer-compte" element={
-            <ProtectedRoute>
-              <>
-                <Navbar />
-                <DeleteAccount />
                 <Footer />
               </>
             </ProtectedRoute>
@@ -282,6 +178,110 @@ function App() {
                 <Navbar />
                 <PostAd />
                 <Footer />
+              </>
+            </ProtectedRoute>
+          } />
+
+          {/* Routes avec SimpleFooter (Petit Footer) - Pages simples/formulaires */}
+          <Route path="/connexion" element={
+            <>
+              <Navbar />
+              <Login />
+              <SimpleFooter />
+            </>
+          } />
+          <Route path="/inscription" element={
+            <>
+              <Navbar />
+              <Register />
+              <SimpleFooter />
+            </>
+          } />
+          <Route path="/produit/:id" element={
+            <>
+              <Navbar />
+              <ProductDetail />
+              <SimpleFooter />
+            </>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <Profile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/profil-public" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <PublicProfile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/modifier-profil" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <EditProfile />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <Settings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/notifications" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <NotificationSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/email" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <EmailSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/mot-de-passe" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <PasswordSettings />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/utilisateurs-bloques" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <BlockedUsers />
+                <SimpleFooter />
+              </>
+            </ProtectedRoute>
+          } />
+          <Route path="/parametres/supprimer-compte" element={
+            <ProtectedRoute>
+              <>
+                <Navbar />
+                <DeleteAccount />
+                <SimpleFooter />
               </>
             </ProtectedRoute>
           } />
