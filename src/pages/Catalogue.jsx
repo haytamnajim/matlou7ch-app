@@ -55,45 +55,32 @@ function Catalogue() {
     localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
   };
 
-  // Filtrer les résultats en fonction des critères de recherche
+  // Filtrer les résultats en fonction des critères de recherche (côté serveur)
   const filterResults = React.useCallback(async () => {
     setLoading(true);
     try {
-      // Récupérer toutes les annonces depuis Supabase
-      // Note: Idéalement, on filtrerait côté serveur (Supabase .eq(), .ilike()), 
-      // mais pour correspondre à la logique existante et si le volume est faible,
-      // on peut filtrer côté client.
-      const allListings = await listingService.getAll();
+      // Utiliser la recherche côté serveur avec Supabase
+      const searchResults = await listingService.search({
+        category: searchCategory,
+        location: searchLocation,
+        query: searchQuery
+      });
 
       // Mapper les données Supabase vers le format attendu par le composant
-      const formattedItems = allListings.map(item => ({
+      const formattedItems = searchResults.map(item => ({
         id: item.id,
         title: item.title,
         location: item.location || item.city || 'Maroc',
         category: item.category,
-        image: item.images && item.images.length > 0 ? item.images[0] : '', // Première image ou vide
+        image: item.images && item.images.length > 0 ? item.images[0] : '',
         user: {
-          // Si 'listings_with_user' view est utilisée par listingService.getAll, 
-          // on devrait avoir user_metadata ou similar.
-          // Sinon on affiche un nom générique ou on fetch le user.
-          // Supposons que listingService.getAll utilise la table 'listings' simple pour l'instant
-          // et qu'on n'a pas les infos user jointes facilement sans vue dédiée.
-          // Fallback:
-          name: item.user?.name || 'Utilisateur'
+          name: item.user_name || item.user?.name || 'Utilisateur'
         },
         time: new Date(item.created_at).toLocaleDateString(),
-        avatar: '#235347' // Couleur par défaut
+        avatar: item.avatar_color || '#235347'
       }));
 
-      // Filtrer les résultats
-      const filteredItems = formattedItems.filter(item => {
-        const matchesLocation = !searchLocation || item.location.toLowerCase().includes(searchLocation.toLowerCase());
-        const matchesQuery = !searchQuery || item.title.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = !searchCategory || item.category === searchCategory; // Match exact pour catégorie select
-        return matchesLocation && matchesQuery && matchesCategory;
-      });
-
-      setResults(filteredItems);
+      setResults(formattedItems);
       setCurrentPage(1);
     } catch (error) {
       console.error("Erreur lors du chargement du catalogue:", error);

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { FaBoxOpen, FaSearch, FaEye, FaTrash, FaEdit, FaCheck } from 'react-icons/fa';
 import AdminLayout from './AdminLayout';
 import { listingService } from '../../services/supabaseDataService';
+import { useToast } from '../../contexts/ToastContext';
 import './Admin.css';
 
 function Listings() {
+  const { success, error } = useToast();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,14 +16,19 @@ function Listings() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [totalListings, setTotalListings] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const listingsPerPage = 12;
 
-  // Charger les annonces depuis Supabase
-  const fetchListings = async () => {
+  // Charger les annonces depuis Supabase avec pagination
+  const fetchListings = async (page = 1) => {
     try {
       setLoading(true);
-      const data = await listingService.getAll();
-      setListings(data);
+      const result = await listingService.getPaginated(page, listingsPerPage);
+      setListings(result.data);
+      setTotalListings(result.count);
+      setTotalPages(result.totalPages);
+      setCurrentPage(result.currentPage);
     } catch (error) {
       console.error('Erreur lors du chargement des annonces:', error);
       alert('Impossible de charger les annonces.');
@@ -31,8 +38,8 @@ function Listings() {
   };
 
   useEffect(() => {
-    fetchListings();
-  }, []);
+    fetchListings(currentPage);
+  }, [currentPage]);
 
   // Fonctions pour gérer les actions sur les annonces
   const handleViewListing = (listing) => {
@@ -51,10 +58,10 @@ function Listings() {
       try {
         await listingService.delete(listingId);
         setListings(listings.filter(listing => listing.id !== listingId));
-        alert(`L'annonce "${listingToDelete.title}" a été supprimée.`);
+        success(`L'annonce "${listingToDelete.title}" a été supprimée.`);
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
-        alert('Erreur lors de la suppression de l\'annonce.');
+        error('Erreur lors de la suppression de l\'annonce.');
       }
     }
   };
@@ -70,10 +77,10 @@ function Listings() {
           listing.id === listingId ? { ...listing, status: 'active' } : listing
         ));
 
-        alert(`L'annonce "${listingToApprove.title}" a été approuvée.`);
+        success(`L'annonce "${listingToApprove.title}" a été approuvée.`);
       } catch (error) {
         console.error('Erreur lors de l\'approbation:', error);
-        alert('Erreur lors de l\'approbation de l\'annonce.');
+        error('Erreur lors de l\'approbation de l\'annonce.');
       }
     }
   };
@@ -101,10 +108,10 @@ function Listings() {
       ));
 
       setShowEditModal(false);
-      alert(`L'annonce "${selectedListing.title}" a été mise à jour avec succès.`);
+      success(`Les modifications de l'annonce "${selectedListing.title}" ont été enregistrées.`);
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
-      alert('Erreur lors de la mise à jour de l\'annonce.');
+      error('Erreur lors de la sauvegarde des modifications.');
     }
   };
 
@@ -118,11 +125,8 @@ function Listings() {
     return matchesSearch && matchesStatus && matchesCategory;
   });
 
-  // Pagination
-  const indexOfLastListing = currentPage * listingsPerPage;
-  const indexOfFirstListing = indexOfLastListing - listingsPerPage;
-  const currentListings = filteredListings.slice(indexOfFirstListing, indexOfLastListing);
-  const totalPages = Math.ceil(filteredListings.length / listingsPerPage);
+  // Pagination - maintenant côté serveur, donc on utilise directement listings
+  const currentListings = listings;
 
   const handleSearch = (e) => {
     e.preventDefault();

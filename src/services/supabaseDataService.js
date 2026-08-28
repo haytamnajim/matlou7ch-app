@@ -83,7 +83,9 @@ export const userService = {
     },
 
     getStats: async () => {
-        const { data, error } = await supabase.from('users').select('*');
+        const { data, error } = await supabase
+            .from('users')
+            .select('id, status, created_at');
         if (error) throw error;
 
         const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -183,7 +185,9 @@ export const listingService = {
     },
 
     getStats: async () => {
-        const { data, error } = await supabase.from('listings').select('*');
+        const { data, error } = await supabase
+            .from('listings')
+            .select('id, is_published, created_at');
         if (error) throw error;
 
         const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -229,6 +233,36 @@ export const listingService = {
             .order('created_at', { ascending: false });
 
         if (error) throw error;
+        return data;
+    },
+
+    search: async (filters = {}) => {
+        const { category, location, query } = filters;
+        
+        let queryBuilder = supabase
+            .from('listings_with_user')
+            .select('*')
+            .eq('is_published', true)
+            .order('created_at', { ascending: false });
+
+        if (category && category !== '') {
+            queryBuilder = queryBuilder.eq('category', category);
+        }
+
+        if (location && location !== '') {
+            queryBuilder = queryBuilder.ilike('location', `%${location}%`);
+        }
+
+        if (query && query !== '') {
+            queryBuilder = queryBuilder.ilike('title', `%${query}%`);
+        }
+
+        const { data, error } = await queryBuilder;
+
+        if (error) {
+            console.error('Erreur lors de la recherche:', error);
+            throw error;
+        }
         return data;
     },
 };
@@ -293,7 +327,9 @@ export const reportService = {
     },
 
     getStats: async () => {
-        const { data, error } = await supabase.from('reports').select('*');
+        const { data, error } = await supabase
+            .from('reports')
+            .select('id, status');
         if (error) throw error;
 
         return {

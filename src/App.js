@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
+import { ToastProvider, ToastContainer } from './components/Toast';
 import Navbar from './components/ModernNavbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
@@ -74,9 +75,10 @@ function AdminRoute({ children }) {
 
 function App() {
   return (
-    <Router>
-      <React.Suspense fallback={<Loader />}>
-        <Routes>
+    <ToastProvider>
+      <Router>
+        <React.Suspense fallback={<Loader />}>
+          <Routes>
           {/* Routes d'administration */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={
@@ -307,7 +309,9 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </React.Suspense>
+      <ToastContainer />
     </Router>
+    </ToastProvider>
   );
 }
 

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { FaUsers, FaSearch, FaEdit, FaTrash, FaEye, FaBan, FaUserCheck } from 'react-icons/fa';
 import AdminLayout from './AdminLayout';
 import { userService } from '../../services/supabaseDataService';
+import { useToast } from '../../contexts/ToastContext';
 import './Admin.css';
 
 function Users() {
+  const { success, error } = useToast();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,10 +72,10 @@ function Users() {
         const actionMessage = isBlocking
           ? `L'utilisateur ${userToToggle.name} a été bloqué avec succès.`
           : `L'utilisateur ${userToToggle.name} a été débloqué avec succès.`;
-        alert(actionMessage);
-      } catch (error) {
-        console.error('Erreur lors de la mise à jour du statut:', error);
-        alert('Erreur lors de la mise à jour du statut.');
+        success(actionMessage);
+      } catch (err) {
+        console.error('Erreur lors de la mise à jour du statut:', err);
+        error('Erreur lors de la mise à jour du statut.');
       }
     }
   };
@@ -84,10 +86,10 @@ function Users() {
       try {
         await userService.delete(userId);
         setUsers(users.filter(user => user.id !== userId));
-        alert(`L'utilisateur ${userToDelete.name} a été supprimé.`);
+        success(`L'utilisateur ${userToDelete.name} a été supprimé.`);
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
-        alert('Erreur lors de la suppression de l\'utilisateur.');
+        error('Erreur lors de la suppression de l\'utilisateur.');
       }
     }
   };
@@ -113,10 +115,10 @@ function Users() {
       ));
 
       setShowEditModal(false);
-      alert(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
+      success(`Les informations de ${selectedUser.name} ont été mises à jour avec succès.`);
     } catch (error) {
       console.error('Erreur lors de la sauvegarde:', error);
-      alert('Erreur lors de la mise à jour de l\'utilisateur.');
+      error('Erreur lors de la mise à jour de l\'utilisateur.');
     }
   };
 
