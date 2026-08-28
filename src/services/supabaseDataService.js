@@ -348,6 +348,154 @@ export const reportService = {
     },
 };
 
+// ==================== MESSAGES ====================
+export const messageService = {
+    getByUserId: async (userId) => {
+        const { data, error } = await supabase
+            .from('messages')
+            .select('*')
+            .or(`sender_id.eq.${userId},receiver_id.eq.${userId}`)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            logger.error('Erreur lors de la récupération des messages', error);
+            throw error;
+        }
+        return data;
+    },
+
+    getConversation: async (userId1, userId2) => {
+        const { data, error } = await supabase
+            .from('messages')
+            .select('*')
+            .or(`and(sender_id.eq.${userId1},receiver_id.eq.${userId2}),and(sender_id.eq.${userId2},receiver_id.eq.${userId1})`)
+            .order('created_at', { ascending: true });
+
+        if (error) {
+            logger.error('Erreur lors de la récupération de la conversation', error);
+            throw error;
+        }
+        return data;
+    },
+
+    create: async (messageData) => {
+        const { data, error } = await supabase
+            .from('messages')
+            .insert([messageData])
+            .select()
+            .single();
+
+        if (error) {
+            logger.error('Erreur lors de la création du message', error);
+            throw error;
+        }
+        return data;
+    },
+
+    update: async (id, messageData) => {
+        const { data, error } = await supabase
+            .from('messages')
+            .update(messageData)
+            .eq('id', id)
+            .select()
+            .single();
+
+        if (error) {
+            logger.error('Erreur lors de la mise à jour du message', error);
+            throw error;
+        }
+        return data;
+    },
+
+    delete: async (id) => {
+        const { error } = await supabase
+            .from('messages')
+            .delete()
+            .eq('id', id);
+
+        if (error) {
+            logger.error('Erreur lors de la suppression du message', error);
+            throw error;
+        }
+        return true;
+    },
+
+    markAsRead: async (id) => {
+        const { data, error } = await supabase
+            .from('messages')
+            .update({ is_read: true })
+            .eq('id', id)
+            .select()
+            .single();
+
+        if (error) {
+            logger.error('Erreur lors du marquage comme lu', error);
+            throw error;
+        }
+        return data;
+    },
+};
+
+// ==================== FAVORIS ====================
+export const favoriteService = {
+    getByUserId: async (userId) => {
+        const { data, error } = await supabase
+            .from('favorites')
+            .select('*, listings(*)')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            logger.error('Erreur lors de la récupération des favoris', error);
+            throw error;
+        }
+        return data;
+    },
+
+    create: async (favoriteData) => {
+        const { data, error } = await supabase
+            .from('favorites')
+            .insert([favoriteData])
+            .select()
+            .single();
+
+        if (error) {
+            logger.error('Erreur lors de la création du favori', error);
+            throw error;
+        }
+        return data;
+    },
+
+    delete: async (userId, listingId) => {
+        const { error } = await supabase
+            .from('favorites')
+            .delete()
+            .eq('user_id', userId)
+            .eq('listing_id', listingId);
+
+        if (error) {
+            logger.error('Erreur lors de la suppression du favori', error);
+            throw error;
+        }
+        return true;
+    },
+
+    isFavorite: async (userId, listingId) => {
+        const { data, error } = await supabase
+            .from('favorites')
+            .select('id')
+            .eq('user_id', userId)
+            .eq('listing_id', listingId)
+            .single();
+
+        if (error && error.code !== 'PGRST116') {
+            logger.error('Erreur lors de la vérification du favori', error);
+            throw error;
+        }
+        return !!data;
+    },
+};
+
 // ==================== STATS GLOBALES ====================
 export const statsService = {
     getGlobalStats: async () => {
