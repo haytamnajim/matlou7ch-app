@@ -13,14 +13,19 @@ function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const usersPerPage = 10;
 
-  // Charger les utilisateurs depuis Supabase
-  const fetchUsers = async () => {
+  // Charger les utilisateurs depuis Supabase avec pagination
+  const fetchUsers = async (page = 1) => {
     try {
       setLoading(true);
-      const data = await userService.getAll();
-      setUsers(data);
+      const result = await userService.getPaginated(page, usersPerPage);
+      setUsers(result.data);
+      setTotalUsers(result.count);
+      setTotalPages(result.totalPages);
+      setCurrentPage(result.currentPage);
     } catch (error) {
       console.error('Erreur lors du chargement des utilisateurs:', error);
       alert('Impossible de charger les utilisateurs.');
@@ -30,8 +35,8 @@ function Users() {
   };
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    fetchUsers(currentPage);
+  }, [currentPage]);
 
   // Fonctions pour gérer les actions sur les utilisateurs
   const handleViewUser = (user) => {
@@ -124,11 +129,8 @@ function Users() {
     return matchesSearch && matchesStatus;
   });
 
-  // Pagination
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
-  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+  // Pagination - maintenant côté serveur, donc on utilise directement users
+  const currentUsers = users;
 
   const handleSearch = (e) => {
     e.preventDefault();

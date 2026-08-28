@@ -15,6 +15,29 @@ export const userService = {
         return data;
     },
 
+    getPaginated: async (page = 1, perPage = 10) => {
+        const from = (page - 1) * perPage;
+        const to = from + perPage - 1;
+
+        const { data, error, count } = await supabase
+            .from('users')
+            .select('*', { count: 'exact' })
+            .order('created_at', { ascending: false })
+            .range(from, to);
+
+        if (error) {
+            console.error('Erreur lors de la récupération paginée des utilisateurs:', error);
+            throw error;
+        }
+
+        return {
+            data,
+            count,
+            totalPages: Math.ceil(count / perPage),
+            currentPage: page
+        };
+    },
+
     getById: async (id) => {
         const { data, error } = await supabase
             .from('users')
@@ -90,6 +113,29 @@ export const listingService = {
             throw error;
         }
         return data;
+    },
+
+    getPaginated: async (page = 1, perPage = 12) => {
+        const from = (page - 1) * perPage;
+        const to = from + perPage - 1;
+
+        const { data, error, count } = await supabase
+            .from('listings_with_user')
+            .select('*', { count: 'exact' })
+            .order('created_at', { ascending: false })
+            .range(from, to);
+
+        if (error) {
+            console.error('Erreur lors de la récupération paginée des annonces:', error);
+            throw error;
+        }
+
+        return {
+            data,
+            count,
+            totalPages: Math.ceil(count / perPage),
+            currentPage: page
+        };
     },
 
     getById: async (id) => {
