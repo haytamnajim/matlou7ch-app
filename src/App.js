@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
-import { ToastProvider, ToastContainer } from './components/Toast';
+import { ToastProvider } from './contexts/ToastContext';
+import { ToastContainer } from './components/Toast';
 import Navbar from './components/ModernNavbar';
 import Footer from './components/Footer';
 import SimpleFooter from './components/SimpleFooter';
