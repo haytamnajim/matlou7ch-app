@@ -168,7 +168,13 @@ CREATE POLICY "Anyone can create reports" ON reports
   FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "Reports viewable by admins" ON reports
-  FOR SELECT USING (true); -- À ajuster selon votre logique admin
+  FOR SELECT USING (
+    EXISTS (
+      SELECT 1 FROM users 
+      WHERE users.id = auth.uid() 
+      AND users.email = 'admin@matlou7ch.ma'
+    )
+  );
 
 -- Policies pour favorites
 CREATE POLICY "Users can view own favorites" ON favorites

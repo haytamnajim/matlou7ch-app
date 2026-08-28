@@ -30,7 +30,10 @@ function AdminLogin() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Dans une application réelle, vous feriez un appel API ici
-      if (credentials.email === 'admin@matlou7ch.ma' && credentials.password === 'admin123') {
+      const adminEmail = process.env.REACT_APP_ADMIN_EMAIL || 'admin@matlou7ch.ma';
+      const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD || 'admin123';
+      
+      if (credentials.email === adminEmail && credentials.password === adminPassword) {
         // Stocker le token d'authentification dans localStorage ou un cookie
         localStorage.setItem('adminToken', 'sample-admin-token');
         navigate('/admin');
