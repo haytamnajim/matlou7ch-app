@@ -18,6 +18,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     console.log("AuthContext: Initialisation...");
+    let mounted = true;
+    
     // 1. Récupérer la session actuelle
     const getSession = async () => {
       console.log("AuthContext: Récupération de la session...");
@@ -25,19 +27,21 @@ export function AuthProvider({ children }) {
         const { data: { session }, error } = await supabase.auth.getSession();
         if (error) {
           console.error("AuthContext: Erreur getSession:", error);
-          setLoading(false);
+          if (mounted) setLoading(false);
           return;
         }
         console.log("AuthContext: Session récupérée:", !!session);
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          await fetchProfile(session.user.id);
-        } else {
-          setLoading(false);
+        if (mounted) {
+          setUser(session?.user ?? null);
+          if (session?.user) {
+            await fetchProfile(session.user.id);
+          } else {
+            setLoading(false);
+          }
         }
       } catch (err) {
         console.error("AuthContext: Exception getSession:", err);
-        setLoading(false);
+        if (mounted) setLoading(false);
       }
     };
 
@@ -46,17 +50,20 @@ export function AuthProvider({ children }) {
     // 2. Écouter les changements d'état (connexion, déconnexion)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("AuthContext: État Auth changé:", event);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        await fetchProfile(session.user.id);
-      } else {
-        setProfile(null);
+      if (mounted) {
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          await fetchProfile(session.user.id);
+        } else {
+          setProfile(null);
+        }
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
-      if (subscription) subscription.unsubscribe();
+      mounted = false;
+      subscription.unsubscribe();
     };
   }, []);
 
