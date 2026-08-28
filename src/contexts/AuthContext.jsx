@@ -15,17 +15,6 @@ export function AuthProvider({ children }) {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Sécurité : Si le chargement prend plus de 10 secondes, on force l'affichage
-    const timer = setTimeout(() => {
-      if (loading) {
-        console.warn("AuthContext: Timeout de chargement atteint ! Force de l'arrêt...");
-        setLoading(false);
-      }
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, [loading]);
 
   useEffect(() => {
     console.log("AuthContext: Initialisation...");
