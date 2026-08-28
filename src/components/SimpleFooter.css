@@ -1,82 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 .simple-footer {
-  background-color: #a7d1f7;
+  background-color: #e8f4fc;
   color: #111;
   font-family: 'Inter', sans-serif;
-  padding: 50px 20px 30px;
+  padding: 25px 20px 20px;
+  margin-top: auto;
+  border-top: 2px solid #a7d1f7;
+}
+
+.simple-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: auto;
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+  gap: 15px;
 }
 
+/* Logo simplifié */
+.simple-footer-logo {
+  margin-bottom: 5px;
+}
+
+.simple-footer-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.simple-footer-logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  transition: color 0.3s ease;
+}
+
+.simple-footer-logo-link:hover .simple-footer-logo-text {
+  color: #3498db;
+}
+
+/* Liens principaux simplifiés */
+.simple-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.simple-footer-link {
+  color: #111;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 3px 8px;
+  transition: color 0.3s ease;
+}
+
+.simple-footer-link:hover {
+  color: #3498db;
+}
+
+/* Réseaux sociaux */
 .simple-footer-social {
   display: flex;
   justify-content: center;
-  gap: 22px;
-  margin-bottom: 25px;
+  gap: 18px;
 }
 
-.simple-footer-social .social-icon {
-  width: 42px;
-  height: 42px;
-  font-size: 24px;
+.simple-social-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #111;
   transition: all 0.3s ease;
-  /* Suppression du background-color et du border-radius */
-}
-
-.simple-footer-social .social-icon:hover {
-  color: #3498db;
-  transform: translateY(-4px);
-  /* Suppression du background-color au survol */
-}
-
-.simple-footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
-  margin-bottom: 30px;
-}
-
-.simple-footer-links .footer-link {
-  color: #111;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 5px 10px;
-  transition: color 0.3s ease;
-  /* Suppression de la transition pour text-decoration */
 }
 
-.simple-footer-links .footer-link:hover {
+.simple-social-icon:hover {
   color: #3498db;
-  /* Suppression du text-decoration: underline; */
+  transform: translateY(-2px);
 }
 
+/* Copyright */
 .simple-footer-copyright {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
-  color: #555;
-  margin-top: 20px;
+  color: #666;
+  margin-top: 5px;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
+  .simple-footer {
+    padding: 20px 15px 15px;
+  }
+
   .simple-footer-links {
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
   }
 
   .simple-footer-social {
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .simple-footer-logo-text {
+    font-size: 16px;
+  }
+
+  .simple-footer-link {
+    font-size: 12px;
   }
 }
