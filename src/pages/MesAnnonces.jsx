@@ -1,19 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { listingService } from '../services/supabaseDataService';
 import './MesAnnonces.css';
 
 function MesAnnonces() {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('en-cours');
   const [myAds, setMyAds] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Récupérer les annonces au chargement du composant
   useEffect(() => {
-    // Récupérer les annonces depuis localStorage
-    const storedAds = JSON.parse(localStorage.getItem('myAds') || '[]');
-    setMyAds(storedAds);
-    setLoading(false);
-  }, []);
+    console.log("MesAnnonces: Effet déclenché, user:", user);
+
+    const fetchMyAds = async () => {
+      if (!user) {
+        console.log("MesAnnonces: Pas d'utilisateur, arrêt du chargement");
+        setLoading(false);
+        return;
+      }
+
+      console.log("MesAnnonces: Début du chargement pour user:", user.id);
+
+      try {
+        // Ajouter un timeout de 5 secondes
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout de la requête Supabase')), 5000)
+        );
+
+        const fetchPromise = listingService.getByUserId(user.id);
+
+        console.log("MesAnnonces: Appel listingService.getByUserId en cours...");
+        const ads = await Promise.race([fetchPromise, timeoutPromise]);
+
+        console.log("MesAnnonces: Données reçues:", ads);
+
+        // Normaliser les données pour l'affichage
+        const formattedAds = ads.map(ad => ({
+          ...ad,
+          date: ad.created_at, // Mapping created_at vers date pour l'affichage
+          isActive: ad.is_published, // Mapping is_published vers isActive
+          city: ad.location || ad.city // Fallback
+        }));
+        setMyAds(formattedAds);
+      } catch (error) {
+        console.error("Erreur lors du chargement de mes annonces:", error);
+        alert(`Erreur de chargement: ${error.message}`);
+      } finally {
+        console.log("MesAnnonces: Fin du chargement (setLoading false)");
+        setLoading(false);
+      }
+    };
+
+    fetchMyAds();
+  }, [user]);
 
   // Filtrer les annonces selon l'onglet actif
   const filteredAds = myAds.filter(ad => {
@@ -23,6 +64,19 @@ function MesAnnonces() {
       return ad.isActive === false; // Annonces terminées
     }
   });
+
+  const handleDelete = async (adId) => {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?")) {
+      try {
+        await listingService.delete(adId);
+        // Mettre à jour l'état local
+        setMyAds(myAds.filter(ad => ad.id !== adId));
+      } catch (error) {
+        console.error("Erreur lors de la suppression:", error);
+        alert("Erreur lors de la suppression de l'annonce.");
+      }
+    }
+  };
 
   return (
     <div className="mes-annonces-container">
@@ -51,7 +105,11 @@ function MesAnnonces() {
             {filteredAds.map(ad => (
               <div key={ad.id} className="annonce-card">
                 <div className="annonce-image">
-                  <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
+                  {ad.images && ad.images.length > 0 ? (
+                    <img src={ad.images[0]} alt={ad.title} className="product-image" />
+                  ) : (
+                    <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
+                  )}
                 </div>
                 <div className="annonce-details">
                   <h3 className="annonce-title">{ad.title}</h3>
@@ -71,12 +129,7 @@ function MesAnnonces() {
                   </Link>
                   <button
                     className="delete-button"
-                    onClick={() => {
-                      // Supprimer l'annonce
-                      const updatedAds = myAds.filter(item => item.id !== ad.id);
-                      setMyAds(updatedAds);
-                      localStorage.setItem('myAds', JSON.stringify(updatedAds));
-                    }}
+                    onClick={() => handleDelete(ad.id)}
                   >
                     Supprimer
                   </button>

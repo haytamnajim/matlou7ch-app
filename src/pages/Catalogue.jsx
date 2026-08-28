@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { listingService } from '../services/supabaseDataService';
 import './Catalogue.css';
 
 function Catalogue() {
@@ -54,51 +55,58 @@ function Catalogue() {
     localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
   };
 
-  // Constantes pour la génération de données fictives
-  const LOCATIONS = ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès'];
-  const CATEGORIES_LIST = ['Vêtements', 'Électronique', 'Meubles', 'Livres', 'Jouets'];
-  const AVATAR_COLORS = ['#235347', '#163832', '#8EB69B', '#163832', '#235347'];
-  const USER_NAMES = ['Ayoub', 'Sara', 'Mohammed', 'Fatima', 'Karim'];
-
   // Filtrer les résultats en fonction des critères de recherche
-  const filterResults = React.useCallback(() => {
+  const filterResults = React.useCallback(async () => {
     setLoading(true);
+    try {
+      // Récupérer toutes les annonces depuis Supabase
+      // Note: Idéalement, on filtrerait côté serveur (Supabase .eq(), .ilike()), 
+      // mais pour correspondre à la logique existante et si le volume est faible,
+      // on peut filtrer côté client.
+      const allListings = await listingService.getAll();
 
-    // Simuler un appel API avec un délai
-    setTimeout(() => {
-      // Ici, vous feriez normalement un appel à votre API
-      // Pour l'exemple, nous utilisons des données fictives
-      const dummyItems = Array.from({ length: 50 }, (_, i) => ({
-        id: i + 1,
-        title: `Article ${i + 1}`,
-        location: LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)],
-        category: CATEGORIES_LIST[Math.floor(Math.random() * CATEGORIES_LIST.length)],
-        time: `Il y a ${Math.floor(Math.random() * 24)} heures`,
-        image: '',
-        avatar: AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)],
+      // Mapper les données Supabase vers le format attendu par le composant
+      const formattedItems = allListings.map(item => ({
+        id: item.id,
+        title: item.title,
+        location: item.location || item.city || 'Maroc',
+        category: item.category,
+        image: item.images && item.images.length > 0 ? item.images[0] : '', // Première image ou vide
         user: {
-          name: USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)]
-        }
+          // Si 'listings_with_user' view est utilisée par listingService.getAll, 
+          // on devrait avoir user_metadata ou similar.
+          // Sinon on affiche un nom générique ou on fetch le user.
+          // Supposons que listingService.getAll utilise la table 'listings' simple pour l'instant
+          // et qu'on n'a pas les infos user jointes facilement sans vue dédiée.
+          // Fallback:
+          name: item.user?.name || 'Utilisateur'
+        },
+        time: new Date(item.created_at).toLocaleDateString(),
+        avatar: '#235347' // Couleur par défaut
       }));
 
-      // Filtrer les résultats en fonction des critères de recherche
-      const filteredItems = dummyItems.filter(item => {
+      // Filtrer les résultats
+      const filteredItems = formattedItems.filter(item => {
         const matchesLocation = !searchLocation || item.location.toLowerCase().includes(searchLocation.toLowerCase());
         const matchesQuery = !searchQuery || item.title.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = !searchCategory || item.category.toLowerCase().includes(searchCategory.toLowerCase());
+        const matchesCategory = !searchCategory || item.category === searchCategory; // Match exact pour catégorie select
         return matchesLocation && matchesQuery && matchesCategory;
       });
 
       setResults(filteredItems);
-      setLoading(false);
       setCurrentPage(1);
-    }, 500); // Délai de 500ms pour simuler le chargement
+    } catch (error) {
+      console.error("Erreur lors du chargement du catalogue:", error);
+    } finally {
+      setLoading(false);
+    }
   }, [searchLocation, searchQuery, searchCategory]);
 
   // Charger les résultats au chargement initial et lors des changements de filtres
   useEffect(() => {
     filterResults();
-  }, []); // Exécuter uniquement au montage du composant
+  }, [filterResults]); // Ajout de filterResults aux dépendances
+
 
   // Fonction pour ajouter/supprimer des favoris
   const toggleFavorite = React.useCallback((itemId, e) => {

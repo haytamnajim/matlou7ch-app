@@ -174,6 +174,17 @@ export const listingService = {
         });
         return cityCount;
     },
+
+    getByUserId: async (userId) => {
+        const { data, error } = await supabase
+            .from('listings_with_user')
+            .select('*')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return data;
+    },
 };
 
 // ==================== SIGNALEMENTS ====================

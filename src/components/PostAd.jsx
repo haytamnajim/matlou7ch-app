@@ -3,22 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import ConfettiIcon from './ConfettiIcon';
 import './PostAd.css';
 import Confetti from './Confetti';
+import { supabase } from '../config/supabaseClient';
+import { useAuth } from '../contexts/AuthContext';
+import { listingService } from '../services/supabaseDataService';
 
 function PostAd() {
-  // Cette fonction crée un objet global pour stocker les annonces
-  useEffect(() => {
-    // Initialiser l'objet global s'il n'existe pas
-    if (!window.matlouchAppData) {
-      window.matlouchAppData = {
-        myAds: JSON.parse(localStorage.getItem('myAds') || '[]')
-      };
-    }
-  }, []);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [submittedProductId, setSubmittedProductId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     category: '',
@@ -28,9 +25,8 @@ function PostAd() {
     signature: '',
     photos: []
   });
-  const navigate = useNavigate();
 
-  // Fonction pour convertir une image en base64
+  // Fonction pour convertir une image en base64 (pour l'aperçu uniquement)
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -40,7 +36,7 @@ function PostAd() {
     });
   };
 
-  // Fonction pour gérer l'upload d'images
+  // Fonction pour gérer l'upload d'images (sélection locale)
   const handleImageUpload = async (e) => {
     if (e.target.files) {
       const newPhotos = [...formData.photos];
@@ -49,12 +45,12 @@ function PostAd() {
       for (const file of filesArray) {
         if (newPhotos.length < 5) {
           try {
-            // Convertir l'image en base64
+            // Convertir l'image en base64 pour l'aperçu
             const base64 = await convertToBase64(file);
 
             newPhotos.push({
-              file,
-              preview: base64 // Utiliser la chaîne base64 au lieu de l'URL
+              file, // Le fichier brut pour l'upload Supabase
+              preview: base64 // L'aperçu pour l'UI
             });
           } catch (error) {
             console.error("Erreur lors de la conversion de l'image:", error);
@@ -89,51 +85,111 @@ function PostAd() {
     setPreviewMode(false);
   };
 
-  // Soumettre le formulaire après confirmation
-  const confirmSubmit = async () => {
+  // Upload une image vers Supabase Storage
+  const uploadImageToSupabase = async (file) => {
     try {
-      console.log("Photos avant sauvegarde:", formData.photos);
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
+      const filePath = `${user.id}/${fileName}`;
 
-      // Créer un objet annonce avec toutes les données nécessaires
-      const newAd = {
-        id: 'product-' + Date.now(),
+      // Timeout pour l'upload
+      const uploadPromise = supabase.storage
+        .from('listings-images')
+        .upload(filePath, file);
+
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout lors de l\'upload de l\'image')), 10000)
+      );
+
+      const result = await Promise.race([uploadPromise, timeoutPromise]);
+      const { data, error } = result;
+
+      if (error) {
+        console.error('Erreur upload:', error);
+        throw error;
+      }
+
+      // Récupérer l'URL publique
+      const { data: publicUrlData } = supabase.storage
+        .from('listings-images')
+        .getPublicUrl(filePath);
+
+      return publicUrlData.publicUrl;
+    } catch (error) {
+      console.error("Exception durant uploadImageToSupabase:", error);
+      throw error;
+    }
+  };
+
+  // Soumettre le formulaire vers Supabase
+  const confirmSubmit = async () => {
+    console.log("Début de la soumission...");
+    if (!user) {
+      alert("Vous devez être connecté pour publier une annonce.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      console.log("Upload des images en cours...");
+      // 1. Upload des images
+      const imageUrls = [];
+      for (const photo of formData.photos) {
+        if (photo.file) {
+          const url = await uploadImageToSupabase(photo.file);
+          imageUrls.push(url);
+        } else if (photo.preview && photo.preview.startsWith('http')) {
+          // Si c'est déjà une URL (cas d'édition future)
+          imageUrls.push(photo.preview);
+        }
+      }
+      console.log("Images uploadées:", imageUrls);
+
+      // 2. Créer l'objet annonce pour Supabase
+      const listingData = {
         title: formData.title,
+        description: formData.description,
         category: formData.category,
         condition: formData.condition,
-        city: formData.city,
-        description: formData.description,
-        signature: formData.signature,
-        // Sauvegardez les URLs des images
-        photos: formData.photos.map(photo => photo.preview),
-        date: new Date().toISOString(),
-        isActive: true
+        location: formData.city, // Mapping 'city' vers 'location'
+        price: 0, // Gratuit par défaut pour un don
+        images: imageUrls,
+        user_id: user.id,
+        is_published: true,
       };
 
-      console.log('Annonce complète à sauvegarder:', newAd);
-      console.log('Photos sauvegardées:', newAd.photos);
+      console.log('Données à envoyer à Supabase:', listingData);
 
-      // Récupérer les annonces existantes
-      const existingAds = JSON.parse(localStorage.getItem('myAds') || '[]');
+      // 3. Insérer dans la base de données avec Timeout
+      const insertPromise = listingService.create(listingData);
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Timeout lors de la création de l\'annonce (Possible blocage RLS)')), 10000)
+      );
 
-      // Ajouter la nouvelle annonce
-      const updatedAds = [newAd, ...existingAds];
+      const savedListing = await Promise.race([insertPromise, timeoutPromise]);
+      console.log('Annonce sauvegardée:', savedListing);
 
-      // Sauvegarder dans localStorage
-      localStorage.setItem('myAds', JSON.stringify(updatedAds));
-
-      // Vérifier que les données sont bien sauvegardées
-      const savedAds = JSON.parse(localStorage.getItem('myAds') || '[]');
-      console.log('Annonces sauvegardées dans localStorage:', savedAds);
-
-      // Stocker l'ID du produit soumis
-      setSubmittedProductId(newAd.id);
-
-      // Marquer comme soumis
+      setSubmittedProductId(savedListing.id);
       setIsSubmitted(true);
       setPreviewMode(false);
+
     } catch (error) {
       console.error('Erreur lors de la soumission:', error);
-      alert('Une erreur est survenue lors de la publication de votre annonce.');
+      let errorMessage = error.message || "Erreur inconnue";
+      if (error.code) {
+        errorMessage += ` (Code: ${error.code})`;
+      }
+      // Ajouter des conseils basés sur l'erreur
+      if (errorMessage.includes("Timeout")) {
+        errorMessage += ". Vérifiez votre connexion internet ou les règles de sécurité (RLS) de la base de données.";
+      } else if (error.code === '42501' || errorMessage.includes("permission denied")) {
+        errorMessage += ". Permission refusée. Vérifiez les politiques RLS de la table 'listings' pour l'insertion.";
+      }
+
+      alert(`Une erreur est survenue: ${errorMessage}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -162,11 +218,14 @@ function PostAd() {
     showPreview();
   };
 
-  const goToMyAds = () => {
-    navigate('/mes-annonces');
-    // Force reload to ensure the component fetches fresh data
-    window.location.reload();
-  };
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Publication de votre annonce en cours...</p>
+      </div>
+    );
+  }
 
   if (isSubmitted) {
     return (
@@ -192,17 +251,17 @@ function PostAd() {
         </div>
         <h1 className="success-title">Félicitations !</h1>
         <p className="success-message">
-          Votre annonce a bien été enregistrée. Elle sera en ligne dans quelques secondes
+          Votre annonce a bien été enregistrée et est maintenant ligne.
         </p>
         <div className="success-actions">
           <button
-            onClick={() => window.location.href = '/mes-annonces'}
+            onClick={() => navigate(`/produit/${submittedProductId}`)}
             className="view-ad-button"
           >
             Voir mon annonce
           </button>
           <button
-            onClick={() => window.location.href = '/mes-annonces'}
+            onClick={() => navigate('/mes-annonces')}
             className="my-ads-button"
           >
             Mes annonces
@@ -479,8 +538,8 @@ function PostAd() {
             <button className="back-to-edit-button" onClick={backToEdit}>
               Modifier l'annonce
             </button>
-            <button className="confirm-publish-button" onClick={confirmSubmit}>
-              Confirmer et publier
+            <button className="confirm-publish-button" onClick={confirmSubmit} disabled={isLoading}>
+              {isLoading ? 'Publication...' : 'Confirmer et publier'}
             </button>
           </div>
         </div>

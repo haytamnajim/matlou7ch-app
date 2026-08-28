@@ -1,58 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { listingService, userService } from '../services/supabaseDataService';
 import './PublicProfile.css';
 
 function PublicProfile() {
+  const { user } = useAuth();
+  const [profile, setProfile] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simuler le chargement des produits de l'utilisateur
-    setTimeout(() => {
-      // Dans une application réelle, vous feriez un appel API ici
-      const mockProducts = [
-        {
-          id: "1",
-          title: "Table d'enfant",
-          location: "Casablanca",
-          timeAgo: "quelques secondes",
-          image: "/images/table-enfant.jpg",
-          category: "Ameublement",
-          condition: "très bon état"
-        },
-        {
-          id: "2",
-          title: "Chaise de bureau",
-          location: "Casablanca",
-          timeAgo: "2 jours",
-          image: "/images/chaise-bureau.jpg",
-          category: "Ameublement",
-          condition: "bon état"
-        },
-        {
-          id: "3",
-          title: "Lampe de chevet",
-          location: "Casablanca",
-          timeAgo: "1 semaine",
-          image: "/images/lampe-chevet.jpg",
-          category: "Décoration",
-          condition: "comme neuf"
-        }
-      ];
+    const fetchData = async () => {
+      // Si pas d'utilisateur connecté, on arrête le chargement
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
-      setProducts(mockProducts);
-      setLoading(false);
-    }, 800);
-  }, []);
+      try {
+        // Pas besoin de refetcher le profil si AuthContext l'a déjà fait
+        // On récupère juste les produits avec un timeout de sécurité
+
+        console.log("PublicProfile: Récupération des produits annonces...");
+
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timeout de récupération des produits')), 5000)
+        );
+
+        // Utiliser la vue 'listings_with_user' via le service pour éviter les blocages RLS sur 'listings'
+        const fetchPromise = listingService.getByUserId(user.id);
+
+        const userProducts = await Promise.race([fetchPromise, timeoutPromise]);
+
+        // Normaliser les données des produits
+        const formattedProducts = userProducts.map(p => ({
+          id: p.id,
+          title: p.title,
+          location: p.location || p.city || 'Maroc',
+          timeAgo: new Date(p.created_at).toLocaleDateString(),
+          image: p.images && p.images.length > 0 ? p.images[0] : '',
+          category: p.category,
+          condition: p.condition
+        }));
+
+        setProducts(formattedProducts);
+      } catch (error) {
+        console.error("Erreur lors du chargement des produits:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   // Fonction pour supprimer un produit
-  const handleDeleteProduct = (productId, e) => {
+  const handleDeleteProduct = async (productId, e) => {
     e.preventDefault();
     if (window.confirm("Êtes-vous sûr de vouloir supprimer ce produit?")) {
-      // Dans une application réelle, vous feriez un appel API ici
-      setProducts(products.filter(product => product.id !== productId));
+      try {
+        await listingService.delete(productId);
+        setProducts(products.filter(product => product.id !== productId));
+      } catch (error) {
+        console.error("Erreur lors de la suppression:", error);
+        alert("Impossible de supprimer le produit.");
+      }
     }
   };
+
+  if (loading) {
+    return <div className="loading-spinner">Chargement...</div>;
+  }
+
+  if (!user) {
+    return <div className="public-profile-container">Veuillez vous connecter pour voir votre profil.</div>;
+  }
+
+  // Utiliser le profil du contexte (si disponible car chargé par AuthContext), 
+  // ou les métadonnées de l'utilisateur, ou des valeurs par défaut.
+  // AuthContext charge le profil de toute façon, donc user.user_metadata est un bon fallback immédiat.
+  const profileName = profile?.name || user.user_metadata?.name || user.email;
+  const profileCity = profile?.city || user.user_metadata?.city || 'Maroc';
+  const profileDate = profile?.created_at
+    ? new Date(profile.created_at).toLocaleDateString()
+    : new Date(user.created_at).toLocaleDateString();
 
   return (
     <div className="public-profile-container">
@@ -60,24 +92,24 @@ function PublicProfile() {
 
       <div className="profile-header-section">
         <div className="profile-avatar">
-          <span>H</span>
+          <span>{profileName ? profileName.charAt(0).toUpperCase() : 'U'}</span>
         </div>
 
         <div className="profile-info">
-          <h2 className="profile-username">haytamnajim</h2>
+          <h2 className="profile-username">{profileName}</h2>
           <div className="profile-location">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--text-muted)" width="16px" height="16px">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-            <span>Casablanca</span>
+            <span>{profileCity}</span>
           </div>
           <div className="profile-member-since">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--text-muted)" width="16px" height="16px">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>
-            <span>Membre depuis le 24 avr. 2025</span>
+            <span>Membre depuis le {profileDate}</span>
           </div>
         </div>
       </div>
@@ -101,9 +133,7 @@ function PublicProfile() {
         <span>Modifier mon profil</span>
       </Link>
 
-      {loading ? (
-        <div className="loading-spinner">Chargement...</div>
-      ) : products.length > 0 ? (
+      {products.length > 0 ? (
         <div className="user-products">
           <h2 className="products-section-title">Mes annonces</h2>
           <div className="products-grid">
@@ -111,7 +141,11 @@ function PublicProfile() {
               <div className="product-card" key={product.id}>
                 <Link to={`/produit/${product.id}`} className="product-link">
                   <div className="product-image-container">
-                    <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
+                    {product.image ? (
+                      <img src={product.image} alt={product.title} className="product-image" />
+                    ) : (
+                      <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>
+                    )}
                   </div>
                   <div className="product-info">
                     <h3 className="product-title">{product.title}</h3>

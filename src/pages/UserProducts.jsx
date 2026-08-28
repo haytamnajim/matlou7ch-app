@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt, FaArrowLeft, FaHeart, FaRegHeart, FaFlag } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
+import { userService, listingService } from '../services/supabaseDataService';
 import './UserProducts.css';
 
 function UserProducts() {
@@ -112,71 +113,52 @@ function UserProducts() {
   };
 
   useEffect(() => {
-    // Simuler le chargement des données de l'utilisateur et de ses produits
-    setTimeout(() => {
+    // Charger les données de l'utilisateur et de ses produits
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        // Dans une application réelle, vous feriez un appel API ici
-        const mockUser = {
-          id: userId,
-          name: "Ayoub Soufat",
-          location: "Casablanca",
-          memberSince: "24 avr. 2025",
-          avatar: "A",
-          avatarColor: "#c9d64f",
-          description: "Les dons sont à venir chercher à mon domicile à Chennevières sur Marne. Je privilégie la proximité."
+        // 1. Récupérer les infos de l'utilisateur
+        const userData = await userService.getById(userId);
+
+        // Formater les données utilisateur
+        const formattedUser = {
+          id: userData.id,
+          name: userData.name || 'Utilisateur',
+          location: userData.city || 'Maroc',
+          memberSince: new Date(userData.created_at).toLocaleDateString(),
+          avatar: userData.name ? userData.name.charAt(0).toUpperCase() : 'U',
+          avatarColor: '#235347', // Couleur par défaut ou générée
+          description: userData.bio || "Aucune description fournie."
         };
 
-        const mockProducts = [
-          {
-            id: "1",
-            title: "Table d'enfant",
-            location: "Casablanca",
-            timeAgo: "quelques secondes",
-            image: "/images/table-enfant.jpg",
-            category: "Ameublement",
-            condition: "très bon état",
-            isPublished: true
-          },
-          {
-            id: "2",
-            title: "Chaise de bureau",
-            location: "Casablanca",
-            timeAgo: "2 jours",
-            image: "/images/chaise-bureau.jpg",
-            category: "Ameublement",
-            condition: "bon état",
-            isPublished: true
-          },
-          {
-            id: "3",
-            title: "Lampe de chevet",
-            location: "Casablanca",
-            timeAgo: "1 semaine",
-            image: "/images/lampe-chevet.jpg",
-            category: "Décoration",
-            condition: "comme neuf",
-            isPublished: true
-          },
-          {
-            id: "4",
-            title: "Livre de cuisine",
-            location: "Casablanca",
-            timeAgo: "3 jours",
-            image: "/images/livre-cuisine.jpg",
-            category: "Livres",
-            condition: "bon état",
-            isPublished: false
-          }
-        ];
+        // 2. Récupérer les produits de l'utilisateur
+        const userListings = await listingService.getByUserId(userId);
 
-        setUser(mockUser);
-        setProducts(mockProducts);
+        // Formater les produits
+        const formattedProducts = userListings.map(item => ({
+          id: item.id,
+          title: item.title,
+          location: item.location || item.city || 'Maroc',
+          timeAgo: new Date(item.created_at).toLocaleDateString(),
+          image: item.images && item.images.length > 0 ? item.images[0] : '',
+          category: item.category,
+          condition: item.condition,
+          isPublished: item.is_published
+        }));
+
+        setUser(formattedUser);
+        setProducts(formattedProducts);
         setLoading(false);
       } catch (err) {
-        setError("Une erreur est survenue lors du chargement des données");
+        console.error("Erreur chargement profil/produits:", err);
+        setError("Impossible de charger les données de cet utilisateur.");
         setLoading(false);
       }
-    }, 800);
+    };
+
+    if (userId) {
+      fetchData();
+    }
   }, [userId]);
 
   if (loading) {
