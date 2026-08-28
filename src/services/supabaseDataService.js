@@ -1,18 +1,24 @@
 import { supabase } from '../config/supabaseClient';
+import { retry, isRetryableError } from '../utils/retry';
+import { createLogger } from '../utils/logger';
+
+const logger = createLogger('SupabaseDataService');
 
 // ==================== UTILISATEURS ====================
 export const userService = {
     getAll: async () => {
-        const { data, error } = await supabase
-            .from('users')
-            .select('*')
-            .order('created_at', { ascending: false });
+        return retry(async () => {
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .order('created_at', { ascending: false });
 
-        if (error) {
-            console.error('Erreur lors de la récupération des utilisateurs:', error);
-            throw error;
-        }
-        return data;
+            if (error) {
+                logger.error('Erreur lors de la récupération des utilisateurs', error);
+                throw error;
+            }
+            return data;
+        }, { shouldRetry: isRetryableError });
     },
 
     getPaginated: async (page = 1, perPage = 10) => {
@@ -105,16 +111,18 @@ export const userService = {
 // ==================== ANNONCES ====================
 export const listingService = {
     getAll: async () => {
-        const { data, error } = await supabase
-            .from('listings_with_user')
-            .select('*')
-            .order('created_at', { ascending: false });
+        return retry(async () => {
+            const { data, error } = await supabase
+                .from('listings_with_user')
+                .select('*')
+                .order('created_at', { ascending: false });
 
-        if (error) {
-            console.error('Erreur lors de la récupération des annonces:', error);
-            throw error;
-        }
-        return data;
+            if (error) {
+                console.error('Erreur lors de la récupération des annonces:', error);
+                throw error;
+            }
+            return data;
+        }, { shouldRetry: isRetryableError });
     },
 
     getPaginated: async (page = 1, perPage = 12) => {
@@ -260,7 +268,7 @@ export const listingService = {
         const { data, error } = await queryBuilder;
 
         if (error) {
-            console.error('Erreur lors de la recherche:', error);
+            logger.error('Erreur lors de la recherche', error);
             throw error;
         }
         return data;
@@ -276,7 +284,7 @@ export const reportService = {
             .order('created_at', { ascending: false });
 
         if (error) {
-            console.error('Erreur lors de la récupération des signalements:', error);
+            logger.error('Erreur lors de la récupération des signalements', error);
             throw error;
         }
         return data;
@@ -356,7 +364,7 @@ export const statsService = {
                 reports: reportStats.pending,
             };
         } catch (error) {
-            console.error('Erreur lors de la récupération des stats globales:', error);
+            logger.error('Erreur lors de la récupération des stats globales', error);
             throw error;
         }
     },
@@ -373,9 +381,9 @@ export const statsService = {
                 .select('created_at')
                 .order('created_at', { ascending: true });
 
-            if (usersError || listingsError) {
-                console.error('Erreur getMonthlyData:', usersError || listingsError);
-                throw usersError || listingsError;
+            if (listingsError) {
+                logger.error('Erreur getMonthlyData', listingsError);
+                throw listingsError;
             }
 
             // Calculer les données mensuelles pour les 7 derniers mois
@@ -412,7 +420,7 @@ export const statsService = {
                 listings: listingCounts,
             };
         } catch (error) {
-            console.error('Erreur lors de la récupération des données mensuelles:', error);
+            logger.error('Erreur lors de la récupération des données mensuelles', error);
             // Retourner des données par défaut en cas d'erreur
             return {
                 users: [0, 0, 0, 0, 0, 0, 0],
