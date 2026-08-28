@@ -24,7 +24,14 @@ export function NotificationProvider({ children }) {
           .order('created_at', { ascending: false })
           .limit(50);
 
-        if (error) throw error;
+        if (error) {
+          // Si la table n'existe pas, ignorer silencieusement
+          if (error.code === '42P01') {
+            logger.warn('Table notifications non trouvée, fonctionnalité désactivée');
+            return;
+          }
+          throw error;
+        }
 
         setNotifications(data || []);
         setUnreadCount(data?.filter(n => !n.is_read).length || 0);
@@ -35,17 +42,28 @@ export function NotificationProvider({ children }) {
 
     fetchNotifications();
 
-    // Écouter les nouvelles notifications en temps réel
-    const subscription = supabase
-      .channel('notifications')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
-        setNotifications(prev => [payload.new, ...prev]);
-        setUnreadCount(prev => prev + 1);
-      })
-      .subscribe();
+    // Écouter les nouvelles notifications en temps réel (optionnel)
+    let subscription;
+    try {
+      subscription = supabase
+        .channel('notifications')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
+          setNotifications(prev => [payload.new, ...prev]);
+          setUnreadCount(prev => prev + 1);
+        })
+        .subscribe((err) => {
+          if (err) {
+            logger.warn('Erreur de souscription aux notifications temps réel', err);
+          }
+        });
+    } catch (err) {
+      logger.warn('Impossible de configurer les notifications temps réel', err);
+    }
 
     return () => {
-      subscription.unsubscribe();
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     };
   }, []);
 
