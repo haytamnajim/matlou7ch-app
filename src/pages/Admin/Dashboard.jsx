@@ -47,12 +47,16 @@ function Dashboard() {
   const navigate = useNavigate();
 
   // Données pour les graphiques
+  const [monthlyLabels, setMonthlyLabels] = useState(['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']);
+  const [monthlyUsers, setMonthlyUsers] = useState([65, 78, 90, 81, 106, 120, 156]);
+  const [monthlyListings, setMonthlyListings] = useState([28, 48, 40, 59, 76, 87, 120]);
+
   const lineChartData = {
-    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
+    labels: monthlyLabels,
     datasets: [
       {
         label: 'Nouveaux utilisateurs',
-        data: [65, 78, 90, 81, 106, 120, 156],
+        data: monthlyUsers,
         fill: false,
         backgroundColor: 'rgba(74, 86, 226, 0.2)',
         borderColor: 'rgba(74, 86, 226, 1)',
@@ -60,7 +64,7 @@ function Dashboard() {
       },
       {
         label: 'Nouvelles annonces',
-        data: [28, 48, 40, 59, 76, 87, 120],
+        data: monthlyListings,
         fill: false,
         backgroundColor: 'rgba(40, 167, 69, 0.2)',
         borderColor: 'rgba(40, 167, 69, 1)',
@@ -142,6 +146,21 @@ function Dashboard() {
 
         const categoriesData = await listingService.getByCategory();
         setCategoryData(categoriesData);
+
+        // Données mensuelles
+        const monthlyData = await statsService.getMonthlyData();
+        setMonthlyUsers(monthlyData.users);
+        setMonthlyListings(monthlyData.listings);
+
+        // Générer les labels des mois
+        const months = [];
+        for (let i = 6; i >= 0; i--) {
+          const date = new Date();
+          date.setMonth(date.getMonth() - i);
+          const monthName = date.toLocaleDateString('fr-FR', { month: 'long' });
+          months.push(monthName.charAt(0).toUpperCase() + monthName.slice(1));
+        }
+        setMonthlyLabels(months);
 
         setLoading(false);
       } catch (error) {

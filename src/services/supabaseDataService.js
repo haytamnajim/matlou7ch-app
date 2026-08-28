@@ -280,11 +280,62 @@ export const statsService = {
     },
 
     getMonthlyData: async () => {
-        // Pour l'instant, retourne des données simulées
-        // TODO: Implémenter le calcul réel depuis Supabase
-        return {
-            users: [65, 78, 90, 81, 106, 120, 156],
-            listings: [28, 48, 40, 59, 76, 87, 120],
-        };
+        try {
+            const { data: users, error: usersError } = await supabase
+                .from('users')
+                .select('created_at')
+                .order('created_at', { ascending: true });
+
+            const { data: listings, error: listingsError } = await supabase
+                .from('listings')
+                .select('created_at')
+                .order('created_at', { ascending: true });
+
+            if (usersError || listingsError) {
+                console.error('Erreur getMonthlyData:', usersError || listingsError);
+                throw usersError || listingsError;
+            }
+
+            // Calculer les données mensuelles pour les 7 derniers mois
+            const months = [];
+            const userCounts = [];
+            const listingCounts = [];
+
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setMonth(date.getMonth() - i);
+                const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+                const monthName = date.toLocaleDateString('fr-FR', { month: 'long' });
+                months.push(monthName.charAt(0).toUpperCase() + monthName.slice(1));
+
+                // Compter les utilisateurs créés ce mois
+                const usersInMonth = users.filter(u => {
+                    const userDate = new Date(u.created_at);
+                    return userDate >= monthStart && userDate <= monthEnd;
+                }).length;
+                userCounts.push(usersInMonth);
+
+                // Compter les annonces créées ce mois
+                const listingsInMonth = listings.filter(l => {
+                    const listingDate = new Date(l.created_at);
+                    return listingDate >= monthStart && listingDate <= monthEnd;
+                }).length;
+                listingCounts.push(listingsInMonth);
+            }
+
+            return {
+                users: userCounts,
+                listings: listingCounts,
+            };
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données mensuelles:', error);
+            // Retourner des données par défaut en cas d'erreur
+            return {
+                users: [0, 0, 0, 0, 0, 0, 0],
+                listings: [0, 0, 0, 0, 0, 0, 0],
+            };
+        }
     },
 };
