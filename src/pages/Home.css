@@ -3,7 +3,9 @@
    ========================================================================== */
 
 .home-page-new {
-  background-color: #ffffff;
+  background: radial-gradient(circle at 10% 10%, rgba(98, 130, 93, 0.06) 0%, transparent 40%),
+              radial-gradient(circle at 90% 50%, rgba(188, 124, 78, 0.05) 0%, transparent 45%),
+              #fbfdfc;
   color: #1e293b;
   overflow-x: hidden;
 }
@@ -28,7 +30,7 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--primary-color, #62825D);
-  background: rgba(98, 130, 93, 0.1);
+  background: rgba(98, 130, 93, 0.12);
   padding: 6px 16px;
   border-radius: 50px;
   margin-bottom: 14px;
@@ -36,7 +38,7 @@
 
 .section-tag.green {
   color: #2e7d32;
-  background: rgba(46, 125, 50, 0.1);
+  background: rgba(46, 125, 50, 0.12);
 }
 
 .section-title {
@@ -60,7 +62,9 @@
    ========================================================================== */
 .home-categories-section {
   padding: 90px 0;
-  background: #ffffff;
+  background: radial-gradient(circle at 85% 20%, rgba(98, 130, 93, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(188, 124, 78, 0.06) 0%, transparent 50%),
+              #ffffff;
 }
 
 .categories-cards-grid {
@@ -72,10 +76,10 @@
 
 .category-card-item {
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
-  height: 280px;
+  height: 290px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
@@ -107,7 +111,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   color: #1e293b;
   font-size: 0.75rem;
@@ -123,7 +127,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 24px 20px 20px;
+  padding: 26px 22px 22px;
   background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 60%, rgba(15, 23, 42, 0.95) 100%);
   color: #ffffff;
   display: flex;
@@ -171,7 +175,9 @@
   padding: 12px 28px;
   border: 1.5px solid var(--primary-color, #62825D);
   border-radius: 50px;
+  background: #ffffff;
   transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(98, 130, 93, 0.1);
 }
 
 .view-all-btn:hover {
@@ -185,10 +191,12 @@
    3. SECTION COMMENT ÇA MARCHE
    ========================================================================== */
 .how-it-works-section {
-  padding: 90px 0;
-  background: #f8faf9;
-  border-top: 1px solid #edf2ee;
-  border-bottom: 1px solid #edf2ee;
+  padding: 100px 0;
+  background: radial-gradient(circle at 10% 20%, rgba(98, 130, 93, 0.12) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+              linear-gradient(180deg, #f4f8f5 0%, #edf4ef 100%);
+  border-top: 1px solid #e2ece4;
+  border-bottom: 1px solid #e2ece4;
 }
 
 .steps-grid {
@@ -198,12 +206,13 @@
 }
 
 .step-card {
-  background: #ffffff;
-  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 42px 32px;
   border-radius: 24px;
   position: relative;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   transition: all 0.35s ease;
   display: flex;
   flex-direction: column;
@@ -212,7 +221,7 @@
 
 .step-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 45px rgba(98, 130, 93, 0.12);
   border-color: rgba(98, 130, 93, 0.3);
 }
 
@@ -222,20 +231,20 @@
   right: 28px;
   font-size: 2.2rem;
   font-weight: 900;
-  color: #e2e8f0;
+  color: #cbd5e1;
   font-family: inherit;
 }
 
 .step-icon-box {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  background: rgba(98, 130, 93, 0.12);
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: rgba(98, 130, 93, 0.14);
   color: var(--primary-color, #62825D);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   margin-bottom: 24px;
   transition: all 0.3s ease;
 }
@@ -264,7 +273,9 @@
    4. SECTION CONCEPTS / MISSION
    ========================================================================== */
 .concepts-section {
-  background: linear-gradient(135deg, #1b2e1e 0%, #0d1a0f 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(98, 130, 93, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(188, 124, 78, 0.2) 0%, transparent 50%),
+              linear-gradient(135deg, #182c1b 0%, #0c180e 100%);
   padding: 100px 32px;
   text-align: center;
   position: relative;
@@ -304,7 +315,7 @@
 
 .concepts-intro-text {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.8);
   max-width: 620px;
   margin: 0 auto 50px;
   line-height: 1.6;
@@ -324,12 +335,12 @@
   height: 420px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .concept-item:hover {
   transform: translateY(-10px);
-  border-color: rgba(163, 230, 53, 0.4);
+  border-color: rgba(163, 230, 53, 0.5);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
 }
 
@@ -410,7 +421,7 @@
 }
 
 .concepts-text {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
   margin: 0;
   line-height: 1.5;
@@ -420,8 +431,10 @@
    5. SECTION VALEURS & FIABILITÉ
    ========================================================================== */
 .features-section {
-  padding: 90px 0;
-  background: #ffffff;
+  padding: 95px 0;
+  background: radial-gradient(circle at 90% 15%, rgba(98, 130, 93, 0.08) 0%, transparent 45%),
+              radial-gradient(circle at 10% 85%, rgba(59, 130, 246, 0.07) 0%, transparent 45%),
+              #ffffff;
 }
 
 .features-grid {
@@ -431,48 +444,49 @@
 }
 
 .feature-card {
-  background: #f8fafc;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fbf9 100%);
   padding: 38px 28px;
-  border-radius: 22px;
+  border-radius: 24px;
   text-align: center;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e2ece4;
   transition: all 0.35s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
 }
 
 .feature-card:hover {
   transform: translateY(-6px);
   background: #ffffff;
   border-color: var(--primary-color, #62825D);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 15px 35px rgba(98, 130, 93, 0.1);
 }
 
 .feature-icon-wrapper {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
+  width: 66px;
+  height: 66px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   transition: all 0.3s ease;
 }
 
 .feature-icon-wrapper.green-icon {
-  background: rgba(98, 130, 93, 0.12);
+  background: rgba(98, 130, 93, 0.14);
   color: #62825D;
 }
 
 .feature-icon-wrapper.blue-icon {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(59, 130, 246, 0.14);
   color: #2563eb;
 }
 
 .feature-icon-wrapper.terracotta-icon {
-  background: rgba(188, 124, 78, 0.12);
+  background: rgba(188, 124, 78, 0.14);
   color: #bc7c4e;
 }
 
@@ -498,18 +512,21 @@
    6. GRANDE BANNIÈRE CTA FINALE
    ========================================================================== */
 .home-cta-banner-section {
-  padding: 0 0 90px 0;
+  padding: 0 0 95px 0;
+  background: transparent;
 }
 
 .cta-card-box {
-  background: linear-gradient(135deg, #27402c 0%, #162619 100%);
+  background: radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.15) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(188, 124, 78, 0.2) 0%, transparent 40%),
+              linear-gradient(135deg, #233a28 0%, #132216 100%);
   border-radius: 32px;
-  padding: 70px 48px;
+  padding: 75px 48px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 25px 60px -15px rgba(22, 38, 25, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px -15px rgba(19, 34, 22, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .cta-card-content {
@@ -544,7 +561,7 @@
 
 .cta-subheading {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   margin: 0 0 28px 0;
   line-height: 1.6;
 }

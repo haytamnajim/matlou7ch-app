@@ -3,7 +3,10 @@
    ========================================================================== */
 
 .catalogue-page-wrapper {
-  background-color: #f8faf9;
+  background: radial-gradient(circle at 90% 15%, rgba(98, 130, 93, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 10% 60%, rgba(188, 124, 78, 0.07) 0%, transparent 45%),
+              radial-gradient(circle at 80% 90%, rgba(46, 125, 50, 0.06) 0%, transparent 40%),
+              #f6faf7;
   min-height: 100vh;
   color: #1e293b;
   font-family: var(--font-main, 'Inter', sans-serif);
@@ -19,9 +22,13 @@
    1. HERO HEADER & SEARCH BAR
    ========================================================================== */
 .catalogue-hero-header {
-  background: linear-gradient(180deg, #ffffff 0%, #f1f6f2 100%);
-  padding: 50px 0 40px;
-  border-bottom: 1px solid #e2e8f0;
+  position: relative;
+  background: radial-gradient(circle at 15% 20%, rgba(98, 130, 93, 0.16) 0%, transparent 45%),
+              radial-gradient(circle at 85% 30%, rgba(188, 124, 78, 0.14) 0%, transparent 50%),
+              linear-gradient(180deg, #fbf9f4 0%, #eef6f0 100%);
+  padding: 55px 0 45px;
+  border-bottom: 1px solid rgba(98, 130, 93, 0.15);
+  overflow: hidden;
 }
 
 .catalogue-header-text {
