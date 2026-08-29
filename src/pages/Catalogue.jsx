@@ -1,13 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { listingService } from '../services/supabaseDataService';
+import {
+  FaSearch,
+  FaMapMarkerAlt,
+  FaTag,
+  FaHeart,
+  FaClock,
+  FaBookmark,
+  FaRegBookmark,
+  FaUndoAlt,
+  FaChevronLeft,
+  FaChevronRight,
+  FaGift
+} from 'react-icons/fa';
 import './Catalogue.css';
 
+const QUICK_CATEGORIES = [
+  { id: '', label: 'Tout voir' },
+  { id: 'vetements', label: 'Vêtements' },
+  { id: 'multimedia', label: 'Multimédia' },
+  { id: 'meubles', label: 'Meubles' },
+  { id: 'maison', label: 'Maison' },
+  { id: 'livres', label: 'Livres' },
+  { id: 'jouets', label: 'Jeux & Jouets' },
+  { id: 'sport', label: 'Sport' }
+];
+
 function Catalogue() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
   const [searchLocation, setSearchLocation] = useState(searchParams.get('location') || '');
   const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || '');
   const [searchCategory, setSearchCategory] = useState(searchParams.get('category') || '');
@@ -19,19 +44,20 @@ function Catalogue() {
 
   const itemsPerPage = 12;
 
+  // Synchroniser avec les query params si changés depuis l'URL
+  useEffect(() => {
+    setSearchLocation(searchParams.get('location') || '');
+    setSearchQuery(searchParams.get('query') || '');
+    setSearchCategory(searchParams.get('category') || '');
+  }, [searchParams]);
+
   // Vérifier si la recherche actuelle est sauvegardée
   useEffect(() => {
     const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
     const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
-
-    if (savedSearches.includes(currentSearch)) {
-      setIsSaved(true);
-    } else {
-      setIsSaved(false);
-    }
+    setIsSaved(savedSearches.includes(currentSearch));
   }, [searchLocation, searchQuery, searchCategory]);
 
-  // Fonction pour basculer l'état de sauvegarde
   const toggleSaveSearch = () => {
     const newSavedState = !isSaved;
     setIsSaved(newSavedState);
@@ -40,12 +66,10 @@ function Catalogue() {
     const currentSearch = `${searchLocation}-${searchQuery}-${searchCategory}`;
 
     if (newSavedState) {
-      // Ajouter la recherche
       if (!savedSearches.includes(currentSearch)) {
         savedSearches.push(currentSearch);
       }
     } else {
-      // Supprimer la recherche
       const index = savedSearches.indexOf(currentSearch);
       if (index !== -1) {
         savedSearches.splice(index, 1);
@@ -55,270 +79,334 @@ function Catalogue() {
     localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
   };
 
-  // Filtrer les résultats en fonction des critères de recherche (côté serveur)
-  const filterResults = React.useCallback(async () => {
+  // Filtrer les résultats
+  const filterResults = useCallback(async () => {
     setLoading(true);
     try {
-      // Utiliser la recherche côté serveur avec Supabase
       const searchResults = await listingService.search({
         category: searchCategory,
         location: searchLocation,
         query: searchQuery
       });
 
-      // Mapper les données Supabase vers le format attendu par le composant
       const formattedItems = searchResults.map(item => ({
         id: item.id,
         title: item.title,
         location: item.location || item.city || 'Maroc',
-        category: item.category,
+        category: item.category || 'Divers',
         image: item.images && item.images.length > 0 ? item.images[0] : '',
         user: {
-          name: item.user_name || item.user?.name || 'Utilisateur'
+          name: item.user_name || item.user?.name || 'Donateur'
         },
-        time: new Date(item.created_at).toLocaleDateString(),
-        avatar: item.avatar_color || '#235347'
+        time: new Date(item.created_at).toLocaleDateString('fr-FR', {
+          day: 'numeric',
+          month: 'short'
+        }),
+        avatar: item.avatar_color || '#62825D'
       }));
 
       setResults(formattedItems);
       setCurrentPage(1);
     } catch (error) {
-      console.error("Erreur lors du chargement du catalogue:", error);
+      console.error("Erreur chargement catalogue:", error);
     } finally {
       setLoading(false);
     }
   }, [searchLocation, searchQuery, searchCategory]);
 
-  // Charger les résultats au chargement initial et lors des changements de filtres
   useEffect(() => {
     filterResults();
-  }, [filterResults]); // Ajout de filterResults aux dépendances
+  }, [filterResults]);
 
-
-  // Fonction pour ajouter/supprimer des favoris
-  const toggleFavorite = React.useCallback((itemId, e) => {
-    if (e) e.preventDefault(); // Vérifier si e existe avant d'appeler preventDefault
+  const toggleFavorite = (itemId, e) => {
+    if (e) e.preventDefault();
 
     if (!user) {
-      // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
       navigate('/connexion', {
         state: { from: { pathname: '/catalogue' } }
       });
-    } else {
-      // Logique existante pour ajouter/supprimer des favoris
-      if (favorites.includes(itemId)) {
-        setFavorites(favorites.filter(id => id !== itemId));
-      } else {
-        setFavorites([...favorites, itemId]);
-      }
+      return;
     }
-  }, [user, navigate, favorites]);
 
-  // Fonction pour gérer la recherche
-  const handleSearch = () => {
+    if (favorites.includes(itemId)) {
+      setFavorites(favorites.filter(id => id !== itemId));
+    } else {
+      setFavorites([...favorites, itemId]);
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    if (e) e.preventDefault();
+    setSearchParams({
+      location: searchLocation,
+      query: searchQuery,
+      category: searchCategory
+    });
     filterResults();
   };
 
-  // Calculer les éléments à afficher pour la pagination
+  const handleCategoryClick = (catId) => {
+    setSearchCategory(catId);
+    setSearchParams({
+      location: searchLocation,
+      query: searchQuery,
+      category: catId
+    });
+  };
+
+  const handleResetFilters = () => {
+    setSearchLocation('');
+    setSearchQuery('');
+    setSearchCategory('');
+    setSearchParams({});
+  };
+
+  // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = results.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(results.length / itemsPerPage);
 
-  // Après le calcul de currentItems, ajoutez cette fonction pour grouper par catégorie
-  const groupItemsByCategory = (items) => {
-    const grouped = {};
-
-    items.forEach(item => {
-      if (!grouped[item.category]) {
-        grouped[item.category] = [];
-      }
-      grouped[item.category].push(item);
-    });
-
-    return grouped;
-  };
-
-  const groupedItems = groupItemsByCategory(currentItems);
-
   return (
-    <div className="search-results-page">
-      <div className="advanced-search-bar">
-        <div className="search-inputs">
-          <input
-            type="text"
-            placeholder="Ville, quartier..."
-            value={searchLocation}
-            onChange={(e) => setSearchLocation(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Que cherchez-vous ?"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <select
-            value={searchCategory}
-            onChange={(e) => setSearchCategory(e.target.value)}
-          >
-            <option value="">Toutes les catégories</option>
-            <option value="Vêtements">Vêtements</option>
-            <option value="Électronique">Électronique</option>
-            <option value="Meubles">Meubles</option>
-            <option value="Livres">Livres</option>
-            <option value="Jouets">Jouets</option>
-          </select>
-          <button className="search-button" onClick={handleSearch}>Rechercher</button>
-        </div>
-      </div>
+    <div className="catalogue-page-wrapper">
+      {/* 1. Header Banner & Barre de Recherche */}
+      <section className="catalogue-hero-header">
+        <div className="catalogue-container">
+          <div className="catalogue-header-text">
+            <span className="catalogue-pill">Catalogue des dons</span>
+            <h1 className="catalogue-title">Trouvez des objets gratuits près de chez vous</h1>
+            <p className="catalogue-subtitle">
+              Parcourez des milliers d'annonces de dons solidaires partout au Maroc.
+            </p>
+          </div>
 
-      <div className="search-header">
-        <div className="search-results-count">
-          {results.length} résultats
-        </div>
-        <button
-          className={`save-search-button ${isSaved ? 'saved' : ''}`}
-          onClick={toggleSaveSearch}
-        >
-          {isSaved ? 'Recherche sauvegardée' : 'Sauvegarder ma recherche'}
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z" />
-          </svg>
-        </button>
-      </div>
+          {/* Formulaire de recherche interactif */}
+          <form className="catalogue-search-bar" onSubmit={handleSearchSubmit}>
+            <div className="search-input-field">
+              <FaSearch className="field-icon" />
+              <input
+                type="text"
+                placeholder="Que cherchez-vous ? (ex: vélo, table, veste...)"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Chargement des résultats...</p>
+            <div className="search-input-field">
+              <FaMapMarkerAlt className="field-icon" />
+              <input
+                type="text"
+                placeholder="Ville, quartier (ex: Casablanca, Rabat...)"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+              />
+            </div>
+
+            <div className="search-input-field select-field">
+              <FaTag className="field-icon" />
+              <select
+                value={searchCategory}
+                onChange={(e) => setSearchCategory(e.target.value)}
+              >
+                <option value="">Toutes catégories</option>
+                <option value="vetements">Vêtements</option>
+                <option value="multimedia">Multimédia</option>
+                <option value="meubles">Meubles</option>
+                <option value="maison">Maison & Déco</option>
+                <option value="livres">Livres</option>
+                <option value="jouets">Jeux & Loisirs</option>
+                <option value="sport">Sport</option>
+              </select>
+            </div>
+
+            <button type="submit" className="catalogue-search-submit">
+              <FaSearch /> Rechercher
+            </button>
+          </form>
+
+          {/* Chips de catégories rapides */}
+          <div className="quick-categories-bar">
+            {QUICK_CATEGORIES.map((cat) => {
+              const isSelected = searchCategory.toLowerCase() === cat.id.toLowerCase();
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`quick-cat-chip ${isSelected ? 'active' : ''}`}
+                  onClick={() => handleCategoryClick(cat.id)}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      ) : results.length === 0 ? (
-        <div className="no-results">
-          <svg className="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#aaa">
-            <path d="M0 0h24v24H0V0z" fill="none" />
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-          </svg>
-          <p>Aucun résultat ne correspond à votre recherche.</p>
-          <button onClick={() => {
-            setSearchLocation('');
-            setSearchQuery('');
-            setSearchCategory('');
-            filterResults();
-          }}>Réinitialiser les filtres</button>
-        </div>
-      ) : (
-        <>
-          {Object.keys(groupedItems).map(category => (
-            <section key={category} className="category-section">
-              <div className="section-header">
-                <h2 className="section-title">{category}</h2>
-                <Link to={`/catalogue?category=${encodeURIComponent(category)}`} className="see-all-button">
-                  Voir tout
-                </Link>
-              </div>
-              <div className="product-grid">
-                {groupedItems[category].map(item => (
-                  <div key={item.id} className="product-card">
-                    <Link to={`/produit/${item.id}`} className="product-link">
-                      <div className="product-image-container">
-                        <div className="product-avatar" style={{ backgroundColor: item.avatar }}>
-                          {item.user.name.charAt(0)}
-                        </div>
-                        <div className="product-user-name">{item.user.name}</div>
-                        {item.image && <img src={item.image} alt={item.title} className="product-image" />}
-                        {!item.image && <div className="product-image" style={{ backgroundColor: '#f0f0f0' }}></div>}
-                        <button
-                          className="favorite-button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            toggleFavorite(item.id, e);  // Passer l'événement e à la fonction
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill={favorites.includes(item.id) ? "var(--primary-color)" : "none"}
-                            stroke={favorites.includes(item.id) ? "var(--primary-color)" : "white"}
-                            width="24px"
-                            height="24px"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                          </svg>
-                        </button>
-                      </div>
-                      <div className="product-info">
-                        <h3 className="product-title">{item.title}</h3>
-                        <p className="product-location">{item.location}</p>
-                        <p className="product-time">{item.time}</p>
-                      </div>
-                    </Link>
+      </section>
+
+      {/* 2. Résultats et Grille */}
+      <section className="catalogue-results-section">
+        <div className="catalogue-container">
+          <div className="results-top-bar">
+            <div className="results-count-text">
+              <strong>{results.length}</strong> {results.length > 1 ? 'objets disponibles' : 'objet disponible'}
+              {searchCategory && <span> dans <em>{searchCategory}</em></span>}
+              {searchLocation && <span> à <em>{searchLocation}</em></span>}
+            </div>
+
+            <button
+              type="button"
+              className={`save-search-pill-btn ${isSaved ? 'is-saved' : ''}`}
+              onClick={toggleSaveSearch}
+            >
+              {isSaved ? <FaBookmark className="save-icon" /> : <FaRegBookmark className="save-icon" />}
+              <span>{isSaved ? 'Recherche sauvegardée' : 'Sauvegarder la recherche'}</span>
+            </button>
+          </div>
+
+          {/* États de chargement & résultats */}
+          {loading ? (
+            <div className="catalogue-loading-grid">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="catalogue-skeleton-card">
+                  <div className="skeleton-img-box" />
+                  <div className="skeleton-body">
+                    <div className="skeleton-line full" />
+                    <div className="skeleton-line half" />
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+          ) : results.length === 0 ? (
+            <div className="catalogue-empty-state">
+              <div className="empty-state-icon-box">
+                <FaGift />
               </div>
-            </section>
-          ))}
-
-          {totalPages > 1 && (
-            <div className="pagination">
+              <h3 className="empty-title">Aucun don ne correspond à votre recherche</h3>
+              <p className="empty-desc">
+                Essayez d'élargir vos critères de recherche ou de modifier votre ville.
+              </p>
               <button
-                className="pagination-button"
-                onClick={() => setCurrentPage(1)}
-                disabled={currentPage === 1}
+                type="button"
+                className="empty-reset-btn"
+                onClick={handleResetFilters}
               >
-                «
-              </button>
-              <button
-                className="pagination-button"
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-              >
-                ‹
-              </button>
-
-              {[...Array(totalPages)].map((_, i) => {
-                // Afficher seulement quelques pages autour de la page actuelle
-                if (
-                  i === 0 ||
-                  i === totalPages - 1 ||
-                  (i >= currentPage - 2 && i <= currentPage + 2)
-                ) {
-                  return (
-                    <button
-                      key={i}
-                      className={`pagination-button ${currentPage === i + 1 ? 'active' : ''}`}
-                      onClick={() => setCurrentPage(i + 1)}
-                    >
-                      {i + 1}
-                    </button>
-                  );
-                } else if (
-                  i === currentPage - 3 ||
-                  i === currentPage + 3
-                ) {
-                  return <span key={i} className="pagination-ellipsis">...</span>;
-                }
-                return null;
-              })}
-
-              <button
-                className="pagination-button"
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-              >
-                ›
-              </button>
-              <button
-                className="pagination-button"
-                onClick={() => setCurrentPage(totalPages)}
-                disabled={currentPage === totalPages}
-              >
-                »
+                <FaUndoAlt /> Réinitialiser les filtres
               </button>
             </div>
+          ) : (
+            <>
+              <div className="catalogue-items-grid">
+                {currentItems.map((item) => {
+                  const isFav = favorites.includes(item.id);
+                  return (
+                    <article key={item.id} className="catalogue-item-card">
+                      <Link to={`/produit/${item.id}`} className="item-card-link">
+                        <div className="item-img-wrapper">
+                          {item.image ? (
+                            <img src={item.image} alt={item.title} className="item-cover-image" />
+                          ) : (
+                            <div className="item-img-placeholder">
+                              <FaGift className="placeholder-icon" />
+                            </div>
+                          )}
+
+                          <span className="item-free-badge">100% GRATUIT</span>
+
+                          {/* Avatar Donateur */}
+                          <div className="item-donor-badge">
+                            <div className="donor-avatar" style={{ backgroundColor: item.avatar }}>
+                              {item.user.name.charAt(0).toUpperCase()}
+                            </div>
+                            <span className="donor-name">{item.user.name}</span>
+                          </div>
+
+                          {/* Bouton Favori */}
+                          <button
+                            type="button"
+                            className={`item-favorite-button ${isFav ? 'is-favorited' : ''}`}
+                            onClick={(e) => toggleFavorite(item.id, e)}
+                            aria-label={isFav ? "Retirer des favoris" : "Ajouter aux favoris"}
+                          >
+                            <FaHeart />
+                          </button>
+                        </div>
+
+                        <div className="item-card-details">
+                          <h3 className="item-card-title" title={item.title}>
+                            {item.title}
+                          </h3>
+
+                          <div className="item-card-meta">
+                            <span className="item-meta-location">
+                              <FaMapMarkerAlt className="meta-icon" />
+                              {item.location}
+                            </span>
+                            <span className="item-meta-date">
+                              <FaClock className="meta-icon" />
+                              {item.time}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </article>
+                  );
+                })}
+              </div>
+
+              {/* 3. Pagination moderne */}
+              {totalPages > 1 && (
+                <div className="catalogue-pagination">
+                  <button
+                    type="button"
+                    className="pagin-btn prev"
+                    onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                    disabled={currentPage === 1}
+                    aria-label="Page précédente"
+                  >
+                    <FaChevronLeft />
+                  </button>
+
+                  {[...Array(totalPages)].map((_, index) => {
+                    const pageNum = index + 1;
+                    if (
+                      pageNum === 1 ||
+                      pageNum === totalPages ||
+                      (pageNum >= currentPage - 2 && pageNum <= currentPage + 2)
+                    ) {
+                      return (
+                        <button
+                          key={pageNum}
+                          type="button"
+                          className={`pagin-number ${currentPage === pageNum ? 'active' : ''}`}
+                          onClick={() => setCurrentPage(pageNum)}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    } else if (
+                      pageNum === currentPage - 3 ||
+                      pageNum === currentPage + 3
+                    ) {
+                      return <span key={pageNum} className="pagin-dots">...</span>;
+                    }
+                    return null;
+                  })}
+
+                  <button
+                    type="button"
+                    className="pagin-btn next"
+                    onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    aria-label="Page suivante"
+                  >
+                    <FaChevronRight />
+                  </button>
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
+        </div>
+      </section>
     </div>
   );
 }
