@@ -253,15 +253,7 @@ function ProductDetail() {
 
 export default ProductDetail;
 
-function ProductDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useAuth();
-  const [favorites, setFavorites] = useState([]);
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
 
   // Charger les favoris depuis le localStorage
   useEffect(() => {
