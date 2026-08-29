@@ -30,8 +30,8 @@ body {
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-main);
-  color: var(--text-white);
+  background-color: #fafcfb;
+  color: var(--text-dark, #1e293b);
   min-height: 100vh;
 }
 
