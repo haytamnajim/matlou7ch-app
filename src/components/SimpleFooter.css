@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 .simple-footer {
-  background-color: #e8f4fc;
+  background-color: #a7d1f7;
   color: #111;
   font-family: 'Inter', sans-serif;
-  padding: 25px 20px 20px;
+  padding: 30px 20px 25px;
   margin-top: auto;
-  border-top: 2px solid #a7d1f7;
 }
 
 .simple-footer-container {
@@ -15,11 +14,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 15px;
+  gap: 25px;
 }
 
-/* Logo simplifié */
+/* Logo */
 .simple-footer-logo {
   margin-bottom: 5px;
 }
@@ -28,11 +26,11 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .simple-footer-logo-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #111;
   transition: color 0.3s ease;
@@ -42,20 +40,32 @@
   color: #3498db;
 }
 
-/* Liens principaux simplifiés */
+/* Sections en grille */
+.simple-footer-section {
+  width: 100%;
+}
+
+.simple-footer-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 .simple-footer-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .simple-footer-link {
   color: #111;
   text-decoration: none;
   font-size: 13px;
-  font-weight: 500;
-  padding: 3px 8px;
+  font-weight: 400;
+  padding: 2px 6px;
   transition: color 0.3s ease;
 }
 
@@ -67,13 +77,13 @@
 .simple-footer-social {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .simple-social-icon {
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,38 +94,61 @@
 
 .simple-social-icon:hover {
   color: #3498db;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Copyright */
 .simple-footer-copyright {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
-  color: #666;
-  margin-top: 5px;
+  color: #555;
+  margin-top: 10px;
+  text-align: center;
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .simple-footer {
-    padding: 20px 15px 15px;
+    padding: 25px 15px 20px;
+  }
+
+  .simple-footer-container {
+    gap: 20px;
+  }
+
+  .simple-footer-section {
+    margin-bottom: 15px;
   }
 
   .simple-footer-links {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .simple-footer-social {
-    gap: 14px;
+    gap: 16px;
   }
 
   .simple-footer-logo-text {
-    font-size: 16px;
+    font-size: 18px;
+  }
+
+  .simple-footer-title {
+    font-size: 13px;
   }
 
   .simple-footer-link {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .simple-footer-logo-text {
+    font-size: 16px;
   }
 }
