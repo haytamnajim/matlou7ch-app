@@ -1,260 +1,410 @@
-/* :root variables removed to inherit from global index.css */
-/* Uses var(--primary-color), var(--secondary-color) from global scope */
+/* ==========================================================================
+   PAGE INSCRIPTION - MATLOU7CH
+   ========================================================================== */
 
-.register-container {
+.register-page-wrapper {
+  min-height: calc(100vh - 72px);
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  /* Ajustement pour header */
-  padding: 40px 20px;
-  background-color: var(--bg-color);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-}
-
-.register-card {
-  width: 100%;
-  max-width: 800px;
-  /* Plus large pour le grid */
-  padding: 50px;
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  justify-content: center;
+  padding: 60px 20px;
   position: relative;
+  background: radial-gradient(circle at 10% 15%, rgba(98, 130, 93, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 90% 85%, rgba(188, 124, 78, 0.08) 0%, transparent 40%),
+              #f8faf9;
+  font-family: var(--font-main, 'Inter', sans-serif);
+  overflow: hidden;
   box-sizing: border-box;
-  animation: slideUp 0.6s ease-out;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  /* Effet contour subtil */
 }
 
-@keyframes slideUp {
+/* Halos lumineux d'ambiance */
+.register-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.register-bg-blob.blob-1 {
+  width: 380px;
+  height: 380px;
+  background: #62825D;
+  top: -60px;
+  left: -80px;
+}
+
+.register-bg-blob.blob-2 {
+  width: 360px;
+  height: 360px;
+  background: #bc7c4e;
+  bottom: -60px;
+  right: -80px;
+}
+
+/* Carte Glassmorphism */
+.register-glass-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 820px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 28px;
+  padding: 48px 48px 40px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.09);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  animation: regSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes regSlideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.back-button {
+/* Bouton Retour */
+.register-back-link {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  width: 45px;
-  height: 45px;
+  top: 32px;
+  left: 32px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background-color: #f0f2fa;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.back-button a {
-  color: var(--primary-color);
-  display: flex;
-  font-size: 1.2rem;
+  color: #475569;
+  font-size: 1rem;
   text-decoration: none;
+  transition: all 0.25s ease;
 }
 
-.back-button:hover {
-  background-color: var(--primary-color);
+.register-back-link:hover {
+  background: #ffffff;
+  color: var(--primary-color, #62825D);
+  border-color: var(--primary-color, #62825D);
   transform: translateX(-3px);
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.back-button:hover a {
-  color: white;
-}
-
-.register-title {
-  font-size: 2.2rem;
-  color: #2c3e50;
-  margin-bottom: 40px;
-  font-weight: 700;
+/* En-tête de marque */
+.register-brand-header {
   text-align: center;
-  position: relative;
-  padding-bottom: 15px;
+  margin-bottom: 32px;
 }
 
-.register-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-  border-radius: 2px;
+.register-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+  transition: transform 0.2s ease;
 }
 
-/* Grid Layout */
-.form-grid {
+.register-logo-link:hover {
+  transform: scale(1.03);
+}
+
+.register-brand-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.register-brand-name {
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--primary-color, #62825D) 0%, #bc7c4e 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.register-card-title {
+  font-size: 2.1rem;
+  font-weight: 850;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.6px;
+}
+
+.register-card-subtitle {
+  font-size: 0.98rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Alerte d'erreur */
+.register-error-alert {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Grille des champs 2 colonnes */
+.register-fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 24px;
   margin-bottom: 20px;
 }
 
-.form-column {
+.register-grid-col {
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }
 
-.form-group {
-  margin-bottom: 25px;
+.register-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-input-group label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.reg-input-wrap {
   position: relative;
-}
-
-.form-group label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #4a5568;
-  font-size: 0.95rem;
 }
 
-.form-group label svg {
-  color: var(--primary-color);
-}
-
-.form-group input {
-  width: 100%;
-  padding: 14px 16px;
-  border: 2px solid #edf2f7;
-  border-radius: var(--input-radius);
-  font-size: 15px;
-  transition: var(--transition);
-  background-color: #fcfcfc;
-  color: #2d3748;
-}
-
-/* Effet focus premium */
-.form-group input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  background-color: white;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-  transform: translateY(-1px);
-}
-
-.input-hint {
-  font-size: 0.8rem;
+.reg-icon {
+  position: absolute;
+  left: 16px;
   color: #94a3b8;
-  margin-top: 6px;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.reg-input-wrap input {
+  width: 100%;
+  padding: 13px 44px 13px 44px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.reg-input-wrap input:focus {
+  background: #ffffff;
+  border-color: var(--primary-color, #62825D);
+  box-shadow: 0 0 0 3px rgba(98, 130, 93, 0.15);
+}
+
+.reg-eye-btn {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.reg-eye-btn:hover {
+  color: var(--primary-color, #62825D);
+}
+
+.reg-hint {
+  font-size: 0.78rem;
+  color: #94a3b8;
   margin-left: 4px;
 }
 
 /* Checkboxes Section */
-.checkbox-section {
-  margin-top: 10px;
-  padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+.register-checkboxes-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 0;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 24px;
 }
 
-.checkbox-group {
+.custom-check-row {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-.checkbox-group input {
-  margin-right: 12px;
-  margin-top: 3px;
-  width: 18px;
-  height: 18px;
+  gap: 12px;
   cursor: pointer;
-  accent-color: var(--primary-color);
+  user-select: none;
 }
 
-.checkbox-group label {
-  font-size: 0.9rem;
-  color: #64748b;
-  line-height: 1.5;
-  cursor: pointer;
+.custom-check-row input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.link-highlight {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s;
-}
-
-.link-highlight:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
-}
-
-/* Button */
-.register-button {
-  width: 100%;
-  padding: 18px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-  color: white;
-  border: none;
-  border-radius: var(--button-radius);
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 20px;
-  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
-  letter-spacing: 0.5px;
-}
-
-.register-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.35);
-}
-
-.register-button:disabled {
-  background: #cbd5e1;
-  box-shadow: none;
-  cursor: not-allowed;
-}
-
-/* Error Message */
-.error-message {
-  background-color: #fff5f5;
-  color: #e53e3e;
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: 500;
-  border: 1px solid #fed7d7;
+.check-custom-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+.check-mark-icon {
+  font-size: 0.68rem;
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.2s ease;
+}
+
+.custom-check-row input[type="checkbox"]:checked + .check-custom-box {
+  background: var(--primary-color, #62825D);
+  border-color: var(--primary-color, #62825D);
+}
+
+.custom-check-row input[type="checkbox"]:checked + .check-custom-box .check-mark-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.check-text {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.reg-highlight-link {
+  color: var(--primary-color, #62825D);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.reg-highlight-link:hover {
+  text-decoration: underline;
+}
+
+/* Bouton Submit */
+.register-submit-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--primary-color, #62825D);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 750;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(98, 130, 93, 0.3);
+}
+
+.register-submit-btn:hover:not(:disabled) {
+  background: var(--primary-hover, #4F6B4A);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(98, 130, 93, 0.4);
+}
+
+.register-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.btn-loading-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reg-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: regSpin 0.7s infinite linear;
+}
+
+@keyframes regSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer prompt */
+.register-card-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+.reg-footer-link {
+  color: var(--primary-color, #62825D);
+  font-weight: 750;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.reg-footer-link:hover {
+  text-decoration: underline;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .register-card {
-    padding: 30px 20px;
+  .register-glass-card {
+    padding: 36px 24px 28px;
   }
 
-  .form-grid {
+  .register-fields-grid {
     grid-template-columns: 1fr;
-    /* Stack sur mobile */
-    gap: 0;
+    gap: 18px;
   }
 
-  .register-title {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+  .register-card-title {
+    font-size: 1.7rem;
   }
 
-  .back-button {
+  .register-back-link {
     top: 20px;
     left: 20px;
+    width: 36px;
+    height: 36px;
   }
 }

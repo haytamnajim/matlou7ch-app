@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaChevronLeft, FaUser, FaEnvelope, FaPhone, FaLock, FaMapMarkerAlt } from 'react-icons/fa';
+import {
+  FaChevronLeft,
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaLock,
+  FaMapMarkerAlt,
+  FaEye,
+  FaEyeSlash,
+  FaCheck
+} from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import './Register.css';
 
@@ -9,6 +19,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [city, setCity] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [rejectNewsletter, setRejectNewsletter] = useState(false);
@@ -24,40 +35,37 @@ function Register() {
     setError('');
     setIsSubmitting(true);
 
-    // Validation basique
     if (!pseudo || !email || !password || !city || !phone) {
-      setError('Veuillez remplir tous les champs');
+      setError('Veuillez remplir tous les champs obligatoires.');
       setIsSubmitting(false);
       return;
     }
 
     if (pseudo.length < 2 || pseudo.length > 30) {
-      setError('Le pseudo doit contenir entre 2 et 30 caractères');
+      setError('Le pseudo doit contenir entre 2 et 30 caractères.');
       setIsSubmitting(false);
       return;
     }
 
-    if (password.length < 6) { // Supabase requiert 6 char min par défaut
-      setError('Le mot de passe doit contenir au moins 6 caractères');
+    if (password.length < 6) {
+      setError('Le mot de passe doit contenir au moins 6 caractères.');
       setIsSubmitting(false);
       return;
     }
 
-    // Validation du numéro de téléphone (format marocain)
     const phoneRegex = /^(0|\+212)[5-7][0-9]{8}$/;
-    if (!phoneRegex.test(phone)) {
-      setError('Veuillez entrer un numéro de téléphone valide');
+    if (!phoneRegex.test(phone.replace(/\s+/g, ''))) {
+      setError('Veuillez entrer un numéro de téléphone marocain valide (ex: 0612345678).');
       setIsSubmitting(false);
       return;
     }
 
     if (!acceptTerms) {
-      setError('Vous devez accepter les conditions générales');
+      setError('Vous devez accepter les conditions générales pour créer un compte.');
       setIsSubmitting(false);
       return;
     }
 
-    // Inscription avec Supabase
     try {
       const { user, session } = await register({
         name: pseudo,
@@ -67,20 +75,18 @@ function Register() {
         city
       });
 
-      // Si l'inscription réussit mais pas de session (email confirm required), informer l'utilisateur
       if (user && !session) {
-        alert('Compte créé avec succès ! Veuillez vérifier votre email pour confirmer votre inscription.');
+        alert('Compte créé avec succès ! Veuillez vérifier vos emails pour confirmer votre inscription.');
         navigate('/connexion');
       } else {
-        // Redirection directe
         navigate('/');
       }
     } catch (err) {
       console.error(err);
-      if (err.message.includes('User already registered')) {
+      if (err.message && err.message.includes('User already registered')) {
         setError('Un compte existe déjà avec cette adresse email.');
       } else {
-        setError('Une erreur est survenue lors de l\'inscription : ' + err.message);
+        setError('Une erreur est survenue lors de l\'inscription : ' + (err.message || 'Erreur inconnue'));
       }
     } finally {
       setIsSubmitting(false);
@@ -88,144 +94,196 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <div className="back-button">
-          <Link to="/connexion"><FaChevronLeft /></Link>
+    <div className="register-page-wrapper">
+      {/* Halos lumineux d'ambiance */}
+      <div className="register-bg-blob blob-1" />
+      <div className="register-bg-blob blob-2" />
+
+      <div className="register-glass-card">
+        {/* Bouton retour */}
+        <Link to="/connexion" className="register-back-link" aria-label="Retour à la connexion">
+          <FaChevronLeft />
+        </Link>
+
+        {/* En-tête avec logo */}
+        <div className="register-brand-header">
+          <Link to="/" className="register-logo-link">
+            <img src="/logo.png" alt="Matlou7ch Logo" className="register-brand-logo" />
+            <span className="register-brand-name">MATLOU7CH</span>
+          </Link>
+          <h1 className="register-card-title">Rejoignez la communauté</h1>
+          <p className="register-card-subtitle">
+            Créez votre compte gratuit en 1 minute pour donner et recevoir.
+          </p>
         </div>
 
-        <h1 className="register-title">Créer mon compte</h1>
+        {error && <div className="register-error-alert">{error}</div>}
 
-        {error && <div className="error-message">{error}</div>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-grid">
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="register-fields-grid">
             {/* Colonne Gauche */}
-            <div className="form-column">
-              <div className="form-group">
-                <label htmlFor="pseudo">
-                  <FaUser /> Pseudo
-                </label>
-                <input
-                  type="text"
-                  id="pseudo"
-                  value={pseudo}
-                  onChange={(e) => setPseudo(e.target.value)}
-                  placeholder="Choisissez un pseudo"
-                  required
-                />
-                <div className="input-hint">De 2 à 30 caractères.</div>
+            <div className="register-grid-col">
+              <div className="register-input-group">
+                <label htmlFor="pseudo">Pseudo / Nom d'affichage *</label>
+                <div className="reg-input-wrap">
+                  <FaUser className="reg-icon" />
+                  <input
+                    type="text"
+                    id="pseudo"
+                    value={pseudo}
+                    onChange={(e) => setPseudo(e.target.value)}
+                    placeholder="Ex: Yassine_Casa"
+                    required
+                  />
+                </div>
+                <span className="reg-hint">De 2 à 30 caractères</span>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="phone">
-                  <FaPhone /> Téléphone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="06XXXXXXXX"
-                  required
-                />
-                <div className="input-hint">Format marocain valide.</div>
+              <div className="register-input-group">
+                <label htmlFor="phone">Numéro de téléphone *</label>
+                <div className="reg-input-wrap">
+                  <FaPhone className="reg-icon" />
+                  <input
+                    type="tel"
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="06XXXXXXXX"
+                    required
+                  />
+                </div>
+                <span className="reg-hint">Format marocain valide</span>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="city">
-                  <FaMapMarkerAlt /> Ville
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="Votre ville"
-                  required
-                />
+              <div className="register-input-group">
+                <label htmlFor="city">Ville de résidence *</label>
+                <div className="reg-input-wrap">
+                  <FaMapMarkerAlt className="reg-icon" />
+                  <input
+                    type="text"
+                    id="city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    placeholder="Ex: Casablanca, Rabat, Marrakech..."
+                    required
+                  />
+                </div>
               </div>
             </div>
 
             {/* Colonne Droite */}
-            <div className="form-column">
-              <div className="form-group">
-                <label htmlFor="email">
-                  <FaEnvelope /> Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Ex: nom@exemple.com"
-                  required
-                />
+            <div className="register-grid-col">
+              <div className="register-input-group">
+                <label htmlFor="email">Adresse email *</label>
+                <div className="reg-input-wrap">
+                  <FaEnvelope className="reg-icon" />
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="nom@exemple.com"
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="password">
-                  <FaLock /> Mot de passe
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Créer un mot de passe"
-                  required
-                />
-                <div className="input-hint">6 caractères minimum.</div>
+              <div className="register-input-group">
+                <label htmlFor="password">Mot de passe *</label>
+                <div className="reg-input-wrap">
+                  <FaLock className="reg-icon" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Au moins 6 caractères"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="reg-eye-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Masquer' : 'Afficher'}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+                <span className="reg-hint">6 caractères minimum</span>
               </div>
             </div>
           </div>
 
-          <div className="checkbox-section">
-            <div className="checkbox-group">
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                <input
-                  type="checkbox"
-                  id="acceptTerms"
-                  checked={acceptTerms}
-                  onChange={(e) => setAcceptTerms(e.target.checked)}
-                  required
-                  style={{ marginTop: '4px', flexShrink: 0 }}
-                />
-                <span>
-                  J'accepte les <Link to="/cgu" className="link-highlight">Conditions Générales</Link> et la <Link to="/confidentialite" className="link-highlight">Politique de Confidentialité</Link>
-                </span>
-              </div>
-            </div>
+          {/* Checkboxes Conditions */}
+          <div className="register-checkboxes-block">
+            <label className="custom-check-row">
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                required
+              />
+              <span className="check-custom-box">
+                <FaCheck className="check-mark-icon" />
+              </span>
+              <span className="check-text">
+                J'accepte les{' '}
+                <Link to="/cgu" className="reg-highlight-link" target="_blank">
+                  Conditions Générales
+                </Link>{' '}
+                et la{' '}
+                <Link to="/confidentialite" className="reg-highlight-link" target="_blank">
+                  Politique de Confidentialité
+                </Link>
+                . *
+              </span>
+            </label>
 
-            <div className="checkbox-group">
+            <label className="custom-check-row">
               <input
                 type="checkbox"
                 id="rejectNewsletter"
                 checked={rejectNewsletter}
                 onChange={(e) => setRejectNewsletter(e.target.checked)}
               />
-              <label htmlFor="rejectNewsletter">
-                Je ne souhaite pas recevoir la newsletter
-              </label>
-            </div>
+              <span className="check-custom-box">
+                <FaCheck className="check-mark-icon" />
+              </span>
+              <span className="check-text">Je ne souhaite pas recevoir la newsletter</span>
+            </label>
 
-            <div className="checkbox-group">
+            <label className="custom-check-row">
               <input
                 type="checkbox"
                 id="rejectNotifications"
                 checked={rejectNotifications}
                 onChange={(e) => setRejectNotifications(e.target.checked)}
               />
-              <label htmlFor="rejectNotifications">
-                Je ne souhaite pas recevoir de notifications
-              </label>
-            </div>
+              <span className="check-custom-box">
+                <FaCheck className="check-mark-icon" />
+              </span>
+              <span className="check-text">Je ne souhaite pas recevoir de notifications</span>
+            </label>
           </div>
 
-          <button type="submit" className="register-button" disabled={isSubmitting}>
-            {isSubmitting ? 'Inscription en cours...' : 'Valider mon inscription'}
+          <button type="submit" className="register-submit-btn" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <span className="btn-loading-content">
+                <span className="reg-spinner" /> Création du compte...
+              </span>
+            ) : (
+              'Valider mon inscription'
+            )}
           </button>
         </form>
+
+        <div className="register-card-footer">
+          <span>Vous avez déjà un compte ?</span>{' '}
+          <Link to="/connexion" className="reg-footer-link">
+            Se connecter
+          </Link>
+        </div>
       </div>
     </div>
   );
