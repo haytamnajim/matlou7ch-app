@@ -20,7 +20,7 @@ function Footer() {
         {/* 1. Header du Footer : Logo & Slogan */}
         <div className="footer-top-brand-box">
           <Link to="/" className="footer-brand-logo">
-            <img src="/logo.png" alt="Matlou7ch Logo" className="footer-logo-image" />
+            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="footer-logo-image" />
             <span className="footer-logo-text">MATLOU7CH</span>
           </Link>
           <p className="footer-brand-tagline">

@@ -35,7 +35,7 @@ function AdminLayout({ children, title }) {
       <aside className="admin-executive-sidebar">
         <div className="admin-sidebar-top">
           <Link to="/" className="admin-brand-header">
-            <img src="/logo.png" alt="Matlou7ch Logo" className="admin-logo-img" />
+            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="admin-logo-img" />
             <div className="admin-brand-text">
               <span className="admin-brand-name">MATLOU7CH</span>
               <span className="admin-portal-badge">

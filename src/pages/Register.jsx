@@ -108,7 +108,7 @@ function Register() {
         {/* En-tête avec logo */}
         <div className="register-brand-header">
           <Link to="/" className="register-logo-link">
-            <img src="/logo.png" alt="Matlou7ch Logo" className="register-brand-logo" />
+            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="register-brand-logo" />
             <span className="register-brand-name">MATLOU7CH</span>
           </Link>
           <h1 className="register-card-title">Rejoignez la communauté</h1>
