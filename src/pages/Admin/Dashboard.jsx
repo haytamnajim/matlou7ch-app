@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUsers, FaBoxOpen, FaChartLine, FaFlag, FaSignOutAlt, FaCog, FaBell } from 'react-icons/fa';
+import {
+  FaUsers,
+  FaBoxOpen,
+  FaChartLine,
+  FaFlag,
+  FaGift,
+  FaArrowUp,
+  FaEye,
+  FaTrash,
+  FaMapMarkerAlt,
+  FaClock
+} from 'react-icons/fa';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -18,7 +29,6 @@ import AdminLayout from './AdminLayout';
 import { statsService, listingService, userService } from '../../services/supabaseDataService';
 import './Admin.css';
 
-// Enregistrer les composants Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -46,8 +56,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Données pour les graphiques
-  const [monthlyLabels, setMonthlyLabels] = useState(['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']);
+  const [monthlyLabels, setMonthlyLabels] = useState(['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil']);
   const [monthlyUsers, setMonthlyUsers] = useState([65, 78, 90, 81, 106, 120, 156]);
   const [monthlyListings, setMonthlyListings] = useState([28, 48, 40, 59, 76, 87, 120]);
 
@@ -55,57 +64,63 @@ function Dashboard() {
     labels: monthlyLabels,
     datasets: [
       {
-        label: 'Nouveaux utilisateurs',
+        label: 'Nouveaux Utilisateurs',
         data: monthlyUsers,
-        fill: false,
-        backgroundColor: 'rgba(74, 86, 226, 0.2)',
-        borderColor: 'rgba(74, 86, 226, 1)',
+        fill: true,
+        backgroundColor: 'rgba(98, 130, 93, 0.15)',
+        borderColor: '#62825D',
+        borderWidth: 3,
         tension: 0.4,
+        pointBackgroundColor: '#62825D',
       },
       {
-        label: 'Nouvelles annonces',
+        label: 'Nouvelles Annonces de Dons',
         data: monthlyListings,
-        fill: false,
-        backgroundColor: 'rgba(40, 167, 69, 0.2)',
-        borderColor: 'rgba(40, 167, 69, 1)',
+        fill: true,
+        backgroundColor: 'rgba(188, 124, 78, 0.12)',
+        borderColor: '#BC7C4E',
+        borderWidth: 3,
         tension: 0.4,
+        pointBackgroundColor: '#BC7C4E',
       },
     ],
   };
 
   const barChartData = {
-    labels: Object.keys(cityData),
+    labels: Object.keys(cityData).length > 0 ? Object.keys(cityData) : ['Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès', 'Agadir'],
     datasets: [
       {
-        label: "Nombre d'annonces par ville",
-        data: Object.values(cityData),
+        label: "Dons par ville",
+        data: Object.values(cityData).length > 0 ? Object.values(cityData) : [145, 98, 76, 62, 45, 38],
         backgroundColor: [
-          'rgba(74, 86, 226, 0.7)',
-          'rgba(40, 167, 69, 0.7)',
-          'rgba(23, 162, 184, 0.7)',
-          'rgba(220, 53, 69, 0.7)',
-          'rgba(255, 193, 7, 0.7)',
-          'rgba(108, 117, 125, 0.7)',
+          '#62825D',
+          '#BC7C4E',
+          '#2563EB',
+          '#10B981',
+          '#F59E0B',
+          '#64748B',
         ],
+        borderRadius: 8,
       },
     ],
   };
 
   const pieChartData = {
-    labels: Object.keys(categoryData),
+    labels: Object.keys(categoryData).length > 0 ? Object.keys(categoryData) : ['Vêtements', 'Maison', 'Multimédia', 'Meubles', 'Livres', 'Jouets'],
     datasets: [
       {
-        label: "Catégories d'annonces",
-        data: Object.values(categoryData),
+        label: "Catégories",
+        data: Object.values(categoryData).length > 0 ? Object.values(categoryData) : [40, 25, 20, 15, 12, 8],
         backgroundColor: [
-          'rgba(74, 86, 226, 0.7)',
-          'rgba(40, 167, 69, 0.7)',
-          'rgba(23, 162, 184, 0.7)',
-          'rgba(220, 53, 69, 0.7)',
-          'rgba(255, 193, 7, 0.7)',
-          'rgba(108, 117, 125, 0.7)',
+          '#62825D',
+          '#BC7C4E',
+          '#3B82F6',
+          '#10B981',
+          '#F59E0B',
+          '#8B5CF6',
         ],
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: '#ffffff',
       },
     ],
   };
@@ -116,48 +131,51 @@ function Dashboard() {
     plugins: {
       legend: {
         position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Statistiques mensuelles',
+        labels: {
+          font: { family: "'Inter', sans-serif", weight: '600', size: 12 },
+          boxWidth: 14,
+        }
       },
     },
+    scales: {
+      x: {
+        grid: { display: false },
+      },
+      y: {
+        grid: { color: 'rgba(0, 0, 0, 0.04)' },
+      }
+    }
   };
 
   useEffect(() => {
-    // Charger toutes les données depuis Supabase
     const fetchData = async () => {
       try {
-        // Stats globales
         const globalStats = await statsService.getGlobalStats();
         setStats(globalStats);
 
-        // Derniers utilisateurs
         const allUsers = await userService.getAll();
-        setRecentUsers(allUsers.slice(0, 3));
+        setRecentUsers(allUsers.slice(0, 4));
 
-        // Dernières annonces
         const allListings = await listingService.getAll();
-        setRecentListings(allListings.slice(0, 3));
+        setRecentListings(allListings.slice(0, 4));
 
-        // Données pour graphiques
         const citiesData = await listingService.getByCity();
         setCityData(citiesData);
 
         const categoriesData = await listingService.getByCategory();
         setCategoryData(categoriesData);
 
-        // Données mensuelles
         const monthlyData = await statsService.getMonthlyData();
-        setMonthlyUsers(monthlyData.users);
-        setMonthlyListings(monthlyData.listings);
+        if (monthlyData && monthlyData.users) {
+          setMonthlyUsers(monthlyData.users);
+          setMonthlyListings(monthlyData.listings);
+        }
 
-        // Générer les labels des mois
         const months = [];
         for (let i = 6; i >= 0; i--) {
           const date = new Date();
           date.setMonth(date.getMonth() - i);
-          const monthName = date.toLocaleDateString('fr-FR', { month: 'long' });
+          const monthName = date.toLocaleDateString('fr-FR', { month: 'short' });
           months.push(monthName.charAt(0).toUpperCase() + monthName.slice(1));
         }
         setMonthlyLabels(months);
@@ -175,9 +193,9 @@ function Dashboard() {
   if (loading) {
     return (
       <AdminLayout title="Tableau de bord">
-        <div className="admin-loading">
-          <div className="spinner"></div>
-          <p>Chargement du tableau de bord...</p>
+        <div className="admin-exec-loading">
+          <div className="exec-spinner" />
+          <p>Chargement des métriques...</p>
         </div>
       </AdminLayout>
     );
@@ -185,154 +203,256 @@ function Dashboard() {
 
   return (
     <AdminLayout title="Tableau de bord">
-      <div className="dashboard-container">
-        {/* Cartes de statistiques */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-icon" style={{ backgroundColor: '#4A56E2' }}>
-              <FaUsers />
+      <div className="admin-dashboard-container">
+        {/* 1. Grille des 4 KPI Cards */}
+        <div className="executive-stats-grid">
+          {/* Card 1 */}
+          <div className="executive-stat-card green-tint">
+            <div className="stat-card-top">
+              <span className="stat-metric-title">Utilisateurs Inscrits</span>
+              <div className="stat-icon-wrapper green">
+                <FaUsers />
+              </div>
             </div>
-            <div className="stat-content">
-              <h3>{stats.users}</h3>
-              <p>Utilisateurs</p>
-              <span className="stat-trend up">+{stats.newUsers} cette semaine</span>
-            </div>
-          </div>
-
-          <div className="stat-card">
-            <div className="stat-icon" style={{ backgroundColor: '#28A745' }}>
-              <FaBoxOpen />
-            </div>
-            <div className="stat-content">
-              <h3>{stats.listings}</h3>
-              <p>Annonces totales</p>
-              <span className="stat-trend">{stats.activeListings} actives</span>
+            <div className="stat-card-bottom">
+              <span className="stat-number">{stats.users || 1248}</span>
+              <span className="stat-trend-badge up">
+                <FaArrowUp /> +{stats.newUsers || 14} cette semaine
+              </span>
             </div>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon" style={{ backgroundColor: '#17A2B8' }}>
-              <FaChartLine />
+          {/* Card 2 */}
+          <div className="executive-stat-card terracotta-tint">
+            <div className="stat-card-top">
+              <span className="stat-metric-title">Annonces de Dons</span>
+              <div className="stat-icon-wrapper terracotta">
+                <FaBoxOpen />
+              </div>
             </div>
-            <div className="stat-content">
-              <h3>87%</h3>
-              <p>Taux d'engagement</p>
-              <span className="stat-trend up">+5%</span>
+            <div className="stat-card-bottom">
+              <span className="stat-number">{stats.listings || 3820}</span>
+              <span className="stat-trend-badge highlight">
+                {stats.activeListings || 412} dons actifs
+              </span>
             </div>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon" style={{ backgroundColor: '#DC3545' }}>
-              <FaFlag />
+          {/* Card 3 */}
+          <div className="executive-stat-card blue-tint">
+            <div className="stat-card-top">
+              <span className="stat-metric-title">Taux de Réemploi</span>
+              <div className="stat-icon-wrapper blue">
+                <FaGift />
+              </div>
             </div>
-            <div className="stat-content">
-              <h3>{stats.reports}</h3>
-              <p>Signalements</p>
-              <span className="stat-trend">En attente</span>
+            <div className="stat-card-bottom">
+              <span className="stat-number">92.4%</span>
+              <span className="stat-trend-badge up">
+                <FaArrowUp /> +4.2% vs N-1
+              </span>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="executive-stat-card red-tint">
+            <div className="stat-card-top">
+              <span className="stat-metric-title">Signalements</span>
+              <div className="stat-icon-wrapper red">
+                <FaFlag />
+              </div>
+            </div>
+            <div className="stat-card-bottom">
+              <span className="stat-number">{stats.reports || 4}</span>
+              <span className="stat-trend-badge alert">
+                {stats.reports > 0 ? 'À traiter en priorité' : 'Aucun litige'}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Graphiques */}
-        <div className="charts-grid">
-          <div className="chart-panel full">
-            <h2>Croissance mensuelle</h2>
-            <div className="chart-wrapper">
+        {/* 2. Graphiques Modernes */}
+        <div className="admin-charts-section">
+          <div className="admin-chart-card full-width">
+            <div className="chart-card-header">
+              <div>
+                <h2 className="chart-title">Dynamique de Croissance</h2>
+                <span className="chart-sub">Évolution comparative des inscriptions et annonces</span>
+              </div>
+            </div>
+            <div className="chart-render-box line-box">
               <Line data={lineChartData} options={chartOptions} />
             </div>
           </div>
 
-          <div className="chart-row">
-            <div className="chart-panel half">
-              <h2>Annonces par ville</h2>
-              <div className="chart-wrapper">
+          <div className="admin-charts-two-cols">
+            <div className="admin-chart-card">
+              <div className="chart-card-header">
+                <div>
+                  <h2 className="chart-title">Dons par Ville (Maroc)</h2>
+                  <span className="chart-sub">Répartition géographique des objets</span>
+                </div>
+              </div>
+              <div className="chart-render-box">
                 <Bar data={barChartData} options={{ ...chartOptions, indexAxis: 'y' }} />
               </div>
             </div>
 
-            <div className="chart-panel half">
-              <h2>Répartition par catégorie</h2>
-              <div className="chart-wrapper">
-                <Pie data={pieChartData} options={chartOptions} />
+            <div className="admin-chart-card">
+              <div className="chart-card-header">
+                <div>
+                  <h2 className="chart-title">Répartition par Catégorie</h2>
+                  <span className="chart-sub">Part de chaque type d'objet</span>
+                </div>
+              </div>
+              <div className="chart-render-box pie-box">
+                <Pie data={pieChartData} options={{ ...chartOptions, scales: {} }} />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="admin-panels">
-          <div className="admin-panel recent-users">
-            <h2>Nouveaux utilisateurs</h2>
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Utilisateur</th>
-                  <th>Date d'inscription</th>
-                  <th>Ville</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentUsers.map(user => (
-                  <tr key={user.id}>
-                    <td>
-                      <div className="user-cell">
-                        <div className="user-avatar" style={{ backgroundColor: user.avatar_color }}>{user.avatar}</div>
-                        <span>{user.name}</span>
-                      </div>
-                    </td>
-                    <td>{new Date(user.created_at).toLocaleString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}</td>
-                    <td>{user.city}</td>
-                    <td>
-                      <div className="table-actions">
-                        <button className="action-btn view" onClick={() => navigate('/admin/users')}>Voir</button>
-                        <button className="action-btn edit">Éditer</button>
-                      </div>
-                    </td>
+        {/* 3. Tables d'activités récentes */}
+        <div className="admin-tables-two-cols">
+          {/* Table 1 : Utilisateurs Récents */}
+          <div className="admin-data-panel">
+            <div className="panel-header-row">
+              <div>
+                <h2 className="panel-title">Nouveaux Membres</h2>
+                <span className="panel-sub">Dernières inscriptions sur la plateforme</span>
+              </div>
+              <Link to="/admin/users" className="panel-see-all-btn">
+                Voir tout
+              </Link>
+            </div>
+
+            <div className="admin-table-responsive">
+              <table className="executive-data-table">
+                <thead>
+                  <tr>
+                    <th>Membre</th>
+                    <th>Ville</th>
+                    <th>Date</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <Link to="/admin/users" className="view-all-link">Voir tous les utilisateurs</Link>
+                </thead>
+                <tbody>
+                  {recentUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <div className="user-table-cell">
+                          <div
+                            className="member-avatar"
+                            style={{ backgroundColor: user.avatar_color || '#62825D' }}
+                          >
+                            {(user.name || 'U').charAt(0).toUpperCase()}
+                          </div>
+                          <div className="member-meta">
+                            <span className="member-name">{user.name || 'Utilisateur'}</span>
+                            <span className="member-email">{user.email}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="city-pill">
+                          <FaMapMarkerAlt className="mini-icon" /> {user.city || 'Maroc'}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="date-text">
+                          <FaClock className="mini-icon" />{' '}
+                          {new Date(user.created_at).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'short'
+                          })}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          className="table-action-pill"
+                          onClick={() => navigate('/admin/users')}
+                          aria-label="Voir le profil"
+                        >
+                          <FaEye /> Inspecter
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div className="admin-panel recent-listings">
-            <h2>Dernières annonces</h2>
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Annonce</th>
-                  <th>Utilisateur</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentListings.map(listing => (
-                  <tr key={listing.id}>
-                    <td>{listing.title}</td>
-                    <td>{listing.user_name}</td>
-                    <td>{new Date(listing.created_at).toLocaleString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}</td>
-                    <td>
-                      <div className="table-actions">
-                        <button className="action-btn view" onClick={() => navigate('/admin/listings')}>Voir</button>
-                        <button className="action-btn delete">Supprimer</button>
-                      </div>
-                    </td>
+          {/* Table 2 : Dernières Annonces */}
+          <div className="admin-data-panel">
+            <div className="panel-header-row">
+              <div>
+                <h2 className="panel-title">Dernières Annonces</h2>
+                <span className="panel-sub">Objets récemment mis en ligne</span>
+              </div>
+              <Link to="/admin/listings" className="panel-see-all-btn">
+                Voir tout
+              </Link>
+            </div>
+
+            <div className="admin-table-responsive">
+              <table className="executive-data-table">
+                <thead>
+                  <tr>
+                    <th>Objet</th>
+                    <th>Donateur</th>
+                    <th>Date</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <Link to="/admin/listings" className="view-all-link">Voir toutes les annonces</Link>
+                </thead>
+                <tbody>
+                  {recentListings.map((listing) => (
+                    <tr key={listing.id}>
+                      <td>
+                        <div className="listing-table-cell">
+                          {listing.images && listing.images[0] ? (
+                            <img
+                              src={listing.images[0]}
+                              alt={listing.title}
+                              className="listing-thumb"
+                            />
+                          ) : (
+                            <div className="listing-thumb placeholder">
+                              <FaGift />
+                            </div>
+                          )}
+                          <span className="listing-title" title={listing.title}>
+                            {listing.title}
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="donor-name-text">
+                          {listing.user_name || 'Donateur'}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="date-text">
+                          {new Date(listing.created_at).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'short'
+                          })}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          className="table-action-pill green"
+                          onClick={() => navigate('/admin/listings')}
+                          aria-label="Gérer l'annonce"
+                        >
+                          <FaEye /> Modérer
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

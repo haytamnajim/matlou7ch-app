@@ -1,6 +1,16 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaUsers, FaBoxOpen, FaChartLine, FaFlag, FaSignOutAlt, FaCog, FaBell } from 'react-icons/fa';
+import {
+  FaUsers,
+  FaBoxOpen,
+  FaChartLine,
+  FaFlag,
+  FaSignOutAlt,
+  FaCog,
+  FaBell,
+  FaExternalLinkAlt,
+  FaShieldAlt
+} from 'react-icons/fa';
 import './Admin.css';
 
 function AdminLayout({ children, title }) {
@@ -8,68 +18,100 @@ function AdminLayout({ children, title }) {
   const location = useLocation();
 
   const handleLogout = () => {
-    // Logique de déconnexion
     localStorage.removeItem('adminToken');
     navigate('/admin/login');
   };
 
-  // Vérifier si le chemin actuel correspond à un élément de navigation
   const isActive = (path) => {
-    return location.pathname === path;
+    if (path === '/admin') {
+      return location.pathname === '/admin' || location.pathname === '/admin/';
+    }
+    return location.pathname.startsWith(path);
   };
 
   return (
-    <div className="admin-dashboard">
-      <aside className="admin-sidebar">
-        <div className="admin-logo">
-          <div className="admin-logo-placeholder">M</div>
-          <h2>Matlou7ch</h2>
+    <div className="admin-executive-dashboard">
+      {/* 1. Sidebar Exécutive */}
+      <aside className="admin-executive-sidebar">
+        <div className="admin-sidebar-top">
+          <Link to="/" className="admin-brand-header">
+            <img src="/logo.png" alt="Matlou7ch Logo" className="admin-logo-img" />
+            <div className="admin-brand-text">
+              <span className="admin-brand-name">MATLOU7CH</span>
+              <span className="admin-portal-badge">
+                <FaShieldAlt className="portal-shield" /> ESPACE ADMIN
+              </span>
+            </div>
+          </Link>
         </div>
 
-        <nav className="admin-nav">
-          <Link to="/admin" className={`admin-nav-item ${isActive('/admin') ? 'active' : ''}`}>
-            <FaChartLine /> <span>Tableau de bord</span>
+        <nav className="admin-nav-list">
+          <span className="nav-group-title">GESTION PRINCIPALE</span>
+          <Link to="/admin" className={`admin-nav-link ${isActive('/admin') ? 'active' : ''}`}>
+            <FaChartLine className="nav-link-icon" />
+            <span>Tableau de bord</span>
           </Link>
-          <Link to="/admin/users" className={`admin-nav-item ${isActive('/admin/users') ? 'active' : ''}`}>
-            <FaUsers /> <span>Utilisateurs</span>
+
+          <Link to="/admin/users" className={`admin-nav-link ${isActive('/admin/users') ? 'active' : ''}`}>
+            <FaUsers className="nav-link-icon" />
+            <span>Utilisateurs</span>
           </Link>
-          <Link to="/admin/listings" className={`admin-nav-item ${isActive('/admin/listings') ? 'active' : ''}`}>
-            <FaBoxOpen /> <span>Annonces</span>
+
+          <Link to="/admin/listings" className={`admin-nav-link ${isActive('/admin/listings') ? 'active' : ''}`}>
+            <FaBoxOpen className="nav-link-icon" />
+            <span>Annonces</span>
           </Link>
-          <Link to="/admin/reports" className={`admin-nav-item ${isActive('/admin/reports') ? 'active' : ''}`}>
-            <FaFlag /> <span>Signalements</span>
-            <span className="badge">42</span>
+
+          <Link to="/admin/reports" className={`admin-nav-link ${isActive('/admin/reports') ? 'active' : ''}`}>
+            <FaFlag className="nav-link-icon" />
+            <span>Signalements</span>
+            <span className="admin-nav-badge">4</span>
           </Link>
-          <Link to="/admin/settings" className={`admin-nav-item ${isActive('/admin/settings') ? 'active' : ''}`}>
-            <FaCog /> <span>Paramètres</span>
+
+          <span className="nav-group-title" style={{ marginTop: '20px' }}>SYSTÈME</span>
+          <Link to="/admin/settings" className={`admin-nav-link ${isActive('/admin/settings') ? 'active' : ''}`}>
+            <FaCog className="nav-link-icon" />
+            <span>Paramètres</span>
           </Link>
         </nav>
 
-        <div className="admin-sidebar-footer">
-          <button onClick={handleLogout} className="admin-logout-btn">
-            <FaSignOutAlt /> Déconnexion
+        <div className="admin-sidebar-bottom">
+          <Link to="/" className="admin-public-site-btn" target="_blank">
+            <FaExternalLinkAlt /> <span>Voir le site public</span>
+          </Link>
+
+          <button onClick={handleLogout} className="admin-logout-action-btn">
+            <FaSignOutAlt /> <span>Déconnexion</span>
           </button>
         </div>
       </aside>
 
-      <main className="admin-main">
-        <header className="admin-header">
-          <h1>{title}</h1>
+      {/* 2. Main Executive Content */}
+      <main className="admin-executive-main">
+        <header className="admin-top-header">
+          <div className="header-title-block">
+            <h1 className="header-page-title">{title}</h1>
+            <span className="header-subtitle">Portail de supervision & modération</span>
+          </div>
 
-          <div className="admin-header-actions">
-            <div className="admin-notifications">
+          <div className="admin-header-user-actions">
+            <button className="admin-notif-btn" aria-label="Notifications">
               <FaBell />
-              <span className="notification-badge">3</span>
-            </div>
+              <span className="notif-pulse-dot" />
+            </button>
 
-            <div className="admin-profile">
-              <div className="admin-profile-avatar-placeholder">A</div>
-              <span>Admin</span>
+            <div className="admin-avatar-pill">
+              <div className="admin-avatar-circle">A</div>
+              <div className="admin-info-labels">
+                <span className="admin-username">Administrateur</span>
+                <span className="admin-role-tag">Super Admin</span>
+              </div>
+              <span className="online-status-dot" />
             </div>
           </div>
         </header>
 
-        <div className="admin-content">
+        <div className="admin-page-body">
           {children}
         </div>
       </main>
