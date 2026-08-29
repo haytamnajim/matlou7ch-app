@@ -104,7 +104,7 @@ function App() {
             </AdminRoute>
           } />
 
-          {/* Routes principales du site avec Footer complet (Grand Footer) */}
+          {/* Page d'accueil avec Grand Footer */}
           <Route path="/" element={
             <>
               <Navbar />
@@ -112,46 +112,48 @@ function App() {
               <Footer />
             </>
           } />
+
+          {/* Pages secondaires avec Mini Footer (SimpleFooter) */}
           <Route path="/catalogue" element={
             <>
               <Navbar />
               <Catalogue />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/notre-adn" element={
             <>
               <Navbar />
               <NotreADN />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/faq" element={
             <>
               <Navbar />
               <FAQ />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/contact" element={
             <>
               <Navbar />
               <Contact />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/cgu" element={
             <>
               <Navbar />
               <CGU />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/favoris" element={
             <>
               <Navbar />
               <Favoris />
-              <Footer />
+              <SimpleFooter />
             </>
           } />
           <Route path="/messages" element={
@@ -159,7 +161,7 @@ function App() {
               <>
                 <Navbar />
                 <Messages />
-                <Footer />
+                <SimpleFooter />
               </>
             </ProtectedRoute>
           } />
@@ -168,7 +170,7 @@ function App() {
               <>
                 <Navbar />
                 <MesAnnonces />
-                <Footer />
+                <SimpleFooter />
               </>
             </ProtectedRoute>
           } />
@@ -177,7 +179,7 @@ function App() {
               <>
                 <Navbar />
                 <PostAd />
-                <Footer />
+                <SimpleFooter />
               </>
             </ProtectedRoute>
           } />
