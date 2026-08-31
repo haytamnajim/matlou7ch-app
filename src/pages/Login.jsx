@@ -42,14 +42,30 @@ function Login() {
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      return setError('Veuillez remplir tous les champs');
+    
+    // Sanitize l'email
+    const sanitizedEmail = sanitizeEmail(email);
+    
+    // Valider le formulaire
+    const validation = validateLoginForm({ email: sanitizedEmail, password });
+    if (!validation.valid) {
+      return setError(validation.errors.email || validation.errors.password || 'Formulaire invalide');
     }
-
+    
+    // Vérifier le rate limiting
+    const rateLimitCheck = checkRateLimit('login', sanitizedEmail);
+    if (!rateLimitCheck.allowed) {
+      if (rateLimitCheck.blocked) {
+        const blockedMinutes = Math.ceil((rateLimitCheck.resetTime - Date.now()) / 60000);
+        return setError(`Trop de tentatives. Réessayez dans ${blockedMinutes} minute(s).`);
+      }
+      return setError('Trop de tentatives. Veuillez réessayer plus tard.');
+    }
+    
     try {
       setError('');
       setLoading(true);
-      await login(email, password);
+      await login(sanitizedEmail, password);
       navigate(from, { replace: true });
     } catch (err) {
       console.error(err);

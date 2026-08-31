@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   FaChevronLeft,
@@ -12,6 +12,9 @@ import {
   FaCheck
 } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
+import { validateRegisterForm, sanitizeEmail, sanitizePhone, sanitizeName, sanitizeCity } from '../utils/validation';
+import { checkRateLimit } from '../utils/rateLimit';
+import { initializeCSRFProtection } from '../utils/csrf';
 import './Register.css';
 
 function Register() {
@@ -30,32 +33,30 @@ function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  // Initialiser la protection CSRF
+  useEffect(() => {
+    initializeCSRFProtection();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
 
-    if (!pseudo || !email || !password || !city || !phone) {
-      setError('Veuillez remplir tous les champs obligatoires.');
-      setIsSubmitting(false);
-      return;
-    }
+    // Sanitize les données
+    const sanitizedData = {
+      name: sanitizeName(pseudo),
+      email: sanitizeEmail(email),
+      phone: sanitizePhone(phone),
+      password: password,
+      city: sanitizeCity(city)
+    };
 
-    if (pseudo.length < 2 || pseudo.length > 30) {
-      setError('Le pseudo doit contenir entre 2 et 30 caractères.');
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères.');
-      setIsSubmitting(false);
-      return;
-    }
-
-    const phoneRegex = /^(0|\+212)[5-7][0-9]{8}$/;
-    if (!phoneRegex.test(phone.replace(/\s+/g, ''))) {
-      setError('Veuillez entrer un numéro de téléphone marocain valide (ex: 0612345678).');
+    // Valider le formulaire
+    const validation = validateRegisterForm(sanitizedData);
+    if (!validation.valid) {
+      const firstError = Object.values(validation.errors)[0];
+      setError(firstError);
       setIsSubmitting(false);
       return;
     }
@@ -66,13 +67,26 @@ function Register() {
       return;
     }
 
+    // Vérifier le rate limiting
+    const rateLimitCheck = checkRateLimit('register', sanitizedData.email);
+    if (!rateLimitCheck.allowed) {
+      if (rateLimitCheck.blocked) {
+        const blockedMinutes = Math.ceil((rateLimitCheck.resetTime - Date.now()) / 60000);
+        setError(`Trop de tentatives d'inscription. Réessayez dans ${blockedMinutes} minute(s).`);
+      } else {
+        setError('Trop de tentatives. Veuillez réessayer plus tard.');
+      }
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const { user, session } = await register({
-        name: pseudo,
-        email,
-        password,
-        phone,
-        city
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        password: sanitizedData.password,
+        phone: sanitizedData.phone,
+        city: sanitizedData.city
       });
 
       if (user && !session) {
