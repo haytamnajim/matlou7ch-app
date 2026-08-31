@@ -25,6 +25,11 @@ function Login() {
   // Message de redirection
   const [redirectMessage, setRedirectMessage] = useState('');
 
+  // Initialiser la protection CSRF
+  useEffect(() => {
+    initializeCSRFProtection();
+  }, []);
+
   useEffect(() => {
     if (location.state?.from) {
       const path = location.state.from.pathname;
