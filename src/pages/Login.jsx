@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaInfoCircle, FaExclamationCircle } from 'react-icons/fa';
+import { validateLoginForm, sanitizeEmail } from '../utils/validation';
+import { checkRateLimit } from '../utils/rateLimit';
+import { initializeCSRFProtection } from '../utils/csrf';
 import './Login.css';
 
 function Login() {
