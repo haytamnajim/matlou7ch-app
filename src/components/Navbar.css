@@ -528,9 +528,41 @@
   font-weight: 600;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar-content {
-    padding: 0 20px;
+    padding: 0 24px;
+  }
+
+  .search-bar {
+    max-width: 350px;
+    margin: 0 24px;
+  }
+
+  .nav-actions {
+    gap: 20px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .icon-link span {
+    display: none;
+  }
+
+  .icon-link svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+  }
+
+  .navbar-content {
+    padding: 0 16px;
   }
 
   .search-bar {
@@ -538,10 +570,186 @@
   }
 
   .nav-actions {
-    gap: 15px;
+    gap: 12px;
+  }
+
+  .logo-image {
+    height: 36px;
   }
 
   .logo-text {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .donate-button {
+    padding: 9px 16px;
+    font-size: 11px;
+  }
+
+  .nav-profile-pill {
+    padding: 7px 14px;
+    gap: 8px;
+  }
+
+  .profile-pill-text {
+    font-size: 12px;
+  }
+
+  .nav-login-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .nav-menu {
+    padding: 10px 0 14px;
+    gap: 20px;
+  }
+
+  .menu-item {
+    width: 70px;
+  }
+
+  .menu-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .menu-icon-wrapper svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-label {
+    font-size: 10px;
+  }
+
+  .menu-item.active .menu-icon-wrapper {
+    transform: translateY(-20px);
+  }
+
+  .menu-item.active .menu-label {
+    transform: translateY(18px);
+  }
+
+  .nav-menu-indicator {
+    width: 80px;
+    height: 54px;
+    top: -20px;
+  }
+
+  .menu-item:nth-child(1).active~.nav-menu-indicator {
+    transform: translateX(calc(-1.5 * 95px));
+  }
+
+  .menu-item:nth-child(2).active~.nav-menu-indicator {
+    transform: translateX(calc(-0.5 * 95px));
+  }
+
+  .menu-item:nth-child(3).active~.nav-menu-indicator {
+    transform: translateX(calc(0.5 * 95px));
+  }
+
+  .menu-item:nth-child(4).active~.nav-menu-indicator {
+    transform: translateX(calc(1.5 * 95px));
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-content {
+    padding: 0 12px;
+  }
+
+  .logo-image {
+    height: 32px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .donate-button {
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .icon-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-profile-pill {
+    padding: 6px 12px;
+  }
+
+  .profile-pill-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile-pill-text {
+    font-size: 11px;
+  }
+
+  .nav-login-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .nav-menu {
+    padding: 8px 0 12px;
+    gap: 16px;
+  }
+
+  .menu-item {
+    width: 60px;
+  }
+
+  .menu-icon-wrapper {
+    width: 34px;
+    height: 34px;
+  }
+
+  .menu-icon-wrapper svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .menu-label {
+    font-size: 9px;
+  }
+
+  .menu-item.active .menu-icon-wrapper {
+    transform: translateY(-18px);
+  }
+
+  .menu-item.active .menu-label {
+    transform: translateY(16px);
+  }
+
+  .nav-menu-indicator {
+    width: 70px;
+    height: 48px;
+    top: -18px;
+  }
+
+  .menu-item:nth-child(1).active~.nav-menu-indicator {
+    transform: translateX(calc(-1.5 * 80px));
+  }
+
+  .menu-item:nth-child(2).active~.nav-menu-indicator {
+    transform: translateX(calc(-0.5 * 80px));
+  }
+
+  .menu-item:nth-child(3).active~.nav-menu-indicator {
+    transform: translateX(calc(0.5 * 80px));
+  }
+
+  .menu-item:nth-child(4).active~.nav-menu-indicator {
+    transform: translateX(calc(1.5 * 80px));
   }
 }

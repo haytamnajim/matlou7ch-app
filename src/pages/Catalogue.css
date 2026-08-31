@@ -615,23 +615,50 @@
 /* ==========================================================================
    6. RESPONSIVE
    ========================================================================== */
+@media (max-width: 1280px) {
+  .catalogue-container {
+    max-width: 1100px;
+    padding: 0 24px;
+  }
+
+  .catalogue-search-bar {
+    max-width: 900px;
+  }
+}
+
 @media (max-width: 1150px) {
   .catalogue-items-grid,
   .catalogue-loading-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .catalogue-container {
+    padding: 0 20px;
   }
 }
 
-@media (max-width: 860px) {
-  .catalogue-items-grid,
-  .catalogue-loading-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+@media (max-width: 960px) {
+  .catalogue-hero-header {
+    padding: 40px 0 35px;
+  }
+
+  .catalogue-header-text {
+    margin-bottom: 24px;
+  }
+
+  .catalogue-title {
+    font-size: 1.9rem;
+  }
+
+  .catalogue-subtitle {
+    font-size: 0.95rem;
   }
 
   .catalogue-search-bar {
     flex-direction: column;
     padding: 16px;
+    gap: 12px;
   }
 
   .search-input-field {
@@ -643,28 +670,240 @@
     justify-content: center;
   }
 
-  .catalogue-title {
-    font-size: 1.8rem;
+  .quick-categories-bar {
+    gap: 8px;
+  }
+
+  .quick-cat-chip {
+    padding: 7px 14px;
+    font-size: 0.85rem;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 860px) {
   .catalogue-items-grid,
   .catalogue-loading-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .item-img-wrapper {
+    height: 200px;
+  }
+
+  .catalogue-results-section {
+    padding: 32px 0 60px;
+  }
+
+  .results-top-bar {
+    margin-bottom: 20px;
+  }
+
+  .catalogue-pagination {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .catalogue-page-wrapper {
+    background: #f8faf9;
+  }
+
+  .catalogue-hero-header {
+    padding: 32px 0 28px;
+    background: linear-gradient(180deg, #fbf9f4 0%, #f8faf9 100%);
+  }
+
+  .catalogue-header-text {
+    margin-bottom: 20px;
+  }
+
+  .catalogue-pill {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+
+  .catalogue-title {
+    font-size: 1.6rem;
+    letter-spacing: -0.4px;
+  }
+
+  .catalogue-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .catalogue-search-bar {
+    padding: 12px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+
+  .search-input-field input,
+  .search-input-field select {
+    padding: 12px 14px 12px 40px;
+    font-size: 0.9rem;
+  }
+
+  .search-input-field .field-icon {
+    left: 14px;
+    font-size: 0.9rem;
+  }
+
+  .catalogue-search-submit {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .quick-categories-bar {
+    gap: 6px;
+  }
+
+  .quick-cat-chip {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 
   .catalogue-container {
     padding: 0 16px;
   }
 
+  .catalogue-results-section {
+    padding: 24px 0 50px;
+  }
+
   .results-top-bar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+  }
+
+  .results-count-text {
+    font-size: 0.95rem;
   }
 
   .save-search-pill-btn {
     width: 100%;
     justify-content: center;
+    padding: 10px 16px;
+  }
+
+  .catalogue-items-grid,
+  .catalogue-loading-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .item-img-wrapper {
+    height: 240px;
+  }
+
+  .item-card-details {
+    padding: 16px;
+  }
+
+  .item-card-title {
+    font-size: 1rem;
+  }
+
+  .item-card-meta {
+    font-size: 0.78rem;
+  }
+
+  .catalogue-pagination {
+    gap: 6px;
+  }
+
+  .pagin-btn,
+  .pagin-number {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .catalogue-hero-header {
+    padding: 24px 0 20px;
+  }
+
+  .catalogue-header-text {
+    margin-bottom: 16px;
+  }
+
+  .catalogue-title {
+    font-size: 1.4rem;
+  }
+
+  .catalogue-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .catalogue-search-bar {
+    margin-bottom: 16px;
+  }
+
+  .quick-cat-chip {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .catalogue-container {
+    padding: 0 12px;
+  }
+
+  .catalogue-results-section {
+    padding: 20px 0 40px;
+  }
+
+  .item-img-wrapper {
+    height: 220px;
+  }
+
+  .item-free-badge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  .item-donor-badge {
+    bottom: 10px;
+    left: 10px;
+    padding: 3px 8px 3px 3px;
+  }
+
+  .donor-avatar {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+
+  .donor-name {
+    font-size: 0.72rem;
+    max-width: 70px;
+  }
+
+  .item-favorite-button {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .empty-state-icon-box {
+    width: 60px;
+    height: 60px;
+    font-size: 1.6rem;
+  }
+
+  .empty-title {
+    font-size: 1.2rem;
+  }
+
+  .empty-desc {
+    font-size: 0.9rem;
+  }
+
+  .empty-reset-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
   }
 }

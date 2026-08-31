@@ -441,23 +441,380 @@
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .product-detail-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 1024px) {
+  .product-detail-page-wrapper {
+    padding: 32px 0 70px;
   }
-  .product-gallery-col {
-    position: static;
+
+  .product-detail-container {
+    max-width: 1000px;
+    padding: 0 24px;
+  }
+
+  .product-detail-grid {
+    gap: 32px;
+  }
+
+  .product-main-title {
+    font-size: 1.5rem;
+  }
+
+  .product-info-card,
+  .product-details-card,
+  .donor-card {
+    padding: 24px;
   }
 }
 
-@media (max-width: 600px) {
-  .product-detail-page-wrapper {
-    padding: 20px 0 60px;
+@media (max-width: 900px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
+
+  .product-gallery-col {
+    position: static;
+  }
+
+  .product-main-image-box {
+    aspect-ratio: 16/9;
+  }
+
+  .product-info-col {
+    gap: 20px;
+  }
+
+  .product-title-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .product-free-badge {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-detail-page-wrapper {
+    padding: 28px 0 60px;
+  }
+
+  .product-detail-container {
+    padding: 0 20px;
+  }
+
+  .product-back-link {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .product-main-image-box {
+    border-radius: 20px;
+  }
+
+  .product-action-row {
+    flex-direction: column;
+  }
+
+  .product-share-btn,
+  .product-fav-btn {
+    width: 100%;
+  }
+
+  .product-info-card,
+  .product-details-card,
+  .donor-card {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .product-main-title {
+    font-size: 1.4rem;
+  }
+
+  .product-meta-row {
+    gap: 12px;
+  }
+
+  .product-meta-chip {
+    font-size: 0.8rem;
+  }
+
+  .product-contact-btn {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
+  .product-details-card h3,
+  .donor-card-heading {
+    font-size: 1rem;
+  }
+
+  .donor-card-inner {
+    gap: 12px;
+  }
+
+  .donor-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .donor-name-link {
+    font-size: 1rem;
+  }
+
+  .donor-chip {
+    font-size: 0.75rem;
+  }
+
+  .donor-description-block {
+    font-size: 0.85rem;
+    padding: 12px 14px;
+  }
+
+  .donor-see-all-btn {
+    padding: 11px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-detail-page-wrapper {
+    padding: 24px 0 50px;
+  }
+
   .product-detail-container {
     padding: 0 16px;
   }
+
+  .product-back-link {
+    margin-bottom: 16px;
+  }
+
+  .product-main-image-box {
+    aspect-ratio: 4/3;
+    border-radius: 18px;
+  }
+
+  .product-image-placeholder svg {
+    font-size: 2.5rem;
+  }
+
+  .product-badge-published {
+    top: 12px;
+    left: 12px;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+  }
+
+  .product-action-row {
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .product-share-btn,
+  .product-fav-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+
+  .product-info-card,
+  .product-details-card,
+  .donor-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
   .product-main-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  .product-free-badge {
+    font-size: 0.72rem;
+    padding: 5px 12px;
+  }
+
+  .product-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .product-interested-line {
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+  }
+
+  .product-contact-btn {
+    padding: 13px;
+    font-size: 0.9rem;
+  }
+
+  .product-details-card h3,
+  .donor-card-heading {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .detail-row {
+    padding-bottom: 10px;
+  }
+
+  .detail-row-label {
+    font-size: 0.82rem;
+  }
+
+  .detail-row-value {
+    font-size: 0.85rem;
+  }
+
+  .condition-pill {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+
+  .donor-card-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .donor-avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .donor-name-link {
+    font-size: 0.95rem;
+  }
+
+  .donor-chips {
+    gap: 8px;
+  }
+
+  .donor-description-block {
+    font-size: 0.82rem;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+  }
+
+  .donor-see-all-btn {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail-page-wrapper {
+    padding: 20px 0 40px;
+  }
+
+  .product-detail-container {
+    padding: 0 12px;
+  }
+
+  .product-back-link {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+  }
+
+  .product-main-image-box {
+    border-radius: 16px;
+  }
+
+  .product-image-placeholder {
+    font-size: 0.85rem;
+  }
+
+  .product-image-placeholder svg {
+    font-size: 2rem;
+  }
+
+  .product-info-card,
+  .product-details-card,
+  .donor-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .product-main-title {
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
+  }
+
+  .product-free-badge {
+    font-size: 0.68rem;
+    padding: 4px 10px;
+  }
+
+  .product-meta-chip {
+    font-size: 0.75rem;
+  }
+
+  .product-contact-btn {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .product-details-card h3,
+  .donor-card-heading {
+    font-size: 0.9rem;
+  }
+
+  .detail-row-label {
+    font-size: 0.78rem;
+  }
+
+  .detail-row-value {
+    font-size: 0.8rem;
+  }
+
+  .donor-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .donor-name-link {
+    font-size: 0.9rem;
+  }
+
+  .donor-chip {
+    font-size: 0.72rem;
+  }
+
+  .donor-description-block {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
+
+  .donor-see-all-btn {
+    padding: 9px 12px;
+    font-size: 0.8rem;
+  }
+
+  .product-loading-state {
+    min-height: 40vh;
+  }
+
+  .product-spinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .product-error-state {
+    padding: 60px 16px;
+  }
+
+  .product-error-state h2 {
+    font-size: 1.2rem;
+  }
+
+  .product-error-state button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
   }
 }
