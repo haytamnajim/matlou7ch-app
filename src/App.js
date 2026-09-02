@@ -77,8 +77,9 @@ function AdminRoute({ children }) {
 
 function App() {
   return (
-    <ToastProvider>
-      {/* <NotificationProvider> */}
+    <ThemeProvider>
+      <ToastProvider>
+        {/* <NotificationProvider> */}
         <Router>
         <React.Suspense fallback={<Loader />}>
           <Routes>
@@ -317,6 +318,7 @@ function App() {
     </Router>
       {/* </NotificationProvider> */}
     </ToastProvider>
+    </ThemeProvider>
   );
 }
 
