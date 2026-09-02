@@ -86,8 +86,8 @@
 }
 
 .category-card-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 .category-card-img-wrap {
@@ -104,7 +104,7 @@
 }
 
 .category-card-item:hover .category-card-img {
-  transform: scale(1.08);
+  transform: scale(1.12);
 }
 
 .category-card-badge {
@@ -220,9 +220,9 @@
 }
 
 .step-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(98, 130, 93, 0.12);
-  border-color: rgba(98, 130, 93, 0.3);
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(98, 130, 93, 0.18);
+  border-color: rgba(98, 130, 93, 0.5);
 }
 
 .step-number-badge {

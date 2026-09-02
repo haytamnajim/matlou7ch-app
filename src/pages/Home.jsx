@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   FaCamera,
   FaComments,
@@ -54,13 +55,39 @@ function Home() {
     }
   ];
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <div className="home-page-new">
+    <motion.div 
+      className="home-page-new"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+    >
       {/* 1. Hero Banner moderne */}
       <HomeBanner />
 
       {/* 2. Section Catégories Populaires */}
-      <section className="home-categories-section">
+      <motion.section 
+        className="home-categories-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeInUp}
+      >
         <div className="home-section-container">
           <div className="section-header-center">
             <span className="section-tag">DÉCOUVREZ PAR BESOIN</span>
@@ -100,7 +127,13 @@ function Home() {
       </section>
 
       {/* 3. Section Comment ça marche en 3 étapes */}
-      <section className="how-it-works-section">
+      <motion.section 
+        className="how-it-works-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeInUp}
+      >
         <div className="home-section-container">
           <div className="section-header-center">
             <span className="section-tag green">SIMPLE ET RAPIDE</span>
@@ -148,7 +181,13 @@ function Home() {
       </section>
 
       {/* 4. Section Mission & Impact */}
-      <section className="concepts-section">
+      <motion.section 
+        className="concepts-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeInUp}
+      >
         <div className="concepts-container">
           <div className="concepts-header-wrap">
             <span className="concepts-pill">NOTRE MISSION COMMUNE</span>
@@ -206,7 +245,13 @@ function Home() {
       </section>
 
       {/* 5. Section Valeurs et Sécurité */}
-      <section className="features-section">
+      <motion.section 
+        className="features-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeInUp}
+      >
         <div className="home-section-container">
           <div className="section-header-center">
             <span className="section-tag">POURQUOI MATLOU7CH ?</span>
@@ -251,7 +296,13 @@ function Home() {
       </section>
 
       {/* 6. Grande Bannière d'Appel à l'action (CTA) */}
-      <section className="home-cta-banner-section">
+      <motion.section 
+        className="home-cta-banner-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={fadeInUp}
+      >
         <div className="home-section-container">
           <div className="cta-card-box">
             <div className="cta-card-content">
@@ -273,8 +324,8 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 }
 
