@@ -15,6 +15,7 @@ import {
   FaChevronRight,
   FaGift
 } from 'react-icons/fa';
+import { SkeletonCatalogueGrid, SkeletonCatalogueHeader } from '../components/Skeleton';
 import './Catalogue.css';
 
 const QUICK_CATEGORIES = [
@@ -265,17 +266,7 @@ function Catalogue() {
 
           {/* États de chargement & résultats */}
           {loading ? (
-            <div className="catalogue-loading-grid">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="catalogue-skeleton-card">
-                  <div className="skeleton-img-box" />
-                  <div className="skeleton-body">
-                    <div className="skeleton-line full" />
-                    <div className="skeleton-line half" />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SkeletonCatalogueGrid items={8} />
           ) : results.length === 0 ? (
             <div className="catalogue-empty-state">
               <div className="empty-state-icon-box">

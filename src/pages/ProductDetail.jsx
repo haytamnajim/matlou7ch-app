@@ -5,6 +5,7 @@ import {
   FaHeart, FaRegHeart, FaMapMarkerAlt, FaCalendarAlt,
   FaShare, FaArrowRight, FaUserCircle, FaChevronLeft, FaGift, FaEye
 } from 'react-icons/fa';
+import { SkeletonProductDetail, SkeletonInfoCard, SkeletonDonorCard } from '../components/Skeleton';
 import './ProductDetail.css';
 
 function ProductDetail() {
@@ -80,9 +81,13 @@ function ProductDetail() {
     return (
       <div className="product-detail-page-wrapper">
         <div className="product-detail-container">
-          <div className="product-loading-state">
-            <div className="product-spinner" />
-            <p>Chargement de l'annonce...</p>
+          <Link to="/catalogue" className="product-back-link">
+            <FaChevronLeft /> Retour au catalogue
+          </Link>
+          <SkeletonProductDetail />
+          <div className="product-details-section">
+            <SkeletonInfoCard />
+            <SkeletonDonorCard />
           </div>
         </div>
       </div>

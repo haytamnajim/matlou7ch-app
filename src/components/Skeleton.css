@@ -1,44 +1,4 @@
-.skeleton-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.skeleton-image {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-.skeleton-content {
-  padding: 16px;
-}
-
-.skeleton-title {
-  height: 24px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-.skeleton-text {
-  height: 16px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-  margin-bottom: 8px;
-}
-
-.skeleton-text.short {
-  width: 60%;
-}
-
+/* Animation shimmer pour tous les skeletons */
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -48,42 +8,480 @@
   }
 }
 
-.skeleton-table {
+/* Base skeleton background */
+.skeleton-base {
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Skeleton pour carte d'annonce (Catalogue) */
+.skeleton-listing-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-listing-image {
+  position: relative;
   width: 100%;
+  height: 220px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
-.skeleton-header {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+.skeleton-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 60px;
+  height: 24px;
+  background: linear-gradient(90deg, #859f3d 25%, #a3b85a 50%, #859f3d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeleton-donor-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 100px;
+  height: 32px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 25%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+}
+
+.skeleton-listing-content {
   padding: 16px;
-  background: #f5f5f5;
-  border-radius: 8px 8px 0 0;
 }
 
-.skeleton-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  padding: 16px;
-  border-bottom: 1px solid #e0e0e0;
+.skeleton-listing-title {
+  height: 22px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.skeleton-row:last-child {
-  border-bottom: none;
+.skeleton-listing-meta {
+  height: 16px;
+  width: 80%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
 }
 
-.skeleton-cell {
-  height: 40px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+.skeleton-listing-location {
+  height: 16px;
+  width: 60%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
 }
 
-.skeleton-grid {
+/* Skeleton pour la grille du catalogue */
+.skeleton-catalogue-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   padding: 20px 0;
+}
+
+/* Skeleton pour le header du catalogue */
+.skeleton-catalogue-header {
+  padding: 40px 0 30px;
+}
+
+.skeleton-catalogue-title {
+  height: 40px;
+  width: 60%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.skeleton-catalogue-subtitle {
+  height: 20px;
+  width: 80%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.skeleton-catalogue-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.skeleton-search-input {
+  flex: 1;
+  height: 48px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeleton-search-button {
+  width: 120px;
+  height: 48px;
+  background: linear-gradient(90deg, #859f3d 25%, #a3b85a 50%, #859f3d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeleton-catalogue-chips {
+  display: flex;
+  gap: 10px;
+}
+
+.skeleton-chip {
+  width: 100px;
+  height: 36px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 18px;
+}
+
+/* Skeleton pour ProductDetail */
+.skeleton-product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.skeleton-product-gallery {
+  position: relative;
+}
+
+.skeleton-product-image {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 20px;
+}
+
+.skeleton-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeleton-product-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.skeleton-product-title {
+  flex: 1;
+  height: 36px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-product-badge {
+  width: 80px;
+  height: 32px;
+  background: linear-gradient(90deg, #859f3d 25%, #a3b85a 50%, #859f3d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 16px;
+}
+
+.skeleton-product-meta {
+  height: 20px;
+  width: 70%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-product-interested {
+  height: 18px;
+  width: 50%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-product-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.skeleton-action-button {
+  flex: 1;
+  height: 44px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeleton-product-contact {
+  height: 52px;
+  background: linear-gradient(90deg, #859f3d 25%, #a3b85a 50%, #859f3d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 26px;
+}
+
+/* Skeleton pour InfoCard */
+.skeleton-info-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-info-header {
+  height: 28px;
+  width: 40%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.skeleton-info-row {
+  height: 20px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.skeleton-info-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Skeleton pour DonorCard */
+.skeleton-donor-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.skeleton-donor-header {
+  height: 24px;
+  width: 35%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.skeleton-donor-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.skeleton-donor-avatar {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+.skeleton-donor-info {
+  flex: 1;
+}
+
+.skeleton-donor-name {
+  height: 22px;
+  width: 60%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.skeleton-donor-chips {
+  display: flex;
+  gap: 8px;
+}
+
+.skeleton-chip-small {
+  width: 60px;
+  height: 24px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+.skeleton-donor-description {
+  height: 60px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-donor-button {
+  height: 44px;
+  width: 100%;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+/* Skeleton pour Navbar */
+.skeleton-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.skeleton-navbar-logo {
+  width: 150px;
+  height: 40px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-navbar-search {
+  flex: 1;
+  max-width: 400px;
+  height: 40px;
+  margin: 0 24px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.skeleton-navbar-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.skeleton-navbar-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+/* Skeleton générique pour texte */
+.skeleton-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-text-line {
+  height: 16px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* Skeleton générique pour avatar */
+.skeleton-avatar {
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 50%;
+}
+
+/* Skeleton générique pour bouton */
+.skeleton-button {
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .skeleton-product-detail {
+    grid-template-columns: 1fr;
+  }
+  
+  .skeleton-product-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skeleton-catalogue-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  
+  .skeleton-navbar-search {
+    display: none;
+  }
+  
+  .skeleton-product-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .skeleton-product-badge {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .skeleton-catalogue-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skeleton-catalogue-search {
+    flex-direction: column;
+  }
+  
+  .skeleton-search-button {
+    width: 100%;
+  }
+  
+  .skeleton-donor-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
