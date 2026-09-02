@@ -1,150 +1,87 @@
-/* From Uiverse.io by SelfMadeSystem - Adapted for Matlou7ch */
-.loader-overlay {
+.loader-overlay-modern {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--bg-dark);
+    background: var(--bg-main, #ffffff);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 99999;
 }
 
-.loader {
+[data-theme='dark'] .loader-overlay-modern {
+    background: var(--bg-body, #0f172a);
+}
+
+.modern-loader-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 28px;
 }
 
-.loader-svg {
-    width: 120px;
-    height: 120px;
-    transform-origin: center;
+.loader-logo-wrapper {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-main);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: 0 15px 40px rgba(98, 130, 93, 0.15);
+    padding: 16px;
 }
 
-.loader-text {
-    font-family: var(--font-main);
-    font-weight: 900;
-    font-size: 14px;
-    fill: var(--primary-color);
-    text-anchor: middle;
-    dominant-baseline: middle;
-    letter-spacing: -0.5px;
+[data-theme='dark'] .loader-logo-wrapper {
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-.absolute {
+.loader-logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.loader-bar-container {
+    width: 180px;
+    height: 4px;
+    background: rgba(98, 130, 93, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+[data-theme='dark'] .loader-bar-container {
+    background: rgba(163, 230, 53, 0.15);
+}
+
+.loader-bar {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: var(--primary-color, #62825D);
+    border-radius: 10px;
 }
 
-.inline-block {
-    display: inline-block;
+.loader-text-container {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.dash {
-    animation: dashArray 2s ease-in-out infinite,
-        dashOffset 2s linear infinite;
-    fill: none;
-    stroke: var(--bg-sage);
-    stroke-width: 2;
-}
-
-.spin {
-    animation: spinDashArray 2s ease-in-out infinite,
-        spin 8s ease-in-out infinite,
-        dashOffset 2s linear infinite;
-    transform-origin: center;
-    fill: none;
-    stroke: var(--text-white);
-    stroke-width: 2;
-    stroke-linecap: round;
-}
-
-@keyframes dashArray {
-    0% {
-        stroke-dasharray: 0 1 359 0;
-    }
-
-    50% {
-        stroke-dasharray: 0 359 1 0;
-    }
-
-    100% {
-        stroke-dasharray: 359 1 0 0;
-    }
-}
-
-@keyframes spinDashArray {
-    0% {
-        stroke-dasharray: 270 90;
-    }
-
-    50% {
-        stroke-dasharray: 0 360;
-    }
-
-    100% {
-        stroke-dasharray: 270 90;
-    }
-}
-
-@keyframes dashOffset {
-    0% {
-        stroke-dashoffset: 365;
-    }
-
-    100% {
-        stroke-dashoffset: 5;
-    }
-}
-
-@keyframes spin {
-    0% {
-        rotate: 0deg;
-    }
-
-    12.5%,
-    25% {
-        rotate: 270deg;
-    }
-
-    37.5%,
-    50% {
-        rotate: 540deg;
-    }
-
-    62.5%,
-    75% {
-        rotate: 810deg;
-    }
-
-    87.5%,
-    100% {
-        rotate: 1080deg;
-    }
-}
-
-.loading-text {
-    margin-top: 20px;
-    color: var(--text-white);
+.modern-loading-text {
+    margin: 0;
+    color: var(--text-dark, #333333);
+    font-size: 0.95rem;
     font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 12px;
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    letter-spacing: 0.5px;
 }
