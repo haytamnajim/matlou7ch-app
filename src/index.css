@@ -25,14 +25,27 @@
   --font-main: 'Outfit', sans-serif;
 }
 
+[data-theme='dark'] {
+  --bg-main: #0f172a;
+  --bg-sage: #2e4a2c;
+  --bg-cream: #1e293b;
+  --bg-body: #0b1120;
+  --text-dark: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary-color: #a3e635;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
 body {
   margin: 0;
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafcfb;
+  background-color: var(--bg-body, #fafcfb);
   color: var(--text-dark, #1e293b);
   min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 html,
