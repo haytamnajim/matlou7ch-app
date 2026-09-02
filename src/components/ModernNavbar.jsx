@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import {
   FaPlus,
   FaHeart,
@@ -10,7 +11,9 @@ import {
   FaCog,
   FaListUl,
   FaChevronDown,
-  FaShieldAlt
+  FaShieldAlt,
+  FaMoon,
+  FaSun
 } from 'react-icons/fa';
 import './ModernNavbar.css';
 
@@ -29,6 +32,7 @@ const ModernNavbar = () => {
   const dropdownRef = useRef(null);
 
   const { user, profile, logout, isAdmin } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -99,6 +103,17 @@ const ModernNavbar = () => {
 
         {/* Actions & Profil à droite */}
         <div className="modern-navbar-actions">
+          {/* Toggle Theme */}
+          <button 
+            type="button" 
+            className="icon-action-btn theme-toggle-btn" 
+            onClick={toggleTheme}
+            aria-label="Basculer le thème"
+            title="Mode sombre / clair"
+          >
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          </button>
+
           {/* Bouton Donner */}
           <Link to="/post-ad" className="btn-donner-navbar">
             <FaPlus className="donner-plus-icon" />
