@@ -124,7 +124,7 @@ function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. Section Comment ça marche en 3 étapes */}
       <motion.section 
@@ -178,7 +178,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. Section Mission & Impact */}
       <motion.section 
@@ -242,7 +242,7 @@ function Home() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Section Valeurs et Sécurité */}
       <motion.section 
@@ -293,7 +293,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 6. Grande Bannière d'Appel à l'action (CTA) */}
       <motion.section 
