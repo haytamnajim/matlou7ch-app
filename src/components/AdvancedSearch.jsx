@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaSearch, FaMapMarkerAlt, FaTags, FaTimes, FaHistory } from 'react-icons/fa';
 
 function AdvancedSearch({
     onClose,
@@ -10,83 +12,109 @@ function AdvancedSearch({
     setCategory,
     handleSearch
 }) {
+    // Liste des catégories pour un select plus moderne
+    const categories = [
+        "Vêtements & Mode",
+        "Électronique & Multimédia",
+        "Meubles & Mobilier",
+        "Maison & Décoration",
+        "Livres & Scolaire",
+        "Jeux & Loisirs",
+        "Autre"
+    ];
+
     return (
-        <div className="advanced-search-overlay">
-            <div className="advanced-search-container">
-                <div className="advanced-search-header">
-                    <h3>Recherche avancée</h3>
-                    <button className="close-button" onClick={onClose}>×</button>
-                </div>
-                <div className="advanced-search-form">
-                    <div className="search-field">
-                        <label>Où recherchez-vous ?</label>
-                        <div className="input-with-clear">
+        <AnimatePresence>
+            <motion.div 
+                className="advanced-search-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+            >
+                <motion.div 
+                    className="advanced-search-container"
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -50, opacity: 0 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div className="advanced-search-header">
+                        <h3>Recherche avancée</h3>
+                        <button className="close-button" onClick={onClose}>
+                            <FaTimes />
+                        </button>
+                    </div>
+                    
+                    <div className="advanced-search-form">
+                        <div className="search-field">
+                            <label><FaMapMarkerAlt className="field-icon" /> Où recherchez-vous ?</label>
+                            <div className="input-with-clear">
+                                <input
+                                    type="text"
+                                    placeholder="Casablanca, Rabat, Marrakech..."
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                />
+                                {location && (
+                                    <button className="clear-input" onClick={() => setLocation('')}><FaTimes /></button>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="search-field">
+                            <label><FaSearch className="field-icon" /> Que recherchez-vous ?</label>
                             <input
                                 type="text"
-                                placeholder="Paris 10 - 100 km"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                placeholder="Canapé, smartphone, livre..."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
                             />
-                            {location && (
-                                <button className="clear-input" onClick={() => setLocation('')}>×</button>
-                            )}
+                        </div>
+
+                        <div className="search-field">
+                            <label><FaTags className="field-icon" /> Quelle catégorie ?</label>
+                            <div className="custom-select-wrapper">
+                                <select 
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    className="modern-select"
+                                >
+                                    <option value="">Toutes les catégories</option>
+                                    {categories.map((cat, idx) => (
+                                        <option key={idx} value={cat}>{cat}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <button className="search-submit-button" onClick={() => {
+                            handleSearch();
+                            onClose();
+                        }}>
+                            <FaSearch style={{ marginRight: '8px' }} />
+                            <span>Voir les annonces</span>
+                        </button>
+                    </div>
+
+                    <div className="recent-searches">
+                        <p className="recent-searches-title" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', color: '#64748b', marginBottom: '12px', fontWeight: '600' }}><FaHistory /> Recherches récentes</p>
+                        <div className="recent-searches-list" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                            <div className="recent-search-item" onClick={() => setQuery('Table')} style={{ cursor: 'pointer', padding: '6px 14px', background: '#f1f5f9', borderRadius: '50px', fontSize: '0.85rem' }}>
+                                <span className="search-text">Table</span>
+                            </div>
+                            <div className="recent-search-item" onClick={() => setQuery('Livre')} style={{ cursor: 'pointer', padding: '6px 14px', background: '#f1f5f9', borderRadius: '50px', fontSize: '0.85rem' }}>
+                                <span className="search-text">Livre</span>
+                            </div>
+                            <div className="recent-search-item" onClick={() => setLocation('Casablanca')} style={{ cursor: 'pointer', padding: '6px 14px', background: '#f1f5f9', borderRadius: '50px', fontSize: '0.85rem' }}>
+                                <span className="search-text">Casablanca</span>
+                            </div>
                         </div>
                     </div>
-
-                    <div className="search-field">
-                        <label>Que recherchez-vous ?</label>
-                        <input
-                            type="text"
-                            placeholder="Canapé, frigidaire, livre..."
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="search-field">
-                        <label>Quelle catégorie ?</label>
-                        <div className="input-with-clear">
-                            <input
-                                type="text"
-                                placeholder="Ameublement"
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value)}
-                            />
-                            {category && (
-                                <button className="clear-input" onClick={() => setCategory('')}>×</button>
-                            )}
-                        </div>
-                    </div>
-
-                    <button className="search-submit-button" onClick={handleSearch}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        </svg>
-                        Rechercher ({Math.floor(Math.random() * 2000)} dons)
-                    </button>
-                </div>
-
-                <div className="recent-searches">
-                    <div className="recent-search-item">
-                        <span className="search-icon">S</span>
-                        <span className="search-text">sion</span>
-                    </div>
-                    <div className="recent-search-item">
-                        <span className="search-icon" style={{ backgroundColor: '#ff5722' }}>A</span>
-                        <span className="search-text">Ada</span>
-                    </div>
-                    <div className="recent-search-item">
-                        <span className="search-icon" style={{ backgroundColor: '#4CAF50' }}>J</span>
-                        <span className="search-text">Juca</span>
-                    </div>
-                    <div className="recent-search-item">
-                        <span className="search-icon" style={{ backgroundColor: '#2196F3' }}>M</span>
-                        <span className="search-text">Mini88</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
     );
 }
 
