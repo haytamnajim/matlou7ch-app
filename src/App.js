@@ -11,7 +11,7 @@ import Loader from './components/Loader';
 import './App.css';
 
 // Pages principales
-const Home = React.lazy(() => import('./pages/Home'));
+import Home from './pages/Home';
 const Favoris = React.lazy(() => import('./pages/Favoris'));
 const Messages = React.lazy(() => import('./pages/Messages'));
 const Profile = React.lazy(() => import('./pages/Profile'));
