@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { useAuth } from './contexts/AuthContext';
 // import { NotificationProvider } from './contexts/NotificationContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -76,9 +77,20 @@ function AdminRoute({ children }) {
 }
 
 function App() {
+  const [initialLoading, setInitialLoading] = React.useState(true);
+
   return (
     <ThemeProvider>
       <ToastProvider>
+        <AnimatePresence>
+          {initialLoading && (
+            <Loader 
+              key="app-initial-splash-loader" 
+              fullScreen={true} 
+              onComplete={() => setInitialLoading(false)} 
+            />
+          )}
+        </AnimatePresence>
         {/* <NotificationProvider> */}
         <Router>
         <React.Suspense fallback={<Loader />}>
@@ -137,6 +149,9 @@ function App() {
               <SimpleFooter />
             </>
           } />
+          {/* Prévisualisation directe du Loader */}
+          <Route path="/loader" element={<Loader />} />
+
           <Route path="/contact" element={
             <>
               <Navbar />

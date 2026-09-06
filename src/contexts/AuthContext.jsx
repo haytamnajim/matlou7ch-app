@@ -83,6 +83,7 @@ export function AuthProvider({ children }) {
       if (timeoutId) clearTimeout(timeoutId);
       subscription.unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Récupérer le profil utilisateur depuis public.users
@@ -238,27 +239,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {loading ? (
-        <div style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: 'sans-serif',
-          color: '#4a56e2'
-        }}>
-          <div className="spinner" style={{
-            width: '40px',
-            height: '40px',
-            border: '4px solid #f3f3f3',
-            borderTop: '4px solid #4a56e2',
-            borderRadius: '50%',
-            marginBottom: '20px'
-          }}></div>
-          Chargement de Matlou7ch...
-        </div>
-      ) : children}
+      {children}
     </AuthContext.Provider>
   );
 }

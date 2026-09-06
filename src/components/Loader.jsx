@@ -6,7 +6,7 @@ import './Loader.css';
 const FULL_TEXT = 'Matlou7ch';
 // "Matlou" (0..5) en vert sauge #62825D, "7ch" (6..8) en terracotta chaleureux #BC7C4E
 
-const Loader = ({ fullScreen = true }) => {
+const Loader = ({ fullScreen = true, onComplete }) => {
   const [displayedCount, setDisplayedCount] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -15,8 +15,8 @@ const Loader = ({ fullScreen = true }) => {
 
     if (displayedCount < FULL_TEXT.length) {
       // Vitesse d'écriture naturelle et humaine avec micro-variations
-      const humanDelays = [220, 160, 180, 140, 170, 200, 240, 170, 210];
-      const delay = humanDelays[displayedCount] || 180;
+      const humanDelays = [200, 150, 160, 130, 150, 180, 210, 150, 190];
+      const delay = humanDelays[displayedCount] || 160;
 
       timeoutId = setTimeout(() => {
         setDisplayedCount((prev) => prev + 1);
@@ -25,15 +25,22 @@ const Loader = ({ fullScreen = true }) => {
       // Écriture terminée : on marque l'état complété
       setIsCompleted(true);
 
-      // Si le chargement continue, on fait une pause élégante avant de reboucler
-      timeoutId = setTimeout(() => {
-        setIsCompleted(false);
-        setDisplayedCount(0);
-      }, 3500);
+      if (onComplete) {
+        // Laisse le temps d'admirer le mot complet et le slogan avant de faire la transition
+        timeoutId = setTimeout(() => {
+          onComplete();
+        }, 750);
+      } else {
+        // Si aucun callback n'est fourni, on boucle élégamment
+        timeoutId = setTimeout(() => {
+          setIsCompleted(false);
+          setDisplayedCount(0);
+        }, 3500);
+      }
     }
 
     return () => clearTimeout(timeoutId);
-  }, [displayedCount]);
+  }, [displayedCount, onComplete]);
 
   // Découpage du texte en fonction de l'avancement
   const matlouPart = FULL_TEXT.slice(0, Math.min(displayedCount, 6));
@@ -148,7 +155,7 @@ const Loader = ({ fullScreen = true }) => {
         className="loader-overlay-modern"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0, transition: { duration: 0.3 } }}
+        exit={{ opacity: 0, scale: 1.02, filter: 'blur(3px)', transition: { duration: 0.45, ease: 'easeInOut' } }}
       >
         {content}
       </motion.div>
