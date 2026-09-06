@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {
-  FaHeart, FaRegHeart, FaMapMarkerAlt, FaCalendarAlt,
-  FaShare, FaArrowRight, FaUserCircle, FaChevronLeft, FaGift, FaEye
+  FaMapMarkerAlt, FaCalendarAlt,
+  FaShare, FaArrowRight, FaUserCircle, FaChevronLeft, FaGift, FaEye,
+  FaCheckCircle, FaHourglassHalf, FaHandHoldingHeart
 } from 'react-icons/fa';
 import { SkeletonProductDetail, SkeletonInfoCard, SkeletonDonorCard } from '../components/Skeleton';
+import StatusBadge from '../components/StatusBadge';
+import FavoriteButton from '../components/FavoriteButton';
+import Confetti from '../components/Confetti';
+import { listingService } from '../services/supabaseDataService';
 import './ProductDetail.css';
 
 function ProductDetail() {
@@ -16,7 +21,41 @@ function ProductDetail() {
   const [favorites, setFavorites] = useState([]);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [celebrationMessage, setCelebrationMessage] = useState(null);
+
+  const handleStatusChange = async (newStatus) => {
+    if (!product) return;
+
+    const previousStatus = product.status;
+    const isDonne = newStatus === 'donne';
+
+    // Mise à jour locale optimiste
+    setProduct((prev) => ({
+      ...prev,
+      status: newStatus,
+      isPublished: !isDonne,
+    }));
+
+    if (isDonne) {
+      setShowConfetti(true);
+      setCelebrationMessage("Félicitations pour votre don solidaire ! 🎉 Merci d'offrir une seconde vie à cet objet 🌿");
+      setTimeout(() => setShowConfetti(false), 5000);
+      setTimeout(() => setCelebrationMessage(null), 8000);
+    }
+
+    try {
+      await listingService.update(id, {
+        status: newStatus,
+        is_published: !isDonne,
+      });
+    } catch (err) {
+      console.error("Erreur mise à jour statut:", err);
+      // Revert en cas d'erreur
+      setProduct((prev) => ({ ...prev, status: previousStatus }));
+    }
+  };
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -109,10 +148,25 @@ function ProductDetail() {
   }
 
   const isFav = favorites.includes(id);
+  const isOwner = user && (user.id === product?.user?.id || user.id === product?.user_id || user.id === product?.userId);
 
   return (
     <div className="product-detail-page-wrapper">
+      {/* Confettis festifs lors du don */}
+      {showConfetti && <Confetti duration={5000} pieces={220} burst={true} />}
+
       <div className="product-detail-container">
+        {/* Bannière de célébration festive */}
+        {celebrationMessage && (
+          <div className="product-celebration-banner">
+            <span className="celebration-icon">🎉</span>
+            <div className="celebration-text-box">
+              <strong>Geste solidaire réussi !</strong>
+              <p>{celebrationMessage}</p>
+            </div>
+          </div>
+        )}
+
         {/* Breadcrumb retour */}
         <Link to="/catalogue" className="product-back-link">
           <FaChevronLeft /> Retour au catalogue
@@ -130,23 +184,57 @@ function ProductDetail() {
                   <span>Aucune photo disponible</span>
                 </div>
               )}
-              {product.isPublished && (
-                <span className="product-badge-published">✓ Disponible</span>
-              )}
+              {/* Badge de statut enrichi avec icône */}
+              <div className="product-status-overlay">
+                <StatusBadge status={product.status} isPublished={product.isPublished} size="md" />
+              </div>
             </div>
 
             <div className="product-action-row">
               <button className="product-share-btn" onClick={handleShareClick}>
                 <FaShare /> Partager
               </button>
-              <button
-                className={`product-fav-btn ${isFav ? 'favorited' : ''}`}
-                onClick={handleFavoriteClick}
-              >
-                {isFav ? <FaHeart /> : <FaRegHeart />}
-                {isFav ? 'Sauvegardé' : 'Sauvegarder'}
-              </button>
+              <div className="product-fav-interactive-wrap">
+                <FavoriteButton
+                  isFavorited={isFav}
+                  onToggle={handleFavoriteClick}
+                  size="md"
+                />
+                <span className="product-fav-text-label">{isFav ? 'Sauvegardé' : 'Ajouter aux favoris'}</span>
+              </div>
             </div>
+
+            {/* Outils donateur propriétaire pour changer le statut */}
+            {isOwner && (
+              <div className="product-owner-management-box">
+                <div className="owner-status-header">
+                  <span>👑 Statut de votre annonce</span>
+                </div>
+                <div className="owner-status-buttons">
+                  <button
+                    type="button"
+                    className={`owner-status-btn btn-disponible ${(product.status === 'disponible' || (!product.status && product.isPublished !== false)) ? 'is-current' : ''}`}
+                    onClick={() => handleStatusChange('disponible')}
+                  >
+                    <FaCheckCircle /> Disponible
+                  </button>
+                  <button
+                    type="button"
+                    className={`owner-status-btn btn-reserve ${product.status === 'reserve' ? 'is-current' : ''}`}
+                    onClick={() => handleStatusChange('reserve')}
+                  >
+                    <FaHourglassHalf /> Réservé
+                  </button>
+                  <button
+                    type="button"
+                    className={`owner-status-btn btn-donne ${product.status === 'donne' ? 'is-current' : ''}`}
+                    onClick={() => handleStatusChange('donne')}
+                  >
+                    <FaHandHoldingHeart /> Donné 🎉
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Colonne Droite : Infos */}

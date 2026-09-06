@@ -1,0 +1,99 @@
+/* ============================================================
+   FAVORITE INTERACTIVE BUTTON - MATLOU7CH
+   ============================================================ */
+
+.favorite-interactive-btn {
+  position: relative;
+  border: none;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  color: #64748b;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  padding: 0;
+  outline: none;
+  z-index: 5;
+}
+
+[data-theme='dark'] .favorite-interactive-btn {
+  background: rgba(30, 41, 59, 0.85);
+  color: #94a3b8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Tailles */
+.favorite-btn-sm {
+  width: 32px;
+  height: 32px;
+  font-size: 0.95rem;
+}
+
+.favorite-btn-md {
+  width: 40px;
+  height: 40px;
+  font-size: 1.15rem;
+}
+
+.favorite-btn-lg {
+  width: 48px;
+  height: 48px;
+  font-size: 1.35rem;
+}
+
+/* Cœur */
+.favorite-heart-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.favorite-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.favorite-icon-outline {
+  color: #64748b;
+}
+
+.favorite-interactive-btn:hover .favorite-icon-outline {
+  color: #e11d48;
+}
+
+.favorite-interactive-btn.is-active {
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(225, 29, 72, 0.25);
+}
+
+[data-theme='dark'] .favorite-interactive-btn.is-active {
+  background: rgba(225, 29, 72, 0.15);
+}
+
+.favorite-icon-filled {
+  color: #e11d48;
+  filter: drop-shadow(0 2px 6px rgba(225, 29, 72, 0.4));
+}
+
+/* Sparkles container */
+.favorite-sparkles-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.favorite-sparkle-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f43f5e);
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.8);
+}

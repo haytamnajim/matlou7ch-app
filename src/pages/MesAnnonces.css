@@ -181,43 +181,246 @@
   opacity: 0.8;
 }
 
+.annonce-status-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+}
+
 .annonce-actions {
   display: flex;
-  padding: 0 20px 20px;
-  gap: 12px;
+  padding: 0 16px 16px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .view-button,
+.mark-given-button,
+.reserve-toggle-button,
+.reactivate-button,
 .delete-button {
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 700;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 750;
   cursor: pointer;
-  flex: 1;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
-}
-
-.view-button {
-  background-color: var(--primary-color);
-  color: white;
   border: none;
 }
 
-.view-button:hover {
-  background-color: var(--primary-dark);
+.view-button {
+  background-color: #f1f5f9;
+  color: #334155;
+  flex: 1;
 }
 
+.view-button:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Bouton Donné Festif */
+.mark-given-button {
+  background: linear-gradient(135deg, #BC7C4E 0%, #A06841 100%);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(188, 124, 78, 0.3);
+  flex: 1.3;
+}
+
+.mark-given-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(188, 124, 78, 0.45);
+}
+
+/* Bouton Réserver */
+.reserve-toggle-button {
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  flex: 1;
+}
+
+.reserve-toggle-button.is-reserved {
+  background: #d97706;
+  color: #ffffff;
+}
+
+.reserve-toggle-button:hover {
+  background: rgba(217, 119, 6, 0.2);
+}
+
+/* Bouton Réactiver */
+.reactivate-button {
+  background: rgba(98, 130, 93, 0.15);
+  color: #3e563a;
+  border: 1px solid rgba(98, 130, 93, 0.35);
+  flex: 1.5;
+}
+
+.reactivate-button:hover {
+  background: var(--primary-color, #62825D);
+  color: #ffffff;
+}
+
+/* Bouton Supprimer icône */
 .delete-button {
-  background-color: white;
-  color: #e74c3c;
-  border: 1.5px solid #e74c3c;
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid rgba(225, 29, 72, 0.2);
+  width: 36px;
+  flex: 0 0 36px;
+  padding: 0;
 }
 
 .delete-button:hover {
-  background-color: #fff5f5;
+  background: #e11d48;
+  color: #ffffff;
+}
+
+/* ============================================================
+   MODAL DE CÉLÉBRATION SOLIDAIRE
+   ============================================================ */
+.celebration-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  padding: 20px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.celebration-modal-card {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 36px 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(98, 130, 93, 0.25);
+  animation: cardScaleUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+@keyframes cardScaleUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+[data-theme='dark'] .celebration-modal-card {
+  background: #1e293b;
+  border-color: rgba(98, 130, 93, 0.4);
+  color: #f8fafc;
+}
+
+.celebration-badge-pill {
+  display: inline-block;
+  background: rgba(98, 130, 93, 0.12);
+  color: #43623f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.celebration-emoji-bounce {
+  font-size: 3.4rem;
+  margin-bottom: 10px;
+  animation: emojiBounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes emojiBounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-8px) scale(1.08); }
+}
+
+.celebration-modal-title {
+  font-size: 1.6rem;
+  font-weight: 850;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+[data-theme='dark'] .celebration-modal-title {
+  color: #f8fafc;
+}
+
+.celebration-modal-text {
+  font-size: 0.96rem;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+}
+
+[data-theme='dark'] .celebration-modal-text {
+  color: #cbd5e1;
+}
+
+.celebration-highlight {
+  color: #BC7C4E;
+  font-weight: 800;
+}
+
+.celebration-impact-banner {
+  background: rgba(98, 130, 93, 0.08);
+  border: 1px solid rgba(98, 130, 93, 0.2);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2e4a2c;
+  margin-bottom: 24px;
+}
+
+[data-theme='dark'] .celebration-impact-banner {
+  background: rgba(163, 230, 53, 0.1);
+  color: #bef264;
+  border-color: rgba(163, 230, 53, 0.2);
+}
+
+.celebration-close-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 50px;
+  border: none;
+  background: var(--primary-color, #62825D);
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(98, 130, 93, 0.35);
+  transition: all 0.25s ease;
+}
+
+.celebration-close-btn:hover {
+  background: var(--primary-hover, #4F6B4A);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(98, 130, 93, 0.45);
 }
 
 .loading {

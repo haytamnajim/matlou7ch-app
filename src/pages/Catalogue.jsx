@@ -6,7 +6,6 @@ import {
   FaSearch,
   FaMapMarkerAlt,
   FaTag,
-  FaHeart,
   FaClock,
   FaBookmark,
   FaRegBookmark,
@@ -15,7 +14,9 @@ import {
   FaChevronRight,
   FaGift
 } from 'react-icons/fa';
-import { SkeletonCatalogueGrid, SkeletonCatalogueHeader } from '../components/Skeleton';
+import { SkeletonCatalogueGrid } from '../components/Skeleton';
+import StatusBadge from '../components/StatusBadge';
+import FavoriteButton from '../components/FavoriteButton';
 import './Catalogue.css';
 
 const QUICK_CATEGORIES = [
@@ -103,7 +104,9 @@ function Catalogue() {
           day: 'numeric',
           month: 'short'
         }),
-        avatar: item.avatar_color || '#62825D'
+        avatar: item.avatar_color || '#62825D',
+        status: item.status || (item.is_published === false ? 'donne' : 'disponible'),
+        isPublished: item.is_published
       }));
 
       setResults(formattedItems);
@@ -301,7 +304,10 @@ function Catalogue() {
                             </div>
                           )}
 
-                          <span className="item-free-badge">100% GRATUIT</span>
+                          <div className="item-card-badges-top">
+                            <span className="item-free-badge">100% GRATUIT</span>
+                            <StatusBadge status={item.status} isPublished={item.isPublished} size="sm" />
+                          </div>
 
                           {/* Avatar Donateur */}
                           <div className="item-donor-badge">
@@ -311,15 +317,14 @@ function Catalogue() {
                             <span className="donor-name">{item.user.name}</span>
                           </div>
 
-                          {/* Bouton Favori */}
-                          <button
-                            type="button"
-                            className={`item-favorite-button ${isFav ? 'is-favorited' : ''}`}
-                            onClick={(e) => toggleFavorite(item.id, e)}
-                            aria-label={isFav ? "Retirer des favoris" : "Ajouter aux favoris"}
-                          >
-                            <FaHeart />
-                          </button>
+                          {/* Bouton Favori avec Micro-Animation */}
+                          <div className="item-favorite-animated-wrapper">
+                            <FavoriteButton
+                              isFavorited={isFav}
+                              onToggle={(e) => toggleFavorite(item.id, e)}
+                              size="sm"
+                            />
+                          </div>
                         </div>
 
                         <div className="item-card-details">

@@ -1,0 +1,105 @@
+/* ============================================================
+   STATUS BADGE COMPONENT - MATLOU7CH
+   ============================================================ */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+/* Tailles */
+.status-badge-sm {
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  gap: 4px;
+}
+
+.status-badge-md {
+  font-size: 0.74rem;
+  padding: 5px 11px;
+}
+
+.status-badge-lg {
+  font-size: 0.85rem;
+  padding: 7px 15px;
+  gap: 7px;
+}
+
+.status-badge-icon {
+  font-size: 0.9em;
+  flex-shrink: 0;
+}
+
+/* 🟢 DISPONIBLE */
+.status-disponible {
+  background: rgba(98, 130, 93, 0.16);
+  color: #3f593b;
+  border: 1px solid rgba(98, 130, 93, 0.35);
+  box-shadow: 0 2px 8px rgba(98, 130, 93, 0.15);
+}
+
+.status-disponible .status-badge-icon {
+  color: #526e4e;
+}
+
+[data-theme='dark'] .status-disponible {
+  background: rgba(163, 230, 53, 0.15);
+  color: #bef264;
+  border-color: rgba(163, 230, 53, 0.3);
+}
+
+[data-theme='dark'] .status-disponible .status-badge-icon {
+  color: #a3e635;
+}
+
+/* 🟡 RÉSERVÉ */
+.status-reserve {
+  background: rgba(217, 119, 6, 0.16);
+  color: #b45309;
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
+}
+
+.status-reserve .status-badge-icon {
+  color: #d97706;
+}
+
+[data-theme='dark'] .status-reserve {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+[data-theme='dark'] .status-reserve .status-badge-icon {
+  color: #fbbf24;
+}
+
+/* 🤝 DONNÉ */
+.status-donne {
+  background: rgba(188, 124, 78, 0.18);
+  color: #8c4a1e;
+  border: 1px solid rgba(188, 124, 78, 0.38);
+  box-shadow: 0 2px 8px rgba(188, 124, 78, 0.15);
+}
+
+.status-donne .status-badge-icon {
+  color: #bc7c4e;
+}
+
+[data-theme='dark'] .status-donne {
+  background: rgba(232, 141, 103, 0.2);
+  color: #fca5a5;
+  border-color: rgba(232, 141, 103, 0.35);
+}
+
+[data-theme='dark'] .status-donne .status-badge-icon {
+  color: #f87171;
+}
