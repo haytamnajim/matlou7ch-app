@@ -1,149 +1,135 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaLeaf } from 'react-icons/fa';
 import './Loader.css';
 
-const FULL_TEXT = 'Matlou7ch';
-// "Matlou" (0..5) en vert sauge #62825D, "7ch" (6..8) en terracotta chaleureux #BC7C4E
+const PRO_LOADING_TEXTS = [
+  'Recherche de dons solidaires près de chez vous...',
+  'Donnez une seconde vie à vos objets 🌿',
+  '1ère plateforme de don 100% gratuit au Maroc 🇲🇦',
+  'Préparation de votre espace solidaire...',
+];
 
 const Loader = ({ fullScreen = true, onComplete }) => {
-  const [displayedCount, setDisplayedCount] = useState(0);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [textIndex, setTextIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
 
+  // Rotation des textes toutes les 2.2s
+  useEffect(() => {
+    const textInterval = setInterval(() => {
+      setTextIndex((prev) => (prev + 1) % PRO_LOADING_TEXTS.length);
+    }, 2200);
+
+    return () => clearInterval(textInterval);
+  }, []);
+
+  // Progression fluide de la barre
   useEffect(() => {
     let timeoutId;
+    if (onComplete) {
+      // Mode Splash Screen : monte à 100% en ~2 secondes puis déclenche onComplete
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            timeoutId = setTimeout(() => {
+              onComplete();
+            }, 350);
+            return 100;
+          }
+          const increment = Math.floor(Math.random() * 12) + 8;
+          return Math.min(prev + increment, 100);
+        });
+      }, 140);
 
-    if (displayedCount < FULL_TEXT.length) {
-      // Vitesse d'écriture naturelle et humaine avec micro-variations
-      const humanDelays = [200, 150, 160, 130, 150, 180, 210, 150, 190];
-      const delay = humanDelays[displayedCount] || 160;
-
-      timeoutId = setTimeout(() => {
-        setDisplayedCount((prev) => prev + 1);
-      }, delay);
-    } else {
-      // Écriture terminée : on marque l'état complété
-      setIsCompleted(true);
-
-      if (onComplete) {
-        // Laisse le temps d'admirer le mot complet et le slogan avant de faire la transition
-        timeoutId = setTimeout(() => {
-          onComplete();
-        }, 750);
-      } else {
-        // Si aucun callback n'est fourni, on boucle élégamment
-        timeoutId = setTimeout(() => {
-          setIsCompleted(false);
-          setDisplayedCount(0);
-        }, 3500);
-      }
+      return () => {
+        clearInterval(interval);
+        if (timeoutId) clearTimeout(timeoutId);
+      };
     }
-
-    return () => clearTimeout(timeoutId);
-  }, [displayedCount, onComplete]);
-
-  // Découpage du texte en fonction de l'avancement
-  const matlouPart = FULL_TEXT.slice(0, Math.min(displayedCount, 6));
-  const sevenChPart = displayedCount > 6 ? FULL_TEXT.slice(6, displayedCount) : '';
+  }, [onComplete]);
 
   const content = (
     <div className="modern-loader-content">
-      <div className="loader-card">
-        {/* Halos lumineux subtils en arrière-plan */}
-        <div className="loader-glow-orb loader-glow-green" />
-        <div className="loader-glow-orb loader-glow-terracotta" />
+      <div className="pro-loader-card">
+        {/* Halos d'ambiance aux couleurs de la marque */}
+        <div className="pro-glow-orb pro-glow-green" />
+        <div className="pro-glow-orb pro-glow-terracotta" />
 
-        {/* Petit badge supérieur */}
+        {/* Badge supérieur */}
+        <div className="pro-loader-badge">
+          <FaLeaf className="pro-badge-leaf" />
+          <span>Plateforme Solidaire & Écologique</span>
+        </div>
+
+        {/* Logo officiel Matlou7ch avec respiration douce */}
         <motion.div
-          className="loader-badge"
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          className="pro-logo-container"
+          animate={{
+            scale: [1, 1.05, 1],
+            y: [0, -6, 0],
+          }}
+          transition={{
+            duration: 2.4,
+            ease: 'easeInOut',
+            repeat: Infinity,
+          }}
         >
-          <FaLeaf className="loader-badge-icon" />
-          <span>Don & Recyclage Solidaire</span>
+          <img
+            src="/imageLOGO.png"
+            alt="Matlou7ch Logo"
+            className="pro-loader-logo-img"
+          />
         </motion.div>
 
-        {/* Zone d'écriture en temps réel avec stylo */}
-        <div className="loader-writer-row">
-          <div className="loader-text-display">
-            <span className="text-matlou">{matlouPart}</span>
-            <span className="text-sevench">{sevenChPart}</span>
-          </div>
+        {/* Nom de la marque */}
+        <div className="pro-brand-title">
+          <span className="pro-brand-matlou">Matlou</span>
+          <span className="pro-brand-seven">7ch</span>
+        </div>
 
-          {/* Stylo plume animé qui écrit en direct */}
-          <motion.div
-            className={`loader-pen-indicator ${isCompleted ? 'pen-finished' : 'pen-writing'}`}
-            animate={{
-              rotate: isCompleted ? [0, -10, 0] : [-8, 12, -8],
-              y: isCompleted ? [0, -4, 0] : [0, -5, 0],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: isCompleted ? 2.5 : 0.35,
-              ease: 'easeInOut',
-            }}
-          >
-            {/* SVG Stylo plume calligraphique moderne */}
-            <svg
-              className="loader-pen-svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        {/* Barre de progression moderne */}
+        <div className="pro-loader-progress-track">
+          {onComplete ? (
+            <motion.div
+              className="pro-loader-progress-fill"
+              style={{ width: `${progress}%` }}
+              transition={{ ease: 'easeOut', duration: 0.2 }}
+            />
+          ) : (
+            <motion.div
+              className="pro-loader-progress-indeterminate"
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.4,
+                ease: 'easeInOut',
+              }}
+            />
+          )}
+        </div>
+
+        {/* Textes rotatifs professionnels */}
+        <div className="pro-loader-text-box">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={textIndex}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="pro-loading-caption"
             >
-              <path
-                d="M16.5 3.5C17.3 2.7 18.7 2.7 19.5 3.5C20.3 4.3 20.3 5.7 19.5 6.5L8.5 17.5L4 19L5.5 14.5L16.5 3.5Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="currentColor"
-                fillOpacity="0.25"
-              />
-              <path
-                d="M15 5L19 9"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M7 16L8 17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-            {/* Goutte d'encre pulsante à la pointe */}
-            <span className="loader-ink-drop" />
-          </motion.div>
+              {PRO_LOADING_TEXTS[textIndex]}
+            </motion.p>
+          </AnimatePresence>
         </div>
 
-        {/* Soulignement élégant qui se trace au fur et à mesure */}
-        <div className="loader-underline-track">
-          <div
-            className="loader-underline-fill"
-            style={{
-              width: `${(displayedCount / FULL_TEXT.length) * 100}%`,
-              transition: 'width 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-            }}
-          />
-        </div>
-
-        {/* Slogan */}
-        <motion.p
-          className="loader-tagline"
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Ne jetez plus, donnez au Maroc 🇲🇦🌿
-        </motion.p>
-
-        {/* Indicateurs de pulsation discrets */}
-        <div className="loader-dots-indicator">
-          <span className="dot dot-1" />
-          <span className="dot dot-2" />
-          <span className="dot dot-3" />
+        {/* Points de pulsation discrets */}
+        <div className="pro-loader-dots">
+          <span className="pro-dot p-dot-1" />
+          <span className="pro-dot p-dot-2" />
+          <span className="pro-dot p-dot-3" />
         </div>
       </div>
     </div>
@@ -155,7 +141,7 @@ const Loader = ({ fullScreen = true, onComplete }) => {
         className="loader-overlay-modern"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 1.02, filter: 'blur(3px)', transition: { duration: 0.45, ease: 'easeInOut' } }}
+        exit={{ opacity: 0, scale: 1.02, filter: 'blur(4px)', transition: { duration: 0.4, ease: 'easeInOut' } }}
       >
         {content}
       </motion.div>
