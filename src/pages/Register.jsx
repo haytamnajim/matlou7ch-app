@@ -9,7 +9,9 @@ import {
   FaMapMarkerAlt,
   FaEye,
   FaEyeSlash,
-  FaCheck
+  FaCheck,
+  FaLeaf,
+  FaArrowRight
 } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import { validateRegisterForm, sanitizeEmail, sanitizePhone, sanitizeName, sanitizeCity } from '../utils/validation';
@@ -33,7 +35,6 @@ function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
-  // Initialiser la protection CSRF
   useEffect(() => {
     initializeCSRFProtection();
   }, []);
@@ -43,7 +44,6 @@ function Register() {
     setError('');
     setIsSubmitting(true);
 
-    // Sanitize les données
     const sanitizedData = {
       name: sanitizeName(pseudo),
       email: sanitizeEmail(email),
@@ -52,7 +52,6 @@ function Register() {
       city: sanitizeCity(city)
     };
 
-    // Valider le formulaire
     const validation = validateRegisterForm(sanitizedData);
     if (!validation.valid) {
       const firstError = Object.values(validation.errors)[0];
@@ -67,7 +66,6 @@ function Register() {
       return;
     }
 
-    // Vérifier le rate limiting
     const rateLimitCheck = checkRateLimit('register', sanitizedData.email);
     if (!rateLimitCheck.allowed) {
       if (rateLimitCheck.blocked) {
@@ -110,127 +108,149 @@ function Register() {
   return (
     <div className="register-page-wrapper">
       {/* Halos lumineux d'ambiance */}
-      <div className="register-bg-blob blob-1" />
-      <div className="register-bg-blob blob-2" />
+      <div className="register-ambient-blob reg-blob-1" />
+      <div className="register-ambient-blob reg-blob-2" />
 
-      <div className="register-glass-card">
-        {/* Bouton retour */}
-        <Link to="/connexion" className="register-back-link" aria-label="Retour à la connexion">
-          <FaChevronLeft />
-        </Link>
-
-        {/* En-tête avec logo */}
-        <div className="register-brand-header">
-          <Link to="/" className="register-logo-link">
-            <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="register-brand-logo" />
-            <span className="register-brand-name">MATLOU7CH</span>
+      <div className="register-card-container">
+        {/* Barre supérieure avec retour */}
+        <div className="register-top-bar">
+          <Link to="/connexion" className="register-back-btn">
+            <FaChevronLeft className="back-chevron" />
+            <span>Retour à la connexion</span>
           </Link>
-          <h1 className="register-card-title">Rejoignez la communauté</h1>
-          <p className="register-card-subtitle">
-            Créez votre compte gratuit en 1 minute pour donner et recevoir.
+
+          <div className="register-pill-badge">
+            <FaLeaf className="badge-leaf" />
+            <span>100% Solidaire & Gratuit</span>
+          </div>
+        </div>
+
+        {/* En-tête principal */}
+        <div className="register-header-group">
+          <h1 className="register-main-title">
+            Rejoignez la communauté <span className="wave-leaf">🌱</span>
+          </h1>
+          <p className="register-subtitle">
+            Créez votre compte en 1 minute pour donner, réserver et échanger partout au Maroc.
           </p>
         </div>
 
-        {error && <div className="register-error-alert">{error}</div>}
+        {error && (
+          <div className="register-error-banner">
+            <span>{error}</span>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="register-form">
-          <div className="register-fields-grid">
-            {/* Colonne Gauche */}
-            <div className="register-grid-col">
-              <div className="register-input-group">
-                <label htmlFor="pseudo">Pseudo / Nom d'affichage *</label>
-                <div className="reg-input-wrap">
-                  <FaUser className="reg-icon" />
-                  <input
-                    type="text"
-                    id="pseudo"
-                    value={pseudo}
-                    onChange={(e) => setPseudo(e.target.value)}
-                    placeholder="Ex: Yassine_Casa"
-                    required
-                  />
-                </div>
-                <span className="reg-hint">De 2 à 30 caractères</span>
+          <div className="register-grid">
+            {/* Ligne 1 : Identité */}
+            <div className="register-input-group">
+              <label htmlFor="pseudo" className="register-label">
+                Pseudo / Nom d'affichage <span className="req-star">*</span>
+              </label>
+              <div className="register-input-shell">
+                <FaUser className="reg-field-icon" />
+                <input
+                  type="text"
+                  id="pseudo"
+                  value={pseudo}
+                  onChange={(e) => setPseudo(e.target.value)}
+                  placeholder="Ex: Yassine_Casa"
+                  required
+                />
               </div>
-
-              <div className="register-input-group">
-                <label htmlFor="phone">Numéro de téléphone *</label>
-                <div className="reg-input-wrap">
-                  <FaPhone className="reg-icon" />
-                  <input
-                    type="tel"
-                    id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="06XXXXXXXX"
-                    required
-                  />
-                </div>
-                <span className="reg-hint">Format marocain valide</span>
-              </div>
-
-              <div className="register-input-group">
-                <label htmlFor="city">Ville de résidence *</label>
-                <div className="reg-input-wrap">
-                  <FaMapMarkerAlt className="reg-icon" />
-                  <input
-                    type="text"
-                    id="city"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Ex: Casablanca, Rabat, Marrakech..."
-                    required
-                  />
-                </div>
-              </div>
+              <span className="register-field-hint">De 2 à 30 caractères</span>
             </div>
 
-            {/* Colonne Droite */}
-            <div className="register-grid-col">
-              <div className="register-input-group">
-                <label htmlFor="email">Adresse email *</label>
-                <div className="reg-input-wrap">
-                  <FaEnvelope className="reg-icon" />
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="nom@exemple.com"
-                    required
-                  />
-                </div>
+            <div className="register-input-group">
+              <label htmlFor="email" className="register-label">
+                Adresse email <span className="req-star">*</span>
+              </label>
+              <div className="register-input-shell">
+                <FaEnvelope className="reg-field-icon" />
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="nom@exemple.com"
+                  required
+                  autoComplete="email"
+                />
               </div>
+              <span className="register-field-hint">Utilisée pour confirmer votre compte</span>
+            </div>
 
-              <div className="register-input-group">
-                <label htmlFor="password">Mot de passe *</label>
-                <div className="reg-input-wrap">
-                  <FaLock className="reg-icon" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Au moins 6 caractères"
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="reg-eye-btn"
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? 'Masquer' : 'Afficher'}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
-                <span className="reg-hint">6 caractères minimum</span>
+            {/* Ligne 2 : Coordonnées (Téléphone & Ville ensemble) */}
+            <div className="register-input-group">
+              <label htmlFor="phone" className="register-label">
+                Numéro de téléphone <span className="req-star">*</span>
+              </label>
+              <div className="register-input-shell">
+                <FaPhone className="reg-field-icon" />
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="06XXXXXXXX ou 07XXXXXXXX"
+                  required
+                />
               </div>
+              <span className="register-field-hint">Format marocain valide</span>
+            </div>
+
+            <div className="register-input-group">
+              <label htmlFor="city" className="register-label">
+                Ville de résidence <span className="req-star">*</span>
+              </label>
+              <div className="register-input-shell">
+                <FaMapMarkerAlt className="reg-field-icon" />
+                <input
+                  type="text"
+                  id="city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Ex: Casablanca, Rabat, Fès..."
+                  required
+                />
+              </div>
+              <span className="register-field-hint">Pour trouver des dons proches de vous</span>
+            </div>
+
+            {/* Ligne 3 : Sécurité (Plein écran ou double) */}
+            <div className="register-input-group full-width">
+              <label htmlFor="password" className="register-label">
+                Mot de passe <span className="req-star">*</span>
+              </label>
+              <div className="register-input-shell">
+                <FaLock className="reg-field-icon" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Choisissez un mot de passe robuste"
+                  required
+                  autoComplete="new-password"
+                />
+                <button
+                  type="button"
+                  className="register-eye-toggle"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                  tabIndex="-1"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              <span className="register-field-hint">Au moins 6 caractères recommandés</span>
             </div>
           </div>
 
-          {/* Checkboxes Conditions */}
-          <div className="register-checkboxes-block">
-            <label className="custom-check-row">
+          {/* Section Conditions Générales & Checkboxes */}
+          <div className="register-consent-section">
+            <label className="register-check-item">
               <input
                 type="checkbox"
                 id="acceptTerms"
@@ -238,63 +258,68 @@ function Register() {
                 onChange={(e) => setAcceptTerms(e.target.checked)}
                 required
               />
-              <span className="check-custom-box">
-                <FaCheck className="check-mark-icon" />
+              <span className="custom-box">
+                <FaCheck className="box-check-icon" />
               </span>
-              <span className="check-text">
+              <span className="check-label-text">
                 J'accepte les{' '}
-                <Link to="/cgu" className="reg-highlight-link" target="_blank">
+                <Link to="/cgu" className="consent-link" target="_blank">
                   Conditions Générales
                 </Link>{' '}
                 et la{' '}
-                <Link to="/confidentialite" className="reg-highlight-link" target="_blank">
+                <Link to="/confidentialite" className="consent-link" target="_blank">
                   Politique de Confidentialité
                 </Link>
-                . *
+                . <span className="req-star">*</span>
               </span>
             </label>
 
-            <label className="custom-check-row">
+            <label className="register-check-item">
               <input
                 type="checkbox"
                 id="rejectNewsletter"
                 checked={rejectNewsletter}
                 onChange={(e) => setRejectNewsletter(e.target.checked)}
               />
-              <span className="check-custom-box">
-                <FaCheck className="check-mark-icon" />
+              <span className="custom-box">
+                <FaCheck className="box-check-icon" />
               </span>
-              <span className="check-text">Je ne souhaite pas recevoir la newsletter</span>
+              <span className="check-label-text">Je ne souhaite pas recevoir la newsletter</span>
             </label>
 
-            <label className="custom-check-row">
+            <label className="register-check-item">
               <input
                 type="checkbox"
                 id="rejectNotifications"
                 checked={rejectNotifications}
                 onChange={(e) => setRejectNotifications(e.target.checked)}
               />
-              <span className="check-custom-box">
-                <FaCheck className="check-mark-icon" />
+              <span className="custom-box">
+                <FaCheck className="box-check-icon" />
               </span>
-              <span className="check-text">Je ne souhaite pas recevoir de notifications</span>
+              <span className="check-label-text">Je ne souhaite pas recevoir de notifications promotionnelles</span>
             </label>
           </div>
 
-          <button type="submit" className="register-submit-btn" disabled={isSubmitting}>
+          {/* Bouton de validation */}
+          <button type="submit" className="register-submit-button" disabled={isSubmitting}>
             {isSubmitting ? (
-              <span className="btn-loading-content">
-                <span className="reg-spinner" /> Création du compte...
+              <span className="submit-loading-content">
+                <span className="reg-loader-spinner" /> Création du compte en cours...
               </span>
             ) : (
-              'Valider mon inscription'
+              <span className="submit-normal-content">
+                <span>Créer mon compte</span>
+                <FaArrowRight className="btn-arrow-icon" />
+              </span>
             )}
           </button>
         </form>
 
-        <div className="register-card-footer">
-          <span>Vous avez déjà un compte ?</span>{' '}
-          <Link to="/connexion" className="reg-footer-link">
+        {/* Pied de carte */}
+        <div className="register-card-bottom">
+          <span>Vous possédez déjà un compte ?</span>{' '}
+          <Link to="/connexion" className="bottom-login-link">
             Se connecter
           </Link>
         </div>
