@@ -1,41 +1,58 @@
 /* ==========================================================================
-   HERO BANNER - MATLOU7CH
+   HERO BANNER — MATLOU7CH (Premium Redesign)
    ========================================================================== */
 
 .home-banner {
   width: 100%;
   position: relative;
-  background: linear-gradient(180deg, #fdfbf7 0%, #f4f8f4 100%);
-  padding: 80px 0 100px;
+  background: linear-gradient(160deg, #fdfbf7 0%, #f0f8f0 50%, #faf6f0 100%);
+  padding: 90px 0 110px;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Halos d'ambiance */
+[data-theme='dark'] .home-banner {
+  background: linear-gradient(160deg, #0a1525 0%, #0d1f1a 50%, #120e1a 100%);
+}
+
+/* ── Halos d'ambiance ── */
 .banner-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
   pointer-events: none;
   z-index: 0;
+  transition: transform 0.08s ease-out;
+  will-change: transform;
 }
 
 .banner-glow-1 {
-  width: 500px;
-  height: 500px;
-  background: rgba(98, 130, 93, 0.15);
-  top: -150px;
-  left: -100px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(98, 130, 93, 0.18) 0%, transparent 70%);
+  top: -200px;
+  left: -150px;
+  filter: blur(60px);
 }
 
 .banner-glow-2 {
-  width: 450px;
-  height: 450px;
-  background: rgba(188, 124, 78, 0.12);
-  bottom: -100px;
-  right: -50px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(188, 124, 78, 0.14) 0%, transparent 70%);
+  bottom: -120px;
+  right: -80px;
+  filter: blur(60px);
 }
 
+.banner-glow-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  top: 40%;
+  left: 45%;
+  filter: blur(80px);
+}
+
+/* ── Layout ── */
 .home-banner-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -43,75 +60,102 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 60px;
+  gap: 64px;
   position: relative;
   z-index: 1;
 }
 
-/* Côté Gauche */
 .home-banner-left {
   flex: 1 1 55%;
-  max-width: 650px;
+  max-width: 640px;
 }
 
-/* Badge Pilule */
+/* ── Badge Pilule ── */
 .banner-pill-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(98, 130, 93, 0.12);
-  border: 1px solid rgba(98, 130, 93, 0.25);
-  color: var(--primary-color, #62825D);
-  padding: 8px 18px;
-  border-radius: 50px;
-  font-size: 0.88rem;
+  background: var(--primary-light);
+  border: 1px solid var(--primary-glow);
+  color: var(--primary-color);
+  padding: 8px 18px 8px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 24px;
-  animation: badgeFade 0.6s ease;
+  margin-bottom: 28px;
+  animation: badgeFade 0.7s ease both;
 }
 
-@keyframes badgeFade {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+.pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  animation: pulseGlow 2s ease infinite;
+  flex-shrink: 0;
 }
 
 .pill-icon {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-/* Titre Principal */
+@keyframes badgeFade {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Titre Principal avec animation cascade ── */
 .home-banner-title {
-  font-size: 3.4rem;
-  font-weight: 850;
-  color: #1e293b;
-  line-height: 1.15;
-  letter-spacing: -1.5px;
-  margin: 0 0 20px 0;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.13;
+  letter-spacing: -2px;
+  margin: 0 0 22px 0;
+}
+
+.title-line {
+  display: inline-block;
+}
+
+.title-line-1 {
+  animation: fadeInUp 0.7s 0.1s ease both;
+}
+
+.title-line-2 {
+  animation: fadeInUp 0.7s 0.25s ease both;
+}
+
+.title-line-3 {
+  animation: fadeInUp 0.7s 0.4s ease both;
 }
 
 .accent-highlight {
-  background: linear-gradient(135deg, #62825D 0%, #bc7c4e 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
+/* ── Sous-titre ── */
 .home-banner-subtitle {
-  font-size: 1.15rem;
-  color: #475569;
-  line-height: 1.6;
-  margin: 0 0 35px 0;
-  max-width: 540px;
+  font-size: 1.12rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 38px 0;
+  max-width: 520px;
+  animation: fadeInUp 0.7s 0.5s ease both;
 }
 
-/* Actions CTAs */
+/* ── Actions CTAs ── */
 .home-banner-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 45px;
+  gap: 14px;
+  margin-bottom: 48px;
   flex-wrap: wrap;
+  animation: fadeInUp 0.7s 0.6s ease both;
 }
 
 .banner-btn-link {
@@ -122,57 +166,81 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--primary-color, #62825D);
+  background: var(--primary-color);
   color: #ffffff;
-  padding: 16px 32px;
-  border-radius: 14px;
-  font-size: 1.05rem;
+  padding: 16px 34px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
   border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 6px 20px rgba(98, 130, 93, 0.35);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-primary-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
 }
 
 .banner-primary-btn:hover {
-  background: var(--primary-hover, #4F6B4A);
+  background: var(--primary-hover);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(98, 130, 93, 0.45);
+  box-shadow: var(--shadow-primary-hover);
+}
+
+.banner-primary-btn:hover::after {
+  opacity: 1;
+}
+
+.banner-primary-btn:active {
+  transform: translateY(-1px);
 }
 
 .banner-secondary-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #ffffff;
-  color: #1e293b;
-  padding: 16px 30px;
-  border-radius: 14px;
-  font-size: 1.05rem;
+  background: var(--bg-card);
+  color: var(--text-dark);
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid var(--border-color);
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-xs);
 }
 
 .banner-secondary-btn:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-  color: var(--primary-color, #62825D);
+  background: var(--bg-subtle);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Statistiques de confiance */
+.banner-secondary-btn:active {
+  transform: translateY(-1px);
+}
+
+/* ── Statistiques de confiance ── */
 .banner-trust-stats {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  gap: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-color);
+  animation: fadeInUp 0.7s 0.75s ease both;
 }
 
 .trust-stat-item {
@@ -182,28 +250,34 @@
 }
 
 .stat-icon-circle {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.trust-stat-item:hover .stat-icon-circle {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .stat-icon-circle.green {
-  background: rgba(98, 130, 93, 0.15);
-  color: #62825D;
+  background: var(--primary-light);
+  color: var(--primary-color);
 }
 
 .stat-icon-circle.terracotta {
-  background: rgba(188, 124, 78, 0.15);
-  color: #bc7c4e;
+  background: var(--accent-light);
+  color: var(--accent-color);
 }
 
 .stat-icon-circle.blue {
-  background: rgba(59, 130, 246, 0.15);
-  color: #2563eb;
+  background: var(--color-info-light);
+  color: var(--color-info);
 }
 
 .stat-text-group {
@@ -214,28 +288,31 @@
 .stat-number {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #1e293b;
+  color: var(--text-dark);
   line-height: 1.2;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: 0.78rem;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 .trust-stat-divider {
   width: 1px;
-  height: 36px;
-  background: #e2e8f0;
+  height: 40px;
+  background: var(--border-color);
+  flex-shrink: 0;
 }
 
-/* Côté Droit : Image & Badges Flottants */
+/* ── Image côté droit ── */
 .home-banner-right {
   flex: 1 1 45%;
   display: flex;
   justify-content: center;
   position: relative;
+  animation: fadeIn 0.9s 0.3s ease both;
 }
 
 .banner-image-wrapper {
@@ -244,51 +321,68 @@
   width: 100%;
 }
 
+/* Anneau décoratif */
+.image-ring-decoration {
+  position: absolute;
+  inset: -16px;
+  border-radius: 36px;
+  border: 2px dashed rgba(98, 130, 93, 0.2);
+  animation: spin 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .banner-main-image {
   width: 100%;
-  height: 480px;
+  height: 490px;
   object-fit: cover;
-  border-radius: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.18);
-  border: 4px solid #ffffff;
-  transition: transform 0.4s ease;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.20);
+  border: 4px solid var(--bg-card);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .banner-image-wrapper:hover .banner-main-image {
-  transform: scale(1.02);
+  transform: scale(1.025) translateY(-4px);
+  box-shadow: 0 40px 70px -10px rgba(0, 0, 0, 0.26);
 }
 
-/* Badges Flottants */
+/* ── Badges Flottants ── */
 .floating-card {
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  animation: floatCard 4s ease-in-out infinite alternate;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-shadow), 0 0 0 1px var(--glass-border);
+  border: 1px solid var(--glass-border);
+  z-index: 2;
+  animation: floatCard 5s ease-in-out infinite alternate;
 }
 
 .floating-card-top {
-  top: 30px;
-  left: -25px;
+  top: 28px;
+  left: -28px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 18px;
+  padding: 14px 18px;
+  position: relative;
 }
 
 .floating-card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: rgba(98, 130, 93, 0.15);
-  color: #62825D;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-xs);
+  background: var(--primary-light);
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .floating-card-info {
@@ -297,66 +391,81 @@
 }
 
 .floating-card-title {
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-dark);
+  line-height: 1.3;
 }
 
 .floating-card-sub {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Dot "online" sur floating card top */
+.floating-online-dot {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+  animation: pulseGlow 2s ease infinite;
 }
 
 .floating-card-bottom {
-  bottom: 25px;
-  right: -20px;
+  bottom: 22px;
+  right: -22px;
   padding: 14px 20px;
   text-align: left;
-  animation-delay: 2s;
+  animation-delay: 2.5s;
 }
 
 .floating-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #bc7c4e 0%, #a06841 100%);
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
   padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.8px;
+  margin-bottom: 5px;
 }
 
 .floating-desc {
   display: block;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #334155;
+  color: var(--text-medium);
 }
 
 @keyframes floatCard {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
+  0%   { transform: translateY(0px); }
+  100% { transform: translateY(-10px); }
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1100px) {
   .home-banner {
-    padding: 60px 0 70px;
+    padding: 70px 0 80px;
   }
 
   .home-banner-container {
     flex-direction: column;
     text-align: center;
-    gap: 45px;
+    gap: 50px;
+    align-items: center;
   }
 
   .home-banner-left {
     max-width: 100%;
-  }
-
-  .home-banner-title {
-    font-size: 2.6rem;
   }
 
   .home-banner-subtitle {
@@ -383,10 +492,10 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .home-banner-title {
-    font-size: 2.1rem;
-    letter-spacing: -0.5px;
+    font-size: 2.4rem;
+    letter-spacing: -1px;
   }
 
   .home-banner-actions {
@@ -402,7 +511,7 @@
   }
 
   .banner-main-image {
-    height: 340px;
+    height: 320px;
   }
 
   .trust-stat-divider {
@@ -413,5 +522,9 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+  }
+
+  .image-ring-decoration {
+    display: none;
   }
 }

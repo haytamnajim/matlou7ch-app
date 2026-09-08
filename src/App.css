@@ -1,18 +1,13 @@
-.App {
-  text-align: center;
-}
+/* ==========================================================================
+   APP.CSS — Matlou7ch Global Layout & Page Transitions
+   ========================================================================== */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
+/* Legacy reset kept for compatibility */
+.App { text-align: center; }
+.App-logo { height: 40vmin; pointer-events: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  .App-logo { animation: App-logo-spin infinite 20s linear; }
 }
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,21 +18,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
+.App-link { color: #61dafb; }
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
+/* ── Layout ── */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -46,10 +33,25 @@
 
 .main-content {
   flex: 1;
-  padding-bottom: 30px;
 }
 
-/* Image placeholders when online photos are removed */
+/* ── Page Transition Wrapper ── */
+.page-transition-wrapper {
+  animation: pageEnter 0.35s ease both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Image Placeholders ── */
 .product-image-placeholder,
 .listing-image-placeholder,
 .listing-detail-image-placeholder,
@@ -57,17 +59,32 @@
 .report-product-image-placeholder {
   width: 100%;
   height: 100%;
-  background-color: #f0f2f5;
+  background: var(--bg-subtle, #f0f2f5);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 200px;
-  border-radius: 8px;
+  border-radius: var(--radius-md, 8px);
 }
 
 .category-image-placeholder {
   width: 80px;
   height: 80px;
-  background-color: #e0e4e8;
+  background: var(--bg-subtle, #e0e4e8);
   border-radius: 50%;
+}
+
+/* ── Global Form Resets ── */
+button, input, select, textarea {
+  font-family: var(--font-main, 'Outfit', sans-serif);
+}
+
+/* ── Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

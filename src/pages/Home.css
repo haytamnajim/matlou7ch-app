@@ -3,10 +3,8 @@
    ========================================================================== */
 
 .home-page-new {
-  background: radial-gradient(circle at 10% 10%, rgba(98, 130, 93, 0.06) 0%, transparent 40%),
-              radial-gradient(circle at 90% 50%, rgba(188, 124, 78, 0.05) 0%, transparent 45%),
-              #fbfdfc;
-  color: #1e293b;
+  background: var(--bg-body);
+  color: var(--text-dark);
   overflow-x: hidden;
 }
 
@@ -24,16 +22,19 @@
 }
 
 .section-tag {
-  display: inline-block;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--primary-color, #62825D);
-  background: rgba(98, 130, 93, 0.12);
+  color: var(--primary-color);
+  background: var(--primary-light);
+  border: 1px solid var(--primary-glow);
   padding: 6px 16px;
-  border-radius: 50px;
-  margin-bottom: 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 16px;
 }
 
 .section-tag.green {
@@ -43,16 +44,16 @@
 
 .section-title {
   font-size: 2.4rem;
-  font-weight: 850;
-  color: #0f172a;
+  font-weight: 900;
+  color: var(--text-dark);
   line-height: 1.2;
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
   margin: 0 0 14px 0;
 }
 
 .section-subtitle {
   font-size: 1.05rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   margin: 0;
 }
@@ -62,9 +63,7 @@
    ========================================================================== */
 .home-categories-section {
   padding: 90px 0;
-  background: radial-gradient(circle at 85% 20%, rgba(98, 130, 93, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(188, 124, 78, 0.06) 0%, transparent 50%),
-              #ffffff;
+  background: var(--bg-card);
 }
 
 .categories-cards-grid {
