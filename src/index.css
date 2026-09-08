@@ -96,51 +96,55 @@
   --z-loader: 500;
 }
 
-/* ── Dark Mode ── */
+/* ── Dark Mode — Deep Black Theme (Noir Profond & Minéral) ── */
 [data-theme='dark'] {
-  --bg-main: #0f172a;
-  --bg-body: #080f1e;
-  --bg-sage: #1e3a1a;
-  --bg-cream: #1e293b;
-  --bg-subtle: #111827;
-  --bg-card: #1a2540;
+  color-scheme: dark;
 
-  /* Brand (adjusted for dark) */
-  --primary-color: #7db87a;
-  --primary-hover: #8dc78a;
-  --primary-light: rgba(125, 184, 122, 0.15);
-  --primary-glow: rgba(125, 184, 122, 0.20);
+  /* Surfaces Noir Profond */
+  --bg-main: #0c0e0c;          /* Fond principal noir profond */
+  --bg-body: #070907;          /* Noir absolu / d'arrière-plan */
+  --bg-sage: #142314;          /* Nuance vert profond */
+  --bg-cream: #121512;         /* Surface sombre chaude */
+  --bg-subtle: #0d100d;        /* Arrière-plan subtil noir */
+  --bg-card: #121613;          /* Cartes en noir anthracite */
+  --bg-card-hover: #181d19;    /* Hover sur cartes */
+  --bg-input: #131714;         /* Champs de formulaire noirs */
+  --bg-dropdown: #121613;      /* Menus déroulants et popups */
 
-  --accent-color: #d4956a;
-  --accent-hover: #e0a87b;
-  --accent-light: rgba(212, 149, 106, 0.15);
+  /* Brand Colors (éclatantes sur fond noir) */
+  --primary-color: #6eb769;    /* Vert sauge lumineux */
+  --primary-hover: #82c87d;
+  --primary-light: rgba(110, 183, 105, 0.16);
+  --primary-glow: rgba(110, 183, 105, 0.30);
 
-  /* Text */
-  --text-dark: #f1f5f9;
-  --text-medium: #cbd5e1;
-  --text-muted: #94a3b8;
-  --text-light: #64748b;
+  --accent-color: #e0945a;     /* Terracotta lumineux */
+  --accent-hover: #ebb17e;
+  --accent-light: rgba(224, 148, 90, 0.18);
 
-  /* Borders */
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
+  /* Typographie & Contraste sur Noir */
+  --text-dark: #f8fafc;        /* Blanc chaud pour titres et textes majeurs */
+  --text-medium: #d1d5db;      /* Textes secondaires très lisibles */
+  --text-muted: #9ca3af;       /* Descriptions douces */
+  --text-light: #6b7280;       /* Placeholders et détails */
 
-  /* Glassmorphism dark */
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  /* Bordures fines & élégantes */
+  --border-color: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.18);
 
-  /* Shadows (dark) */
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.40);
-  --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.45);
+  /* Glassmorphism Dark Noir */
+  --glass-bg: rgba(11, 14, 12, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
 
-  --shadow-primary: 0 8px 24px rgba(125, 184, 122, 0.20);
-  --shadow-primary-hover: 0 12px 32px rgba(125, 184, 122, 0.30);
+  /* Ombres Noires Profondes */
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.65);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.75);
+  --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.85);
 
-  --bg-card: #162033;
+  --shadow-primary: 0 8px 25px rgba(110, 183, 105, 0.22);
+  --shadow-primary-hover: 0 12px 35px rgba(110, 183, 105, 0.35);
 }
 
 /* ==========================================================================
@@ -257,4 +261,34 @@ code {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--container-padding);
+}
+
+/* ==========================================================================
+   UNIVERSAL DARK MODE ENHANCEMENTS (Deep Black Foundation)
+   ========================================================================== */
+
+[data-theme='dark'] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="color"]),
+[data-theme='dark'] textarea,
+[data-theme='dark'] select {
+  background-color: var(--bg-input);
+  color: var(--text-dark);
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] input:focus,
+[data-theme='dark'] textarea:focus,
+[data-theme='dark'] select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-light);
+  outline: none;
+}
+
+[data-theme='dark'] input::placeholder,
+[data-theme='dark'] textarea::placeholder {
+  color: var(--text-light);
+}
+
+[data-theme='dark'] hr,
+[data-theme='dark'] .divider {
+  border-color: var(--border-color);
 }

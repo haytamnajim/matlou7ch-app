@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaInfoCircle, FaExclamationCircle } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+  FaInfoCircle,
+  FaExclamationCircle,
+  FaGift,
+  FaUsers,
+  FaLeaf,
+  FaArrowRight
+} from 'react-icons/fa';
 import { validateLoginForm, sanitizeEmail } from '../utils/validation';
 import { checkRateLimit } from '../utils/rateLimit';
 import { initializeCSRFProtection } from '../utils/csrf';
@@ -71,134 +82,159 @@ function Login() {
 
   return (
     <div className="login-page-wrapper">
-      {/* ── Left Panel ── */}
-      <div className="login-left-panel">
-        <div className="login-panel-glow login-panel-glow-1" />
-        <div className="login-panel-glow login-panel-glow-2" />
+      {/* Halos lumineux d'ambiance en arrière-plan */}
+      <div className="login-ambient-blob login-blob-1" />
+      <div className="login-ambient-blob login-blob-2" />
 
-        <Link to="/" className="login-panel-logo">
-          <img src="/imageLOGO.png" alt="Matlou7ch" className="login-panel-logo-img" />
-          <span className="login-panel-logo-text">Matlou7ch</span>
-        </Link>
+      <div className="login-card-container">
+        {/* ── Panneau Gauche : Valeurs & Impact ── */}
+        <div className="login-brand-panel">
+          <div className="login-brand-content">
+            <div className="login-pill-badge">
+              <FaLeaf className="pill-badge-icon" />
+              <span>Anti-gaspillage & Solidarité au Maroc</span>
+            </div>
 
-        <div className="login-panel-content">
-          <h2 className="login-panel-title">
-            Donnez, <em>partagez</em>,<br />
-            faites le bien.
-          </h2>
-          <p className="login-panel-subtitle">
-            Rejoignez des milliers de Marocains qui donnent une seconde vie à leurs objets et renforcent leur communauté.
-          </p>
-          <div className="login-panel-stats">
-            <div className="login-panel-stat">
-              <span className="login-panel-stat-number">+5 000</span>
-              <span className="login-panel-stat-label">Objets donnés</span>
+            <h2 className="login-brand-title">
+              Donnez, partagez,<br />
+              <span className="text-gradient-sage">faites le bien.</span>
+            </h2>
+
+            <p className="login-brand-desc">
+              Rejoignez des milliers de citoyens qui donnent une seconde vie à leurs objets et participent à une économie circulaire bienveillante.
+            </p>
+
+            {/* Statistiques clés intégrées */}
+            <div className="login-stats-grid">
+              <div className="login-stat-card">
+                <div className="stat-card-icon">
+                  <FaGift />
+                </div>
+                <div>
+                  <span className="stat-card-number">+5 000</span>
+                  <span className="stat-card-label">Objets donnés</span>
+                </div>
+              </div>
+
+              <div className="login-stat-card">
+                <div className="stat-card-icon">
+                  <FaUsers />
+                </div>
+                <div>
+                  <span className="stat-card-number">+12 000</span>
+                  <span className="stat-card-label">Membres actifs</span>
+                </div>
+              </div>
             </div>
-            <div className="login-panel-stat">
-              <span className="login-panel-stat-number">+12 000</span>
-              <span className="login-panel-stat-label">Membres actifs</span>
-            </div>
-            <div className="login-panel-stat">
-              <span className="login-panel-stat-number">100%</span>
-              <span className="login-panel-stat-label">Gratuit</span>
+
+            <div className="login-trust-quote">
+              <span className="trust-dot" />
+              <span>Plateforme 100% gratuite, sans frais ni commission</span>
             </div>
           </div>
         </div>
 
-        <p className="login-panel-footer">© 2024 Matlou7ch — Plateforme solidaire marocaine</p>
-      </div>
-
-      {/* ── Right Panel ── */}
-      <div className="login-right-panel">
-        <div className="login-card">
-          <div className="login-header">
-            <Link to="/" className="login-logo-link">
-              <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="login-logo-img" />
-              <span className="login-logo-text">Matlou7ch</span>
-            </Link>
-            <h1 className="login-main-title">Bon retour parmi nous !</h1>
-            <p className="login-subtext">
-              Connectez-vous pour donner, recevoir et partager des objets gratuits au Maroc.
-            </p>
-          </div>
-
-          {redirectMessage && (
-            <div className="login-alert info">
-              <FaInfoCircle className="alert-icon" />
-              <span>{redirectMessage}</span>
+        {/* ── Panneau Droit : Formulaire de connexion ── */}
+        <div className="login-form-panel">
+          <div className="login-form-box">
+            <div className="login-header-group">
+              <h1 className="login-title">
+                Bon retour parmi nous <span className="wave-emoji">👋</span>
+              </h1>
+              <p className="login-subtitle">
+                Entrez vos identifiants pour accéder à votre compte.
+              </p>
             </div>
-          )}
 
-          {error && (
-            <div className="login-alert error">
-              <FaExclamationCircle className="alert-icon" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          <form onSubmit={handleEmailLogin} className="login-form">
-            <div className="input-group">
-              <label htmlFor="email" className="input-label">Adresse Email</label>
-              <div className="input-wrapper">
-                <FaEnvelope className="input-icon" />
-                <input
-                  type="email"
-                  id="email"
-                  className="input-field"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="nom@exemple.com"
-                  required
-                  autoComplete="email"
-                />
+            {redirectMessage && (
+              <div className="login-notice-banner">
+                <FaInfoCircle className="notice-icon" />
+                <span>{redirectMessage}</span>
               </div>
-            </div>
+            )}
 
-            <div className="input-group">
-              <label htmlFor="password" className="input-label">Mot de passe</label>
-              <div className="input-wrapper">
-                <FaLock className="input-icon" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  className="input-field password-input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Votre mot de passe"
-                  required
-                  autoComplete="current-password"
-                />
-                <button
-                  type="button"
-                  className="password-toggle-btn"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
-                  tabIndex="-1"
-                >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+            {error && (
+              <div className="login-error-banner">
+                <FaExclamationCircle className="error-icon" />
+                <span>{error}</span>
               </div>
+            )}
+
+            <form onSubmit={handleEmailLogin} className="login-form-body">
+              <div className="login-field-group">
+                <label htmlFor="login-email" className="login-field-label">
+                  Adresse Email
+                </label>
+                <div className="login-input-shell">
+                  <FaEnvelope className="field-icon" />
+                  <input
+                    type="email"
+                    id="login-email"
+                    className="login-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="exemple@email.com"
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+              </div>
+
+              <div className="login-field-group">
+                <div className="login-field-header">
+                  <label htmlFor="login-password" className="login-field-label">
+                    Mot de passe
+                  </label>
+                </div>
+                <div className="login-input-shell">
+                  <FaLock className="field-icon" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    id="login-password"
+                    className="login-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••••••"
+                    required
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    className="login-eye-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+                    tabIndex="-1"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
+              </div>
+
+              <button type="submit" className="login-submit-btn" disabled={loading}>
+                {loading ? (
+                  <span className="submit-loading-wrap">
+                    <span className="login-spinner" />
+                    Connexion en cours...
+                  </span>
+                ) : (
+                  <span className="submit-content-wrap">
+                    <span>Se connecter</span>
+                    <FaArrowRight className="submit-arrow" />
+                  </span>
+                )}
+              </button>
+            </form>
+
+            <div className="login-card-divider">
+              <span>ou</span>
             </div>
 
-            <button type="submit" className="login-submit-button" disabled={loading}>
-              {loading ? (
-                <span className="btn-loading-content">
-                  <span className="btn-spinner" />
-                  Connexion en cours...
-                </span>
-              ) : (
-                'Se connecter'
-              )}
-            </button>
-          </form>
-
-          <div className="login-divider"><span>ou</span></div>
-
-          <div className="login-footer-prompt">
-            <span>Vous n'avez pas encore de compte ?</span>
-            <Link to="/inscription" className="register-link">
-              Créer un compte gratuitement
-            </Link>
+            <div className="login-signup-prompt">
+              <span>Vous n'avez pas encore de compte ?</span>
+              <Link to="/inscription" className="signup-link-btn">
+                Créer un compte gratuitement
+              </Link>
+            </div>
           </div>
         </div>
       </div>
