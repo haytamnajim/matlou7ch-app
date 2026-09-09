@@ -167,23 +167,29 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--primary-color, #62825D);
+  color: var(--primary-color);
   font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
   padding: 12px 28px;
-  border: 1.5px solid var(--primary-color, #62825D);
+  border: 1.5px solid var(--primary-color);
   border-radius: 50px;
-  background: #ffffff;
+  background: var(--bg-card);
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(98, 130, 93, 0.1);
+  box-shadow: var(--shadow-xs);
 }
 
 .view-all-btn:hover {
-  background: var(--primary-color, #62825D);
+  background: var(--primary-color);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(98, 130, 93, 0.25);
+  box-shadow: var(--shadow-primary);
+}
+
+[data-theme='dark'] .category-card-badge {
+  background: rgba(18, 22, 19, 0.9);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
 }
 
 /* ==========================================================================
@@ -198,6 +204,14 @@
   border-bottom: 1px solid #e2ece4;
 }
 
+[data-theme='dark'] .how-it-works-section {
+  background: radial-gradient(circle at 10% 20%, rgba(110, 183, 105, 0.10) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(224, 148, 90, 0.08) 0%, transparent 40%),
+              linear-gradient(180deg, #0a0d0b 0%, #070907 100%);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -205,13 +219,13 @@
 }
 
 .step-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-card);
   backdrop-filter: blur(10px);
   padding: 42px 32px;
   border-radius: 24px;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   transition: all 0.35s ease;
   display: flex;
   flex-direction: column;
@@ -220,8 +234,8 @@
 
 .step-card:hover {
   transform: translateY(-12px);
-  box-shadow: 0 30px 60px rgba(98, 130, 93, 0.18);
-  border-color: rgba(98, 130, 93, 0.5);
+  box-shadow: var(--shadow-primary);
+  border-color: var(--primary-color);
 }
 
 .step-number-badge {
@@ -230,7 +244,7 @@
   right: 28px;
   font-size: 2.2rem;
   font-weight: 900;
-  color: #cbd5e1;
+  color: var(--border-strong);
   font-family: inherit;
 }
 
@@ -257,13 +271,13 @@
 .step-title {
   font-size: 1.3rem;
   font-weight: 750;
-  color: #0f172a;
+  color: var(--text-dark);
   margin: 0 0 12px 0;
 }
 
 .step-desc {
   font-size: 0.95rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.6;
   margin: 0;
 }
@@ -433,7 +447,7 @@
   padding: 95px 0;
   background: radial-gradient(circle at 90% 15%, rgba(98, 130, 93, 0.08) 0%, transparent 45%),
               radial-gradient(circle at 10% 85%, rgba(59, 130, 246, 0.07) 0%, transparent 45%),
-              #ffffff;
+              var(--bg-body);
 }
 
 .features-grid {
@@ -443,23 +457,23 @@
 }
 
 .feature-card {
-  background: linear-gradient(180deg, #ffffff 0%, #f9fbf9 100%);
+  background: var(--bg-card);
   padding: 38px 28px;
   border-radius: 24px;
   text-align: center;
-  border: 1px solid #e2ece4;
+  border: 1px solid var(--border-color);
   transition: all 0.35s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-sm);
 }
 
 .feature-card:hover {
   transform: translateY(-6px);
-  background: #ffffff;
-  border-color: var(--primary-color, #62825D);
-  box-shadow: 0 15px 35px rgba(98, 130, 93, 0.1);
+  background: var(--bg-card-hover);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-icon-wrapper {
@@ -496,13 +510,13 @@
 .feature-name {
   font-size: 1.2rem;
   font-weight: 750;
-  color: #0f172a;
+  color: var(--text-dark);
   margin: 0 0 10px 0;
 }
 
 .feature-text {
   font-size: 0.92rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.55;
   margin: 0;
 }
