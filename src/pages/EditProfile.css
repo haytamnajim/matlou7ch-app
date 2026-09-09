@@ -3,18 +3,19 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 120px);
-  background-color: var(--bg-cream);
+  background-color: var(--bg-body);
   padding: 60px 20px;
+  color: var(--text-dark);
 }
 
 .edit-profile-container {
   width: 100%;
   max-width: 600px;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   padding: 50px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 
@@ -30,7 +31,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -69,9 +71,9 @@
   align-items: center;
   margin-bottom: 40px;
   padding: 30px;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
 }
 
 .profile-avatar {
@@ -103,18 +105,18 @@
   flex-grow: 1;
   cursor: pointer;
   padding: 15px 25px;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 16px;
   transition: all 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
 }
 
 .change-photo-button:hover {
-  background-color: var(--bg-cream);
+  background-color: var(--bg-card-hover);
   border-color: var(--primary-color);
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .change-photo-button span {
@@ -144,21 +146,21 @@
 .input-container input {
   width: 100%;
   padding: 18px 20px;
-  border: 2px solid var(--bg-cream);
+  border: 1.5px solid var(--border-color);
   border-radius: 16px;
   font-size: 16px;
   color: var(--text-dark);
   box-sizing: border-box;
   transition: all 0.2s ease;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-input);
   font-weight: 600;
 }
 
 .input-container input:focus {
   outline: none;
   border-color: var(--primary-color);
-  background-color: white;
-  box-shadow: 0 0 0 4px rgba(135, 148, 114, 0.1);
+  background-color: var(--bg-card);
+  box-shadow: 0 0 0 3px var(--primary-light);
 }
 
 .input-container {

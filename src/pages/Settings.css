@@ -3,19 +3,19 @@
   align-items: center;
   justify-content: center;
   padding: 60px 40px;
-  background-color: var(--bg-main);
+  background-color: var(--bg-body);
   min-height: calc(100vh - 400px);
-  /* Adjust to give space for footer while staying centered */
 }
 
 .settings-container {
   width: 100%;
   max-width: 600px;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
 }
 
 .settings-header {
@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: center;
   padding: 30px;
-  background-color: white;
-  border-bottom: 2px solid var(--bg-cream);
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .back-button {
@@ -37,7 +37,8 @@
   color: var(--text-dark);
   text-decoration: none;
   transition: all 0.3s ease;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -69,12 +70,12 @@
   padding: 20px 30px;
   text-decoration: none;
   color: var(--text-dark);
-  border-bottom: 1px solid var(--bg-cream);
+  border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 .settings-item:hover {
-  background-color: #fcfbf8;
+  background-color: var(--bg-card-hover);
   padding-left: 35px;
 }
 
@@ -98,8 +99,9 @@
 }
 
 .settings-item-arrow {
+  display: flex;
+  align-items: center;
   color: var(--text-muted);
-  font-size: 14px;
   transition: transform 0.3s ease;
 }
 
@@ -108,38 +110,20 @@
   color: var(--primary-color);
 }
 
-.danger {
-  color: #e74c3c;
-}
-
-.danger-text {
-  color: #e74c3c;
-  font-weight: 700;
-}
-
-.settings-item.danger:hover {
-  background-color: #fff5f5;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .settings-container {
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-  }
-
+@media (max-width: 600px) {
   .settings-page {
-    padding: 0;
+    padding: 30px 20px;
   }
 
   .settings-header {
     padding: 20px;
   }
 
+  .settings-item {
+    padding: 18px 20px;
+  }
+
   .back-button {
-    left: 15px;
-    width: 36px;
-    height: 36px;
+    left: 20px;
   }
 }

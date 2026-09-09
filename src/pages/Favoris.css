@@ -1,11 +1,16 @@
+/* ==========================================================================
+   PAGE FAVORIS — MATLOU7CH (Design System & Dark Mode)
+   ========================================================================== */
+
 .favoris-container {
   max-width: 900px;
   margin: 60px auto;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   padding: 50px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
 }
 
 .favoris-title {
@@ -20,7 +25,7 @@
 
 .favoris-tabs {
   display: flex;
-  border-bottom: 2px solid var(--bg-cream);
+  border-bottom: 2px solid var(--border-color);
   margin-bottom: 40px;
   justify-content: center;
   gap: 40px;
@@ -65,7 +70,8 @@
 
 .search-icon-container,
 .heart-icon-container {
-  background-color: var(--bg-cream);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   width: 80px;
   height: 80px;
@@ -74,6 +80,7 @@
   justify-content: center;
   margin-bottom: 25px;
   transition: transform 0.3s ease;
+  color: var(--primary-color);
 }
 
 .empty-state:hover .search-icon-container,
@@ -84,7 +91,7 @@
 .empty-title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: var(--text-dark);
   font-weight: 800;
 }
 
@@ -119,7 +126,15 @@
 
 @media (max-width: 768px) {
   .favoris-container {
+    margin: 30px 20px;
     padding: 30px 20px;
-    margin: 30px 15px;
+  }
+
+  .favoris-title {
+    font-size: 28px;
+  }
+
+  .favoris-tabs {
+    gap: 20px;
   }
 }

@@ -1,5 +1,5 @@
 .user-products-page {
-  background-color: #f8f9fa;
+  background-color: var(--bg-body);
   min-height: calc(100vh - 120px);
   padding: 40px 20px;
 }
@@ -39,18 +39,19 @@
 .page-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-dark);
   margin: 0;
 }
 
 .user-profile-card {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 16px;
   padding: 25px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   margin-bottom: 25px;
+  border: 1px solid var(--border-color);
 }
 
 .user-avatar {
@@ -74,7 +75,7 @@
 .user-name {
   font-size: 24px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-dark);
   margin: 0 0 10px 0;
 }
 
@@ -82,7 +83,7 @@
 .user-member-since {
   display: flex;
   align-items: center;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 14px;
   margin-bottom: 8px;
 }
@@ -94,12 +95,12 @@
 }
 
 .user-description {
-  background-color: #f1f5f9;
+  background-color: var(--bg-subtle);
   border-radius: 12px;
   padding: 15px;
   margin-top: 15px;
   border-left: 4px solid #6366f1;
-  color: #475569;
+  color: var(--text-muted);
   font-size: 14px;
   line-height: 1.6;
 }
@@ -107,11 +108,12 @@
 .products-stats {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 12px;
   padding: 15px 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   margin-bottom: 25px;
+  border: 1px solid var(--border-color);
 }
 
 .products-count,
@@ -120,7 +122,7 @@
   align-items: center;
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-dark);
   margin-right: 25px;
 }
 
@@ -149,13 +151,14 @@
 }
 
 .product-card {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
   color: inherit;
+  border: 1px solid var(--border-color);
 }
 
 .product-card:hover {
@@ -174,8 +177,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-  background-color: #f0f0f0;
-  /* Default background for placeholders */
+  background-color: var(--bg-subtle);
 }
 
 .product-card:hover .product-image {
@@ -201,7 +203,7 @@
 .product-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-dark);
   margin: 0 0 10px 0;
   white-space: nowrap;
   overflow: hidden;
@@ -211,7 +213,7 @@
 .product-meta {
   display: flex;
   justify-content: space-between;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 13px;
   margin-bottom: 10px;
 }
@@ -223,8 +225,8 @@
 
 .product-category,
 .product-condition {
-  background-color: #f1f5f9;
-  color: #475569;
+  background-color: var(--bg-subtle);
+  color: var(--text-muted);
   font-size: 12px;
   padding: 4px 8px;
   border-radius: 4px;
@@ -283,10 +285,10 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-subtle);
   color: #dc3545;
   border: none;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--border-color);
   padding: 10px;
   font-size: 14px;
   font-weight: 500;
@@ -296,7 +298,7 @@
 }
 
 .report-product-button:hover {
-  background-color: #f1f3f5;
+  background-color: var(--bg-subtle);
   color: #c82333;
 }
 
@@ -323,13 +325,14 @@
 
 /* Styles pour la modal de signalement */
 .report-modal {
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 8px;
   padding: 24px;
   width: 90%;
   max-width: 500px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   animation: modalFadeIn 0.3s ease-out;
+  border: 1px solid var(--border-color);
 }
 
 @keyframes modalFadeIn {
@@ -348,19 +351,19 @@
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .report-modal-subtitle {
   font-size: 14px;
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 20px;
 }
 
 .report-product-info {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa;
+  background-color: var(--bg-subtle);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -382,10 +385,11 @@
   font-weight: 600;
   margin: 0 0 4px 0;
   font-size: 16px;
+  color: var(--text-dark);
 }
 
 .report-product-location {
-  color: #666;
+  color: var(--text-muted);
   font-size: 14px;
   margin: 0;
 }
@@ -398,19 +402,21 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .report-reason-select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 16px;
+  background-color: var(--bg-input);
+  color: var(--text-dark);
 }
 
 .report-user-info {
-  background-color: #f0f7ff;
+  background-color: var(--bg-subtle);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -419,12 +425,12 @@
 .report-user-info p {
   margin: 0 0 4px 0;
   font-size: 14px;
-  color: #666;
+  color: var(--text-muted);
 }
 
 .report-user-name {
   font-weight: 600;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .report-modal-actions {
@@ -443,8 +449,8 @@
 }
 
 .cancel-report-button {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--bg-subtle);
+  color: var(--text-dark);
 }
 
 .submit-report-button {
@@ -458,7 +464,7 @@
 }
 
 .cancel-report-button:hover {
-  background-color: #e0e0e0;
+  background-color: var(--border-color);
 }
 
 .submit-report-button:hover:not(:disabled) {

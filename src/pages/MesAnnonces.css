@@ -1,11 +1,12 @@
 .mes-annonces-container {
   max-width: 900px;
   margin: 60px auto;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   padding: 50px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
 }
 
 .mes-annonces-title {
@@ -41,12 +42,12 @@
 
 .tab-button:hover {
   color: var(--primary-color);
-  background-color: var(--bg-cream);
+  background-color: var(--primary-light);
 }
 
 .tab-button.active {
   color: var(--primary-color);
-  background-color: var(--bg-cream);
+  background-color: var(--primary-light);
 }
 
 .annonces-content {
@@ -64,7 +65,8 @@
 }
 
 .annonce-icon-container {
-  background-color: var(--bg-cream);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   width: 80px;
   height: 80px;
@@ -73,6 +75,7 @@
   justify-content: center;
   margin-bottom: 25px;
   transition: transform 0.3s ease;
+  color: var(--primary-color);
 }
 
 .empty-title {
@@ -121,15 +124,16 @@
 .annonce-card {
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
 .annonce-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
 }
 
 .annonce-image {
@@ -215,8 +219,9 @@
 }
 
 .view-button {
-  background-color: #f1f5f9;
-  color: #334155;
+  background-color: var(--bg-subtle);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
   flex: 1;
 }
 
@@ -323,9 +328,9 @@
 }
 
 [data-theme='dark'] .celebration-modal-card {
-  background: #1e293b;
-  border-color: rgba(98, 130, 93, 0.4);
-  color: #f8fafc;
+  background: var(--bg-card);
+  border-color: var(--primary-color);
+  color: var(--text-dark);
 }
 
 .celebration-badge-pill {

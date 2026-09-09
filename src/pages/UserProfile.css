@@ -1,7 +1,8 @@
 .user-profile-page {
-  background-color: #f8f9fa;
+  background-color: var(--bg-body);
   min-height: calc(100vh - 120px);
   padding: 40px 20px;
+  color: var(--text-dark);
 }
 
 .user-profile-container {
@@ -13,10 +14,11 @@
 }
 
 .profile-card {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease;
 }
 
@@ -29,7 +31,7 @@
 .profile-content {
   display: flex;
   padding: 30px;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 16px;
   margin-bottom: 0;
   position: relative;
@@ -51,13 +53,13 @@
   font-size: 48px;
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 4px solid #ffffff;
+  border: 4px solid var(--bg-card);
 }
 
 .profile-username {
   font-size: 28px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-dark);
   margin: 0 0 15px 0;
 }
 
@@ -102,11 +104,12 @@
 
 .stats-card {
   display: flex;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 0;
+  border: 1px solid var(--border-color);
 }
 
 .stat-item {
@@ -137,19 +140,21 @@
   display: flex;
   gap: 20px;
   margin-top: 25px;
-  background-color: #f8fafc;
+  background-color: var(--bg-subtle);
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
 }
 
 .profile-stats .stat-item {
   flex: 1;
   text-align: center;
   padding: 15px;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xs);
   transition: transform 0.2s ease;
 }
 
@@ -244,13 +249,14 @@
 
 .product-card {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--border-color);
 }
 
 .product-link {
@@ -266,7 +272,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-subtle);
   color: #dc3545;
   border: none;
   border-top: 1px solid #e9ecef;
@@ -352,7 +358,7 @@
 }
 
 .empty-listings-card {
-  background-color: var(--neutral-100, #ffffff);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-lg, 12px);
   padding: 40px;
   text-align: center;
@@ -360,6 +366,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px solid var(--border-color);
 }
 
 .empty-icon {
@@ -601,13 +608,15 @@
 
 /* Styles pour la modal de signalement améliorée */
 .report-modal {
-  background-color: white;
-  border-radius: 8px;
+  background-color: var(--bg-card);
+  border-radius: 16px;
   padding: 24px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-xl);
   animation: modalFadeIn 0.3s ease-out;
+  color: var(--text-dark);
 }
 
 @keyframes modalFadeIn {
@@ -626,19 +635,19 @@
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .report-modal-subtitle {
   font-size: 14px;
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 20px;
 }
 
 .report-product-info {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa;
+  background-color: var(--bg-subtle);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 20px;

@@ -5,10 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
 }
 
 .public-profile-title {
@@ -27,10 +27,10 @@
   margin-bottom: 40px;
   width: 100%;
   max-width: 600px;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   padding: 30px;
   border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
 }
 
 .profile-avatar {
@@ -90,18 +90,18 @@
 
 .stat-box {
   flex: 1;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   padding: 25px;
   border-radius: 20px;
   text-align: center;
   transition: transform 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
 }
 
 .stat-box:hover {
   transform: translateY(-5px);
-  background-color: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-card);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border-color: var(--primary-color);
 }
 
@@ -156,7 +156,7 @@
 /* Products Section */
 .user-products {
   width: 100%;
-  border-top: 2px solid var(--bg-cream);
+  border-top: 2px solid var(--border-color);
   padding-top: 40px;
 }
 
@@ -178,14 +178,14 @@
 }
 
 .product-card {
-  background-color: #fff;
+  background-color: var(--bg-card);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
 }
 
 .product-card:hover {
@@ -197,7 +197,7 @@
   height: 200px;
   overflow: hidden;
   position: relative;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
 }
 
 .product-image {
@@ -243,7 +243,7 @@
 
 .product-category,
 .product-condition {
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   padding: 6px 12px;
   border-radius: 8px;
   color: var(--primary-color);
@@ -283,13 +283,13 @@
 }
 
 .delete-product-button {
-  background-color: white;
+  background-color: transparent;
   color: #e74c3c;
   border: 1.5px solid #e74c3c;
 }
 
 .delete-product-button:hover {
-  background-color: #fff5f5;
+  background-color: rgba(231, 76, 60, 0.1);
 }
 
 /* State Handlers */
@@ -308,7 +308,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   border-radius: 20px;
   padding: 20px;
   transition: transform 0.3s ease;

@@ -292,3 +292,20 @@ code {
 [data-theme='dark'] .divider {
   border-color: var(--border-color);
 }
+
+/* Image Dimming in Dark Mode (Anti-Éblouissement) */
+[data-theme='dark'] img:not(.navbar-logo-img):not(.footer-logo-image) {
+  filter: brightness(0.92);
+  transition: filter var(--transition-base);
+}
+
+[data-theme='dark'] img:not(.navbar-logo-img):not(.footer-logo-image):hover {
+  filter: brightness(1);
+}
+
+/* Subtle Emerald Micro-Glow */
+[data-theme='dark'] .btn-donner-navbar,
+[data-theme='dark'] .login-submit-btn,
+[data-theme='dark'] .register-submit-button {
+  box-shadow: 0 4px 20px rgba(110, 183, 105, 0.35);
+}

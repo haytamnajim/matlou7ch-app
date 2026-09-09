@@ -17,7 +17,7 @@
 
 /* Skeleton pour carte d'annonce (Catalogue) */
 .skeleton-listing-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -252,7 +252,7 @@
 
 /* Skeleton pour InfoCard */
 .skeleton-info-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -283,7 +283,7 @@
 
 /* Skeleton pour DonorCard */
 .skeleton-donor-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -367,7 +367,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  background: white;
+  background: var(--bg-card);
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -485,3 +485,28 @@
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   DARK MODE SKELETONS (Deep Charcoal & Subtle Emerald Shimmer)
+   ========================================================================== */
+[data-theme='dark'] .skeleton-base,
+[data-theme='dark'] .skeleton-listing-image,
+[data-theme='dark'] .skeleton-product-main-image,
+[data-theme='dark'] .skeleton-avatar,
+[data-theme='dark'] .skeleton-line,
+[data-theme='dark'] .skeleton-text,
+[data-theme='dark'] .skeleton-button {
+  background: linear-gradient(90deg, #131814 25%, #1e261f 50%, #131814 75%);
+  background-size: 200% 100%;
+}
+
+[data-theme='dark'] .skeleton-listing-card,
+[data-theme='dark'] .skeleton-product-info-card,
+[data-theme='dark'] .skeleton-product-details-card,
+[data-theme='dark'] .skeleton-donor-card,
+[data-theme='dark'] .skeleton-category-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+

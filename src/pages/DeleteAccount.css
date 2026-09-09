@@ -10,7 +10,7 @@
 .delete-account-container {
   width: 100%;
   max-width: 550px;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   padding: 40px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);

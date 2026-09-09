@@ -1,7 +1,12 @@
+/* ==========================================================================
+   PAGE MESSAGES — MATLOU7CH (Design System & Dark Mode)
+   ========================================================================== */
+
 .messages-page {
   padding: 60px 40px;
-  background-color: var(--bg-main);
+  background-color: var(--bg-body);
   min-height: calc(100vh - 120px);
+  color: var(--text-dark);
 }
 
 .messages-container-wrapper {
@@ -13,20 +18,20 @@
 
 .messages-container {
   flex: 1;
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: var(--card-radius);
   padding: 40px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .messages-detail-container {
   flex: 1.2;
-  background-color: var(--bg-cream);
+  background-color: var(--bg-subtle);
   border-radius: var(--card-radius);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
   min-height: 600px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
 }
 
 .messages-title {
@@ -41,7 +46,7 @@
 
 .messages-tabs {
   display: flex;
-  border-bottom: 2px solid var(--bg-cream);
+  border-bottom: 2px solid var(--border-color);
   margin-bottom: 40px;
   justify-content: center;
   gap: 40px;
@@ -86,7 +91,8 @@
 
 .message-icon-container,
 .trash-icon-container {
-  background-color: var(--bg-cream);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   width: 80px;
   height: 80px;
@@ -95,6 +101,7 @@
   justify-content: center;
   margin-bottom: 25px;
   transition: transform 0.3s ease;
+  color: var(--primary-color);
 }
 
 .empty-state:hover .message-icon-container,
@@ -105,7 +112,7 @@
 .empty-title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: var(--text-dark);
   font-weight: 800;
 }
 
@@ -119,7 +126,7 @@
 
 .donate-button {
   background-color: var(--accent-color);
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 18px 40px;
   border-radius: 100px;

@@ -7,7 +7,7 @@
 }
 
 .edit-product-container {
-  background-color: white;
+  background-color: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 35px;
@@ -35,7 +35,7 @@
 .back-button {
   display: flex;
   align-items: center;
-  color: #333;
+  color: var(--text-dark);
   text-decoration: none;
   transition: all 0.3s ease;
   position: fixed;
@@ -43,7 +43,7 @@
   left: 15px;
   font-weight: 500;
   font-size: 0.9rem;
-  background-color: white;
+  background-color: var(--bg-card);
   padding: 8px 15px;
   border-radius: 30px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -65,7 +65,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin: 0 auto;
-  color: #333;
+  color: var(--text-dark);
   position: relative;
   padding-bottom: 10px;
 }
@@ -97,7 +97,7 @@
 .form-group label {
   font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--text-dark);
   font-size: 1rem;
 }
 
@@ -105,11 +105,12 @@
 .form-group select,
 .form-group textarea {
   padding: 14px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background-color: #f9f9f9;
+  background-color: var(--bg-input);
+  color: var(--text-dark);
 }
 
 .form-group input:focus,
@@ -118,7 +119,7 @@
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
   outline: none;
-  background-color: #fff;
+  background-color: var(--bg-input);
 }
 
 .form-group textarea {
@@ -154,8 +155,8 @@
 .custom-file-upload {
   display: inline-block;
   padding: 12px 20px;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--bg-subtle);
+  color: var(--text-dark);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -166,8 +167,8 @@
 }
 
 .custom-file-upload:hover {
-  background-color: #e0e0e0;
-  border-color: #ccc;
+  background-color: var(--border-color);
+  border-color: var(--border-color);
 }
 
 .form-actions {
@@ -176,7 +177,7 @@
   gap: 15px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
 }
 
 .cancel-button,
@@ -191,9 +192,9 @@
 }
 
 .cancel-button {
-  background-color: #f0f0f0;
-  color: #333;
-  border: 2px solid #e0e0e0;
+  background-color: var(--bg-subtle);
+  color: var(--text-dark);
+  border: 2px solid var(--border-color);
 }
 
 .save-button {
@@ -223,7 +224,7 @@
   padding: 50px;
   font-size: 1.3rem;
   border-radius: 8px;
-  background-color: white;
+  background-color: var(--bg-card);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
