@@ -1,294 +1,280 @@
-/* ============================================================
-   PRO BRAND LOADER - MATLOU7CH
-   ============================================================ */
+/* ==========================================================================
+   SIGNATURE CINEMATIC LOADER — MATLOU7CH
+   ========================================================================== */
 
-.loader-overlay-modern {
+.signature-loader-overlay {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at 30% 25%, rgba(98, 130, 93, 0.12) 0%, transparent 50%),
-              radial-gradient(circle at 70% 75%, rgba(188, 124, 78, 0.12) 0%, transparent 50%),
-              #fafcfb;
+  background: radial-gradient(circle at 35% 30%, rgba(46, 125, 50, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 65% 70%, rgba(188, 124, 78, 0.10) 0%, transparent 60%),
+              rgba(253, 251, 247, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  backdrop-filter: blur(10px);
-}
-
-[data-theme='dark'] .loader-overlay-modern {
-  background: radial-gradient(circle at 30% 25%, rgba(98, 130, 93, 0.22) 0%, transparent 50%),
-              radial-gradient(circle at 70% 75%, rgba(188, 124, 78, 0.18) 0%, transparent 50%),
-              #0b1120;
-}
-
-.modern-loader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  width: 100%;
-}
-
-/* Pro Glass Card */
-.pro-loader-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(98, 130, 93, 0.2);
-  border-radius: 32px;
-  padding: 44px 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 25px 70px rgba(98, 130, 93, 0.15),
-              0 8px 24px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(16px);
-  max-width: 440px;
-  width: 100%;
   overflow: hidden;
-  text-align: center;
+  user-select: none;
 }
 
-[data-theme='dark'] .pro-loader-card {
-  background: rgba(15, 23, 42, 0.88);
-  border-color: rgba(98, 130, 93, 0.35);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6),
-              0 8px 24px rgba(0, 0, 0, 0.3);
+[data-theme='dark'] .signature-loader-overlay {
+  background: radial-gradient(circle at 35% 30%, rgba(46, 125, 50, 0.22) 0%, transparent 60%),
+              radial-gradient(circle at 65% 70%, rgba(188, 124, 78, 0.15) 0%, transparent 60%),
+              rgba(10, 17, 12, 0.97);
 }
 
-/* Background Ambient Glows */
-.pro-glow-orb {
+/* ── Halos Lumineux d'Ambiance ── */
+.signature-glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(40px);
   pointer-events: none;
-  opacity: 0.4;
+  filter: blur(80px);
+  opacity: 0.55;
   z-index: 0;
 }
 
-.pro-glow-green {
-  top: -30px;
-  left: -30px;
-  width: 140px;
-  height: 140px;
-  background: #62825D;
+.glow-orb-green {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.4) 0%, transparent 70%);
+  top: 20%;
+  left: 30%;
 }
 
-.pro-glow-terracotta {
-  bottom: -30px;
-  right: -30px;
-  width: 140px;
-  height: 140px;
-  background: #BC7C4E;
+.glow-orb-terracotta {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.3) 0%, transparent 70%);
+  bottom: 25%;
+  right: 30%;
 }
 
-/* Top Badge */
-.pro-loader-badge {
+/* ── Centre Épuré et Aérien ── */
+.signature-loader-center {
   position: relative;
-  z-index: 1;
-  display: inline-flex;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 7px;
-  background: rgba(98, 130, 93, 0.1);
-  color: #4a6645;
-  border: 1px solid rgba(98, 130, 93, 0.25);
-  padding: 5px 14px;
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 750;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  max-width: 460px;
+  width: 100%;
 }
 
-[data-theme='dark'] .pro-loader-badge {
-  background: rgba(98, 130, 93, 0.2);
-  color: #bef264;
-  border-color: rgba(163, 230, 53, 0.3);
-}
-
-.pro-badge-leaf {
-  color: #62825D;
-  font-size: 0.85rem;
-}
-
-[data-theme='dark'] .pro-badge-leaf {
-  color: #a3e635;
-}
-
-/* Official Logo Container */
-.pro-logo-container {
+/* ── Aura & Logo ── */
+.signature-logo-aura-wrap {
   position: relative;
-  z-index: 1;
-  width: 110px;
-  height: 110px;
-  border-radius: 28px;
-  background: #ffffff;
-  border: 1.5px solid rgba(98, 130, 93, 0.2);
-  box-shadow: 0 14px 35px rgba(98, 130, 93, 0.18),
-              0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
   margin-bottom: 20px;
 }
 
-[data-theme='dark'] .pro-logo-container {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+.signature-logo-aura {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.5) 0%, rgba(46, 125, 50, 0.2) 60%, transparent 75%);
+  filter: blur(16px);
+  z-index: 0;
 }
 
-.pro-loader-logo-img {
+.signature-logo-mark {
+  position: relative;
+  z-index: 1;
+  width: 96px;
+  height: 96px;
+  border-radius: 26px;
+  background: #ffffff;
+  padding: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08),
+              0 0 0 1px rgba(98, 130, 93, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme='dark'] .signature-logo-mark {
+  background: rgba(22, 34, 25, 0.95);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(163, 230, 53, 0.3);
+}
+
+.signature-logo-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Brand Title */
-.pro-brand-title {
-  position: relative;
-  z-index: 1;
-  font-size: 2.2rem;
+/* ── Nom de la Marque Signature ── */
+.signature-brand-name {
+  font-size: 2.3rem;
   font-weight: 900;
-  letter-spacing: -0.5px;
-  margin-bottom: 18px;
-  user-select: none;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin-bottom: 6px;
 }
 
-.pro-brand-matlou {
-  color: #62825D;
-  text-shadow: 0 2px 10px rgba(98, 130, 93, 0.15);
+.brand-word-matlou {
+  color: #2e7d32;
+  transition: color 0.3s ease;
 }
 
-[data-theme='dark'] .pro-brand-matlou {
-  color: #7fa47a;
+[data-theme='dark'] .brand-word-matlou {
+  color: #a3e635;
 }
 
-.pro-brand-seven {
-  color: #BC7C4E;
-  text-shadow: 0 2px 10px rgba(188, 124, 78, 0.15);
+.brand-word-seven {
+  color: #bc7c4e;
+  transition: color 0.3s ease;
 }
 
-[data-theme='dark'] .pro-brand-seven {
-  color: #d89667;
+[data-theme='dark'] .brand-word-seven {
+  color: #fb923c;
 }
 
-/* Progress Track */
-.pro-loader-progress-track {
+.signature-tagline {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 26px;
+}
+
+[data-theme='dark'] .signature-tagline {
+  color: rgba(226, 232, 240, 0.65);
+}
+
+/* ── Ligne de Progression Laser Ultra-Fine ── */
+.signature-laser-track {
   position: relative;
-  z-index: 1;
-  width: 190px;
-  height: 5px;
-  background: rgba(98, 130, 93, 0.14);
-  border-radius: 999px;
+  width: 220px;
+  height: 3px;
+  background: rgba(46, 125, 50, 0.12);
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
-[data-theme='dark'] .pro-loader-progress-track {
+[data-theme='dark'] .signature-laser-track {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.pro-loader-progress-fill {
+.signature-laser-fill {
   height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #62825D 0%, #BC7C4E 100%);
-  box-shadow: 0 0 10px rgba(98, 130, 93, 0.5);
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2e7d32 0%, #a3e635 60%, #f97316 100%);
+  box-shadow: 0 0 12px rgba(163, 230, 53, 0.7);
 }
 
-.pro-loader-progress-indeterminate {
+.signature-laser-shimmer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 45%;
+  width: 60%;
   height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #62825D 0%, #BC7C4E 100%);
-  box-shadow: 0 0 10px rgba(98, 130, 93, 0.5);
+  border-radius: 10px;
+  background: linear-gradient(90deg, transparent 0%, #a3e635 50%, #f97316 100%);
+  box-shadow: 0 0 14px rgba(163, 230, 53, 0.9);
 }
 
-/* Rotating Pro Text Box */
-.pro-loader-text-box {
-  position: relative;
-  z-index: 1;
-  min-height: 28px;
+/* ── Légende en Fondu Croisé ── */
+.signature-caption-container {
+  min-height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.pro-loading-caption {
+.signature-caption-text {
   margin: 0;
-  font-size: 0.92rem;
-  font-weight: 650;
-  color: #4b5e4d;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #475569;
   letter-spacing: 0.2px;
 }
 
-[data-theme='dark'] .pro-loading-caption {
+[data-theme='dark'] .signature-caption-text {
   color: #cbd5e1;
 }
 
-/* Dots */
-.pro-loader-dots {
+/* ==========================================================================
+   MODE COMPACT (INLINE LOADER POUR BOUTONS ET COMPOSANTS)
+   ========================================================================== */
+.inline-loader-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  color: var(--primary-color, #2e7d32);
+}
+
+.inline-loader-spinner {
   position: relative;
-  z-index: 1;
+  width: 32px;
+  height: 32px;
   display: flex;
-  gap: 7px;
-  margin-top: 16px;
+  align-items: center;
+  justify-content: center;
 }
 
-.pro-dot {
-  width: 6px;
-  height: 6px;
+.inline-spinner-ring {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: #62825D;
-  opacity: 0.3;
-  animation: dotPulse 1.4s infinite ease-in-out both;
+  border: 2.5px solid rgba(46, 125, 50, 0.2);
+  border-top-color: var(--primary-color, #2e7d32);
+  animation: inlineSpin 0.9s linear infinite;
 }
 
-.p-dot-2 {
-  background: #908056;
-  animation-delay: 0.2s;
+.inline-spinner-icon {
+  font-size: 0.85rem;
+  color: var(--primary-color, #2e7d32);
 }
 
-.p-dot-3 {
-  background: #BC7C4E;
-  animation-delay: 0.4s;
+.inline-loader-text {
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--text-dark, #1e293b);
 }
 
-@keyframes dotPulse {
-  0%, 80%, 100% {
-    transform: scale(0.8);
-    opacity: 0.25;
-  }
-  40% {
-    transform: scale(1.3);
-    opacity: 1;
+@keyframes inlineSpin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Responsive */
+/* ── Responsive ── */
 @media (max-width: 480px) {
-  .pro-loader-card {
-    padding: 36px 24px;
-    margin: 0 16px;
+  .signature-brand-name {
+    font-size: 1.9rem;
   }
 
-  .pro-logo-container {
-    width: 90px;
-    height: 90px;
+  .signature-logo-aura-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .signature-logo-mark {
+    width: 82px;
+    height: 82px;
+    border-radius: 22px;
     padding: 12px;
   }
 
-  .pro-brand-title {
-    font-size: 1.8rem;
+  .signature-laser-track {
+    width: 180px;
   }
 
-  .pro-loading-caption {
-    font-size: 0.84rem;
+  .signature-caption-text {
+    font-size: 0.82rem;
   }
 }
