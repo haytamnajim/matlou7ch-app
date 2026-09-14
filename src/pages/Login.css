@@ -45,12 +45,12 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 960px;
+  max-width: 980px;
   display: flex;
   background: var(--bg-card);
-  border-radius: 28px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.45);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 30px 80px -10px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   animation: loginCardFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -67,24 +67,20 @@
 }
 
 /* ==========================================================================
-   1. PANNEAU GAUCHE (VALEURS & IDENTITÉ)
+   1. PANNEAU GAUCHE (VALEURS & IDENTITÉ AVEC FOND CINÉMATIQUE)
    ========================================================================== */
 
 .login-brand-panel {
-  flex: 1.1;
-  padding: 48px 44px;
+  flex: 1.15;
+  padding: 50px 44px;
   display: none;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  background: linear-gradient(150deg, #0d1611 0%, #122116 55%, #0b140e 100%);
-  border-right: 1px solid var(--border-color);
+  background: #0d1710;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
-}
-
-/* En mode clair : vert sauge doux */
-[data-theme='light'] .login-brand-panel {
-  background: linear-gradient(150deg, #f1f7f0 0%, #e5efe3 60%, #dae7d8 100%);
+  overflow: hidden;
 }
 
 @media (min-width: 880px) {
@@ -93,9 +89,27 @@
   }
 }
 
+/* Calque de fond d'ambiance */
+.login-brand-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-brand-panel:hover .login-brand-bg-layer {
+  transform: scale(1.07);
+}
+
 .login-brand-content {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 /* Badge pilule */
@@ -106,42 +120,48 @@
   align-self: flex-start;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: rgba(110, 183, 105, 0.12);
-  border: 1px solid rgba(110, 183, 105, 0.25);
-  color: var(--primary-color);
+  background: rgba(46, 125, 50, 0.35);
+  border: 1px solid rgba(163, 230, 53, 0.4);
+  color: #d9f99d;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.3px;
   margin-bottom: 24px;
+  backdrop-filter: blur(10px);
 }
 
 .pill-badge-icon {
   font-size: 0.85rem;
+  color: #a3e635;
 }
 
 /* Titre de gauche */
 .login-brand-title {
-  font-size: 2.2rem;
-  font-weight: 850;
-  line-height: 1.22;
-  color: var(--text-dark);
+  font-size: 2.3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #ffffff;
   letter-spacing: -0.8px;
   margin: 0 0 16px 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
 }
 
 .text-gradient-sage {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #a8d5a4 100%);
+  background: linear-gradient(135deg, #a3e635 0%, #facc15 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(163, 230, 53, 0.35));
 }
 
 .login-brand-desc {
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: rgba(241, 245, 249, 0.9);
   margin: 0 0 32px 0;
-  max-width: 380px;
+  max-width: 400px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Grille de stats */
@@ -158,47 +178,46 @@
   gap: 12px;
   padding: 14px 16px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(8px);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-[data-theme='light'] .login-stat-card {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(98, 130, 93, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .login-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(110, 183, 105, 0.3);
+  transform: translateY(-3px);
+  border-color: rgba(163, 230, 53, 0.5);
 }
 
 .stat-card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--primary-light);
-  color: var(--primary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(163, 230, 53, 0.2);
+  color: #a3e635;
+  border: 1px solid rgba(163, 230, 53, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.05rem;
   flex-shrink: 0;
 }
 
 .stat-card-number {
   display: block;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-dark);
+  font-size: 1.18rem;
+  font-weight: 850;
+  color: #ffffff;
   line-height: 1.15;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .stat-card-label {
   display: block;
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.76rem;
+  color: rgba(226, 232, 240, 0.8);
   font-weight: 500;
   margin-top: 2px;
 }
@@ -208,16 +227,16 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.82rem;
+  color: rgba(226, 232, 240, 0.85);
 }
 
 .trust-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: var(--primary-color);
-  box-shadow: 0 0 8px var(--primary-color);
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
 }
 
 /* ==========================================================================

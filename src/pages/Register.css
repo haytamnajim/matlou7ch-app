@@ -40,17 +40,19 @@
   right: 12%;
 }
 
-/* ── Conteneur Carte Flottante ── */
+/* ── Conteneur Carte Flottante Split-Screen ── */
 .register-card-container {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 760px;
+  max-width: 1080px;
+  display: flex;
   background: var(--bg-card);
-  border-radius: 28px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.45);
-  padding: 30px 36px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 30px 80px -12px rgba(0, 0, 0, 0.45);
+  padding: 0;
+  overflow: hidden;
   box-sizing: border-box;
   animation: registerCardFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -66,9 +68,164 @@
   }
 }
 
+/* ==========================================================================
+   PANNEAU GAUCHE : VALEURS & IMPACT (AVEC FOND CINÉMATIQUE)
+   ========================================================================== */
+.register-brand-panel {
+  flex: 0.95;
+  padding: 48px 40px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: #0d1710;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (min-width: 960px) {
+  .register-brand-panel {
+    display: flex;
+  }
+}
+
+/* Calque de fond d'ambiance */
+.register-brand-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.register-brand-panel:hover .register-brand-bg-layer {
+  transform: scale(1.07);
+}
+
+.register-brand-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge pilule */
+.register-brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(46, 125, 50, 0.35);
+  border: 1px solid rgba(163, 230, 53, 0.4);
+  color: #d9f99d;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+}
+
+.register-brand-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #ffffff;
+  letter-spacing: -0.8px;
+  margin: 0 0 16px 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+}
+
+.register-brand-desc {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: rgba(241, 245, 249, 0.9);
+  margin: 0 0 28px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Liste des avantages en verre */
+.register-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.register-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.register-perk-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(163, 230, 53, 0.45);
+}
+
+.perk-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(163, 230, 53, 0.2);
+  color: #a3e635;
+  border: 1px solid rgba(163, 230, 53, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.perk-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.perk-text strong {
+  font-size: 0.88rem;
+  color: #ffffff;
+  font-weight: 750;
+}
+
+.perk-text span {
+  font-size: 0.74rem;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.register-trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+/* ==========================================================================
+   PANNEAU DROIT : FORMULAIRE
+   ========================================================================== */
+.register-form-panel {
+  flex: 1.25;
+  padding: 38px 42px;
+  box-sizing: border-box;
+}
+
 @media (max-width: 640px) {
-  .register-card-container {
-    padding: 32px 20px;
+  .register-form-panel {
+    padding: 30px 20px;
   }
 }
 
@@ -360,7 +517,7 @@
 .register-submit-button {
   width: 100%;
   padding: 15px 24px;
-  background: linear-gradient(135deg, #578e51 0%, #43723d 100%);
+  background: linear-gradient(135deg, #2e7d32 0%, #1e5a23 100%);
   border: none;
   border-radius: var(--radius-pill);
   color: #ffffff;
@@ -368,7 +525,7 @@
   font-weight: 750;
   font-family: inherit;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(67, 114, 61, 0.35);
+  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.35);
   transition: all var(--transition-base);
   display: flex;
   align-items: center;
@@ -376,9 +533,9 @@
 }
 
 .register-submit-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #629e5b 0%, #4c8246 100%);
+  background: linear-gradient(135deg, #388e3c 0%, #256b2a 100%);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(67, 114, 61, 0.45);
+  box-shadow: 0 12px 30px rgba(46, 125, 50, 0.45);
 }
 
 .register-submit-button:active:not(:disabled) {

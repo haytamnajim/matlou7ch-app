@@ -87,8 +87,14 @@ function Login() {
       <div className="login-ambient-blob login-blob-2" />
 
       <div className="login-card-container">
-        {/* ── Panneau Gauche : Valeurs & Impact ── */}
+        {/* ── Panneau Gauche : Valeurs & Impact avec fond cinématique ── */}
         <div className="login-brand-panel">
+          <div
+            className="login-brand-bg-layer"
+            style={{
+              backgroundImage: 'linear-gradient(145deg, rgba(14, 25, 17, 0.86) 0%, rgba(9, 16, 11, 0.94) 100%), url(/donner1.png)'
+            }}
+          />
           <div className="login-brand-content">
             <div className="login-pill-badge">
               <FaLeaf className="pill-badge-icon" />

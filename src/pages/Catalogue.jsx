@@ -36,7 +36,7 @@ function Catalogue() {
   const { user } = useAuth();
 
   const [searchLocation, setSearchLocation] = useState(searchParams.get('location') || '');
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || '');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || searchParams.get('search') || '');
   const [searchCategory, setSearchCategory] = useState(searchParams.get('category') || '');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ function Catalogue() {
   // Synchroniser avec les query params si changés depuis l'URL
   useEffect(() => {
     setSearchLocation(searchParams.get('location') || '');
-    setSearchQuery(searchParams.get('query') || '');
+    setSearchQuery(searchParams.get('query') || searchParams.get('search') || '');
     setSearchCategory(searchParams.get('category') || '');
   }, [searchParams]);
 

@@ -11,7 +11,11 @@ import {
   FaEyeSlash,
   FaCheck,
   FaLeaf,
-  FaArrowRight
+  FaArrowRight,
+  FaShieldAlt,
+  FaBolt,
+  FaGift,
+  FaUsers
 } from 'react-icons/fa';
 import { useAuth } from '../contexts/AuthContext';
 import { validateRegisterForm, sanitizeEmail, sanitizePhone, sanitizeName, sanitizeCity } from '../utils/validation';
@@ -112,34 +116,98 @@ function Register() {
       <div className="register-ambient-blob reg-blob-2" />
 
       <div className="register-card-container">
-        {/* Barre supérieure avec retour */}
-        <div className="register-top-bar">
-          <Link to="/connexion" className="register-back-btn">
-            <FaChevronLeft className="back-chevron" />
-            <span>Retour à la connexion</span>
-          </Link>
+        {/* ── Panneau Gauche : Valeurs & Impact avec fond cinématique ── */}
+        <div className="register-brand-panel">
+          <div
+            className="register-brand-bg-layer"
+            style={{
+              backgroundImage: 'linear-gradient(145deg, rgba(14, 25, 17, 0.86) 0%, rgba(9, 16, 11, 0.94) 100%), url(/donner3.png)'
+            }}
+          />
+          <div className="register-brand-content">
+            <div className="register-brand-pill">
+              <FaLeaf className="pill-badge-icon" />
+              <span>100% Solidaire &amp; Écologique</span>
+            </div>
 
-          <div className="register-pill-badge">
-            <FaLeaf className="badge-leaf" />
-            <span>100% Solidaire & Gratuit</span>
+            <h2 className="register-brand-title">
+              Rejoignez le mouvement,<br />
+              <span className="text-gradient-sage">partagez le bonheur.</span>
+            </h2>
+
+            <p className="register-brand-desc">
+              Donnez une seconde vie à vos objets, faites de la place chez vous et aidez une personne près de chez vous partout au Maroc.
+            </p>
+
+            <div className="register-perks-list">
+              <div className="register-perk-item">
+                <div className="perk-icon-circle">
+                  <FaBolt />
+                </div>
+                <div className="perk-text">
+                  <strong>Inscription en 1 minute</strong>
+                  <span>Zéro frais, zéro commission</span>
+                </div>
+              </div>
+
+              <div className="register-perk-item">
+                <div className="perk-icon-circle">
+                  <FaShieldAlt />
+                </div>
+                <div className="perk-text">
+                  <strong>Communauté de confiance</strong>
+                  <span>Comptes vérifiés &amp; messagerie sécurisée</span>
+                </div>
+              </div>
+
+              <div className="register-perk-item">
+                <div className="perk-icon-circle">
+                  <FaMapMarkerAlt />
+                </div>
+                <div className="perk-text">
+                  <strong>Partout au Maroc</strong>
+                  <span>12 Régions, des milliers de dons locaux</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="register-trust-badge">
+              <span className="trust-dot" />
+              <span>Déjà plus de +12 000 membres solidaires actifs</span>
+            </div>
           </div>
         </div>
 
-        {/* En-tête principal */}
-        <div className="register-header-group">
-          <h1 className="register-main-title">
-            Rejoignez la communauté <span className="wave-leaf">🌱</span>
-          </h1>
-          <p className="register-subtitle">
-            Créez votre compte en 1 minute pour donner, réserver et échanger partout au Maroc.
-          </p>
-        </div>
+        {/* ── Panneau Droit : Formulaire d'inscription ── */}
+        <div className="register-form-panel">
+          {/* Barre supérieure avec retour */}
+          <div className="register-top-bar">
+            <Link to="/connexion" className="register-back-btn">
+              <FaChevronLeft className="back-chevron" />
+              <span>Retour à la connexion</span>
+            </Link>
 
-        {error && (
-          <div className="register-error-banner">
-            <span>{error}</span>
+            <div className="register-pill-badge">
+              <FaLeaf className="badge-leaf" />
+              <span>100% Gratuit</span>
+            </div>
           </div>
-        )}
+
+          {/* En-tête principal */}
+          <div className="register-header-group">
+            <h1 className="register-main-title">
+              Rejoignez la communauté <span className="wave-leaf">🌱</span>
+            </h1>
+            <p className="register-subtitle">
+              Créez votre compte gratuit pour donner, réserver et échanger partout au Maroc.
+            </p>
+          </div>
+
+          {error && (
+            <div className="register-error-banner">
+              <span>{error}</span>
+            </div>
+          )}
 
         <form onSubmit={handleSubmit} className="register-form">
           <div className="register-grid">
@@ -322,6 +390,7 @@ function Register() {
           <Link to="/connexion" className="bottom-login-link">
             Se connecter
           </Link>
+        </div>
         </div>
       </div>
     </div>

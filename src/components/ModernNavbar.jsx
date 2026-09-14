@@ -44,6 +44,7 @@ const ModernNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   // Scroll detection
   useEffect(() => {
@@ -118,12 +119,16 @@ const ModernNavbar = () => {
   };
 
   return (
-    <header className={`modern-navbar-header ${isScrolled ? 'is-scrolled' : ''}`}>
+    <header className={`modern-navbar-header ${isScrolled ? 'is-scrolled' : ''} ${isHome ? 'on-home-page' : ''}`}>
       <div className="modern-navbar-container">
         {/* Logo */}
         <Link to="/" className="modern-navbar-logo" aria-label="Retour à l'accueil Matlou7ch">
+          <div className="navbar-logo-glow" />
           <img src="/imageLOGO.png" alt="Matlou7ch Logo" className="navbar-logo-img" />
-          <span className="navbar-logo-name">Matlou7ch</span>
+          <span className="navbar-logo-name">
+            <span className="logo-word-matlou">Matlou</span>
+            <span className="logo-word-seven">7ch</span>
+          </span>
         </Link>
 
         {/* Navigation Desktop */}
