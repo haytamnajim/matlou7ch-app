@@ -13,7 +13,6 @@ import {
   FaCheckCircle
 } from 'react-icons/fa';
 import HomeBanner from '../components/HomeBanner';
-import VideoBackground from '../components/VideoBackground';
 import './Home.css';
 
 function Home() {
@@ -68,13 +67,7 @@ function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.3 } }}
     >
-      {/* Video Background */}
-      <VideoBackground 
-        videoSrc="/videos/background-video.mp4" 
-        overlayOpacity={0.6}
-      />
-      
-      {/* 1. Hero Banner moderne */}
+      {/* 1. Hero Banner moderne avec vidéo d'ambiance et images animées */}
       <HomeBanner />
 
       {/* 2. Section Catégories Populaires */}
@@ -302,6 +295,12 @@ function Home() {
       >
         <div className="home-section-container">
           <div className="cta-card-box">
+            <div
+              className="cta-bg-image-layer"
+              style={{
+                backgroundImage: `radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(188, 124, 78, 0.25) 0%, transparent 50%), linear-gradient(135deg, rgba(19, 34, 22, 0.86) 0%, rgba(13, 22, 15, 0.92) 100%), url(/donner3.png)`
+              }}
+            />
             <div className="cta-card-content">
               <span className="cta-mini-pill">Rejoignez le mouvement</span>
               <h2 className="cta-heading">Vous avez un objet qui ne vous sert plus ?</h2>

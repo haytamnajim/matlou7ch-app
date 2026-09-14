@@ -18,6 +18,16 @@
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  animation: videoZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes videoZoom {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 .video-overlay {
@@ -27,10 +37,48 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
+    135deg,
+    rgba(98, 130, 93, 0.3) 0%,
     rgba(0, 0, 0, 0.5) 50%,
     rgba(0, 0, 0, 0.7) 100%
   );
   z-index: 1;
+  animation: overlayPulse 8s ease-in-out infinite;
+}
+
+@keyframes overlayPulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.video-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2f1a 0%, #0d1a0d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(163, 230, 53, 0.3);
+  border-top-color: #a3e635;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -64,13 +64,20 @@
    2. SECTION CATÉGORIES
    ========================================================================== */
 .home-categories-section {
-  padding: 90px 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  padding: 95px 0;
+  background: 
+    radial-gradient(circle at 12% 20%, rgba(163, 230, 53, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 88% 80%, rgba(188, 124, 78, 0.05) 0%, transparent 45%),
+    var(--bg-main, #fafaf9);
+  position: relative;
+  overflow: hidden;
 }
 
 [data-theme='dark'] .home-categories-section {
-  background: rgba(15, 23, 42, 0.95);
+  background: 
+    radial-gradient(circle at 12% 20%, rgba(163, 230, 53, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 88% 80%, rgba(188, 124, 78, 0.06) 0%, transparent 45%),
+    #0c140e;
 }
 
 .categories-cards-grid {
@@ -87,13 +94,15 @@
   position: relative;
   height: 290px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
 }
 
 .category-card-item:hover {
   transform: translateY(-10px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+  border-color: rgba(163, 230, 53, 0.4);
 }
 
 .category-card-img-wrap {
@@ -203,18 +212,24 @@
    3. SECTION COMMENT ÇA MARCHE
    ========================================================================== */
 .how-it-works-section {
-  padding: 100px 0;
-  background: rgba(244, 248, 245, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid #e2ece4;
-  border-bottom: 1px solid #e2ece4;
+  padding: 105px 0;
+  background: 
+    radial-gradient(circle at 82% 18%, rgba(98, 130, 93, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 18% 82%, rgba(249, 115, 22, 0.07) 0%, transparent 45%),
+    #f3f7f4;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(98, 130, 93, 0.12);
+  border-bottom: 1px solid rgba(98, 130, 93, 0.12);
 }
 
 [data-theme='dark'] .how-it-works-section {
-  background: rgba(10, 13, 11, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  background: 
+    radial-gradient(circle at 82% 18%, rgba(98, 130, 93, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 18% 82%, rgba(249, 115, 22, 0.09) 0%, transparent 45%),
+    #09110b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .steps-grid {
@@ -224,23 +239,30 @@
 }
 
 .step-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: 42px 32px;
-  border-radius: 24px;
+  border-radius: 26px;
   position: relative;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  transition: all 0.35s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+[data-theme='dark'] .step-card {
+  background: rgba(18, 30, 21, 0.75);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
 .step-card:hover {
-  transform: translateY(-12px);
-  box-shadow: var(--shadow-primary);
-  border-color: var(--primary-color);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(46, 125, 50, 0.18);
+  border-color: rgba(163, 230, 53, 0.6);
 }
 
 .step-number-badge {
@@ -249,16 +271,21 @@
   right: 28px;
   font-size: 2.2rem;
   font-weight: 900;
-  color: var(--border-strong);
+  color: rgba(98, 130, 93, 0.2);
   font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+.step-card:hover .step-number-badge {
+  color: rgba(163, 230, 53, 0.6);
 }
 
 .step-icon-box {
   width: 62px;
   height: 62px;
   border-radius: 18px;
-  background: rgba(98, 130, 93, 0.14);
-  color: var(--primary-color, #62825D);
+  background: rgba(98, 130, 93, 0.16);
+  color: var(--primary-color, #2e7d32);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,9 +295,10 @@
 }
 
 .step-card:hover .step-icon-box {
-  background: var(--primary-color, #62825D);
+  background: var(--primary-color, #2e7d32);
   color: #ffffff;
-  transform: scale(1.08);
+  transform: scale(1.1) rotate(4deg);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.35);
 }
 
 .step-title {
@@ -449,13 +477,20 @@
    5. SECTION VALEURS & FIABILITÉ
    ========================================================================== */
 .features-section {
-  padding: 95px 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
+  padding: 100px 0;
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(98, 130, 93, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
+    var(--bg-main, #fafaf9);
+  position: relative;
+  overflow: hidden;
 }
 
 [data-theme='dark'] .features-section {
-  background: rgba(15, 23, 42, 0.92);
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(98, 130, 93, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+    #0c140e;
 }
 
 .features-grid {
@@ -465,54 +500,65 @@
 }
 
 .feature-card {
-  background: var(--bg-card);
-  padding: 38px 28px;
-  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 42px 30px;
+  border-radius: 26px;
   text-align: center;
-  border: 1px solid var(--border-color);
-  transition: all 0.35s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .feature-card {
+  background: rgba(18, 30, 21, 0.72);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
 
 .feature-card:hover {
-  transform: translateY(-6px);
-  background: var(--bg-card-hover);
-  border-color: var(--primary-color);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+  border-color: rgba(163, 230, 53, 0.55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon-wrapper {
-  width: 66px;
-  height: 66px;
-  border-radius: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  font-size: 1.55rem;
-  transition: all 0.3s ease;
+  margin-bottom: 22px;
+  font-size: 1.65rem;
+  transition: all 0.35s ease;
 }
 
 .feature-icon-wrapper.green-icon {
-  background: rgba(98, 130, 93, 0.14);
-  color: #62825D;
+  background: rgba(98, 130, 93, 0.18);
+  color: #2e7d32;
+  border: 1px solid rgba(98, 130, 93, 0.25);
 }
 
 .feature-icon-wrapper.blue-icon {
-  background: rgba(59, 130, 246, 0.14);
+  background: rgba(59, 130, 246, 0.18);
   color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.25);
 }
 
 .feature-icon-wrapper.terracotta-icon {
-  background: rgba(188, 124, 78, 0.14);
+  background: rgba(188, 124, 78, 0.18);
   color: #bc7c4e;
+  border: 1px solid rgba(188, 124, 78, 0.25);
 }
 
 .feature-card:hover .feature-icon-wrapper {
-  transform: scale(1.1);
+  transform: scale(1.12) rotate(-4deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .feature-name {
@@ -538,16 +584,32 @@
 }
 
 .cta-card-box {
-  background: radial-gradient(circle at 20% 20%, rgba(163, 230, 53, 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(188, 124, 78, 0.2) 0%, transparent 40%),
-              linear-gradient(135deg, #233a28 0%, #132216 100%);
+  background: #132216;
   border-radius: 32px;
   padding: 75px 48px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 25px 60px -15px rgba(19, 34, 22, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px -15px rgba(19, 34, 22, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cta-bg-image-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cta-card-box:hover .cta-bg-image-layer {
+  transform: scale(1.08);
 }
 
 .cta-card-content {

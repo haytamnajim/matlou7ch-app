@@ -1,0 +1,184 @@
+/* ==========================================================================
+   HERO DYNAMIC BACKGROUND (VIDEO & KEN BURNS IMAGES)
+   ========================================================================== */
+
+.hero-dynamic-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Calque Vidéo ── */
+.hero-video-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-video-layer.loaded {
+  opacity: 1;
+}
+
+.hero-video-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%) scale(1.04);
+  object-fit: cover;
+  filter: brightness(0.92) contrast(1.05);
+}
+
+/* ── Calque Images Animées (Ken Burns) ── */
+.hero-slides-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide-item {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+  will-change: transform, opacity;
+}
+
+.hero-slide-item.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Animation Ken Burns Zoom In (lente et élégante) */
+.hero-slide-item.kenburns-zoom-in.active {
+  animation: kenBurnsZoomIn 16s ease-out infinite alternate;
+}
+
+/* Animation Ken Burns Zoom Out */
+.hero-slide-item.kenburns-zoom-out.active {
+  animation: kenBurnsZoomOut 16s ease-out infinite alternate;
+}
+
+@keyframes kenBurnsZoomIn {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-1%, -1%);
+  }
+}
+
+@keyframes kenBurnsZoomOut {
+  0% {
+    transform: scale(1.12) translate(1%, 1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+/* ── Overlay dégradé protecteur ── */
+.hero-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Halo lumineux vert & terracotta (ambiance Matlou7ch) ── */
+.hero-mesh-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 18% 25%, rgba(98, 130, 93, 0.35) 0%, transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(188, 124, 78, 0.25) 0%, transparent 40%);
+  mix-blend-mode: screen;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Contrôles discrets (Play/Pause & Switch Mode) ── */
+.hero-bg-controls {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hero-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 28, 20, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e5f2e5;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.hero-control-btn:hover {
+  background: rgba(30, 48, 34, 0.85);
+  border-color: rgba(163, 230, 53, 0.5);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.hero-control-btn.active {
+  background: rgba(46, 125, 50, 0.7);
+  border-color: rgba(163, 230, 53, 0.7);
+  color: #ffffff;
+}
+
+.control-btn-label {
+  letter-spacing: 0.3px;
+}
+
+/* ── Adaptabilité Mobile ── */
+@media (max-width: 768px) {
+  .hero-bg-controls {
+    bottom: 12px;
+    right: 16px;
+    gap: 6px;
+  }
+
+  .hero-control-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+}

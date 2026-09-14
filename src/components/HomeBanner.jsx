@@ -1,6 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaGift, FaSearch, FaPlusCircle, FaLeaf, FaHandHoldingHeart, FaMapMarkerAlt, FaUsers } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  FaGift,
+  FaSearch,
+  FaPlusCircle,
+  FaLeaf,
+  FaHandHoldingHeart,
+  FaMapMarkerAlt,
+  FaUsers,
+  FaCheckCircle,
+  FaArrowRight
+} from 'react-icons/fa';
+import HeroDynamicBackground from './HeroDynamicBackground';
 import './HomeBanner.css';
 
 /* ── Animated Counter Hook ── */
@@ -12,8 +23,10 @@ function useCountUp(target, duration = 2000, startWhenVisible = true) {
   useEffect(() => {
     if (!startWhenVisible) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.5 }
+      ([entry]) => {
+        if (entry.isIntersecting) setStarted(true);
+      },
+      { threshold: 0.4 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -35,134 +48,188 @@ function useCountUp(target, duration = 2000, startWhenVisible = true) {
 }
 
 const HomeBanner = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
   const { count: objetsCount, ref: objetsRef } = useCountUp(5000, 2200);
   const { count: membresCount, ref: membresRef } = useCountUp(12000, 2500);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Subtle parallax on glow orbs
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const x = (clientX / window.innerWidth - 0.5) * 20;
-    const y = (clientY / window.innerHeight - 0.5) * 20;
-    setMousePos({ x, y });
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalogue?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/catalogue');
+    }
   };
 
   return (
-    <section className="home-banner" onMouseMove={handleMouseMove}>
-      {/* Orbes décoratifs avec parallaxe subtile */}
-      <div
-        className="banner-glow banner-glow-1"
-        style={{ transform: `translate(${mousePos.x * 0.6}px, ${mousePos.y * 0.6}px)` }}
-      />
-      <div
-        className="banner-glow banner-glow-2"
-        style={{ transform: `translate(${-mousePos.x * 0.4}px, ${-mousePos.y * 0.4}px)` }}
-      />
-      <div
-        className="banner-glow banner-glow-3"
-        style={{ transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.8}px)` }}
-      />
+    <section className="home-banner">
+      {/* ── Fond dynamique : Vidéo fluide + diaporama images Ken Burns ── */}
+      <HeroDynamicBackground />
 
       <div className="home-banner-container">
-        <div className="home-banner-left">
-          {/* Badge haut avec animation pulse */}
-          <div className="banner-pill-badge">
-            <span className="pill-dot" />
-            <FaLeaf className="pill-icon" />
-            <span>1ère Plateforme de Don &amp; Recyclage au Maroc</span>
-          </div>
-
-          <h1 className="home-banner-title">
-            <span className="title-line title-line-1">Ne jetez plus,</span>
-            <br />
-            <span className="accent-highlight title-line title-line-2">donnez &amp; partagez</span>
-            <br />
-            <span className="title-line title-line-3">gratuitement à 100&nbsp;%&nbsp;!</span>
-          </h1>
-
-          <p className="home-banner-subtitle">
-            Offrez une seconde vie à vos vêtements, meubles et objets tout en aidant votre communauté locale partout au Maroc.
-          </p>
-
-          <div className="home-banner-actions">
-            <Link to="/catalogue" className="banner-btn-link">
-              <button className="banner-primary-btn">
-                <FaSearch /> Découvrir les dons
-              </button>
-            </Link>
-            <Link to="/post-ad" className="banner-btn-link">
-              <button className="banner-secondary-btn">
-                <FaPlusCircle /> Donner un objet
-              </button>
-            </Link>
-          </div>
-
-          {/* Statistiques animées */}
-          <div className="banner-trust-stats" ref={objetsRef}>
-            <div className="trust-stat-item">
-              <div className="stat-icon-circle green">
-                <FaGift />
-              </div>
-              <div className="stat-text-group">
-                <span className="stat-number">+{objetsCount.toLocaleString('fr-FR')}</span>
-                <span className="stat-label">Objets donnés</span>
-              </div>
+        {/* ── PARTIE 1 : Titres, Recherche & Actions (Haut) ── */}
+        <div className="banner-main-grid">
+          {/* Colonne Gauche : Titre et Recherche */}
+          <div className="banner-left-content">
+            {/* Badge pilule */}
+            <div className="banner-pill-badge">
+              <span className="pill-dot" />
+              <FaLeaf className="pill-icon" />
+              <span>1ère Plateforme de Don &amp; Recyclage au Maroc</span>
             </div>
 
-            <div className="trust-stat-divider" />
+            {/* Titre Principal */}
+            <h1 className="home-banner-title">
+              <span className="title-line title-line-1">Ne jetez plus,</span>
+              <br />
+              <span className="accent-highlight title-line title-line-2">donnez &amp; partagez</span>
+              <br />
+              <span className="title-line title-line-3">gratuitement à 100&nbsp;%&nbsp;!</span>
+            </h1>
 
-            <div className="trust-stat-item" ref={membresRef}>
-              <div className="stat-icon-circle terracotta">
-                <FaUsers />
+            {/* Sous-titre */}
+            <p className="home-banner-subtitle">
+              Offrez une seconde vie à vos vêtements, meubles et objets tout en soutenant votre communauté locale partout au Maroc.
+            </p>
+
+            {/* Barre de recherche rapide intégrée */}
+            <form className="banner-quick-search-box" onSubmit={handleSearchSubmit}>
+              <div className="search-input-wrap">
+                <FaSearch className="search-box-icon" />
+                <input
+                  type="text"
+                  placeholder="Que cherchez-vous ? (ex: vélo, table, vêtements...)"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-box-input"
+                />
               </div>
-              <div className="stat-text-group">
-                <span className="stat-number">+{membresCount.toLocaleString('fr-FR')}</span>
-                <span className="stat-label">Membres actifs</span>
-              </div>
+              <button type="submit" className="search-box-submit-btn">
+                Rechercher
+              </button>
+            </form>
+
+            {/* Boutons d'actions rapides */}
+            <div className="banner-actions-row">
+              <Link to="/post-ad" className="banner-btn-link">
+                <button className="banner-primary-btn">
+                  <FaPlusCircle /> Publier un don gratuit
+                </button>
+              </Link>
+              <Link to="/catalogue" className="banner-btn-link">
+                <button className="banner-secondary-btn">
+                  <FaSearch /> Explorer le catalogue
+                </button>
+              </Link>
             </div>
+          </div>
 
-            <div className="trust-stat-divider" />
-
-            <div className="trust-stat-item">
-              <div className="stat-icon-circle blue">
-                <FaMapMarkerAlt />
+          {/* Colonne Droite : Carte d'activité en direct (Glassmorphism laissant voir la vidéo) */}
+          <div className="banner-right-content">
+            <div className="banner-glass-card">
+              <div className="glass-card-header">
+                <div className="live-status-pill">
+                  <span className="live-pulsing-dot" />
+                  <span>Activité en direct</span>
+                </div>
+                <span className="live-region-tag">Casablanca • Rabat • Marrakech</span>
               </div>
-              <div className="stat-text-group">
-                <span className="stat-number">12 Régions</span>
-                <span className="stat-label">Partout au Maroc</span>
+
+              <div className="glass-card-featured-gift">
+                <div className="featured-gift-thumbnail">
+                  <img src="/donner1.png" alt="Don récent" />
+                  <span className="gift-free-tag">100% GRATUIT</span>
+                </div>
+                <div className="featured-gift-info">
+                  <h4 className="gift-title">Table en bois &amp; 4 chaises</h4>
+                  <p className="gift-location">
+                    <FaMapMarkerAlt className="mini-pin" /> Quartier Maârif, Casablanca
+                  </p>
+                  <span className="gift-time">Offert il y a 8 min</span>
+                </div>
+              </div>
+
+              <div className="glass-card-eco-impact">
+                <div className="eco-icon-wrap">
+                  <FaLeaf />
+                </div>
+                <div className="eco-text-wrap">
+                  <span className="eco-stat-title">Impact Écologique &amp; Social</span>
+                  <span className="eco-stat-desc">Zéro commission • Économie circulaire solidaire</span>
+                </div>
+              </div>
+
+              <Link to="/catalogue" className="glass-card-footer-link">
+                Voir toutes les annonces disponibles <FaArrowRight />
+              </Link>
+
+              {/* Badge flottant supérieur */}
+              <div className="floating-bubble bubble-top">
+                <FaHandHoldingHeart className="bubble-icon" />
+                <div>
+                  <strong>Don offert</strong>
+                  <span>Il y a 5 min</span>
+                </div>
+              </div>
+
+              {/* Badge flottant inférieur */}
+              <div className="floating-bubble bubble-bottom">
+                <FaCheckCircle className="bubble-icon check" />
+                <div>
+                  <strong>100% Gratuit</strong>
+                  <span>Direct entre voisins</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Côté droit : Image avec badges flottants */}
-        <div className="home-banner-right">
-          <div className="banner-image-wrapper">
-            {/* Anneau décoratif derrière l'image */}
-            <div className="image-ring-decoration" />
-
-            <img
-              src="/image.png"
-              alt="Communauté d'entraide Matlou7ch"
-              className="banner-main-image"
-            />
-
-            {/* Badge flottant 1 : Don récent */}
-            <div className="floating-card floating-card-top">
-              <div className="floating-card-icon">
-                <FaHandHoldingHeart />
-              </div>
-              <div className="floating-card-info">
-                <span className="floating-card-title">Don offert avec amour</span>
-                <span className="floating-card-sub">Il y a 5 min à Casablanca</span>
-              </div>
-              <div className="floating-online-dot" />
+        {/* ── PARTIE 2 : Dock de Statistiques Horizontal (Bas) ── */}
+        <div className="banner-stats-dock" ref={objetsRef}>
+          <div className="stat-dock-item">
+            <div className="stat-dock-icon green">
+              <FaGift />
             </div>
+            <div className="stat-dock-text">
+              <span className="stat-dock-number">+{objetsCount.toLocaleString('fr-FR')}</span>
+              <span className="stat-dock-label">Objets donnés</span>
+            </div>
+          </div>
 
-            {/* Badge flottant 2 : 100% Gratuit */}
-            <div className="floating-card floating-card-bottom">
-              <div className="floating-tag">100% GRATUIT</div>
-              <span className="floating-desc">Zéro frais • Entraide directe</span>
+          <div className="stat-dock-divider" />
+
+          <div className="stat-dock-item" ref={membresRef}>
+            <div className="stat-dock-icon terracotta">
+              <FaUsers />
+            </div>
+            <div className="stat-dock-text">
+              <span className="stat-dock-number">+{membresCount.toLocaleString('fr-FR')}</span>
+              <span className="stat-dock-label">Membres actifs</span>
+            </div>
+          </div>
+
+          <div className="stat-dock-divider" />
+
+          <div className="stat-dock-item">
+            <div className="stat-dock-icon blue">
+              <FaMapMarkerAlt />
+            </div>
+            <div className="stat-dock-text">
+              <span className="stat-dock-number">12 Régions</span>
+              <span className="stat-dock-label">Partout au Maroc</span>
+            </div>
+          </div>
+
+          <div className="stat-dock-divider" />
+
+          <div className="stat-dock-item">
+            <div className="stat-dock-icon gold">
+              <FaLeaf />
+            </div>
+            <div className="stat-dock-text">
+              <span className="stat-dock-number">100% Solidaire</span>
+              <span className="stat-dock-label">Économie circulaire</span>
             </div>
           </div>
         </div>
@@ -172,3 +239,4 @@ const HomeBanner = () => {
 };
 
 export default HomeBanner;
+
