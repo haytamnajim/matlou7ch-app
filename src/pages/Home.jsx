@@ -13,6 +13,7 @@ import {
   FaCheckCircle
 } from 'react-icons/fa';
 import HomeBanner from '../components/HomeBanner';
+import VideoBackground from '../components/VideoBackground';
 import './Home.css';
 
 function Home() {
@@ -60,16 +61,6 @@ function Home() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
   };
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
   return (
     <motion.div 
       className="home-page-new"
@@ -77,6 +68,12 @@ function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.3 } }}
     >
+      {/* Video Background */}
+      <VideoBackground 
+        videoSrc="/videos/background-video.mp4" 
+        overlayOpacity={0.6}
+      />
+      
       {/* 1. Hero Banner moderne */}
       <HomeBanner />
 
